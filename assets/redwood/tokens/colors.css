@@ -1,0 +1,96 @@
+/* ============================================================
+   Oracle Redwood — Color tokens
+   Extracted from the official Oracle FY26 PowerPoint theme
+   ("Oracle Pillars" / Custom 77 color scheme) and the Redwood
+   product-family Word themes. All hex values are verbatim from
+   the source OOXML themes.
+   ============================================================ */
+
+:root {
+  /* ---- Core brand palette (Redwood "core colors") ---- */
+  --red-redwood:   #C74634; /* THE Oracle red — primary brand mark */
+  --blue-deep:     #04536F; /* deep ocean blue — primary accent */
+  --plum-core:     #6C3F49; /* core plum / mauve */
+  --gold-core:     #F0CC71; /* warm gold */
+  --sage-core:     #89B2B0; /* muted sage teal */
+  --green-core:    #86B596; /* soft green */
+  --link-blue:     #00688C; /* hyperlink blue */
+
+  /* ---- Extended / secondary palette (Redwood product families) ---- */
+  --sage:          #76A2A0; /* ERP·SCM family lean */
+  --plum:          #796087; /* ACX / CX family */
+  --rose:          #C28897; /* HCM family */
+  --pine:          #315357; /* Tech·OCI·DB family */
+  --ochre:         #C58C52; /* warm earth accent */
+  --mauve:         #925865; /* deep rose-mauve */
+  --sky:           #5B8FB0; /* Health family sky blue */
+  --ocean:         #1E5F8C; /* NetSuite family ocean */
+
+  /* ---- Tints (surfaces & soft fills, ~12% over warm white) ---- */
+  --red-tint:    #F6E1DC;
+  --blue-tint:   #DCE7EC;
+  --plum-tint:   #E8E1E5;
+  --gold-tint:   #FBF1D8;
+  --sage-tint:   #E3ECEB;
+  --green-tint:  #E4EEE8;
+
+  /* ---- Neutrals (warm "stone" grey ramp) ---- */
+  --stone-900: #2A2F2F; /* near-black text — Redwood dk1 */
+  --stone-800: #3B4140;
+  --stone-700: #5A6160;
+  --stone-600: #6B7170;
+  --stone-500: #8A908F;
+  --stone-400: #AAB0AF;
+  --stone-300: #CBD0CF;
+  --stone-200: #E4E7E6;
+  --stone-150: #ECEEED;
+  --stone-100: #F3F4F3;
+  --stone-50:  #FBF9F8; /* warm white — Redwood lt2 */
+  --white:     #FFFFFF;
+
+  /* ---- Semantic status ---- */
+  --success: #3A7D44;
+  --success-tint: #E4EEE6;
+  --warning: #C58C52;
+  --warning-tint: #FBF1D8;
+  --danger:  #C74634;
+  --danger-tint: #F6E1DC;
+  --info:    #04536F;
+  --info-tint: #DCE7EC;
+
+  /* ============================================================
+     Semantic aliases — reference these in components, not the raw
+     palette values above.
+     ============================================================ */
+
+  /* Text */
+  --text-strong:   var(--stone-900);
+  --text-body:     var(--stone-800);
+  --text-muted:    var(--stone-600);
+  --text-subtle:   var(--stone-500);
+  --text-inverse:  var(--stone-50);
+  --text-link:     var(--link-blue);
+  --text-brand:    var(--red-redwood);
+
+  /* Surfaces */
+  --surface-page:    var(--stone-50);
+  --surface-card:    var(--white);
+  --surface-sunken:  var(--stone-100);
+  --surface-raised:  var(--white);
+  --surface-inverse: var(--stone-900);
+  --surface-brand:   var(--red-redwood);
+
+  /* Borders & dividers */
+  --border-subtle:  var(--stone-200);
+  --border-default: var(--stone-300);
+  --border-strong:  var(--stone-400);
+  --border-focus:   var(--blue-deep);
+
+  /* Interactive (primary = Redwood red) */
+  --action-primary:        var(--red-redwood);
+  --action-primary-hover:  #B23C2B;
+  --action-primary-active: #9C3424;
+  --action-secondary:        var(--blue-deep);
+  --action-secondary-hover:  #033F55;
+  --focus-ring: #04536F;
+}

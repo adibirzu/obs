@@ -1,0 +1,14 @@
+/* ============================================================
+   Oracle Redwood — Fonts
+   Brand fonts: Georgia (display/serif, web-safe) + Oracle Sans /
+   Oracle Sans Tab (UI/body, proprietary). Oracle Sans is not
+   publicly distributable, so this system substitutes Figtree —
+   a humanist geometric sans with comparable proportions — and
+   loads it from Google Fonts. Replace with the official Oracle
+   Sans / Oracle Sans Tab webfonts for production fidelity.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Roboto+Mono:wght@400;500&display=swap');
+
+/* Georgia is web-safe and is the real Oracle brand display face —
+   no @font-face needed; it resolves from the system. */

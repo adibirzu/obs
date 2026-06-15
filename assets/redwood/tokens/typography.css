@@ -1,0 +1,53 @@
+/* ============================================================
+   Oracle Redwood — Typography tokens
+   Display / headings: Georgia (the Oracle brand serif).
+   UI / body: Oracle Sans → substituted with Figtree.
+   Mono: Roboto Mono for code / data.
+   ============================================================ */
+
+:root {
+  /* Families */
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-sans: 'Figtree', 'Oracle Sans', -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Aliases */
+  --font-heading: var(--font-display);
+  --font-body:    var(--font-sans);
+  --font-ui:      var(--font-sans);
+
+  /* Type scale — 1.250 major-third-ish, tuned for product UI */
+  --text-2xs: 0.6875rem;  /* 11px */
+  --text-xs:  0.75rem;    /* 12px */
+  --text-sm:  0.8125rem;  /* 13px */
+  --text-base: 0.875rem;  /* 14px — default UI body */
+  --text-md:  1rem;       /* 16px — reading body */
+  --text-lg:  1.125rem;   /* 18px */
+  --text-xl:  1.375rem;   /* 22px */
+  --text-2xl: 1.75rem;    /* 28px */
+  --text-3xl: 2.25rem;    /* 36px */
+  --text-4xl: 3rem;       /* 48px */
+  --text-5xl: 4rem;       /* 64px */
+  --text-6xl: 5.25rem;    /* 84px display */
+
+  /* Weights */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Line heights */
+  --leading-tight: 1.08;
+  --leading-snug: 1.2;
+  --leading-normal: 1.45;
+  --leading-relaxed: 1.6;
+
+  /* Letter spacing */
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.08em;
+}

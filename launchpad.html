@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="redwood">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,15 +22,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
     <!-- Main stylesheet -->
-    <link rel="stylesheet" href="/static/observability.css">
-    <link rel="stylesheet" href="/static/seven_kingdoms.css">
+    <link rel="stylesheet" href="static/observability.css">
+    <link rel="stylesheet" href="static/seven_kingdoms.css">
 
     <!-- Preload critical OCI icons used above the fold -->
-    <link rel="preload" as="image" href="/static/oci-icons/Monitoring.png">
-    <link rel="preload" as="image" href="/static/oci-icons/LoggingAnalytics.png">
-    <link rel="preload" as="image" href="/static/oci-icons/APM.png">
+    <link rel="preload" as="image" href="static/oci-icons/Monitoring.png">
+    <link rel="preload" as="image" href="static/oci-icons/LoggingAnalytics.png">
+    <link rel="preload" as="image" href="static/oci-icons/APM.png">
 </head>
-<body data-public-mode="__PUBLIC_MODE__">
+<body data-public-mode="public">
     <!-- Navigation Sidebar -->
     <nav class="sidebar">
         <div class="sidebar-header">
@@ -1619,7 +1619,7 @@ def call_inventory_service():
                 <div class="service-card monitoring">
                     <div class="service-card-header">
                         <div class="service-icon oci-icon">
-                            <img src="/static/oci-icons/Monitoring.png" alt="OCI Monitoring" width="40" height="40" />
+                            <img src="static/oci-icons/Monitoring.png" alt="OCI Monitoring" width="40" height="40" />
                         </div>
                         <div class="tier-badges">
                             <span class="tier-badge free">Free Tier</span>
@@ -1659,7 +1659,7 @@ def call_inventory_service():
                 <div class="service-card logs">
                     <div class="service-card-header">
                         <div class="service-icon oci-icon">
-                            <img src="/static/oci-icons/LoggingAnalytics.png" alt="OCI Log Analytics" width="40" height="40" />
+                            <img src="static/oci-icons/LoggingAnalytics.png" alt="OCI Log Analytics" width="40" height="40" />
                         </div>
                         <div class="tier-badges">
                             <span class="tier-badge free">Free Tier</span>
@@ -1700,7 +1700,7 @@ def call_inventory_service():
                 <div class="service-card apm">
                     <div class="service-card-header">
                         <div class="service-icon oci-icon">
-                            <img src="/static/oci-icons/APM.png" alt="OCI Application Performance Monitoring" width="40" height="40" />
+                            <img src="static/oci-icons/APM.png" alt="OCI Application Performance Monitoring" width="40" height="40" />
                         </div>
                         <div class="tier-badges">
                             <span class="tier-badge free">Free Tier</span>
@@ -1749,7 +1749,7 @@ def call_inventory_service():
                     </div>
                     <div class="service-card-header">
                         <div class="service-icon oci-icon">
-                            <img src="/static/oci-icons/HealthCheck.png" alt="OCI Stack Monitoring" width="40" height="40" />
+                            <img src="static/oci-icons/HealthCheck.png" alt="OCI Stack Monitoring" width="40" height="40" />
                         </div>
                         <div class="tier-badges">
                             <span class="tier-badge paid">Paid Only</span>
@@ -1785,7 +1785,7 @@ def call_inventory_service():
                 <div class="service-card opsinsights">
                     <div class="service-card-header">
                         <div class="service-icon oci-icon">
-                            <img src="/static/oci-icons/OperationsInsights.png" alt="OCI Operations Insights" width="40" height="40" />
+                            <img src="static/oci-icons/OperationsInsights.png" alt="OCI Operations Insights" width="40" height="40" />
                         </div>
                         <div class="tier-badges">
                             <span class="tier-badge paid">Paid</span>
@@ -1826,7 +1826,7 @@ def call_inventory_service():
                 <div class="service-card dbmgmt">
                     <div class="service-card-header">
                         <div class="service-icon oci-icon">
-                            <img src="/static/oci-icons/DatabaseManagement.png" alt="OCI Database Management" width="40" height="40" />
+                            <img src="static/oci-icons/DatabaseManagement.png" alt="OCI Database Management" width="40" height="40" />
                         </div>
                         <div class="tier-badges">
                             <span class="tier-badge free">Free Tier</span>
@@ -1889,7 +1889,7 @@ def call_inventory_service():
 
                     <div class="tier-table-row">
                         <div class="service-col">
-                            <img src="/static/oci-icons/Monitoring.png" alt="Monitoring" class="service-mini-icon" width="24" height="24" loading="lazy" />
+                            <img src="static/oci-icons/Monitoring.png" alt="Monitoring" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>Monitoring</span>
                         </div>
                         <div class="free-col">
@@ -1904,7 +1904,7 @@ def call_inventory_service():
 
                     <div class="tier-table-row">
                         <div class="service-col">
-                            <img src="/static/oci-icons/LoggingAnalytics.png" alt="Log Analytics" class="service-mini-icon" width="24" height="24" loading="lazy" />
+                            <img src="static/oci-icons/LoggingAnalytics.png" alt="Log Analytics" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>Log Analytics</span>
                         </div>
                         <div class="free-col">
@@ -1919,7 +1919,7 @@ def call_inventory_service():
 
                     <div class="tier-table-row">
                         <div class="service-col">
-                            <img src="/static/oci-icons/APM.png" alt="APM" class="service-mini-icon" width="24" height="24" loading="lazy" />
+                            <img src="static/oci-icons/APM.png" alt="APM" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>APM</span>
                         </div>
                         <div class="free-col">
@@ -1934,7 +1934,7 @@ def call_inventory_service():
 
                     <div class="tier-table-row">
                         <div class="service-col">
-                            <img src="/static/oci-icons/DatabaseManagement.png" alt="Database Management" class="service-mini-icon" width="24" height="24" loading="lazy" />
+                            <img src="static/oci-icons/DatabaseManagement.png" alt="Database Management" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>Database Mgmt</span>
                         </div>
                         <div class="free-col">
@@ -1949,7 +1949,7 @@ def call_inventory_service():
 
                     <div class="tier-table-row no-free">
                         <div class="service-col">
-                            <img src="/static/oci-icons/OperationsInsights.png" alt="Operations Insights" class="service-mini-icon" width="24" height="24" loading="lazy" />
+                            <img src="static/oci-icons/OperationsInsights.png" alt="Operations Insights" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>Ops Insights</span>
                         </div>
                         <div class="free-col">
@@ -1964,7 +1964,7 @@ def call_inventory_service():
 
                     <div class="tier-table-row no-free eol-row">
                         <div class="service-col">
-                            <img src="/static/oci-icons/HealthCheck.png" alt="Stack Monitoring" class="service-mini-icon" width="24" height="24" loading="lazy" />
+                            <img src="static/oci-icons/HealthCheck.png" alt="Stack Monitoring" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>Stack Monitoring</span>
                             <span class="mini-eol-badge">EOL</span>
                         </div>
@@ -6533,7 +6533,7 @@ def call_inventory_service():
         </div>
     </div>
 
-    <script src="/static/seven_kingdoms.js"></script>
-    <script src="/static/observability.js" defer></script>
+    <script src="static/seven_kingdoms.js"></script>
+    <script src="static/observability.js" defer></script>
 </body>
 </html>
