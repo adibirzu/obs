@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The OCI Observability Atlas — a guided path from L0 (govern & land) to L3 (correlate & automate). Find the right OCI Observability & Management services for your use case, each deployable as an add-on to your OCI Landing Zone." />
+  <meta name="theme-color" content="#FBF9F8" />
+  <title>OCI Observability Atlas · L0 → L3 Guided Path</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBF9F8'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%2304536F' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23C74634'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/guide.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="topnav">
+    <div class="wrap topnav__row">
+      <a class="brand" href="#top">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="17" fill="none" stroke="#04536F" stroke-width="2.5"/>
+          <circle cx="20" cy="20" r="6.5" fill="#C74634"/>
+        </svg>
+        OCI Observability Atlas
+      </a>
+      <span class="topnav__spacer"></span>
+      <nav class="topnav__links" aria-label="Sections">
+        <a href="#finder">Find your path</a>
+        <a href="#ladder">L0 → L3</a>
+        <a href="#landingzone">Landing Zone add-ons</a>
+        <a href="#maturity">Maturity</a>
+      </nav>
+      <a class="topnav__cta" href="launchpad.html">Open Launchpad</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="reveal">
+          <p class="eyebrow">Enterprise Observability on Oracle Cloud Infrastructure</p>
+          <h1>From bare tenancy to <span class="em">business reliability</span>, in <span class="teal">four moves</span>.</h1>
+          <p class="hero__lede">A guided map of OCI Observability &amp; Management. Pick your use case, follow the path from <b>L0</b> to <b>L3</b>, and add each service onto your existing Landing Zone — no rebuild required.</p>
+          <div class="hero__meta">
+            <div class="hero__stat"><span class="n">15</span><span class="l">O&amp;M services</span></div>
+            <div class="hero__stat"><span class="n">4</span><span class="l">levels · L0–L3</span></div>
+            <div class="hero__stat"><span class="n">5</span><span class="l">use-case patterns</span></div>
+            <div class="hero__stat"><span class="n">3</span><span class="l">lenses per service</span></div>
+          </div>
+        </div>
+        <aside class="hero__rail reveal" aria-label="Questions observability answers">
+          <div class="hero__q"><b>Is the service healthy?</b> Metrics, alarms, SLOs</div>
+          <div class="hero__q"><b>What happened?</b> Logs, audit, events</div>
+          <div class="hero__q"><b>Why did it happen?</b> Traces, topology, Log Analytics</div>
+          <div class="hero__q"><b>Which database is affected?</b> DB Management, Ops Insights</div>
+          <div class="hero__q"><b>What is the business impact?</b> Service SLOs &amp; correlation</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ FINDER ============ -->
+    <section class="section section--alt" id="finder">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="eyebrow">Step 1 · Orient</p>
+          <h2>Find the path for your use case</h2>
+          <p>Choose the pattern that looks most like your estate. We'll highlight where to start and the exact services to add — then dim everything else on the ladder so the route is clear.</p>
+        </div>
+
+        <div class="finder reveal">
+          <button class="uc" data-uc="trad" aria-pressed="false">
+            <span class="uc__k">PATTERN 01</span>
+            <h3>Traditional Enterprise App</h3>
+            <p>LB, web/app tiers, middleware, Oracle DB, batch &amp; integrations.</p>
+            <div class="uc__tags"><span class="minitag">monitoring</span><span class="minitag">database</span><span class="minitag">apm</span></div>
+          </button>
+          <button class="uc" data-uc="dbc" aria-pressed="false">
+            <span class="uc__k">PATTERN 02</span>
+            <h3>Oracle Database-Centric</h3>
+            <p>Exadata, Autonomous AI DB, Base DB, Data Guard, external DBs.</p>
+            <div class="uc__tags"><span class="minitag">db-management</span><span class="minitag">ops-insights</span></div>
+          </button>
+          <button class="uc" data-uc="oke" aria-pressed="false">
+            <span class="uc__k">PATTERN 03</span>
+            <h3>Cloud-Native on OKE</h3>
+            <p>Kubernetes, microservices, API Gateway, Streaming, ADB.</p>
+            <div class="uc__tags"><span class="minitag">opentelemetry</span><span class="minitag">connector-hub</span></div>
+          </button>
+          <button class="uc" data-uc="apps" aria-pressed="false">
+            <span class="uc__k">PATTERN 04</span>
+            <h3>Oracle Apps &amp; Middleware</h3>
+            <p>EBS, JD Edwards, PeopleSoft, WebLogic, SOA, Fusion Middleware.</p>
+            <div class="uc__tags"><span class="minitag">log-analytics</span><span class="minitag">apm</span></div>
+          </button>
+          <button class="uc" data-uc="hybrid" aria-pressed="false">
+            <span class="uc__k">PATTERN 05</span>
+            <h3>Hybrid Enterprise Estate</h3>
+            <p>OCI + on-prem databases &amp; apps, external tools, existing ITSM.</p>
+            <div class="uc__tags"><span class="minitag">mgmt-agent</span><span class="minitag">gateway</span></div>
+          </button>
+          <div class="uc" style="display:flex;flex-direction:column;justify-content:center;cursor:default;border-style:dashed">
+            <p style="margin:0;color:var(--ink-faint);font-size:var(--text-sm)">Not sure? Start at <b>L0 · Govern &amp; Land</b> below and walk the ladder in order.</p>
+          </div>
+        </div>
+
+        <div class="finder__result reveal" id="finderResult" role="region" aria-live="polite">
+          <p class="eyebrow">Recommended path</p>
+          <h3 id="fr-name">—</h3>
+          <p id="fr-start" style="color:var(--ink-soft);margin-top:.4rem"></p>
+          <div class="path" id="fr-path"></div>
+          <p style="margin-top:1rem;font-size:var(--text-sm)"><button id="finderClear" style="background:none;border:none;color:var(--teal);cursor:pointer;font:inherit;font-weight:600;padding:0">Clear &amp; show all ↺</button> · click any service to inspect it</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LADDER ============ -->
+    <section class="section" id="ladder">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="eyebrow">Step 2 · Climb</p>
+          <h2>The L0 → L3 ladder</h2>
+          <p>Each level answers a sharper question than the last. Every card is a service you can <b>add onto a deployed Landing Zone</b>. Click one to open the inspector — switch lenses for an Executive, Architect, or Practitioner view, with copy-ready snippets.</p>
+        </div>
+
+        <div class="ladder">
+          <article class="station reveal" data-level="L0">
+            <div class="station__node">0</div>
+            <div class="station__head">
+              <span class="station__tier">L0 · Govern &amp; Land</span>
+              <h3>Foundation &amp; guardrails</h3>
+            </div>
+            <p class="station__q">"Is the platform ready to be observed safely?"</p>
+            <p class="station__body">Before a single metric flows, give observability a governed home: a dedicated compartment, least-privilege IAM, consistent tags, secrets in Vault, and tenancy-wide Audit. This is the layer that bolts directly onto your OCI Landing Zone.</p>
+            <div class="cards"></div>
+          </article>
+
+          <article class="station reveal" data-level="L1">
+            <div class="station__node">1</div>
+            <div class="station__head">
+              <span class="station__tier">L1 · See &amp; Alert</span>
+              <h3>Foundation telemetry</h3>
+            </div>
+            <p class="station__q">"Is it healthy — and what just happened?"</p>
+            <p class="station__body">Turn on the three native pillars — Monitoring, Logging, Audit — plus the routing layer of Notifications and Events. Actionable alarms only, severity by business impact, the right alert to the right channel.</p>
+            <div class="cards"></div>
+          </article>
+
+          <article class="station reveal" data-level="L2">
+            <div class="station__node">2</div>
+            <div class="station__head">
+              <span class="station__tier">L2 · Diagnose Deep</span>
+              <h3>Database &amp; analysis depth</h3>
+            </div>
+            <p class="station__q">"Why did it happen, and are we running out of room?"</p>
+            <p class="station__body">Make databases a first-class domain: Database Management for live diagnosis, Ops Insights for capacity and forecasting, Log Analytics for root-cause work, and Management Agent for hybrid reach.</p>
+            <div class="cards"></div>
+          </article>
+
+          <article class="station reveal" data-level="L3">
+            <div class="station__node">3</div>
+            <div class="station__head">
+              <span class="station__tier">L3 · Correlate &amp; Automate</span>
+              <h3>End-to-end &amp; proactive</h3>
+            </div>
+            <p class="station__q">"What's the business impact — and what can the platform fix itself?"</p>
+            <p class="station__body">Stitch traces, logs, metrics and database signals together with APM + OpenTelemetry, move data with Connector Hub, automate via Events, and layer on AI-assisted operations and forecasting.</p>
+            <div class="cards"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LANDING ZONE ============ -->
+    <section class="section section--alt" id="landingzone">
+      <div class="wrap lzband">
+        <div class="reveal">
+          <p class="eyebrow">Step 3 · Attach</p>
+          <h2>Every service is a Landing&nbsp;Zone add-on</h2>
+          <p style="color:var(--ink-soft);margin-top:1rem">Your OCI Landing Zone gives you the secure foundation — compartments, networking, identity, guardrails. Observability is not a separate build: each service here is designed to <b>drop in after the Landing Zone is deployed</b>, inherit its compartments and tags, and start producing signal.</p>
+          <ol class="steps">
+            <li><b>Deploy the Landing Zone</b> — or point at your existing one. Core identity, network and security guardrails come first.</li>
+            <li><b>Add the L0 observability foundation</b> — the observability compartment, IAM groups, tag defaults and Vault scope extend the LZ topology.</li>
+            <li><b>Bolt on services level by level</b> — Monitoring, Logging, DB Management, APM and the rest enable per compartment or per resource, no teardown.</li>
+            <li><b>Iterate by use case</b> — use the finder to add only what each pattern needs, then climb toward L3.</li>
+          </ol>
+        </div>
+        <div class="lzdiagram reveal" aria-hidden="true">
+          <div class="lzcore"><b>OCI Landing Zone</b><span>compartments · network · identity · guardrails</span></div>
+          <div class="lzplus">+ add after deploy ↓</div>
+          <div class="lzaddons">
+            <div class="lzaddon"><span class="dot" style="background:var(--l0)"></span>L0 · Govern</div>
+            <div class="lzaddon"><span class="dot" style="background:var(--l1)"></span>L1 · See &amp; Alert</div>
+            <div class="lzaddon"><span class="dot" style="background:var(--l2)"></span>L2 · Diagnose</div>
+            <div class="lzaddon"><span class="dot" style="background:var(--l3)"></span>L3 · Automate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MATURITY ============ -->
+    <section class="section" id="maturity">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="eyebrow">Where are you today?</p>
+          <h2>Read your maturity, pick your next level</h2>
+          <p>The ladder maps cleanly onto an observability maturity model. Find your current state, and the next column is your next move.</p>
+        </div>
+        <div class="matgrid reveal">
+          <div class="matcard" style="--lvl:var(--l0)">
+            <span class="lv">L0</span><h4>Govern &amp; Land</h4>
+            <p>Tenancy and Landing Zone exist; little to no governed telemetry. Monitoring is ad-hoc or absent.</p>
+            <span class="map">maps to · pre-Level&nbsp;1</span>
+          </div>
+          <div class="matcard" style="--lvl:var(--l1)">
+            <span class="lv">L1</span><h4>See &amp; Alert</h4>
+            <p>Infrastructure metrics, central logging, basic alarms and notification standards. Manual troubleshooting.</p>
+            <span class="map">maps to · Level&nbsp;1–2</span>
+          </div>
+          <div class="matcard" style="--lvl:var(--l2)">
+            <span class="lv">L2</span><h4>Diagnose Deep</h4>
+            <p>Database performance monitoring, SQL diagnostics, capacity forecasting and log analytics in play.</p>
+            <span class="map">maps to · Level&nbsp;3</span>
+          </div>
+          <div class="matcard" style="--lvl:var(--l3)">
+            <span class="lv">L3</span><h4>Correlate &amp; Automate</h4>
+            <p>Distributed tracing, telemetry correlation, anomaly detection, automated remediation, service SLOs.</p>
+            <span class="map">maps to · Level&nbsp;4–5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div>
+          <p class="foot__lede">A service-oriented observability architecture, built one level at a time.</p>
+        </div>
+        <div>
+          <h4>Official docs</h4>
+          <ul>
+            <li><a href="https://docs.oracle.com/en-us/iaas/Content/Monitoring/home.htm">OCI Monitoring</a></li>
+            <li><a href="https://docs.oracle.com/en-us/iaas/Content/Logging/home.htm">OCI Logging</a></li>
+            <li><a href="https://docs.oracle.com/en-us/iaas/log-analytics/home.htm">OCI Log Analytics</a></li>
+            <li><a href="https://docs.oracle.com/en-us/iaas/application-performance-monitoring/home.htm">OCI APM</a></li>
+            <li><a href="https://docs.oracle.com/en-us/iaas/database-management/doc/database-management-oracle-databases.html">OCI Database Management</a></li>
+            <li><a href="https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html">OCI Ops Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>This guide</h4>
+          <ul>
+            <li><a href="#finder">Find your path</a></li>
+            <li><a href="#ladder">The L0 → L3 ladder</a></li>
+            <li><a href="#landingzone">Landing Zone add-ons</a></li>
+            <li><a href="launchpad.html">Interactive Launchpad</a></li>
+            <li><a href="https://opentelemetry.io/">OpenTelemetry</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot__legal">
+        <span>Reference guide · last reviewed 2026-06-15 · service names &amp; support status can change — recheck OCI docs.</span>
+        <span>Built from the OCI Enterprise Observability Design Guide.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SLIDE-OVER INSPECTOR ============ -->
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <aside class="inspector" id="inspector" role="dialog" aria-modal="true" aria-labelledby="i-name" aria-hidden="true">
+    <div class="inspector__bar"></div>
+    <div class="inspector__head">
+      <span class="inspector__ic" id="i-ic"></span>
+      <div class="inspector__title">
+        <span class="tier" id="i-tier"></span>
+        <h3 id="i-name"></h3>
+        <p id="i-tag"></p>
+      </div>
+      <button class="iclose" id="i-close" aria-label="Close inspector">×</button>
+    </div>
+    <div class="inspector__scroll">
+      <div class="lzcallout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 6-13 14-13 0 8-6 13-14 13z"/><path d="M5 19c4-6 7-8 10-9"/></svg>
+        <div><b>Landing Zone add-on.</b><p id="i-lz"></p></div>
+      </div>
+
+      <div class="lens" role="tablist" aria-label="Detail lens">
+        <button role="tab" aria-selected="true">Executive</button>
+        <button role="tab" aria-selected="false">Architect</button>
+        <button role="tab" aria-selected="false">Practitioner</button>
+      </div>
+
+      <div class="lenspanel active" role="tabpanel"><h4>Business value</h4><div id="i-exec"></div></div>
+      <div class="lenspanel" role="tabpanel"><h4>Design decisions</h4><div id="i-arch"></div></div>
+      <div class="lenspanel" role="tabpanel"><h4>Hands-on</h4><div id="i-prac"></div></div>
+
+      <a class="idocs" id="i-docs" href="#" target="_blank" rel="noopener">Official documentation ↗</a>
+    </div>
+  </aside>
+
+  <script src="assets/guide.js"></script>
+</body>
+</html>
