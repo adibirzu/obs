@@ -206,6 +206,59 @@
       </div>
     </section>
 
+    <!-- ============ AGENT COMPARISON ============ -->
+    <section class="section" id="agents">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="eyebrow">The collection layer</span>
+          <h2>Choosing the right collection agent</h2>
+          <p>Most telemetry reaches OCI through an agent. Three types cover the cases — pick by where the target runs and what it emits. Use the Oracle Cloud Agent whenever it fits; reach for the others for hybrid targets and custom logs.</p>
+        </div>
+        <div class="agents reveal">
+          <article class="agentcard" style="--ac:var(--l1);--ac-tint:var(--l1-tint)">
+            <div class="agentcard__top">
+              <span class="agentcard__ic"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></span>
+              <div><span class="kind">Default · on OCI compute</span><h3>Oracle Cloud Agent</h3></div>
+            </div>
+            <p class="use">Preinstalled on OCI compute instances and the recommended default whenever it fits.</p>
+            <dl>
+              <dt>Auth</dt><dd>Resource or instance principal</dd>
+              <dt>Collects</dt><dd>Host metrics to Monitoring, custom logs to Logging, and hosts the Management Agent plugin</dd>
+              <dt>Plugins</dt><dd>Run Command, Bastion, Vulnerability Scanning, Autonomous Linux, OS Management</dd>
+            </dl>
+            <span class="best"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Best practice when possible</span>
+          </article>
+          <article class="agentcard" style="--ac:var(--l2);--ac-tint:var(--l2-tint)">
+            <div class="agentcard__top">
+              <span class="agentcard__ic"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></svg></span>
+              <div><span class="kind">Hybrid · OCI and external</span><h3>Oracle Management Agent</h3></div>
+            </div>
+            <p class="use">Low-latency interactive collection between OCI and IT targets, including external and on-premises.</p>
+            <dl>
+              <dt>Auth</dt><dd>Resource or instance principal</dd>
+              <dt>Plugins</dt><dd>Logging Analytics, Database Management, Ops Insights, Java Management, Stack Monitoring, OS Management Hub</dd>
+              <dt>Install</dt><dd>Standalone (zip / rpm) or as an Oracle Cloud Agent plugin; Helm chart for OKE</dd>
+            </dl>
+            <span class="best"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> For hybrid and database targets</span>
+          </article>
+          <article class="agentcard" style="--ac:var(--l0);--ac-tint:var(--l0-tint)">
+            <div class="agentcard__top">
+              <span class="agentcard__ic"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg></span>
+              <div><span class="kind">Custom logs · fluentd</span><h3>Unified Monitoring Agent</h3></div>
+            </div>
+            <p class="use">Open-source, fluentd-based ingestion of custom logs into OCI Logging.</p>
+            <dl>
+              <dt>Auth</dt><dd>User principal</dd>
+              <dt>Collects</dt><dd>Syslog, application, and security logs to OCI Logging, then on to a SIEM via Connector Hub</dd>
+              <dt>Note</dt><dd>Does not parse Oracle database logs — raw records only</dd>
+            </dl>
+            <span class="best"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> For custom log streams to SIEM</span>
+          </article>
+        </div>
+        <p class="aicap reveal"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> Source: "Demystifying logging and monitoring agent types in OCI Observability and Management" — Royce Fu, OCI Observability blog.</p>
+      </div>
+    </section>
+
     <!-- ============ AI LAYER (deep dive) ============ -->
     <section class="section section--sunken" id="ai">
       <div class="wrap">
@@ -361,6 +414,33 @@
         </div>
       </div>
     </section>
+    <!-- ============ REFERENCE IMPLEMENTATION ============ -->
+    <section class="section" id="reference">
+      <div class="wrap">
+        <div class="refimpl reveal">
+          <div class="refimpl__bg" style="background-image:url('assets/redwood/brand-mosaic-stone.jpg')"></div>
+          <div class="refimpl__in">
+            <div>
+              <span class="eyebrow">Reference implementation</span>
+              <h2>See it working — the OCTO observability demo</h2>
+              <p>The OCI AI Observability for Agents whitepaper cites this as its worked example. A multi-service drone-retail stack where every browser click, FastAPI request, Spring Boot span, and Oracle ATP query share one trace context — and a GenAI multi-agent workflow traced end to end into OCI APM and Langfuse. Deploy in 5–10 minutes with OCI Resource Manager.</p>
+              <div class="refimpl__tags">
+                <span class="tag">MELT-S</span><span class="tag">APM + RUM</span><span class="tag">Logging Analytics</span><span class="tag">Monitoring</span><span class="tag">Stack Monitoring</span><span class="tag">Connector Hub</span><span class="tag">Cloud Guard</span><span class="tag">GenAI + LangGraph</span>
+              </div>
+              <div class="refimpl__actions">
+                <a class="btn btn--primary" href="https://github.com/adibirzu/octo-observability-demo" target="_blank" rel="noopener">View on GitHub <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+                <a class="btn btn--ghostlight" href="launchpad.html">Open the launchpad</a>
+              </div>
+            </div>
+            <div class="refimpl__side">
+              <div class="refstat"><b>One trace context</b><span>Browser → FastAPI → Spring Boot → ATP, correlated by W3C traceparent and oracleApmTraceId</span></div>
+              <div class="refstat"><b>6 GenAI agents</b><span>Supervisor, analyst, RAG, code interpreter, copy, presenter — traced to APM and Langfuse</span></div>
+              <div class="refstat"><b>10 hands-on labs</b><span>From first trace through a chaos drill</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ============ FOOTER ============ -->
@@ -389,10 +469,10 @@
           <ul>
             <li><a href="#finder">Find your path</a></li>
             <li><a href="#ladder">The L0 to L4 ladder</a></li>
+            <li><a href="#agents">Choosing an agent</a></li>
             <li><a href="#ai">AI agent observability</a></li>
-            <li><a href="#landingzone">Landing Zone add-ons</a></li>
-            <li><a href="launchpad.html">Interactive launchpad</a></li>
-            <li><a href="https://blogs.oracle.com/observability/">OCI Observability blog</a></li>
+            <li><a href="#reference">Reference implementation</a></li>
+            <li><a href="https://github.com/adibirzu/octo-observability-demo">OCTO observability demo</a></li>
           </ul>
         </div>
       </div>

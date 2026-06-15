@@ -204,8 +204,8 @@ oci ons subscription create --topic-id $TOPIC \\
     agent: { level: "L2", icon: "server", name: "Management Agent and Gateway",
       tagline: "Secure collection from external, on-premises, and hybrid targets.",
       lz: "An add-on for hybrid Landing Zones. Place agents per data center or segment to reach external databases and hosts.",
-      exec: ["Answers the question, how do external targets reach OCI securely?"],
-      arch: ["Place agents per data center or network segment; use the Gateway for centralized outbound HTTPS.", "Monitor agent and gateway health; document proxy, firewall, DNS, and TLS.", "Feeds Log Analytics, Ops Insights, and Database Management."],
+      exec: ["Answers the question, how do external targets reach OCI securely?", "Three agent types cover OCI, hybrid, and custom-log cases — see the comparison below."],
+      arch: ["Three types: <b>Oracle Cloud Agent</b> (preinstalled on OCI compute, the default when it fits), <b>Management Agent</b> (low-latency, hybrid — external and on-premises targets), and <b>Unified Monitoring Agent</b> (fluentd-based custom logs to OCI Logging).", "Place Management Agents per data center or segment; use the Gateway for centralized outbound HTTPS.", "Feeds Logging Analytics, Database Management, Ops Insights, Java Management, and Stack Monitoring. A Helm chart deploys it on OKE as a StatefulSet."],
       prac: ["Install and register the agent with an install key."],
       code: { lang: "Shell", body: `# Install key from the Management Agents console
 ./installer.sh -i input.rsp
