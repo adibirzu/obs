@@ -36,6 +36,23 @@
     "external-link": '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
     "rotate-ccw": '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
     "compass": '<path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/>',
+    "heart-pulse": '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>',
+    "layout-dashboard": '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+    "coffee": '<path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>',
+    "calendar-clock": '<path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/>',
+    "hard-drive": '<line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/>',
+    "grid": '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/>',
+    "brain-circuit": '<path d="M12 5a3 3 0 1 0-5.997.142 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/>',
+    "flask-conical": '<path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/>',
+    "shield-alert": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+    "bot": '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>',
+    "git-branch": '<line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
+    "database-zap": '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 15 21.84"/><path d="M21 5V8"/><path d="M21 12 18 17h4l-3 5"/><path d="M3 12A9 3 0 0 0 14.59 14.87"/>',
+    "archive": '<rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>',
+    "route": '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+    "gauge": '<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
+    "scale": '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+    "shield-half": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 22V2"/>',
   };
   function ic(name) {
     return `<svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LU[name] || ""}</svg>`;
@@ -46,6 +63,7 @@
     L1: { color: "var(--l1)", tint: "var(--l1-tint)", label: "L1 · See and alert" },
     L2: { color: "var(--l2)", tint: "var(--l2-tint)", label: "L2 · Diagnose deep" },
     L3: { color: "var(--l3)", tint: "var(--l3-tint)", label: "L3 · Correlate and automate" },
+    L4: { color: "var(--l4)", tint: "var(--l4-tint)", label: "L4 · Observe and govern AI agents" },
   };
 
   /* ---- Component catalog (OCI Observability & Management services) ---- */
@@ -229,6 +247,198 @@ OTEL_PROPAGATORS=tracecontext,baggage` },
   | where errs > forecast(errs) * 3
 # schedule: every 5m -> Notifications: prod-warning` },
       docs: "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm" },
+
+    /* --- Additional L1 coverage --- */
+    health: { level: "L1", icon: "heart-pulse", name: "OCI Health Checks",
+      tagline: "Synthetic availability probes from global vantage points.",
+      lz: "Add HTTP, HTTPS, and ping probes as a Landing Zone add-on, with no change to the monitored endpoint.",
+      exec: ["Confirms endpoints and journeys are reachable, from the outside in.", "Often the first signal of an outage, and a feed for availability SLOs."],
+      arch: ["Vantage points across regions; HTTP, HTTPS, and ping checks.", "Results become metrics and alarms in Monitoring.", "Pair with APM synthetics for full user-journey checks."],
+      prac: ["Create an HTTP health check against a public endpoint."],
+      code: { lang: "OCI CLI", body: `oci health-checks http-monitor create \\
+  --compartment-id $OBS_CMPT --display-name portal-https \\
+  --protocol HTTPS --targets '["portal.example.com"]' \\
+  --vantage-point-names '["aws-iad","goo-bru"]' \\
+  --interval-in-seconds 30` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/HealthChecks/Concepts/healthchecks.htm" },
+    dash: { level: "L1", icon: "layout-dashboard", name: "Management and Console Dashboards",
+      tagline: "Role-specific views that assemble metrics, logs, and traces.",
+      lz: "Build dashboards onto any Landing Zone workload and share saved views per audience.",
+      exec: ["One screen per audience — executive, operations, DBA, capacity, security.", "A dashboard without an owner goes stale, so assign one."],
+      arch: ["Management Dashboards for cross-service views; Console Dashboards for metric widgets.", "Filter by tags: business_service, environment, criticality.", "Saved searches and widgets, composed per role."],
+      prac: ["Dashboards are defined as JSON and can be saved and shared."],
+      code: { lang: "Dashboard (JSON)", body: `{
+  "displayName": "Operations — prod",
+  "widgets": [
+    { "type": "METRIC", "query": "CpuUtilization[1m].mean()" },
+    { "type": "LOG", "savedSearchId": "ocid1.logsavedsearch..." }
+  ]
+}` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/ManagementDashboard/home.htm" },
+
+    /* --- Additional L2 coverage --- */
+    stack: { level: "L2", icon: "layers", name: "OCI Stack Monitoring",
+      tagline: "Full-stack monitoring for application stacks and their hosts.",
+      lz: "Add for existing or transitional estates. Documented as deprecated to 23 January 2027 — not a default for net-new designs.",
+      exec: ["Health and performance of app servers, databases, and the infrastructure beneath them.", "Use for existing-estate or migration cases, with a documented transition plan."],
+      arch: ["Discovers stack resources and their relationships.", "Treat as transitional — prefer Monitoring, APM, and Database Management for net-new.", "Document the deprecation transition plan before the date."],
+      prac: ["Enable monitoring on a discovered resource through the Management Agent."],
+      code: { lang: "Note", body: `# Stack Monitoring — available until 2026-... (deprecated 2027-01-23)
+# Net-new designs: prefer Monitoring + APM + Database Management
+# Existing estates: document a transition plan before the date` },
+      docs: "https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm" },
+    java: { level: "L2", icon: "coffee", name: "Java Management Service",
+      tagline: "Discover, monitor, and patch the Java estate across hosts.",
+      lz: "Add through the Management Agent to inventory and govern the Java fleet, after deployment.",
+      exec: ["Finds which Java versions run where, what needs updates, and which applications use them.", "Reduces risk from unpatched or unknown Java runtimes."],
+      arch: ["Uses the Management Agent and fleets.", "Advanced features: Java Flight Recorder performance and crypto analysis.", "Feed findings into patch and compliance workflows."],
+      prac: ["Java usage and inventory are reported per fleet by the agent."],
+      code: { lang: "Concept", body: `# Java Management Service
+# - discover JDKs + applications via the Management Agent
+# - flag versions needing updates or past end of support
+# - drill into Java Flight Recorder performance data` },
+      docs: "https://docs.oracle.com/en-us/iaas/jms/home.htm" },
+
+    /* --- Additional L3 coverage (manage + automate) --- */
+    resched: { level: "L3", icon: "calendar-clock", name: "OCI Resource Scheduler",
+      tagline: "Schedule start, stop, and lifecycle actions to cut cost and toil.",
+      lz: "Add schedules onto Landing Zone resources after deployment, with no redesign.",
+      exec: ["Automatically stops non-production resources off-hours — a direct cost saving.", "Removes manual start and stop toil."],
+      arch: ["Schedules act on tagged resource sets.", "Combine with tags such as environment = dev or test.", "Audit scheduled actions through Events and Audit."],
+      prac: ["A schedule stops development instances each evening."],
+      code: { lang: "Concept", body: `# Resource Scheduler
+# action:     STOP_RESOURCE
+# resources:  query by tag  environment = dev
+# recurrence: FREQ=DAILY;BYHOUR=20   (stop at 20:00)` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/resource-scheduler/home.htm" },
+    osmh: { level: "L3", icon: "hard-drive", name: "OS Management Hub",
+      tagline: "Operating-system patch, configuration, and lifecycle across the fleet.",
+      lz: "Add to manage the OS layer of Landing Zone compute, on OCI and hybrid hosts.",
+      exec: ["Keeps the operating-system layer patched and compliant at fleet scale.", "Reduces vulnerability exposure on the hosts agents run on."],
+      arch: ["Managed instances grouped into lifecycle stages and software sources.", "Scheduled patch jobs with compliance reporting.", "Pairs with Cloud Guard Instance Security for runtime protection."],
+      prac: ["Patch jobs run against a managed-instance group on a schedule."],
+      code: { lang: "Concept", body: `# OS Management Hub
+# - register managed instances (Management Agent)
+# - group by lifecycle stage + software source
+# - schedule patch jobs; report compliance` },
+      docs: "https://docs.oracle.com/en-us/iaas/osmh/doc/overview.htm" },
+    fleet: { level: "L3", icon: "grid", name: "Fleet Application Management",
+      tagline: "Fleet-wide application lifecycle and maintenance automation.",
+      lz: "Add to standardize patching and maintenance across many applications at once.",
+      exec: ["Consistent, scheduled maintenance across large application estates.", "Less drift, and fewer manual change windows."],
+      arch: ["Group resources into fleets with runbooks and maintenance definitions.", "Schedule and track lifecycle operations.", "Integrates with the broader O&M signal set."],
+      prac: ["Define a fleet and run a scheduled maintenance task across it."],
+      code: { lang: "Concept", body: `# Fleet Application Management
+# - define a fleet of related resources
+# - attach lifecycle / patch runbooks
+# - schedule + track maintenance across the fleet` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/fleet-management/home.htm" },
+
+    /* --- L4: AI agent observability + governance --- */
+    ai_apm: { level: "L4", icon: "waypoints", name: "Agent tracing — APM and OpenTelemetry",
+      tagline: "Every reasoning step, tool call, and model call as a span you can follow.",
+      lz: "Add an APM domain per environment, then instrument agents with the OpenTelemetry GenAI conventions.",
+      exec: ["Answers, why is the agent slow or wrong, and where in the chain did it go wrong?", "A single trace follows one task across every agent, tool, and model it touches."],
+      arch: ["GenAI spans: invoke_agent, invoke_workflow, execute_tool, chat or inference, and retrieval.", "OTLP ingest through the OTel Collector (redact and route); fan out to Tempo at the same time.", "Correlate traces to logs via trace.id and span.id; add synthetic and real-user monitoring."],
+      prac: ["Point the OpenTelemetry SDK at the APM OTLP endpoint with a private data key."],
+      code: { lang: "OpenTelemetry (env)", body: `OTEL_EXPORTER_OTLP_ENDPOINT=\\
+  https://<domain>.apm-agent.<rgn>.oci.oraclecloud.com/20200101
+OTEL_EXPORTER_OTLP_HEADERS="Authorization=dataKey <PRIVATE_DATA_KEY>"
+OTEL_SERVICE_NAME=triage-agent
+# span tree: invoke_agent > execute_tool > chat   (gen_ai.* attributes)` },
+      docs: "https://docs.oracle.com/iaas/application-performance-monitoring/doc/configure-open-source-tracing-systems.html" },
+    ai_genai: { level: "L4", icon: "brain-circuit", name: "LLM-as-a-judge — Generative AI and guardrails",
+      tagline: "A governed model scores agent output for quality and safety, at scale.",
+      lz: "Add a private Generative AI endpoint and guardrails; evaluation data never leaves the tenancy trust boundary.",
+      exec: ["Answers, is the agent correct, grounded, safe, and within policy?", "Scores quality and safety at a volume humans cannot review alone."],
+      arch: ["The judge model is served by OCI Generative AI as a private, governed endpoint.", "Guardrails add deterministic signals — content moderation, prompt-injection, and PII.", "Calibrate: anchor rubrics to human labels, sample verdicts, track judge–human agreement. The judge is itself an agent — govern it under the same Zero Trust."],
+      prac: ["The judge scores an output against a rubric; guardrails add the hard checks."],
+      code: { lang: "Concept", body: `# LLM-as-a-judge on OCI Generative AI
+score = judge(rubric, agent_output, retrieved_context)
+guard = guardrails(agent_output)    # moderation / prompt-injection / PII
+advance = score >= threshold and guard.safe   # gate the change` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm" },
+    ai_logan: { level: "L4", icon: "scan-search", name: "Agent anomaly detection — Logging Analytics",
+      tagline: "Machine-learning clustering over agent, broker, and gateway logs.",
+      lz: "Feed agent logs from Logging through Connector Hub; detections map to MITRE.",
+      exec: ["Surfaces unusual agent behaviour you did not predict — drift and tool-call shifts.", "Detections map to MITRE ATT&CK and MITRE ATLAS, in language the SOC already uses."],
+      arch: ["Clustering and anomaly detection on a common timeline, with no hand-written rule.", "Scheduled searches as detections; alert on input-distribution and output-quality drift.", "Pivot from an anomalous APM span to the surrounding log detail."],
+      prac: ["A scheduled cluster detection flags a shift in tool-call distribution."],
+      code: { lang: "OCL", body: `* | where 'Log Source' = 'Agent Logs'
+  | cluster t = 0.8
+  | where Anomaly = true
+# schedule every 5m -> Notifications: prod-warning   (MITRE ATLAS tagged)` },
+      docs: "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm" },
+    ai_eval: { level: "L4", icon: "flask-conical", name: "Evaluation jobs — OCI Data Science",
+      tagline: "Golden-set scoring and judge calibration, orchestrated as jobs.",
+      lz: "Add evaluation jobs against curated datasets; scores land beside the operational metrics.",
+      exec: ["Turns 'is the new prompt better?' into a measured comparison.", "Builds the baseline that makes change safe."],
+      arch: ["A golden set of representative tasks with known-good outcomes.", "Data Science jobs (or Functions) run the suite; scores write to Logging Analytics.", "Sample judge verdicts for human re-calibration."],
+      prac: ["A job scores a candidate against the golden set and writes the results."],
+      code: { lang: "Python (eval job)", body: `for case in golden_set:
+    out = agent.run(case.input)
+    log_analytics.put({
+        "case": case.id,
+        "correct":  judge(case, out),
+        "grounded": grounded(out, case.context),
+    })   # scores land beside operational metrics` },
+      docs: "https://docs.oracle.com/en-us/iaas/data-science/using/home.htm" },
+    ai_loop: { level: "L4", icon: "git-branch", name: "Controlled evolution — Functions and DevOps",
+      tagline: "Evaluation gates, shadow-to-canary rollout, and automated rollback.",
+      lz: "Add evaluation gates to DevOps pipelines; the feedback-loop logic runs in Functions.",
+      exec: ["Lets agents improve without each change becoming a gamble.", "A regression caught in canary is reversed before it spreads."],
+      arch: ["The eval gate runs the suite as part of promotion — a regression does not advance.", "Roll out shadow, then canary, then wide, watching live metrics and scores.", "Drift detected by Logging Analytics triggers re-evaluation, rollback, or retraining. Findings can tighten the Zero Trust tool allowlist, not just the prompt."],
+      prac: ["The pipeline blocks promotion when the evaluation score regresses."],
+      code: { lang: "Pipeline (gate)", body: `evaluate:
+  run:  eval-suite --golden golden_set --candidate $BUILD
+  gate: score.correct >= baseline and score.grounded >= baseline
+  on_fail: block                         # no promotion
+  on_pass: rollout shadow -> canary -> wide` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm" },
+    ai_cgis: { level: "L4", icon: "shield-alert", name: "Agent host runtime — Cloud Guard Instance Security",
+      tagline: "osquery-based runtime protection for the hosts agents run on.",
+      lz: "Add to extend Cloud Guard from posture management to workload runtime on agent Compute.",
+      exec: ["A compromised agent host can fail in ways the agent never reports.", "Catches suspicious processes, unexpected open ports, and script execution."],
+      arch: ["Built on the open-source osquery engine, with Oracle-managed detections and ad-hoc fleet queries.", "Findings surface as Cloud Guard problems and flow into Logging Analytics beside agent telemetry.", "Kubernetes Security Posture Management extends the discipline to OKE."],
+      prac: ["Run an ad-hoc osquery across the agent host fleet."],
+      code: { lang: "osquery (SQL)", body: `SELECT name, path, cmdline FROM processes
+WHERE on_disk = 0;   -- process running from a deleted binary
+-- Cloud Guard Instance Security -> problem -> Logging Analytics` },
+      docs: "https://docs.oracle.com/en-us/iaas/cloud-guard/using/cgis.htm" },
+    ai_agents: { level: "L4", icon: "bot", name: "Observability agents — Generative AI Agents and AI Agent Studio",
+      tagline: "Triage and correlation agents that watch with you — governed like any agent.",
+      lz: "Add an observability agent with scoped, read-only access to APM, Logging Analytics, and Monitoring.",
+      exec: ["AI for observability — an agent gathers spans and logs, maps relationships, and proposes a root cause and next step.", "Low-risk actions run through allowlisted tools; high-risk actions are proposed for human approval."],
+      arch: ["Build code-first on OCI Generative AI Agents, or enterprise-grade on Oracle AI Agent Studio with built-in observability and governance.", "Frameworks such as LangGraph, instrumented with OpenTelemetry — the observability agent is itself fully traced.", "Runs under the same Zero Trust scoped identity and decision ledger as any other agent."],
+      prac: ["A triage agent correlates an anomaly and drafts an incident summary."],
+      code: { lang: "LangGraph (sketch)", body: `graph = StateGraph()
+graph.add_node("gather",    read_apm_logging_monitoring)  # read-only, scoped
+graph.add_node("correlate", build_service_and_agent_map)
+graph.add_node("explain",   call_generative_ai_summary)
+# high-risk actions -> human approval via the Zero Trust broker` },
+      docs: "https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/home.htm" },
+    ai_datasafe: { level: "L4", icon: "shield-half", name: "Database security — Data Safe and SQL Firewall",
+      tagline: "Security assessment, activity auditing, and allow-listed SQL for Oracle databases.",
+      lz: "Add to govern the databases agents query — assessment, auditing, masking, and SQL allow-listing.",
+      exec: ["Answers, what did the agent's SQL actually do to the database?", "Allow-listed SQL blocks unexpected statements at the database."],
+      arch: ["Data Safe: security and user assessment, activity auditing, data discovery and masking.", "SQL Firewall (Database 23ai): allow-listed SQL and trusted paths per account.", "Feeds the database signal group — sessions, blocked statements, entitlement drift."],
+      prac: ["SQL Firewall blocks a statement outside the account's allow-list."],
+      code: { lang: "Concept", body: `# Oracle Data Safe + SQL Firewall (Database 23ai)
+# - capture an allow-list of normal SQL per account
+# - enforce: block + audit statements off the allow-list
+# - Data Safe: assess config, audit activity, mask sensitive data` },
+      docs: "https://docs.oracle.com/en-us/iaas/data-safe/index.html" },
+    ai_avdf: { level: "L4", icon: "archive", name: "Audit Vault and Database Firewall",
+      tagline: "Native audit collection and a network SQL firewall — Oracle and third-party, across clouds.",
+      lz: "Add as the heterogeneous answer to 'visibility everywhere' for the databases agents reach.",
+      exec: ["Answers SQL access for Oracle and third-party databases, wherever they run.", "Blocks policy-violating statements at the boundary."],
+      arch: ["Native audit collection consolidates trails from many databases.", "The Database Firewall parses and classifies each statement — allow, log, alert, substitute, or block.", "Supports Oracle, SQL Server, MySQL, PostgreSQL, IBM Db2, SAP Sybase, and MongoDB across clouds."],
+      prac: ["The Database Firewall blocks a SQL-injection pattern at the boundary."],
+      code: { lang: "Concept", body: `# Audit Vault and Database Firewall (AVDF)
+# - collect native audit trails (Oracle + third-party)
+# - SQL-grammar engine classifies each statement
+# - action: allow | log | alert | substitute | BLOCK` },
+      docs: "https://www.oracle.com/security/database-security/audit-vault-database-firewall/" },
   };
 
   /* ---- Use-case patterns ---- */
@@ -248,6 +458,9 @@ OTEL_PROPAGATORS=tracecontext,baggage` },
     hybrid: { name: "Hybrid enterprise estate", icon: "cloud",
       start: "Lead with the Management Agent and Gateway, then add the full stack.",
       path: ["agent","metric","log","analyze","db","insight","event","bell","hub"] },
+    agentic: { name: "Agentic and generative-AI workload", icon: "bot",
+      start: "This is the L4 path. Instrument with OpenTelemetry GenAI, judge with Generative AI, and govern with Zero Trust.",
+      path: ["ai_apm","metric","log","ai_logan","ai_genai","ai_eval","ai_loop","ai_cgis","ai_agents"] },
   };
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -427,5 +640,7 @@ OTEL_PROPAGATORS=tracecontext,baggage` },
     });
     $$(".lens button").forEach((b, i) => b.addEventListener("click", () => selectLens(i)));
     $("#finderClear")?.addEventListener("click", clearFinder);
+    // wire diagram chips (the AI reference-architecture pipeline)
+    $$(".dchip[data-comp]").forEach((d) => d.addEventListener("click", () => openInspector(d.dataset.comp)));
   });
 })();

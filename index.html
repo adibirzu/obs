@@ -35,6 +35,7 @@
         <a href="#lvl-L1" data-lv="L1"><span class="dot" style="--lv:var(--l1)"></span>L1</a>
         <a href="#lvl-L2" data-lv="L2"><span class="dot" style="--lv:var(--l2)"></span>L2</a>
         <a href="#lvl-L3" data-lv="L3"><span class="dot" style="--lv:var(--l3)"></span>L3</a>
+        <a href="#lvl-L4" data-lv="L4"><span class="dot" style="--lv:var(--l4)"></span>L4 · AI</a>
       </nav>
       <a class="btn btn--primary" href="launchpad.html">Open launchpad</a>
     </div>
@@ -53,9 +54,9 @@
             <a class="btn btn--secondary" href="#ladder">Explore the ladder</a>
           </div>
           <div class="hero__meta">
-            <div class="hero__stat"><span class="n">15</span><span class="l">O&amp;M services</span></div>
-            <div class="hero__stat"><span class="n">4</span><span class="l">levels, L0 to L3</span></div>
-            <div class="hero__stat"><span class="n">5</span><span class="l">use-case patterns</span></div>
+            <div class="hero__stat"><span class="n">30+</span><span class="l">O&amp;M and AI services</span></div>
+            <div class="hero__stat"><span class="n">5</span><span class="l">levels, L0 to L4</span></div>
+            <div class="hero__stat"><span class="n">6</span><span class="l">use-case patterns</span></div>
             <div class="hero__stat"><span class="n">3</span><span class="l">lenses per service</span></div>
           </div>
         </div>
@@ -116,9 +117,12 @@
             <p>OCI alongside on-premises databases and applications, external tools, and existing ITSM.</p>
             <div class="uc__tags"><span class="tag">mgmt-agent</span><span class="tag">gateway</span></div>
           </button>
-          <div class="uc uc--hint">
-            <p>Not sure? Start at <b>L0 · Govern and land</b> below and walk the ladder in order.</p>
-          </div>
+          <button class="uc" type="button" data-uc="agentic" aria-pressed="false">
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 06</span></div>
+            <h3>Agentic and generative-AI workload</h3>
+            <p>Autonomous agents, RAG, LLM calls, tool use, and multi-agent orchestration.</p>
+            <div class="uc__tags"><span class="tag">opentelemetry-genai</span><span class="tag">llm-as-a-judge</span></div>
+          </button>
         </div>
 
         <div class="finder__result reveal" id="finderResult" role="region" aria-live="polite">
@@ -139,8 +143,8 @@
       <div class="wrap">
         <div class="section__head reveal">
           <span class="steptag"><b>Step 2</b> · Climb</span>
-          <h2>The L0 to L3 ladder</h2>
-          <p>Each level answers a sharper question than the last. Every card is a service you can add onto a deployed Landing Zone. Select one to open the inspector, then switch lenses for an executive, architect, or practitioner view, with copy-ready snippets.</p>
+          <h2>The L0 to L4 ladder</h2>
+          <p>Each level answers a sharper question than the last, from governance through classic observability to AI agents. Every card is a service you can add onto a deployed Landing Zone. Select one to open the inspector, then switch lenses for an executive, architect, or practitioner view, with copy-ready snippets.</p>
         </div>
 
         <div class="ladder">
@@ -187,7 +191,114 @@
             <p class="station__body">Stitch traces, logs, metrics, and database signals together with APM and OpenTelemetry, move data with Connector Hub, automate through Events, and layer on AI-assisted operations and forecasting.</p>
             <div class="cards"></div>
           </article>
+
+          <article class="station reveal" id="lvl-L4" data-level="L4">
+            <div class="station__node">4</div>
+            <div class="station__head">
+              <span class="station__tier">L4 · Observe and govern AI agents</span>
+              <h3>See, judge, and improve autonomous AI</h3>
+            </div>
+            <p class="station__q">Is the agent correct, grounded, safe, and getting better — and what can it do?</p>
+            <p class="station__body">Agents are non-deterministic and drift silently, so they need more than the three pillars. Trace every reasoning step, judge output quality with a governed model, detect anomalies the SOC can read, and evolve under gated control — paired with Zero Trust enforcement and the OCI Secure AI Framework. See the deep dive below.</p>
+            <div class="cards"></div>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ AI LAYER (deep dive) ============ -->
+    <section class="section section--sunken" id="ai">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="steptag"><b>The AI layer</b> · observe, judge, govern</span>
+          <h2>AI agent observability and governance</h2>
+          <p>Autonomous agents fail in non-obvious ways — a confident but wrong answer returns a normal status code. OCI answers this with three connected disciplines, each shipped as an add-on to the OCI Cloud Adoption Framework and Enterprise Landing Zone.</p>
+        </div>
+
+        <div class="reveal">
+          <p class="triad__quote">"Zero Trust decides what an agent is allowed to do. Observability tells you what it <span class="accent">actually did</span> — and whether it is getting better or worse. You need both."</p>
+          <div class="triad">
+            <article class="triadcard" style="--tc:var(--blue-deep)">
+              <span class="role">OCI SAIF · framework</span>
+              <h3>Secure AI Framework</h3>
+              <p>The umbrella. Secures three surfaces — models, data, and agents — with six principles across the adoption lifecycle. Ships through the Enterprise Landing Zone as policy-as-code.</p>
+              <span class="verb">Defines what is secured</span>
+            </article>
+            <article class="triadcard" style="--tc:var(--red-redwood)">
+              <span class="role">Zero Trust for AI agents · enforcement</span>
+              <h3>Authorize every action</h3>
+              <p>The agent execution trust boundary. A policy gate and broker scope identity, allow-list tools, and authorize each action at the moment it happens — producing a decision ledger.</p>
+              <span class="verb">Decides what an agent may do</span>
+            </article>
+            <article class="triadcard" style="--tc:var(--plum-core)">
+              <span class="role">AI observability · detect and evaluate</span>
+              <h3>See, judge, improve</h3>
+              <p>The detective and evaluative half. Trace agent behaviour, judge it with LLM-as-a-judge, detect drift, and evolve under gated control. The decision ledger becomes a primary data source.</p>
+              <span class="verb">Tells you what it actually did</span>
+            </article>
+          </div>
+          <div class="loop" aria-label="The agent observability loop">
+            <span class="loopchip">See</span>
+            <span class="arrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="loopchip">Judge</span>
+            <span class="arrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="loopchip">Improve under control</span>
+            <span class="arrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 5 5v0a5 5 0 0 1-5 5H9"/></svg></span>
+            <span class="loopchip">Tighten Zero Trust</span>
+          </div>
+        </div>
+
+        <div class="section__head reveal" style="margin-top:var(--space-8)">
+          <span class="eyebrow">A new modern diagram</span>
+          <h2 style="font-size:var(--text-2xl)">The OCI AI observability reference architecture</h2>
+          <p>One OpenTelemetry instrumentation feeds OCI Observability and Management and an open-source stack, then evaluation and action. Select any service to inspect it.</p>
+        </div>
+
+        <div class="aiflow reveal" role="group" aria-label="AI observability pipeline">
+          <div class="aistage" style="--stagec:var(--l0)">
+            <div class="aistage__h"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg> Instrument</div>
+            <p class="aistage__sub">OpenTelemetry GenAI conventions</p>
+            <span class="dchip dchip--static">Agent, tools, and broker</span>
+            <span class="dchip dchip--static">Zero Trust decision ledger</span>
+          </div>
+          <span class="aiarrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+
+          <div class="aistage" style="--stagec:var(--l1)">
+            <div class="aistage__h"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg> Collect</div>
+            <p class="aistage__sub">Redact and route</p>
+            <span class="dchip dchip--static">OpenTelemetry Collector</span>
+            <button class="dchip" type="button" data-comp="agent">Management Agent</button>
+          </div>
+          <span class="aiarrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+
+          <div class="aistage" style="--stagec:var(--l2)">
+            <div class="aistage__h"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></svg> Analyse</div>
+            <p class="aistage__sub">OCI O&amp;M + open source</p>
+            <button class="dchip" type="button" data-comp="ai_apm">APM — traces</button>
+            <button class="dchip" type="button" data-comp="ai_logan">Logging Analytics</button>
+            <button class="dchip" type="button" data-comp="metric">Monitoring — metrics</button>
+            <span class="dchip dchip--static">Grafana · Prometheus · Tempo · Loki</span>
+          </div>
+          <span class="aiarrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+
+          <div class="aistage" style="--stagec:var(--l4)">
+            <div class="aistage__h"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg> Evaluate</div>
+            <p class="aistage__sub">LLM-as-a-judge</p>
+            <button class="dchip" type="button" data-comp="ai_genai">Judge — Generative AI</button>
+            <button class="dchip" type="button" data-comp="ai_eval">Eval jobs — Data Science</button>
+            <button class="dchip" type="button" data-comp="ai_cgis">Host runtime — Cloud Guard</button>
+          </div>
+          <span class="aiarrow"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+
+          <div class="aistage" style="--stagec:var(--l3)">
+            <div class="aistage__h"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg> Act</div>
+            <p class="aistage__sub">Gate, govern, alert</p>
+            <button class="dchip" type="button" data-comp="ai_loop">Evaluation gates — DevOps</button>
+            <span class="dchip dchip--static">Tighten Zero Trust policy</span>
+            <button class="dchip" type="button" data-comp="bell">Notifications</button>
+          </div>
+        </div>
+        <p class="aicap reveal"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M16 12h2"/><path d="M16 8h2"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg> The pipeline ends in action, not a dashboard — evaluation results and detected drift flow into the controlled-evolution loop and back into Zero Trust policy. Based on the OCI AI Observability for Agents whitepaper.</p>
       </div>
     </section>
 
@@ -269,21 +380,24 @@
             <li><a href="https://docs.oracle.com/en-us/iaas/application-performance-monitoring/home.htm">OCI Application Performance Monitoring</a></li>
             <li><a href="https://docs.oracle.com/en-us/iaas/database-management/doc/database-management-oracle-databases.html">OCI Database Management</a></li>
             <li><a href="https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html">OCI Ops Insights</a></li>
+            <li><a href="https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm">OCI Generative AI</a></li>
+            <li><a href="https://www.oracle.com/manageability/">All O&amp;M services</a></li>
           </ul>
         </div>
         <div>
           <h4>This guide</h4>
           <ul>
             <li><a href="#finder">Find your path</a></li>
-            <li><a href="#ladder">The L0 to L3 ladder</a></li>
+            <li><a href="#ladder">The L0 to L4 ladder</a></li>
+            <li><a href="#ai">AI agent observability</a></li>
             <li><a href="#landingzone">Landing Zone add-ons</a></li>
             <li><a href="launchpad.html">Interactive launchpad</a></li>
-            <li><a href="https://opentelemetry.io/">OpenTelemetry</a></li>
+            <li><a href="https://blogs.oracle.com/observability/">OCI Observability blog</a></li>
           </ul>
         </div>
       </div>
       <div class="foot__legal">
-        <span>Reference guide, last reviewed 2026-06-15. Service names and support status can change — recheck the OCI documentation.</span>
+        <span>Reference guide, last reviewed 2026-06-15. Built from the OCI Enterprise Observability Design Guide and the OCI Secure AI Framework, Zero Trust for AI Agents, and AI Observability for Agents whitepapers. Service names and support status can change — recheck the OCI documentation.</span>
         <span>Copyright © 2026, Oracle and/or its affiliates.</span>
       </div>
     </div>
