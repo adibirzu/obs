@@ -492,3 +492,10 @@ button.dchip:hover { border-color: var(--l4); background: var(--surface-card); b
 .l5pill { display: inline-flex; align-items: center; font-family: var(--font-body); font-weight: var(--weight-semibold); font-size: var(--text-sm); padding: var(--space-1) var(--space-4); border-radius: var(--radius-pill); background: var(--surface-card); border: 1px solid var(--border-default); color: var(--text-body); }
 .l5pill--op { background: var(--l5-tint); border-color: var(--l5); color: var(--l5); }
 .l5scale .arrow { color: var(--stone-400); }
+
+/* inspector "relevant to" personas */
+.i-personas { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
+.i-personas:empty { display: none; }
+.i-personas__k { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); }
+.ptag { font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--text-body); text-decoration: none; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); padding: 2px 10px; }
+.ptag:hover { border-color: var(--action-secondary); color: var(--action-secondary); text-decoration: none; }

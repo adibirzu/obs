@@ -548,6 +548,10 @@ graph.add_node("explain",   call_generative_ai_summary)
     $("#i-tier").textContent = lv.label;
     $("#i-name").textContent = c.name;
     $("#i-tag").textContent = c.tagline;
+    const personas = (window.OBS_PERSONAS || []).filter((p) => p.levels.includes(c.level));
+    $("#i-personas").innerHTML = personas.length
+      ? `<span class="i-personas__k">Relevant to</span>${personas.map((p) => `<a class="ptag" href="#personas">${p.name}</a>`).join("")}`
+      : "";
     $("#i-exec").innerHTML = ul(c.exec);
     $("#i-arch").innerHTML = ul(c.arch);
     $("#i-prac").innerHTML = ul(c.prac) + `

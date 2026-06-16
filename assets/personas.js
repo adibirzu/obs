@@ -99,6 +99,9 @@
       emphasis: ["L5 multitenancy", "L4 AI agents", "L0 per-tenant governance"] },
   ];
 
+  // Expose for guide.js (inspector "relevant to" chips + persona-aware nav)
+  window.OBS_PERSONAS = PERSONAS.map((p) => ({ id: p.id, name: p.name, levels: p.levels, lens: p.lens }));
+
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   let chosen = { persona: null, industry: null };
