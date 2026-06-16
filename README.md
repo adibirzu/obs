@@ -35,7 +35,7 @@ A single-page guide that helps **any user** — executive, architect, or practit
 
 ## Landing Zone add-ons — attach after deploy
 
-Observability is **not** a separate build. Deploy the [OCI Operating Entities (OE) Landing Zone](https://github.com/adibirzu/oci-landing-zone-operating-entities) first; then enable each add-on independently, on top of the live Landing Zone, choosing only what each use case needs — no teardown.
+Observability is **not** a separate build. Deploy the [OCI Operating Entities (OE) Landing Zone](https://github.com/oci-landing-zones/oci-landing-zone-operating-entities) (the official Oracle OCI Landing Zones project) first; then enable each add-on independently, on top of the live Landing Zone, choosing only what each use case needs — no teardown.
 
 ![LZ add-on architecture](assets/diagrams/lz-addons-architecture.svg)
 

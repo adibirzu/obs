@@ -133,7 +133,7 @@ window.OBS_RESOURCES = [
       { title: "Ops Insights add-ons for OCI Landing Zone", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/operations-insights/LZ-addons", summary: "IaC add-ons to enable Operations Insights within an OCI Landing Zone." },
     ],
     projects: [
-      { title: "oci-landing-zone-operating-entities", url: "https://github.com/adibirzu/oci-landing-zone-operating-entities", summary: "OCI Operating Entities (OE) Landing Zone blueprints — the secure base that observability add-ons attach to." },
+      { title: "oci-landing-zone-operating-entities (official)", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities", summary: "The official Oracle OCI Operating Entities (OE) Landing Zone blueprints — the secure base that observability add-ons attach to." },
     ],
   },
 ];
