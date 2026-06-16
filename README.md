@@ -4,7 +4,10 @@
 
 🔗 **Live:** [obs.octodemo.cloud](https://obs.octodemo.cloud) · mirror: [adibirzu.github.io/obs](https://adibirzu.github.io/obs/)
 
-Built on the [Oracle Redwood Design System](https://www.oracle.com/) (Georgia + Figtree, warm-stone palette, Lucide icons). Static, self-contained, no build step.
+Built with the Oracle Redwood design language (Georgia + Figtree, warm-stone palette, Lucide icons) for familiarity. Static, self-contained, no build step.
+
+> [!IMPORTANT]
+> **Not an Oracle product.** OCTO Observability Atlas is an **independent, community-built project**. It is **not affiliated with, sponsored by, or endorsed by Oracle**. Its sole purpose is to make Oracle Cloud Infrastructure's observability tools easier to understand and adopt. Oracle, OCI, Oracle Cloud Infrastructure, and the Redwood design language are trademarks of Oracle and/or its affiliates, used here for identification and educational purposes only. The OCTO mark belongs to its respective project. Always verify against the [official OCI documentation](https://docs.oracle.com/en-us/iaas/Content/home.htm).
 
 ---
 
