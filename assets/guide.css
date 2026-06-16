@@ -60,7 +60,7 @@ body.no-scroll { overflow: hidden; }
 .topnav__row { display: flex; align-items: center; gap: var(--space-5); height: 64px; }
 .brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; }
 .brand:hover { text-decoration: none; }
-.brand__logo { height: 36px; width: auto; }
+.brand__logo { height: 44px; width: auto; border-radius: 8px; display: block; }
 .brand__octo { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; color: var(--blue-deep); letter-spacing: .02em; }
 .brand__div { width: 1px; height: 22px; background: var(--border-default); }
 .brand__name { font-family: var(--font-display); font-size: var(--text-md); color: var(--text-strong); letter-spacing: var(--tracking-snug); }

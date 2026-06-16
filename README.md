@@ -1,6 +1,6 @@
 # OCI Observability Atlas
 
-**A guided path from L0 to L4 for designing enterprise observability on Oracle Cloud Infrastructure — with every service framed as a Landing Zone add-on you attach after deployment, per customer need.**
+**A guided path from L0 to L4 for designing enterprise observability on Oracle Cloud Infrastructure — find the right O&M and AI services for your use case and enable them when you need them.**
 
 🔗 **Live:** [obs.octodemo.cloud](https://obs.octodemo.cloud) · mirror: [adibirzu.github.io/obs](https://adibirzu.github.io/obs/)
 
@@ -19,7 +19,7 @@ A single-page guide that helps **any user** — executive, architect, or practit
 - **The L0 → L4 ladder** — 31 O&M and AI services, each opening an inspector with Executive / Architect / Practitioner lenses, copy-ready MQL/OCL/OTel snippets, and a "Learn more" panel of curated guides + open-source projects.
 - **Collection-agent comparison** — Oracle Cloud Agent vs. Management Agent vs. Unified Monitoring Agent.
 - **AI agent observability (L4)** — the SAIF / Zero Trust / Observability triad and a modern Instrument → Collect → Analyse → Evaluate → Act reference diagram.
-- **Landing Zone add-ons** — how observability attaches **after** the OCI Operating Entities (OE) Landing Zone is deployed (see the diagram below).
+- **Database observability** — deployable as part of the official OCI Operating Entities (OE) Landing Zone (see below).
 - **Resources** — curated DevRel guides, demos, and the maintainer's public observability projects, mapped per service.
 - **[Interactive launchpad](https://obs.octodemo.cloud/launchpad.html)** — the companion operations console.
 
@@ -33,13 +33,9 @@ A single-page guide that helps **any user** — executive, architect, or practit
 | **L3** | Correlate & automate | What's the business impact, and what can self-heal? | APM + OpenTelemetry, Connector Hub, Resource Scheduler, OS Management Hub, Fleet App Mgmt |
 | **L4** | Observe & govern AI | Is the agent correct, grounded, safe, improving? | APM GenAI, Generative AI (judge) + guardrails, Logging Analytics anomaly, Data Science eval, Cloud Guard Instance Security, Gen AI Agents |
 
-## Landing Zone add-ons — attach after deploy
+## Database observability and the official Landing Zone
 
-Observability is **not** a separate build. Deploy the [OCI Operating Entities (OE) Landing Zone](https://github.com/oci-landing-zones/oci-landing-zone-operating-entities) (the official Oracle OCI Landing Zones project) first; then enable each add-on independently, on top of the live Landing Zone, choosing only what each use case needs — no teardown.
-
-![LZ add-on architecture](assets/diagrams/lz-addons-architecture.svg)
-
-Editable diagram sources: [`draw.io`](assets/diagrams/lz-addons-architecture.drawio) · [`Excalidraw`](assets/diagrams/lz-addons-architecture.excalidraw) · [`SVG`](assets/diagrams/lz-addons-architecture.svg). See also the DevRel [LZ add-ons for Database Management](https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/database-management/LZ-addons) and [Ops Insights](https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/operations-insights/LZ-addons).
+For the database layer, observability can be deployed as part of the official Oracle [OCI Operating Entities (OE) Landing Zone](https://github.com/oci-landing-zones/oci-landing-zone-operating-entities) (the `oci-landing-zones` org). Enable Database Management and the related signals where your databases live.
 
 ## Propose a new monitoring scenario
 

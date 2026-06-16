@@ -516,7 +516,6 @@ graph.add_node("explain",   call_generative_ai_summary)
         b.innerHTML = `
           <div class="card__top">
             <span class="card__ic">${ic(c.icon)}</span>
-            <span class="addon">${ic("puzzle")} LZ add-on</span>
           </div>
           <h4>${c.name}</h4>
           <p>${c.tagline}</p>
@@ -549,7 +548,6 @@ graph.add_node("explain",   call_generative_ai_summary)
     $("#i-tier").textContent = lv.label;
     $("#i-name").textContent = c.name;
     $("#i-tag").textContent = c.tagline;
-    $("#i-lz").innerHTML = c.lz;
     $("#i-exec").innerHTML = ul(c.exec);
     $("#i-arch").innerHTML = ul(c.arch);
     $("#i-prac").innerHTML = ul(c.prac) + `

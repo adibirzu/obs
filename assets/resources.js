@@ -74,7 +74,7 @@ window.OBS_RESOURCES = [
     key: "database-management", label: "OCI Database Management", comp: "db", module: "module-dbmgmt",
     items: [
       { title: "OCI Database Management demo", url: "https://www.youtube.com/watch?v=3k9jrkOlBkc", summary: "Performance diagnostics and fleet monitoring for Oracle Databases." },
-      { title: "Database Management add-ons for OCI Landing Zone", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/database-management/LZ-addons", summary: "Step-by-step guides and IaC add-ons to enable Database Management within a Landing Zone." },
+      { title: "Database observability in the official OCI Landing Zone (OE)", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities", summary: "Deploy database observability as part of the official Oracle OCI Operating Entities (OE) Landing Zone." },
       { title: "Enable observability for an OCI-native database deployment", url: "https://medium.com/@erikasciunzi/enable-observability-for-oci-native-database-deploy-235484953e46", summary: "Turn on OCI Observability and Management for natively deployed OCI databases." },
       { title: "OCI Database Management — PDB support and new features", url: "https://learnoci.cloud/oci-database-management-new-features-announced-f9991cba2cc2", summary: "Review newly announced features, including monitoring for pluggable databases (PDBs)." },
     ],
@@ -87,7 +87,6 @@ window.OBS_RESOURCES = [
     key: "operations-insights", label: "OCI Ops Insights", comp: "insight", module: "module-opsinsights",
     items: [
       { title: "OCI Ops Insights demo", url: "https://www.youtube.com/watch?v=Y45kPRn_c7s", summary: "Resource-capacity analysis, forecasting, and SQL performance across a database fleet." },
-      { title: "Ops Insights add-ons for OCI Landing Zone", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/operations-insights/LZ-addons", summary: "Step-by-step guides and IaC add-ons to enable Operations Insights within a Landing Zone." },
       { title: "Enable Ops Insights on Autonomous Database Serverless", url: "https://medium.com/@rishabhghosh24/enable-oci-ops-insight-on-oracle-autonomous-database-serverless-61efab78f927", summary: "Enable Operations Insights for Oracle Autonomous Database Serverless instances." },
       { title: "Enable Operations Insights for Oracle DBCS", url: "https://learnoci.cloud/how-to-enable-operations-insight-for-oracle-dbcs-51dac10da833", summary: "Enable Operations Insights for Oracle Database Cloud Service databases." },
     ],
@@ -124,16 +123,6 @@ window.OBS_RESOURCES = [
       { title: "multi-mcp-gateway", url: "https://github.com/adibirzu/multi-mcp-gateway", summary: "Unified HTTP gateway for orchestrating multiple Model Context Protocol servers." },
       { title: "oci-skills", url: "https://github.com/adibirzu/oci-skills", summary: "Tenancy-agnostic OCI admin skill pack — IAM, security, observability, and database." },
       { title: "DevVisualization", url: "https://github.com/adibirzu/DevVisualization", summary: "Local-first project knowledge graph (KAG) — a read-only code knowledge surface for agents." },
-    ],
-  },
-  {
-    key: "landing-zone", label: "Landing Zone and operating entities", comp: "iam", module: "module-home",
-    items: [
-      { title: "Database Management add-ons for OCI Landing Zone", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/database-management/LZ-addons", summary: "IaC add-ons to enable Database Management within an OCI Landing Zone." },
-      { title: "Ops Insights add-ons for OCI Landing Zone", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/operations-insights/LZ-addons", summary: "IaC add-ons to enable Operations Insights within an OCI Landing Zone." },
-    ],
-    projects: [
-      { title: "oci-landing-zone-operating-entities (official)", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities", summary: "The official Oracle OCI Operating Entities (OE) Landing Zone blueprints — the secure base that observability add-ons attach to." },
     ],
   },
 ];
