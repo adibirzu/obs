@@ -416,9 +416,7 @@ button.dchip:hover { border-color: var(--l4); background: var(--surface-card); b
 .foot a:hover { color: var(--white); }
 .foot__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: var(--space-6); }
 @media (max-width: 740px) { .foot__grid { grid-template-columns: 1fr; gap: var(--space-5); } }
-.foot__brand { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
-.foot__logo { height: 34px; }
-.foot__octo { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--white); letter-spacing: .02em; }
+.foot__logo { height: 76px; width: auto; margin-bottom: var(--space-4); display: block; }
 .foot__disclaimer { margin-top: var(--space-7); padding: var(--space-4) var(--space-5); background: rgba(255,255,255,.04); border: 1px solid var(--stone-800); border-radius: var(--radius-md); font-size: var(--text-xs); color: var(--stone-400); line-height: var(--leading-relaxed); }
 .foot__disclaimer strong { color: var(--stone-200); }
 .foot__lede { font-family: var(--font-display); font-size: var(--text-xl); color: var(--white); max-width: 34ch; line-height: var(--leading-snug); margin: 0; }

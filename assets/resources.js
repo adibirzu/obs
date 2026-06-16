@@ -7,6 +7,14 @@
    ========================================================================= */
 window.OBS_RESOURCES = [
   {
+    key: "library", label: "Observability library", comp: null, module: "module-home",
+    items: [
+      { title: "Oracle DevRel — Observability & Management library", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management", summary: "The full oracle-devrel/technology-engineering observability collection: APM, Logging, Log Analytics, Monitoring, Database Management, Ops Insights, cost, and shared assets." },
+      { title: "OCI Observability & Management — product overview", url: "https://www.oracle.com/manageability/", summary: "The canonical list of OCI Observability and Management services." },
+      { title: "OCI Observability blog", url: "https://blogs.oracle.com/observability/", summary: "Latest insights, trends, and updates on multicloud observability and management." },
+    ],
+  },
+  {
     key: "monitoring", label: "OCI Monitoring", comp: "metric", module: "module-monitoring",
     items: [
       { title: "Custom metrics with the Python SDK — service-limit monitoring", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/oci-monitoring/custom-metrics/custom-metric-python-SDK-services-limit-monitoring", summary: "A custom metric namespace that tracks OCI service limits so alarms fire before a limit is reached." },

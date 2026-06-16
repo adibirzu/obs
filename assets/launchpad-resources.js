@@ -27,7 +27,14 @@
     ".obs-further__s{font-size:.78rem;opacity:.72;line-height:1.4}" +
     ".obs-further__l{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;opacity:.55;margin-top:2px}" +
     ".obs-disclaimer{margin:28px 24px 40px;padding:14px 18px;border:1px solid rgba(128,128,128,.3);border-left:3px solid #C58C52;border-radius:8px;font-family:'Figtree',system-ui,sans-serif;font-size:.76rem;line-height:1.55;opacity:.85}" +
-    ".obs-disclaimer strong{color:#C74634}";
+    ".obs-disclaimer strong{color:#C74634}" +
+    ".showcase-image{cursor:zoom-in}" +
+    ".octo-lb{position:fixed;inset:0;z-index:9999;background:rgba(6,20,32,.88);display:flex;align-items:center;justify-content:center;padding:28px;opacity:0;visibility:hidden;transition:opacity .2s ease}" +
+    ".octo-lb.open{opacity:1;visibility:visible}" +
+    ".octo-lb img{max-width:95vw;max-height:90vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.55);background:#fff;cursor:zoom-out}" +
+    ".octo-lb__cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:#e7eef0;font-family:'Figtree',system-ui,sans-serif;font-size:.9rem;font-weight:600}" +
+    ".octo-lb__x{position:absolute;top:18px;right:22px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:24px;line-height:1;cursor:pointer}" +
+    ".octo-lb__x:hover{background:rgba(255,255,255,.2)}";
   var st = document.createElement("style");
   st.textContent = css;
   document.head.appendChild(st);
@@ -69,7 +76,29 @@
     d.innerHTML = "<strong>Not an Oracle product.</strong> OCTO Observability Atlas is an independent, community-built project to simplify understanding of Oracle's observability tools. It is not affiliated with, sponsored by, or endorsed by Oracle. Oracle, OCI, and Redwood are trademarks of Oracle and/or its affiliates, used for identification only.";
     main.appendChild(d);
   }
-  function init() { render(); disclaimer(); }
+  function lightbox() {
+    if (document.querySelector(".octo-lb")) return;
+    var lb = document.createElement("div");
+    lb.className = "octo-lb";
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-modal", "true");
+    lb.innerHTML = '<button class="octo-lb__x" aria-label="Close">×</button><img alt=""><div class="octo-lb__cap"></div>';
+    document.body.appendChild(lb);
+    var big = lb.querySelector("img"), cap = lb.querySelector(".octo-lb__cap");
+    function close() { lb.classList.remove("open"); document.body.style.overflow = ""; }
+    lb.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    document.querySelectorAll(".showcase-image").forEach(function (box) {
+      box.addEventListener("click", function () {
+        var im = box.querySelector("img"); if (!im) return;
+        big.src = im.currentSrc || im.src;
+        var card = box.closest(".showcase-card"), h = card && card.querySelector("h4");
+        cap.textContent = h ? h.textContent : (im.alt || "");
+        lb.classList.add("open"); document.body.style.overflow = "hidden";
+      });
+    });
+  }
+  function init() { render(); disclaimer(); lightbox(); }
   if (document.readyState !== "loading") init();
   else document.addEventListener("DOMContentLoaded", init);
 })();

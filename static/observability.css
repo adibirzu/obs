@@ -7041,6 +7041,22 @@ a.service-card {
     color: var(--text-secondary);
 }
 
+/* Fix: step rows were inheriting a stray 36px circle size (from an earlier
+   .workflow-step rule meant for a badge), which crammed the text and caused
+   overlapping rows. Restore natural row sizing. */
+.workflow-steps .workflow-step {
+    width: auto;
+    height: auto;
+    min-height: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    align-items: flex-start;
+    justify-content: flex-start;
+    line-height: 1.5;
+}
+.workflow-steps .workflow-step > span:last-child { flex: 1; }
+
 .step-number {
     width: 22px;
     height: 22px;

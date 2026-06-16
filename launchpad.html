@@ -3460,6 +3460,71 @@ def call_inventory_service():
                         </div>
                     </div>
 
+                    <!-- Log Analytics for Oracle Fusion Applications -->
+                    <div class="workflow-card">
+                        <div class="workflow-header">
+                            <div class="workflow-icon loganalytics">🔎</div>
+                            <div>
+                                <h3 class="workflow-title">Log Analytics for Oracle Fusion</h3>
+                                <span class="workflow-subtitle">Fusion ERP, HCM, SCM &amp; CX application, audit and security logs</span>
+                            </div>
+                        </div>
+                        <p class="workflow-description">
+                            Ingest Oracle Fusion Applications logs into OCI Log Analytics — application, audit, and security logs from Fusion ERP, HCM, SCM, and CX — using the BI Cloud Connector (BICC) export plus the Fusion Applications Observability solution. Parse, enrich, and correlate them with the OCI-side signals, then build saved searches and dashboards for functional and security teams.
+                        </p>
+                        <div class="workflow-diagram">
+                            <div class="diagram-node">Fusion Apps</div>
+                            <span class="diagram-arrow">→</span>
+                            <div class="diagram-node">BICC / Audit export</div>
+                            <span class="diagram-arrow">→</span>
+                            <div class="diagram-node highlight">Log Analytics</div>
+                            <span class="diagram-arrow">→</span>
+                            <div class="diagram-node highlight">Dashboards</div>
+                        </div>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <span class="step-number">1</span>
+                                <span>Enable Fusion Applications audit and security log ingestion, or schedule a BICC extract to Object Storage</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span class="step-number">2</span>
+                                <span>Use the predefined Fusion Applications log sources and parsers in OCI Log Analytics</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span class="step-number">3</span>
+                                <span>Map entities to business services (payroll, order-to-cash, procurement) and tag by environment</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span class="step-number">4</span>
+                                <span>Correlate Fusion logs with APM traces and Integration Cloud activity on a common timeline</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span class="step-number">5</span>
+                                <span>Build saved searches, scheduled detections, and role-based dashboards for functional and security teams</span>
+                            </div>
+                        </div>
+                        <div class="workflow-services">
+                            <span class="service-badge primary">Log Analytics</span>
+                            <span class="service-badge primary">Fusion HCM</span>
+                            <span class="service-badge">Audit</span>
+                            <span class="service-badge">Management Agent</span>
+                        </div>
+                        <div class="workflow-links">
+                            <a href="https://docs.oracle.com/en/learn/ofaob/index.html" target="_blank" class="doc-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+                                Fusion Apps Observability
+                            </a>
+                            <a href="https://www.ateam-oracle.com/configure-fusion-applications-audit-and-security-logs-ingestion-in-oci-log-analytics-part-1" target="_blank" class="doc-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+                                Fusion Log Ingestion Guide
+                            </a>
+                            <a href="https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/fusion-hcm-to-la" target="_blank" class="doc-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+                                Fusion HCM to LA (DevRel)
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- Log Analytics for OIC -->
                     <div class="workflow-card">
                         <div class="workflow-header">
