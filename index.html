@@ -416,7 +416,7 @@
         </div>
 
         <figure class="lzfig reveal">
-          <img src="assets/diagrams/observability-multitenant.svg" alt="Multitenant observability at scale: per-tenant multicloud sources (OCI, Oracle Database@Azure, AWS, GCP, on-premises, Fusion SaaS, OKE) are collected by Management Agent, Service Connector Hub, Streaming and Object Storage, Functions, FluentD/Fluent-Bit/OpenTelemetry and direct upload, aggregated into a central OCI Log Analytics that ingests 300-plus sources, clusters and correlates with link analysis and detection rules and tiered storage and LoganAI, and is surfaced to an operator cross-tenant fleet view, dashboards, alarms, and per-tenant views — with per-tenant isolation by compartment and IAM." loading="lazy" width="1180" height="600" />
+          <img src="assets/diagrams/observability-multitenant.svg" alt="Multitenant observability at scale: per-tenant multicloud sources (OCI, Oracle Database@Azure, AWS, GCP, on-premises, Fusion SaaS, OKE) are collected by Service Connector Hub, OCI Streaming (custom and cross-tenancy logs), Management Agent, Object Storage buckets, FluentD/Fluent-Bit via Helm, and the REST API or on-demand upload, aggregated into a central OCI Log Analytics that ingests 250-plus sources with clustering, link analysis, detection rules, tiered storage and GenAI-assisted analytics. The same Service Connector, Streaming and REST API paths can also feed 3rd-party SIEM and observability tools, and data is surfaced to an operator cross-tenant fleet view, dashboards, alarms, and per-tenant views — with per-tenant isolation by log group and compartment." loading="lazy" width="1180" height="660" />
           <figcaption>
             <span>Collect from everywhere → aggregate in OCI Log Analytics → analyse with ML and GenAI → operate one fleet view, with per-tenant isolation by compartment and IAM.</span>
           </figcaption>
@@ -427,14 +427,15 @@
           <h3 style="font-size:var(--text-xl)">One platform, every source</h3>
         </div>
         <div class="l5scale reveal" style="gap:var(--space-2)">
-          <span class="l5pill">Management Agent</span>
           <span class="l5pill">Service Connector Hub</span>
-          <span class="l5pill">Streaming &amp; Object Storage</span>
-          <span class="l5pill">OCI Functions</span>
-          <span class="l5pill">FluentD · Fluent-Bit · OpenTelemetry</span>
-          <span class="l5pill">Direct upload (API / UI)</span>
+          <span class="l5pill">OCI Streaming (cross-tenancy)</span>
+          <span class="l5pill">Management Agent</span>
+          <span class="l5pill">Object Storage (continuous)</span>
+          <span class="l5pill">FluentD · Fluent-Bit (Helm / K8s)</span>
+          <span class="l5pill">REST API / on-demand upload</span>
+          <span class="l5pill l5pill--op">3rd-party tools — via REST API / Streaming</span>
         </div>
-        <p class="reveal" style="color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-3)">OCI Log Analytics ingests from OCI, on-premises, AWS, Azure, Google Cloud, and SaaS — 250+ out-of-the-box sources, tiered active-plus-archive storage, ML clustering and link analysis, detection rules, and GenAI-assisted analytics. Kubernetes: OKE and AWS EKS are documented via the Helm chart; OCI Functions bridges data (it processes and forwards, rather than collecting natively).</p>
+        <p class="reveal" style="color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-3)">The documented OCI Logging Analytics ingestion paths are the <b>Management Agent</b>, <b>on-demand / REST upload</b>, <b>Object Storage buckets</b> (continuous collection), and <b>Service Connector Hub</b> — which also pulls <b>custom and cross-tenancy logs from OCI Streaming</b>. It ships 250+ out-of-the-box sources, tiered active-plus-archive storage, ML clustering and link analysis, detection rules, and GenAI-assisted analytics. The same Service Connector → Streaming / REST API paths can also fan out to <b>3rd-party SIEM and observability tools</b> (Splunk, Elastic, Datadog, Microsoft Sentinel) via log shippers or OCI Functions. Kubernetes: OKE and AWS EKS are documented via the Helm chart.</p>
 
         <div class="section__head reveal" style="margin:var(--space-8) 0 var(--space-5)">
           <span class="eyebrow">Isolation and RBAC</span>
