@@ -563,7 +563,7 @@ graph.add_node("explain",   call_generative_ai_summary)
     $("#i-resources").innerHTML = (rs || pr)
       ? `<h4 class="ilearn__h">Learn more</h4>${rs ? `<ul class="ilearn">${rs.map(resItem).join("")}</ul>` : ""}${pr ? `<p class="projlabel">${ic("github")} Projects by @adibirzu</p><ul class="ilearn">${pr.map(projItem).join("")}</ul>` : ""}`
       : "";
-    selectLens(0);
+    selectLens(typeof window.__obsLens === "number" ? window.__obsLens : 0);
 
     $("#i-copy").addEventListener("click", (e) => {
       const btn = e.currentTarget;

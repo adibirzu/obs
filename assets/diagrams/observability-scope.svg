@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 660" font-family="Figtree, Arial, sans-serif" role="img" aria-label="OCI observability IAM scoping: Tenancy, Platform, and Environment/Project observability teams (admin and reader) mapped to Landing Zone compartments under one Common Identity Domain.">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker>
+    <style>
+      .t{font-family:Georgia,serif} .mut{fill:#5A6160} .mono{font-family:'JetBrains Mono',monospace}
+      .cmp{fill:#fff;stroke:#A9C0CC;stroke-width:1.2;rx:8}
+    </style>
+  </defs>
+  <rect width="1180" height="660" fill="#FBF9F8"/>
+
+  <!-- Region / Tenancy frame -->
+  <rect x="20" y="16" width="1140" height="628" rx="14" fill="none" stroke="#CBD0CF" stroke-dasharray="6 5"/>
+  <text x="40" y="40" class="mono" font-size="12" fill="#5A6160">OCI Region · OCI Tenancy</text>
+
+  <!-- Common Identity Domain + teams -->
+  <rect x="40" y="54" width="1100" height="196" rx="12" fill="#F3F4F3" stroke="#D2C7BD"/>
+  <text x="60" y="80" class="t" font-size="15" fill="#1C1A19">LZ Common Identity Domain — observability teams (RBAC: admin manages · reader reads)</text>
+
+  <!-- Tenancy team -->
+  <g transform="translate(60,98)">
+    <rect width="330" height="134" rx="10" fill="#fff" stroke="#C74634" stroke-width="1.5"/>
+    <text x="16" y="28" class="mono" font-size="10" fill="#C74634" font-weight="700">SCOPE · TENANCY</text>
+    <text x="16" y="50" class="t" font-size="15" fill="#1C1A19">Tenancy Observability Team</text>
+    <rect x="16" y="62" width="64" height="22" rx="11" fill="#F6E1DC"/><text x="48" y="77" text-anchor="middle" font-size="11" fill="#C74634" font-weight="600">Admin</text>
+    <rect x="86" y="62" width="68" height="22" rx="11" fill="#fff" stroke="#E4DCD5"/><text x="120" y="77" text-anchor="middle" font-size="11" fill="#5A6160">Reader</text>
+    <text x="16" y="104" font-size="11.5" class="mut">Manages all O&amp;M services and DBM/OPSI</text>
+    <text x="16" y="120" font-size="11.5" class="mut">private endpoints across the whole tenancy.</text>
+  </g>
+  <!-- Platform team -->
+  <g transform="translate(405,98)">
+    <rect width="330" height="134" rx="10" fill="#fff" stroke="#C58C52" stroke-width="1.5"/>
+    <text x="16" y="28" class="mono" font-size="10" fill="#A8702F" font-weight="700">SCOPE · PLATFORM</text>
+    <text x="16" y="50" class="t" font-size="15" fill="#1C1A19">Platform Observability Team</text>
+    <rect x="16" y="62" width="64" height="22" rx="11" fill="#FBF1D8"/><text x="48" y="77" text-anchor="middle" font-size="11" fill="#A8702F" font-weight="600">Admin</text>
+    <rect x="86" y="62" width="68" height="22" rx="11" fill="#fff" stroke="#E4DCD5"/><text x="120" y="77" text-anchor="middle" font-size="11" fill="#5A6160">Reader</text>
+    <text x="16" y="104" font-size="11.5" class="mut">Manages O&amp;M for the shared production</text>
+    <text x="16" y="120" font-size="11.5" class="mut">platform (e.g. shared ExaCS, hub services).</text>
+  </g>
+  <!-- Environment team -->
+  <g transform="translate(750,98)">
+    <rect width="330" height="134" rx="10" fill="#fff" stroke="#04536F" stroke-width="1.5"/>
+    <text x="16" y="28" class="mono" font-size="10" fill="#04536F" font-weight="700">SCOPE · ENVIRONMENT / PROJECT</text>
+    <text x="16" y="50" class="t" font-size="15" fill="#1C1A19">Environment Observability Team</text>
+    <rect x="16" y="62" width="64" height="22" rx="11" fill="#DCE7EC"/><text x="48" y="77" text-anchor="middle" font-size="11" fill="#04536F" font-weight="600">Admin</text>
+    <rect x="86" y="62" width="68" height="22" rx="11" fill="#fff" stroke="#E4DCD5"/><text x="120" y="77" text-anchor="middle" font-size="11" fill="#5A6160">Reader</text>
+    <text x="16" y="104" font-size="11.5" class="mut">Manages O&amp;M scoped to one environment</text>
+    <text x="16" y="120" font-size="11.5" class="mut">or project (Prod, Pre-prod, proj1).</text>
+  </g>
+
+  <!-- cmp-landingzone -->
+  <rect x="40" y="268" width="1100" height="360" rx="12" fill="none" stroke="#C74634" stroke-dasharray="4 4"/>
+  <text x="58" y="292" class="mono" font-size="12" fill="#1C1A19" font-weight="700">cmp-landingzone</text>
+
+  <!-- left column: shared compartments -->
+  <g font-size="12" fill="#1C1A19">
+    <g transform="translate(58,306)"><rect width="200" height="58" rx="8" fill="#FBF1D8" stroke="#E4D9C0"/><text x="14" y="34" class="mono" font-size="11.5">cmp-lz-network</text></g>
+    <g transform="translate(58,372)"><rect width="200" height="58" rx="8" fill="#FBF1D8" stroke="#E4D9C0"/><text x="14" y="34" class="mono" font-size="11.5">cmp-lz-security</text></g>
+    <g transform="translate(58,438)"><rect width="200" height="92" rx="8" fill="#FBF1D8" stroke="#E4D9C0"/><text x="14" y="26" class="mono" font-size="11.5">cmp-lz-platform</text>
+      <g transform="translate(14,38)"><rect width="172" height="40" rx="6" fill="#E4E7E6" stroke="#CBD0CF"/><text x="12" y="25" class="mono" font-size="10.5" fill="#3B4140">cmp-lz-shared-exacs</text></g>
+    </g>
+  </g>
+
+  <!-- prod env -->
+  <g transform="translate(290,306)">
+    <rect width="400" height="148" rx="8" fill="#E4EEE8" stroke="#9DBBA8"/>
+    <text x="16" y="26" class="mono" font-size="11.5" fill="#2A2F2F">cmp-lz-prod</text>
+    <g transform="translate(16,38)"><rect width="368" height="96" rx="6" fill="#fff" stroke="#C7DACC"/>
+      <text x="12" y="22" class="mono" font-size="10.5" fill="#3B4140">cmp-lz-prod-projects</text>
+      <g transform="translate(12,32)"><rect width="200" height="48" rx="5" fill="#F3F7F4" stroke="#D6E3DA" stroke-dasharray="3 3"/><text x="12" y="29" class="mono" font-size="10.5" fill="#3F6B4A">cmp-lz-prod-proj1</text></g>
+    </g>
+  </g>
+  <!-- preprod env -->
+  <g transform="translate(290,466)">
+    <rect width="400" height="148" rx="8" fill="#E4EEE8" stroke="#9DBBA8"/>
+    <text x="16" y="26" class="mono" font-size="11.5" fill="#2A2F2F">cmp-lz-preprod</text>
+    <g transform="translate(16,38)"><rect width="368" height="96" rx="6" fill="#fff" stroke="#C7DACC"/>
+      <text x="12" y="22" class="mono" font-size="10.5" fill="#3B4140">cmp-lz-preprod-projects</text>
+      <g transform="translate(12,32)"><rect width="200" height="48" rx="5" fill="#F3F7F4" stroke="#D6E3DA" stroke-dasharray="3 3"/><text x="12" y="29" class="mono" font-size="10.5" fill="#3F6B4A">cmp-lz-preprod-proj1</text></g>
+    </g>
+  </g>
+
+  <!-- Hub monitoring note -->
+  <g transform="translate(720,306)">
+    <rect width="402" height="148" rx="8" fill="#fff" stroke="#A9C0CC"/>
+    <text x="16" y="26" class="t" font-size="13" fill="#04536F">Shared monitoring hub (scales to N)</text>
+    <text x="16" y="50" font-size="11.5" class="mut">One global DBM / OPSI private endpoint in the hub</text>
+    <text x="16" y="68" font-size="11.5" class="mut">monitoring subnet, reused across every project,</text>
+    <text x="16" y="86" font-size="11.5" class="mut">environment, and entity — conserves PE service limits.</text>
+    <text x="16" y="112" font-size="11.5" class="mut">Dedicated observability compartment · groups · policies</text>
+    <text x="16" y="130" font-size="11.5" class="mut">per service · a Vault for monitoring secrets.</text>
+  </g>
+  <g transform="translate(720,466)">
+    <rect width="402" height="148" rx="8" fill="#fff" stroke="#A9C0CC"/>
+    <text x="16" y="26" class="t" font-size="13" fill="#1C1A19">Scope = compartment + policy</text>
+    <text x="16" y="50" font-size="11.5" class="mut">Tenancy team → all of cmp-landingzone.</text>
+    <text x="16" y="68" font-size="11.5" class="mut">Platform team → cmp-lz-platform + shared prod.</text>
+    <text x="16" y="86" font-size="11.5" class="mut">Environment team → one env / project compartment.</text>
+    <text x="16" y="112" font-size="11.5" class="mut">Add an environment or project = clone the compartment</text>
+    <text x="16" y="130" font-size="11.5" class="mut">+ group + policy. The model scales by repetition.</text>
+  </g>
+
+  <!-- scope connectors -->
+  <g fill="none" stroke-width="1.6">
+    <path d="M150 232 L150 300" stroke="#C74634" marker-end="url(#ar)" color="#C74634"/>
+    <path d="M520 232 L320 438" stroke="#C58C52" marker-end="url(#ar)" color="#C58C52" opacity="0.85"/>
+    <path d="M880 232 L506 372" stroke="#04536F" marker-end="url(#ar)" color="#04536F" opacity="0.85"/>
+  </g>
+</svg>

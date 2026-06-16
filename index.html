@@ -37,7 +37,10 @@
         <a href="#lvl-L2" data-lv="L2"><span class="dot" style="--lv:var(--l2)"></span>L2</a>
         <a href="#lvl-L3" data-lv="L3"><span class="dot" style="--lv:var(--l3)"></span>L3</a>
         <a href="#lvl-L4" data-lv="L4"><span class="dot" style="--lv:var(--l4)"></span>L4 · AI</a>
+        <a href="#multitenancy" data-lv="L5"><span class="dot" style="--lv:var(--l5)"></span>L5 · Multitenancy</a>
       </nav>
+      <a class="topnav__seg" href="#start">Start</a>
+      <a class="topnav__seg" href="#personas">Personas</a>
       <a class="btn btn--primary" href="launchpad.html">Open launchpad</a>
     </div>
   </header>
@@ -76,6 +79,28 @@
             </ul>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <!-- ============ START: PERSONA + INDUSTRY ============ -->
+    <section class="section" id="start">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="eyebrow">Start here</span>
+          <h2>Tailor it to you</h2>
+          <p>Pick your persona and your industry — we'll point you to the right levels, services, and lens, rather than starting from a product list. Access to every view shown here is governed by <b>OCI IAM</b>: each persona maps to an OCI Group with policies scoped to the right compartments.</p>
+        </div>
+        <div class="start__grid reveal">
+          <div class="start__col">
+            <h3 class="start__label">I am a…</h3>
+            <div class="pickrow" id="personaPick"></div>
+          </div>
+          <div class="start__col">
+            <h3 class="start__label">In…</h3>
+            <div class="pickrow" id="industryPick"></div>
+          </div>
+        </div>
+        <div class="start__result" id="startResult" role="region" aria-live="polite"></div>
       </div>
     </section>
 
@@ -360,6 +385,70 @@
       </div>
     </section>
 
+    <!-- ============ PERSONA VIEW ============ -->
+    <section class="section" id="personas">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="eyebrow">Persona view</span>
+          <h2>How each persona identifies and uses the data</h2>
+          <p>The same observability estate looks different to each role. Here is what each persona recognises, what they do with it, and the levels they live in.</p>
+        </div>
+
+        <div class="iam-note reveal">
+          <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div>
+            <b>Access is governed by OCI IAM.</b>
+            <p>These views and rights are not ad hoc — each persona maps to an <b>OCI Group</b> with <b>policies</b> scoped to the right compartments. The pattern is two levels per scope: an <b>admin</b> group that manages the services, and a <b>reader</b> group with read-only access for monitoring and reporting. The groups live in the Landing Zone Common Identity Domain. See the scoping model below.</p>
+          </div>
+        </div>
+
+        <div class="pgrid reveal" id="personaGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ L5: MULTITENANCY ============ -->
+    <section class="section section--sunken" id="multitenancy">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="steptag"><b>L5</b> · custom build, not out of the box</span>
+          <h2>From one tenancy to multitenancy, at scale</h2>
+          <p>At tenancy level, observability access is scoped by compartment and IAM. The same governed model then scales out — by environment, by project, and ultimately across tenancies — for operators running <b>OCI Alloy</b>, <b>Dedicated Region (DRCC)</b>, or a multitenant <b>ISV / SaaS</b> platform.</p>
+        </div>
+
+        <figure class="lzfig reveal">
+          <img src="assets/diagrams/observability-scope.svg" alt="OCI observability IAM scoping: Tenancy, Platform, and Environment or Project observability teams, each with admin and reader OCI groups, mapped to Landing Zone compartments under one Common Identity Domain, with a shared monitoring hub that scales by repetition." loading="lazy" width="1180" height="660" />
+          <figcaption>
+            <span>Scope = compartment + policy. Three observability teams (Tenancy · Platform · Environment), each with an admin and a reader OCI group, mapped to the Landing Zone compartments.</span>
+            <span class="lzfig__src">Model: <a href="https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/obs_v2/addons/oci-db-observability" target="_blank" rel="noopener">OCI Database Observability at Scale — official LZ add-on (obs_v2)</a></span>
+          </figcaption>
+        </figure>
+
+        <div class="tier3 reveal">
+          <article class="tier3card" style="--tc:var(--l3)">
+            <h3>Tenancy level</h3>
+            <p>One landing zone, one Common Identity Domain. A central <b>Tenancy Observability</b> team (admin + reader) owns O&amp;M and the DBM/OPSI private endpoints across every compartment. A shared monitoring hub holds a global private endpoint reused across the estate — conserving private-endpoint service limits.</p>
+          </article>
+          <article class="tier3card" style="--tc:var(--l2)">
+            <h3>Platform &amp; environment</h3>
+            <p><b>Platform</b> and <b>Environment / Project</b> teams take narrower scopes — the shared platform, or one environment (Prod, Pre-prod) and its projects. Adding an environment or project is repetition: clone the compartment, group, and policy. The model grows without redesign.</p>
+          </article>
+          <article class="tier3card" style="--tc:var(--l5)">
+            <h3>L5 · Operator / multitenancy</h3>
+            <p>For Alloy, DRCC, and ISV platforms, replicate the per-tenant model and aggregate at the <b>operator</b> level: per-tenant isolation for each customer, plus a cross-tenant view for fleet SLOs, capacity, and chargeback. This is a <b>custom build</b> on top of the native services — not an out-of-the-box product.</p>
+          </article>
+        </div>
+
+        <div class="l5scale reveal">
+          <span class="l5scale__k">Scales by repetition</span>
+          <span class="l5pill">Compartment</span><span class="arrow">→</span>
+          <span class="l5pill">Environment</span><span class="arrow">→</span>
+          <span class="l5pill">Project</span><span class="arrow">→</span>
+          <span class="l5pill l5pill--op">Tenant</span><span class="arrow">→</span>
+          <span class="l5pill l5pill--op">Operator fleet</span>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ MATURITY ============ -->
     <section class="section" id="maturity">
       <div class="wrap">
@@ -457,6 +546,9 @@
         <div>
           <h4>This guide</h4>
           <ul>
+            <li><a href="#start">Start — persona &amp; industry</a></li>
+            <li><a href="#personas">Persona view</a></li>
+            <li><a href="#multitenancy">L5 · Multitenancy</a></li>
             <li><a href="#finder">Find your path</a></li>
             <li><a href="#ladder">The L0 to L4 ladder</a></li>
             <li><a href="#agents">Choosing an agent</a></li>
@@ -509,6 +601,7 @@
   </aside>
 
   <script src="assets/resources.js"></script>
+  <script src="assets/personas.js"></script>
   <script src="assets/guide.js"></script>
 </body>
 </html>

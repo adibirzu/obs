@@ -74,7 +74,7 @@ window.OBS_RESOURCES = [
     key: "database-management", label: "OCI Database Management", comp: "db", module: "module-dbmgmt",
     items: [
       { title: "OCI Database Management demo", url: "https://www.youtube.com/watch?v=3k9jrkOlBkc", summary: "Performance diagnostics and fleet monitoring for Oracle Databases." },
-      { title: "Database observability in the official OCI Landing Zone (OE)", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities", summary: "Deploy database observability as part of the official Oracle OCI Operating Entities (OE) Landing Zone." },
+      { title: "OCI Database Observability at Scale — official LZ add-on (obs_v2)", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/obs_v2/addons/oci-db-observability", summary: "Enable Database Management, Ops Insights, and Logging Analytics as an add-on to the official OCI Operating Entities Landing Zone, with observability compartments, groups, policies, and a vault." },
       { title: "Enable observability for an OCI-native database deployment", url: "https://medium.com/@erikasciunzi/enable-observability-for-oci-native-database-deploy-235484953e46", summary: "Turn on OCI Observability and Management for natively deployed OCI databases." },
       { title: "OCI Database Management — PDB support and new features", url: "https://learnoci.cloud/oci-database-management-new-features-announced-f9991cba2cc2", summary: "Review newly announced features, including monitoring for pluggable databases (PDBs)." },
     ],

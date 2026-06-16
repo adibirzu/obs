@@ -13,11 +13,13 @@
   --l2: var(--ochre);
   --l3: var(--red-redwood);
   --l4: var(--plum-core);
+  --l5: var(--ocean);
   --l0-tint: var(--sage-tint);
   --l1-tint: var(--blue-tint);
   --l2-tint: var(--gold-tint);
   --l3-tint: var(--red-tint);
   --l4-tint: var(--plum-tint);
+  --l5-tint: #DCE6EE;
 }
 
 /* ---------- Layout primitives ---------- */
@@ -424,3 +426,69 @@ button.dchip:hover { border-color: var(--l4); background: var(--surface-card); b
 .foot ul { list-style: none; padding: 0; margin: 0; }
 .foot li { margin-bottom: var(--space-2); font-size: var(--text-sm); }
 .foot__legal { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--stone-800); font-size: var(--text-xs); color: var(--stone-500); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+
+/* ============ Persona + Industry start selector ============ */
+.topnav__seg { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--text-muted); text-decoration: none; padding: var(--space-2) var(--space-3); border-radius: var(--radius-pill); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+.topnav__seg:hover { background: var(--surface-sunken); color: var(--text-strong); text-decoration: none; }
+@media (max-width: 1080px) { .topnav__seg { display: none; } }
+
+.start__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+@media (max-width: 760px) { .start__grid { grid-template-columns: 1fr; gap: var(--space-5); } }
+.start__label { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-caps); color: var(--text-subtle); margin: 0 0 var(--space-3); }
+.pickrow { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.pickchip { display: inline-flex; align-items: center; gap: var(--space-2); font: inherit; font-size: var(--text-sm); font-weight: var(--weight-medium); cursor: pointer;
+  background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-pill); padding: var(--space-2) var(--space-4); color: var(--text-body);
+  transition: border-color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard); }
+.pickchip:hover { border-color: var(--action-secondary); transform: translateY(-1px); }
+.pickchip[aria-pressed="true"] { background: var(--action-secondary); color: var(--white); border-color: var(--action-secondary); }
+.pickchip .pic { width: 16px; height: 16px; flex: none; }
+
+.start__result { display: none; margin-top: var(--space-6); border: 1px solid var(--border-default); border-left: 4px solid var(--action-secondary); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); background: var(--surface-card); box-shadow: var(--shadow-sm); }
+.start__result.show { display: block; animation: rise var(--duration-base) var(--ease-out); }
+.start__lead { font-family: var(--font-display); font-size: var(--text-xl); color: var(--text-strong); margin: 0 0 var(--space-3); }
+.start__line { color: var(--text-muted); margin: 0 0 var(--space-2); font-size: var(--text-md); }
+.start__levels { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-4) 0; }
+.lvlchip { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-body); font-weight: var(--weight-semibold); font-size: var(--text-sm); text-decoration: none; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); border: 1px solid var(--lv); color: var(--text-body); }
+.lvlchip:hover { background: color-mix(in srgb, var(--lv) 10%, transparent); text-decoration: none; }
+.lvlchip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lv); }
+.start__svc { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
+.start__k { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-subtle); text-transform: uppercase; letter-spacing: .04em; }
+.start__cta { display: flex; flex-wrap: wrap; gap: var(--space-5); margin-top: var(--space-5); }
+.start__cta .pic { width: 16px; height: 16px; }
+
+/* ============ IAM note ============ */
+.iam-note { display: flex; gap: var(--space-4); background: var(--blue-tint); border: 1px solid color-mix(in srgb, var(--blue-deep) 30%, transparent); border-radius: var(--radius-lg); padding: var(--space-5); margin-bottom: var(--space-6); }
+.iam-note .lucide { width: 26px; height: 26px; color: var(--blue-deep); flex: none; margin-top: 2px; }
+.iam-note b { color: var(--text-strong); }
+.iam-note p { margin: var(--space-2) 0 0; color: var(--text-body); font-size: var(--text-sm); }
+
+/* ============ Persona cards ============ */
+.pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+@media (max-width: 1080px) { .pgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .pgrid { grid-template-columns: 1fr; } }
+.pcard { background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard); }
+.pcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.pcard__top { display: flex; gap: var(--space-3); align-items: flex-start; }
+.pcard__ic { width: 40px; height: 40px; border-radius: var(--radius-md); display: grid; place-items: center; background: var(--blue-tint); color: var(--blue-deep); flex: none; }
+.pcard__ic .pic { width: 22px; height: 22px; }
+.pcard h3 { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--text-md); letter-spacing: var(--tracking-snug); color: var(--text-strong); margin: 0; }
+.pcard__lens { font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--text-subtle); }
+.pcard__sum { font-size: var(--text-sm); color: var(--text-muted); margin: 0; }
+.pcard__levels { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.lvltag { font-family: var(--font-mono); font-size: var(--text-2xs); font-weight: var(--weight-bold); color: var(--lv); background: color-mix(in srgb, var(--lv) 12%, transparent); border-radius: var(--radius-sm); padding: 2px 7px; }
+.pcard__dl { margin: 0; display: grid; gap: var(--space-1); }
+.pcard__dl dt { font-family: var(--font-mono); font-size: var(--text-2xs); text-transform: uppercase; letter-spacing: .04em; color: var(--text-subtle); margin-top: var(--space-2); }
+.pcard__dl dd { margin: 0; font-size: var(--text-sm); color: var(--text-body); }
+.pcard__svc { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: auto; padding-top: var(--space-2); border-top: 1px solid var(--border-subtle); }
+
+/* ============ L5 multitenancy ============ */
+.tier3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+@media (max-width: 820px) { .tier3 { grid-template-columns: 1fr; } }
+.tier3card { background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); border-top: 3px solid var(--tc); padding: var(--space-5); }
+.tier3card h3 { font-family: var(--font-display); font-size: var(--text-lg); margin: 0 0 var(--space-2); color: var(--tc); }
+.tier3card p { font-size: var(--text-sm); color: var(--text-muted); margin: 0; }
+.l5scale { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-6); }
+.l5scale__k { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); margin-right: var(--space-2); }
+.l5pill { display: inline-flex; align-items: center; font-family: var(--font-body); font-weight: var(--weight-semibold); font-size: var(--text-sm); padding: var(--space-1) var(--space-4); border-radius: var(--radius-pill); background: var(--surface-card); border: 1px solid var(--border-default); color: var(--text-body); }
+.l5pill--op { background: var(--l5-tint); border-color: var(--l5); color: var(--l5); }
+.l5scale .arrow { color: var(--stone-400); }
