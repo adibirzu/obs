@@ -24,6 +24,8 @@
     public: P('<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>'),
     retail: P('<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>'),
     isv: P('<path d="M16 16.66A5 5 0 0 0 12.66 14H6a4 4 0 1 1 .92-7.89A5 5 0 0 1 17 8a4.5 4.5 0 0 1-1 8.66"/><path d="m12 12 4 4-4 4"/><path d="M12 20V12"/>'),
+    oilgas: P('<line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>'),
+    tech: P('<rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>'),
   };
 
   const LVL = {
@@ -78,24 +80,28 @@
       services: ["Observability compartment & IAM", "Connector Hub", "Ops Insights", "Management Dashboards"] },
   ];
 
+  // Aligned with Oracle's industry naming (oracle.com/industries) — kept short.
   const INDUSTRIES = [
-    { id: "finserv", icon: "bank", name: "Financial services", pattern: "dbc",
+    { id: "finserv", icon: "bank", name: "Financial Services — Banking", pattern: "dbc",
       focus: "Database-centric, low MTTR, and heavy audit and resilience obligations (DORA, PCI).",
       emphasis: ["L2 database depth", "L0 audit and governance", "fast L1 → L3 correlation"] },
-    { id: "telco", icon: "telco", name: "Telecommunications", pattern: "oke",
+    { id: "comms", icon: "telco", name: "Communications", pattern: "oke",
       focus: "Cloud-native scale, network visibility, and often multitenant operator platforms.",
       emphasis: ["L3 tracing on OKE", "L5 multitenancy", "open-source fan-out"] },
+    { id: "government", icon: "public", name: "Government", pattern: "hybrid",
+      focus: "National, state, and local: sovereignty (often DRCC), strong audit, and hybrid estates.",
+      emphasis: ["L0 audit", "L5 dedicated-region operation", "hybrid collection"] },
     { id: "healthcare", icon: "health", name: "Healthcare", pattern: "apps",
       focus: "Sensitive data, compliance, and reliability across Oracle applications and databases.",
       emphasis: ["L0 governance", "L2 database", "L2 security detections"] },
-    { id: "public", icon: "public", name: "Public sector", pattern: "hybrid",
-      focus: "Sovereignty (often DRCC), strong audit, and hybrid estates.",
-      emphasis: ["L0 audit", "L5 dedicated-region operation", "hybrid collection"] },
-    { id: "retail", icon: "retail", name: "Retail / e-commerce", pattern: "trad",
+    { id: "oilgas", icon: "oilgas", name: "Oil and Gas", pattern: "hybrid",
+      focus: "Hybrid and edge estates, OT/IoT telemetry, and high-value uptime under safety and sovereignty rules.",
+      emphasis: ["L2 capacity and database", "L1 alarms on critical assets", "hybrid collection"] },
+    { id: "retail", icon: "retail", name: "Retail", pattern: "trad",
       focus: "Peak-season scale, user experience, and capacity planning.",
       emphasis: ["L3 APM and RUM", "L1 alarms", "L2 capacity"] },
-    { id: "isv", icon: "isv", name: "ISV / SaaS", pattern: "agentic",
-      focus: "Multitenant isolation, per-customer SLOs, and operator-scale aggregation.",
+    { id: "hightech", icon: "tech", name: "High Technology", pattern: "agentic",
+      focus: "Multitenant SaaS and ISV platforms: per-customer SLOs, AI products, and operator-scale aggregation.",
       emphasis: ["L5 multitenancy", "L4 AI agents", "L0 per-tenant governance"] },
   ];
 

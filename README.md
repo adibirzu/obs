@@ -40,7 +40,7 @@ The site opens with a **persona + industry** selector, not a product list. Pick 
 | AI / ML engineer | Architect | L4 |
 | Operator / ISV (multitenancy) | Architect | L0, L5 |
 
-Industries (financial services, telco, healthcare, public sector, retail, ISV/SaaS) tilt the emphasis — e.g. financial services leans on L2 database depth and L0 audit; ISV/SaaS leans on L5 multitenancy.
+Industries (aligned with [Oracle's industry naming](https://www.oracle.com/industries/) — Financial Services/Banking, Communications, Government, Healthcare, Oil and Gas, Retail, High Technology) tilt the emphasis — e.g. Banking leans on L2 database depth and L0 audit; High Technology leans on L5 multitenancy; Oil and Gas leans on hybrid/edge collection.
 
 **Access is governed by OCI IAM.** Each persona maps to an **OCI Group** with **policies scoped to compartments** — an *admin* group manages the services, a *reader* group has read-only access — in the Landing Zone Common Identity Domain.
 
