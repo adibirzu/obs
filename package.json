@@ -18,14 +18,15 @@
     "governance:refresh-links": "node scripts/validate-governance.mjs --refresh-links",
     "lint": "node scripts/static-check.mjs",
     "security:scan": "node scripts/redact-gate.mjs",
-    "build": "npm run governance:validate && npm run lint && npm run artifacts:check && npm run artifacts:release && npm run security:scan && npm run test:ci && npm run test:coverage:ci",
+    "build": "npm run governance:validate && npm run lint && npm run artifacts:check && npm run artifacts:release && npm run security:scan && npm run test:ci && npm run test:coverage:node:ci && npm run test:browser:ci",
     "test": "node --test tests/*.test.mjs",
     "test:ci": "node scripts/run-test-gate.mjs",
     "test:coverage": "npm run test:coverage:node && npm run test:coverage:browser",
     "test:coverage:node": "node --experimental-test-coverage --test tests/*.test.mjs",
-    "test:coverage:node:ci": "node --experimental-test-coverage --test-coverage-lines=80 --test tests/*.test.mjs",
+    "test:coverage:node:ci": "node scripts/run-node-coverage-gate.mjs",
     "test:coverage:browser": "node tests/e2e/browser-coverage.mjs",
     "test:coverage:ci": "npm run test:coverage:node:ci && npm run test:coverage:browser",
+    "test:browser:ci": "node tests/e2e/browser-suite.mjs",
     "test:e2e": "node tests/e2e/launchpad.e2e.mjs",
     "test:smoke": "node tests/e2e/surfaces.smoke.mjs"
   }

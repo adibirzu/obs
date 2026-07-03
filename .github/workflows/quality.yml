@@ -54,14 +54,11 @@ jobs:
       - name: Enforce complete test suite
         run: npm run test:ci
 
-      - name: Run detailed Launchpad browser E2E
-        run: npm run test:e2e
+      - name: Enforce 80 percent Node line coverage
+        run: npm run test:coverage:node:ci
 
-      - name: Enforce 80 percent Node and browser line coverage
-        run: npm run test:coverage:ci
-
-      - name: Cross-surface desktop and mobile smoke tests
-        run: npm run test:smoke
+      - name: Run managed E2E, browser coverage, and cross-surface smoke suite
+        run: npm run test:browser:ci
 
       - name: Assemble release package
         run: npm run release:build
@@ -70,9 +67,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: observability-atlas-site
-          path: |
-            dist/site/
-            dist/release-manifest.json
+          path: dist/
           if-no-files-found: error
           retention-days: 14
 

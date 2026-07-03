@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { access, mkdtemp, readFile, rm, stat } from 'node:fs/promises';
+import { access, mkdtemp, readFile, readdir, rm, stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { tmpdir } from 'node:os';
+import { homedir, tmpdir } from 'node:os';
 import { extname, join, resolve, sep } from 'node:path';
 import { spawn } from 'node:child_process';
 
@@ -14,6 +14,8 @@ const DEVTOOLS_FILE_ATTEMPTS = 120;
 const ENDPOINT_ATTEMPTS = 50;
 const HANDSHAKE_DELAY_MS = 100;
 const SHUTDOWN_TIMEOUT_MS = 4_000;
+const CDP_COMMAND_TIMEOUT_MS = 10_000;
+const PAGE_LOAD_TIMEOUT_MS = 15_000;
 
 const mimeTypes = new Map([
   ['.css', 'text/css; charset=utf-8'], ['.drawio', 'application/xml'], ['.excalidraw', 'application/json'],
@@ -22,8 +24,21 @@ const mimeTypes = new Map([
 ]);
 
 async function findChrome() {
+  const managedCandidates = [];
+  if (process.platform === 'darwin') {
+    const cacheRoot = join(homedir(), 'Library/Caches/ms-playwright');
+    try {
+      const revisions = (await readdir(cacheRoot, { withFileTypes: true }))
+        .filter(entry => entry.isDirectory() && entry.name.startsWith('chromium_headless_shell-'))
+        .map(entry => entry.name)
+        .sort((left, right) => right.localeCompare(left, undefined, { numeric: true }));
+      managedCandidates.push(...revisions.map(revision =>
+        join(cacheRoot, revision, 'chrome-headless-shell-mac-arm64', 'chrome-headless-shell')));
+    } catch { /* use an explicitly configured or system browser */ }
+  }
   const candidates = [
     process.env.CHROME_PATH,
+    ...managedCandidates,
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
   ].filter(Boolean);
@@ -238,11 +253,14 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
     if (message.id && pending.has(message.id)) {
       const request = pending.get(message.id);
       pending.delete(message.id);
+      clearTimeout(request.timeout);
       if (message.error) request.reject(new Error(message.error.message));
       else request.resolve(message.result);
       return;
     }
-    if (message.method === 'Runtime.exceptionThrown') exceptions.push(message.params.exceptionDetails.text);
+    if (message.method === 'Runtime.exceptionThrown') {
+      exceptions.push(message.params.exceptionDetails.exception?.description ?? message.params.exceptionDetails.text);
+    }
     if (message.method === 'Network.requestWillBeSent') requestUrls.set(message.params.requestId, message.params.request.url);
     if (message.method === 'Network.loadingFailed') {
       const url = requestUrls.get(message.params.requestId) ?? '';
@@ -251,27 +269,95 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
     const queue = eventWaiters.get(message.method);
     if (queue?.length) queue.shift()(message.params);
   });
+  const rejectPending = reason => {
+    for (const request of pending.values()) {
+      clearTimeout(request.timeout);
+      request.reject(new Error(reason));
+    }
+    pending.clear();
+  };
+  socket.addEventListener('close', () => rejectPending('DevTools WebSocket closed before the command completed'));
+  socket.addEventListener('error', () => rejectPending('DevTools WebSocket failed before the command completed'));
 
   const send = (method, params = {}) => {
+    if (socket.readyState !== WebSocket.OPEN) return Promise.reject(new Error(`Cannot send ${method}: DevTools WebSocket is not open`));
     const id = ++requestId;
-    socket.send(JSON.stringify({ id, method, params }));
-    return new Promise((resolvePromise, reject) => pending.set(id, { resolve: resolvePromise, reject }));
+    return new Promise((resolvePromise, reject) => {
+      const timeout = setTimeout(() => {
+        pending.delete(id);
+        reject(new Error(`${method} timed out after ${CDP_COMMAND_TIMEOUT_MS}ms`));
+      }, CDP_COMMAND_TIMEOUT_MS);
+      pending.set(id, { resolve: resolvePromise, reject, timeout });
+      try {
+        socket.send(JSON.stringify({ id, method, params }));
+      } catch (error) {
+        pending.delete(id);
+        clearTimeout(timeout);
+        reject(error);
+      }
+    });
   };
-  const once = method => new Promise(resolvePromise => eventWaiters.set(method, [...(eventWaiters.get(method) || []), resolvePromise]));
+  function waitForEvent(method, timeoutMs) {
+    let settled = false;
+    let timeout;
+    let resolveEvent;
+    const removeWaiter = waiter => {
+      const remaining = (eventWaiters.get(method) || []).filter(candidate => candidate !== waiter);
+      if (remaining.length) eventWaiters.set(method, remaining);
+      else eventWaiters.delete(method);
+    };
+    const waiter = params => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeout);
+      removeWaiter(waiter);
+      resolveEvent(params);
+    };
+    const promise = new Promise((resolvePromise, reject) => {
+      resolveEvent = resolvePromise;
+      timeout = setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        removeWaiter(waiter);
+        reject(new Error(`${method} timed out after ${timeoutMs}ms`));
+      }, timeoutMs);
+      eventWaiters.set(method, [...(eventWaiters.get(method) || []), waiter]);
+    });
+    return {
+      promise,
+      cancel() {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        removeWaiter(waiter);
+        resolveEvent(undefined);
+      },
+    };
+  }
   const evaluate = async expression => {
     const result = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
     if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text);
     return result.result.value;
   };
   const navigate = async path => {
-    const loaded = once('Page.loadEventFired');
-    await send('Page.navigate', { url: `http://${host}:${serverPort}/${path}` });
-    await loaded;
+    const loaded = waitForEvent('Page.loadEventFired', PAGE_LOAD_TIMEOUT_MS);
+    try {
+      await send('Page.navigate', { url: `http://${host}:${serverPort}/${path}` });
+      await loaded.promise;
+    } catch (error) {
+      loaded.cancel();
+      throw new Error(`Navigation to ${path} failed: ${error.message}`, { cause: error });
+    }
   };
   const reload = async () => {
-    const loaded = once('Page.loadEventFired');
-    await send('Page.reload', { ignoreCache: true });
-    await loaded;
+    const loaded = waitForEvent('Page.loadEventFired', PAGE_LOAD_TIMEOUT_MS);
+    try {
+      await send('Page.reload', { ignoreCache: true });
+      await loaded.promise;
+    } catch (error) {
+      loaded.cancel();
+      throw new Error(`Page reload failed: ${error.message}`, { cause: error });
+    }
   };
   const waitFor = async (expression, timeoutMs = 5000) => {
     const deadline = Date.now() + timeoutMs;
@@ -283,6 +369,13 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
   };
   const setViewport = ({ width, height }) => send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
   const setReducedMotion = value => send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value }] });
+  const resetContext = async () => {
+    await evaluate('sessionStorage.clear(); localStorage.clear(); true');
+    await send('Network.clearBrowserCache');
+    exceptions.length = 0;
+    localNetworkFailures.length = 0;
+    requestUrls.clear();
+  };
   const press = async (key, code, keyCode) => {
     const text = key === 'Enter' ? '\r' : key === ' ' ? ' ' : undefined;
     await send('Input.dispatchKeyEvent', {
@@ -333,12 +426,22 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
     return closePromise;
   };
 
-  await send('Page.enable');
-  await send('Runtime.enable');
-  await send('Network.enable');
+  const initializeDevTools = async () => {
+    await send('Page.enable');
+    await send('Runtime.enable');
+    await send('Network.enable');
+  };
+  try {
+    await initializeDevTools();
+  } catch (error) {
+    let cleanupDetail = '';
+    try { await close(); } catch (cleanupError) { cleanupDetail = `\nCleanup failure: ${cleanupError.message}`; }
+    const detail = diagnosticTail(startupErrors);
+    throw new Error(`DevTools initialization failed: ${error.message}${detail ? `\nChrome diagnostics:\n${detail}` : ''}${cleanupDetail}`);
+  }
   return {
     close, evaluate, exceptions, localNetworkFailures, navigate, press, reload, send, setReducedMotion,
-    setViewport, startCoverage, stopCoverage, takeCoverage, waitFor,
+    resetContext, setViewport, startCoverage, stopCoverage, takeCoverage, waitFor,
     baseUrl: `http://${host}:${serverPort}`,
   };
 }

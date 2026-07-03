@@ -16,9 +16,9 @@ test('CI runs on pull requests and main commits with pinned least-privilege acti
   assert.match(workflow, /actions\/setup-node@[a-f0-9]{40}/);
   assert.match(workflow, /gitleaks\/gitleaks-action@[a-f0-9]{40}/);
   assert.match(workflow, /npm run test:ci/);
-  assert.match(workflow, /npm run test:coverage:ci/);
+  assert.match(workflow, /npm run test:coverage:node:ci/);
+  assert.match(workflow, /npm run test:browser:ci/);
   assert.match(workflow, /npm run artifacts:check/);
-  assert.match(workflow, /npm run test:smoke/);
 });
 
 test('clean-checkout governance runs before every artifact or release operation', async () => {
@@ -39,25 +39,28 @@ test('clean-checkout governance runs before every artifact or release operation'
 });
 
 test('test runner enforces at least 40 tests, zero failures, and 80 percent line coverage', async () => {
-  const [quality, packageJson, runner] = await Promise.all([
+  const [quality, packageJson, runner, coverageRunner] = await Promise.all([
     readJson('governance/quality-gates.json'),
     readJson('package.json'),
     read('scripts/run-test-gate.mjs'),
+    read('scripts/run-node-coverage-gate.mjs'),
   ]);
   assert.equal(quality.tests.minimum, 40);
   assert.equal(quality.tests.allowSkipped, false);
   assert.equal(quality.coverage.lines, 80);
-  assert.match(packageJson.scripts['test:coverage:node:ci'], /--test-coverage-lines=80/);
+  assert.equal(packageJson.scripts['test:coverage:node:ci'], 'node scripts/run-node-coverage-gate.mjs');
+  assert.match(coverageRunner, /--test-coverage-lines=/);
   assert.match(runner, /minimumTests/);
   assert.match(runner, /failed !== 0/);
   assert.match(runner, /skipped !== 0/);
 });
 
 test('coverage gate includes critical browser application scripts at 80 percent', async () => {
-  const [quality, packageJson, coverageScript] = await Promise.all([
+  const [quality, packageJson, coverageScript, nodeCoverageScript] = await Promise.all([
     readJson('governance/quality-gates.json'),
     readJson('package.json'),
     read('tests/e2e/browser-coverage.mjs'),
+    read('scripts/run-node-coverage-gate.mjs'),
   ]);
   assert.equal(quality.coverage.client.lines, 80);
   for (const path of ['assets/guide.js', 'assets/personas.js', 'assets/state.js', 'static/observability.js', 'assets/interlocks/interlocks.js', 'assets/interlocks/usecase-detail.js']) {
@@ -67,15 +70,37 @@ test('coverage gate includes critical browser application scripts at 80 percent'
   assert.match(packageJson.scripts['test:coverage:browser'], /browser-coverage\.mjs/);
   assert.match(packageJson.scripts['test:coverage:ci'], /test:coverage:node:ci/);
   assert.match(packageJson.scripts['test:coverage:ci'], /test:coverage:browser/);
+  assert.equal(packageJson.scripts['test:coverage:node:ci'], 'node scripts/run-node-coverage-gate.mjs');
+  assert.match(coverageScript, /enforcePerFileLineFloors/);
+  assert.match(nodeCoverageScript, /enforcePerFileLineFloors/);
+  for (const [path, floor] of Object.entries({
+    'static/observability.js': 75,
+    'scripts/redact-gate.mjs': 70,
+    'scripts/validate-governance.mjs': 75,
+  })) assert.ok(quality.coverage.perFileLines[path] >= floor, path);
 });
 
-test('CI enforces detailed E2E and browser coverage before smoke and release', async () => {
-  const workflow = await read('.github/workflows/quality.yml');
-  const e2e = workflow.indexOf('npm run test:e2e');
-  const coverage = workflow.indexOf('npm run test:coverage:ci');
-  const smoke = workflow.indexOf('npm run test:smoke');
+test('CI runs all browser journeys through one managed harness before release', async () => {
+  const [workflow, packageJson, suite] = await Promise.all([
+    read('.github/workflows/quality.yml'),
+    readJson('package.json'),
+    read('tests/e2e/browser-suite.mjs'),
+  ]);
+  const nodeCoverage = workflow.indexOf('npm run test:coverage:node:ci');
+  const browserSuite = workflow.indexOf('npm run test:browser:ci');
   const release = workflow.indexOf('npm run release:build');
-  assert.ok(e2e > 0 && coverage > e2e && smoke > coverage && release > smoke);
+  assert.ok(nodeCoverage > 0 && browserSuite > nodeCoverage && release > browserSuite);
+  assert.equal((workflow.match(/npm run test:browser:ci/g) || []).length, 1);
+  assert.doesNotMatch(workflow, /npm run test:e2e/);
+  assert.doesNotMatch(workflow, /npm run test:coverage:ci/);
+  assert.doesNotMatch(workflow, /npm run test:smoke/);
+  assert.equal(packageJson.scripts['test:browser:ci'], 'node tests/e2e/browser-suite.mjs');
+  assert.match(packageJson.scripts.build, /test:coverage:node:ci/);
+  assert.match(packageJson.scripts.build, /test:browser:ci/);
+  assert.doesNotMatch(packageJson.scripts.build, /test:coverage:ci/);
+  assert.equal((suite.match(/startBrowserHarness\(/g) || []).length, 1);
+  assert.equal((suite.match(/resetContext\(\)/g) || []).length, 2);
+  for (const journey of ['runLaunchpadE2E', 'runBrowserCoverage', 'runSurfaceSmoke']) assert.match(suite, new RegExp(journey));
 });
 
 test('browser harness uses ephemeral ports and deep smoke assertions', async () => {
@@ -94,6 +119,9 @@ test('browser harness uses ephemeral ports and deep smoke assertions', async () 
   assert.match(harness, /detached: true/);
   assert.match(harness, /SIGKILL/);
   assert.match(harness, /Chrome diagnostics/);
+  assert.match(harness, /chromium_headless_shell-/);
+  assert.match(harness, /initializeDevTools/);
+  assert.match(harness, /await close\(\)/);
   assert.doesNotMatch(harness, /reserveEphemeralPort/);
   assert.match(launchpad, /startBrowserHarness/);
   for (const assertion of ['activeElement', 'aria-current', 'aria-selected', 'aria-controls', 'scrollWidth', 'minTouchTarget']) {
@@ -135,11 +163,12 @@ test('redaction gate scans secrets, private keys, tokens, OCIDs, topology, and p
 });
 
 test('artifact policy separates tracked vectors from release-only PDFs and drift is enforced', async () => {
-  const [policy, snapshot, packageJson, drift, release, releaseFilter] = await Promise.all([
+  const [policy, snapshot, packageJson, drift, driftLibrary, release, releaseFilter] = await Promise.all([
     readJson('governance/artifact-policy.json'),
     readJson('governance/artifact-snapshot.json'),
     readJson('package.json'),
     read('scripts/check-artifact-drift.mjs'),
+    read('scripts/artifact-drift-lib.mjs'),
     read('scripts/build-release.mjs'),
     read('scripts/release-path-policy.mjs'),
   ]);
@@ -151,7 +180,7 @@ test('artifact policy separates tracked vectors from release-only PDFs and drift
   assert.match(drift, /generate-usecase-artifacts\.mjs/);
   assert.match(drift, /SHA-256|sha256/i);
   assert.match(drift, /artifact-snapshot\.json/);
-  assert.match(drift, /unexpected/i);
+  assert.match(driftLibrary, /unexpected/i);
   assert.equal(snapshot.schemaVersion, '1.0.0');
   assert.equal(snapshot.algorithm, 'sha256');
   assert.ok(snapshot.files.length > 150);
@@ -163,6 +192,9 @@ test('artifact policy separates tracked vectors from release-only PDFs and drift
     assert.equal(createHash('sha256').update(bytes).digest('hex'), entry.sha256, entry.path);
   }
   assert.match(release, /artifact-policy\.json/);
+  assert.doesNotMatch(release, /generate-interlocks-pdf\.mjs/);
+  assert.doesNotMatch(release, /generate-usecase-pdf\.mjs/);
+  assert.match(release, /pre-built release PDF cache/i);
   for (const excluded of ['\\.bkp', '\\.env', '\\.DS_Store', 'Thumbs\\.db']) assert.match(releaseFilter, new RegExp(excluded));
   assert.match(release, /requiredPdfCount/);
   assert.ok(packageJson.scripts['artifacts:check']);
@@ -203,19 +235,33 @@ test('verified release is uploaded and deployed to GitHub Pages with public URL 
   assert.match(workflow, /verify-public-deployment\.mjs/);
   assert.match(verificationLibrary, /interlocks\.html/);
   assert.match(verificationLibrary, /requiredPdfCount/);
-  assert.match(verifier, /response\.ok/);
+  for (const surface of ['index.html', 'launchpad.html', 'interlocks.html', 'interlock-detail.html']) {
+    assert.match(verificationLibrary, new RegExp(surface.replace('.', '\\.')));
+  }
+  assert.match(verifier, /sha256|SHA-256/);
+  assert.match(verifier, /byte size/i);
+  for (const marker of ['telemetry-route', 'module-home', 'architecture-board', 'usecase-detail']) {
+    assert.match(verifier, new RegExp(marker));
+  }
+  assert.match(verifier, /redirect: 'manual'/);
+  assert.doesNotMatch(workflow, /configure-pages-deployment/);
 });
 
-test('public deployment verification derives Interlocks and exactly 66 PDF routes', async () => {
+test('public deployment verification derives all required surfaces and exactly 66 PDF routes', async () => {
   const { buildVerificationPaths } = await import('../scripts/deployment-verification-lib.mjs');
   const manifest = { files: [
-    { path: 'interlocks.html' },
-    ...Array.from({ length: 66 }, (_, index) => ({ path: `assets/architecture-${index + 1}.pdf` })),
+    ...['index.html', 'launchpad.html', 'interlocks.html', 'interlock-detail.html']
+      .map(path => ({ path, bytes: 1, sha256: 'a'.repeat(64) })),
+    ...Array.from({ length: 66 }, (_, index) => ({ path: `assets/architecture-${index + 1}.pdf`, bytes: 1, sha256: 'b'.repeat(64) })),
   ] };
   const paths = buildVerificationPaths(manifest, 66);
-  assert.equal(paths[0], 'interlocks.html');
-  assert.equal(paths.length, 67);
+  assert.deepEqual(paths.slice(0, 4), ['index.html', 'launchpad.html', 'interlocks.html', 'interlock-detail.html']);
+  assert.equal(paths.length, 70);
   assert.throws(() => buildVerificationPaths({ files: manifest.files.slice(0, -1) }, 66), /66 PDFs/);
+  assert.throws(
+    () => buildVerificationPaths({ files: manifest.files.filter(entry => entry.path !== 'launchpad.html') }, 66),
+    /missing required surface: launchpad\.html/,
+  );
 });
 
 test('cross-surface smoke suite covers four surfaces at desktop and mobile widths', async () => {

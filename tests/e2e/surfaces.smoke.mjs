@@ -19,7 +19,7 @@ const surfaces = Object.freeze([
   },
   {
     name: 'Interlocks', path: 'interlocks.html', ready: `document.querySelectorAll('#diagram-tabs .diagram-tab').length === 6 && Boolean(document.querySelector('#community-scenario-list .community-scenario'))`,
-    interact: `(() => { const tab = document.querySelector('[data-diagram-id="security"]'); tab.focus(); tab.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); const selected = document.querySelector('[role="tab"][aria-selected="true"]'); return { activeElement: document.activeElement === selected, ariaSelected: selected !== tab, controlsValid: Boolean(document.getElementById(selected.getAttribute('aria-controls'))), rovingTabindex: document.querySelectorAll('[role="tab"][tabindex="0"]').length === 1 }; })()`,
+    interact: `(() => { const tab = document.querySelector('[data-diagram-id="security"]'); tab.focus(); tab.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); const selected = document.querySelector('[role="tab"][aria-selected="true"]'); return { activeElement: document.activeElement === selected, ariaSelected: selected !== tab, controlsValid: Boolean(document.getElementById(selected.getAttribute('aria-controls'))), rovingTabindex: document.querySelectorAll('[role="tab"][tabindex="0"]').length === 1, panelLabelMatchesActiveTab: document.querySelector('#architecture-board').getAttribute('aria-labelledby') === selected.id }; })()`,
   },
   {
     name: 'Interlock detail', path: 'interlock-detail.html?diagram=network&usecase=flow-logs', ready: `document.querySelectorAll('.usecase-detail__guidance').length === 3`,
@@ -27,12 +27,7 @@ const surfaces = Object.freeze([
   },
 ]);
 
-const configuredCdpPort = Number.parseInt(process.env.CDP_PORT ?? '', 10);
-const harness = await startBrowserHarness({
-  root,
-  ...(Number.isInteger(configuredCdpPort) && configuredCdpPort > 0 ? { cdpPort: configuredCdpPort } : {}),
-});
-try {
+export async function runSurfaceSmoke(harness) {
   for (const viewport of viewports) {
     await harness.setViewport(viewport);
     for (const surface of surfaces) {
@@ -72,6 +67,17 @@ try {
   assert.deepEqual(harness.exceptions, [], 'Runtime.exceptionThrown');
   assert.deepEqual(harness.localNetworkFailures, [], 'Network.loadingFailed');
   console.log('Cross-surface smoke passed: 4 surfaces × 2 viewport widths.');
-} finally {
-  await harness.close();
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
+  const configuredCdpPort = Number.parseInt(process.env.CDP_PORT ?? '', 10);
+  const harness = await startBrowserHarness({
+    root,
+    ...(Number.isInteger(configuredCdpPort) && configuredCdpPort > 0 ? { cdpPort: configuredCdpPort } : {}),
+  });
+  try {
+    await runSurfaceSmoke(harness);
+  } finally {
+    await harness.close();
+  }
 }

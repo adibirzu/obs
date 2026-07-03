@@ -9,6 +9,11 @@
   },
   "coverage": {
     "lines": 80,
+    "perFileLines": {
+      "static/observability.js": 75,
+      "scripts/redact-gate.mjs": 70,
+      "scripts/validate-governance.mjs": 75
+    },
     "client": {
       "lines": 80,
       "include": [

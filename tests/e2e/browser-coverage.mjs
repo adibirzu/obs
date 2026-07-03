@@ -2,14 +2,10 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+import { enforcePerFileLineFloors } from '../../scripts/coverage-gate-lib.mjs';
 import { startBrowserHarness } from './browser-harness.mjs';
 
 const root = resolve(new URL('../../', import.meta.url).pathname);
-const configuredCdpPort = Number.parseInt(process.env.COVERAGE_CDP_PORT ?? process.env.CDP_PORT ?? '', 10);
-const harness = await startBrowserHarness({
-  root,
-  ...(Number.isInteger(configuredCdpPort) && configuredCdpPort > 0 ? { cdpPort: configuredCdpPort } : {}),
-});
 const policy = JSON.parse(await readFile(resolve(root, 'governance/quality-gates.json'), 'utf8'));
 const clientPolicy = policy.coverage.client;
 const requiredCoverageTargets = Object.freeze([
@@ -21,11 +17,10 @@ const requiredCoverageTargets = Object.freeze([
   'assets/interlocks/usecase-detail.js',
 ]);
 for (const path of requiredCoverageTargets) assert.ok(clientPolicy.include.includes(path), `Coverage policy includes ${path}`);
-const snapshots = [];
 
-const settle = () => harness.evaluate(`new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))`);
+const settle = harness => harness.evaluate(`new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))`);
 
-async function exerciseAtlas() {
+async function exerciseAtlas(harness, snapshots) {
   await harness.navigate('index.html');
   await harness.waitFor(`document.querySelectorAll('#telemetry-route [data-source]').length === 6`);
   await harness.evaluate(`(async () => {
@@ -46,36 +41,91 @@ async function exerciseAtlas() {
     for (const card of [...document.querySelectorAll('.card[data-id]')]) { card.click(); document.querySelector('#i-close')?.click(); }
     window.dispatchEvent(new Event('scroll'));
   })()`);
-  await settle();
+  await settle(harness);
   snapshots.push(...await harness.takeCoverage());
 }
 
-async function exerciseLaunchpad() {
+async function exerciseLaunchpad(harness, snapshots) {
   await harness.navigate('launchpad.html');
   await harness.waitFor(`document.querySelectorAll('.nav-item[data-module]').length > 10`);
   await harness.evaluate(`(() => {
+    document.startViewTransition = undefined;
     const click = selector => document.querySelector(selector)?.click();
     document.querySelectorAll('.theme-option').forEach(node => node.click());
+    click('#themeToggle'); click('#themeToggle'); click('#mobileThemeToggle');
     document.querySelectorAll('[data-toggle-kind="tier"] .toggle-option').forEach(node => node.click());
     document.querySelectorAll('[data-toggle-kind="cloud-guard"] .toggle-option').forEach(node => node.click());
+    for (const selector of ['[data-toggle-kind="tier"] .toggle-option', '[data-toggle-kind="cloud-guard"] .toggle-option']) {
+      const option = document.querySelector(selector);
+      for (const key of ['Enter', ' ', 'ArrowRight', 'ArrowLeft', 'Home', 'End']) {
+        option?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+      }
+    }
     document.querySelectorAll('#rolePick [data-persona]').forEach(node => node.click());
     document.querySelectorAll('#goalPick [data-goal]').forEach(node => node.click());
+    const scalePattern = document.querySelector('[data-scale-pattern]');
+    if (scalePattern) { scalePattern.dataset.href = '#home'; scalePattern.click(); }
     click('[data-command-palette-trigger]');
     const command = document.querySelector('#commandPaletteInput');
     if (command) {
       for (const query of ['logs', 'unfindable']) { command.value = query; command.dispatchEvent(new Event('input', { bubbles: true })); }
       command.value = ''; command.dispatchEvent(new Event('input', { bubbles: true }));
-      command.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+      command.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
       command.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     }
-    click('#mobileNavToggle'); click('#mobileNavClose');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    document.body.dispatchEvent(new KeyboardEvent('keydown', { key: '/', bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    const runCommand = query => {
+      click('[data-command-palette-trigger]');
+      const input = document.querySelector('#commandPaletteInput');
+      input.value = query;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      document.querySelector('#commandPaletteResults .command-result')?.click();
+    };
+    runCommand('Monitoring');
+    runCommand('Prometheus ingestion lane');
+    window.open = () => null;
+    runCommand('Oracle monitoring guidance');
+    click('[data-command-palette-trigger]');
+    document.querySelector('#commandPalette')?.dispatchEvent(new Event('cancel', { bubbles: true, cancelable: true }));
+    click('[data-command-palette-trigger]');
+    document.querySelector('#commandPalette')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    click('#mobileNavToggle');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+    document.querySelector('#mobileDrawer button')?.focus();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    click('#mobileNavToggle'); click('#mobileNavBackdrop');
+    click('#mobileNavToggle'); click('#mobileNavToggle');
+    const nav = document.querySelector('.sidebar .nav-item[data-module="monitoring"]');
+    nav?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    document.querySelectorAll('.pillar-node').forEach(node => node.click());
+    const sectionRoute = document.querySelector('[data-route-module][data-route-section]');
+    sectionRoute?.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+    document.querySelectorAll('[data-launchpad-section]').forEach(node => node.click());
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', altKey: true, bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', altKey: true, bubbles: true }));
     window.dispatchEvent(new Event('resize'));
   })()`);
+  await harness.setViewport({ width: 390, height: 844 });
+  await harness.evaluate(`(() => {
+    document.querySelector('#mobileNavToggle')?.click();
+    const focusable = [...document.querySelectorAll('#mobileDrawer button:not([disabled]), #mobileDrawer a[href]')]
+      .filter(node => node.getClientRects().length > 0);
+    focusable[0]?.focus();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }));
+    focusable.at(-1)?.focus();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  })()`);
+  await harness.setViewport({ width: 1440, height: 1000 });
   for (const module of ['home', 'monitoring', 'ebs', 'fusion', 'integrations', 'loganalytics', 'apm', 'opsinsights', 'dbmgmt', 'ai']) {
-    await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="${module}"]').click()`);
+    await harness.evaluate(`document.querySelector('[data-module="${module}"]')?.click()`);
     await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-${module}'`);
     await harness.evaluate(`(() => {
-      document.querySelectorAll('.module.active .use-case-tab, .module.active .view-btn, .module.active .suggestion-chip, .module.active .prompt-chip, .module.active .cluster-bubble, .module.active .waterfall-row, .module.active .session-marker, .module.active .sankey-node, .module.active .service-card').forEach(node => {
+      document.querySelectorAll('.module.active .use-case-tab, .module.active .view-btn, .module.active .suggestion-chip, .module.active .prompt-chip, .module.active .cluster-bubble, .module.active .waterfall-row, .module.active .session-marker, .module.active .sankey-node, .module.active .service-card, .module.active #brazilMarker, .module.active #stuckJob').forEach(node => {
         node.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
         node.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         node.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
@@ -107,14 +157,14 @@ async function exerciseLaunchpad() {
         }
         input.value = 'keypress path'; input.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter', bubbles: true }));
       })()`);
-      await harness.evaluate(`new Promise(resolve => setTimeout(resolve, 1700))`);
+      await harness.evaluate(`new Promise(resolve => setTimeout(resolve, 2100))`);
     }
   }
-  await settle();
+  await settle(harness);
   snapshots.push(...await harness.takeCoverage());
 }
 
-async function exerciseInterlocks() {
+async function exerciseInterlocks(harness, snapshots) {
   await harness.navigate('interlocks.html');
   await harness.waitFor(`document.querySelectorAll('#diagram-tabs [role="tab"]').length === 6`);
   await harness.evaluate(`(async () => {
@@ -131,14 +181,14 @@ async function exerciseInterlocks() {
     document.querySelector('#clear-filters')?.click();
     for (const card of [...document.querySelectorAll('.service-card__button')].slice(0, 8)) { card.click(); document.querySelector('#dialog-close')?.click(); }
   })()`);
-  await settle();
+  await settle(harness);
   snapshots.push(...await harness.takeCoverage());
 
   for (const usecase of ['flow-logs', 'iam-events', 'checkout-latency']) {
     await harness.navigate(`interlock-detail.html?diagram=network&usecase=${usecase}`);
     await harness.waitFor(`Boolean(document.querySelector('#detail-title')?.textContent)`);
     await harness.evaluate(`[...document.querySelectorAll('button')].find(button => button.textContent.includes('Copy direct link'))?.click()`);
-    await settle();
+    await settle(harness);
     snapshots.push(...await harness.takeCoverage());
   }
 }
@@ -164,7 +214,7 @@ function sourceLineRanges(source) {
   return ranges;
 }
 
-async function calculateFile(path) {
+async function calculateFile(path, snapshots) {
   const source = await readFile(resolve(root, path), 'utf8');
   const mergedExecutable = new Uint8Array(source.length);
   const mergedCovered = new Uint8Array(source.length);
@@ -194,23 +244,32 @@ async function calculateFile(path) {
   return { path, covered, total: lines.length, percent: lines.length ? (covered / lines.length) * 100 : 100, uncovered: lines.filter(line => !coveredNumbers.has(line.number)).map(line => line.number) };
 }
 
-try {
+export async function runBrowserCoverage(sharedHarness) {
+  const harness = sharedHarness;
+  const snapshots = [];
   await harness.setViewport({ width: 1440, height: 1000 });
   await harness.startCoverage();
   console.log('Browser coverage: exercising Atlas');
-  await exerciseAtlas();
+  await exerciseAtlas(harness, snapshots);
   console.log('Browser coverage: exercising Launchpad');
-  await exerciseLaunchpad();
+  await exerciseLaunchpad(harness, snapshots);
   console.log('Browser coverage: exercising Interlocks');
-  await exerciseInterlocks();
+  await exerciseInterlocks(harness, snapshots);
   snapshots.push(...await harness.stopCoverage());
 
-  const results = await Promise.all(clientPolicy.include.map(calculateFile));
+  const results = await Promise.all(clientPolicy.include.map(path => calculateFile(path, snapshots)));
   const totals = results.reduce((sum, result) => ({ covered: sum.covered + result.covered, total: sum.total + result.total }), { covered: 0, total: 0 });
   const aggregate = totals.total ? (totals.covered / totals.total) * 100 : 100;
   console.log('\nBrowser client line coverage');
   for (const result of results) console.log(`${result.percent.toFixed(2).padStart(7)}%  ${String(result.covered).padStart(4)}/${String(result.total).padEnd(4)}  ${result.path}`);
   console.log(`${aggregate.toFixed(2).padStart(7)}%  ${totals.covered}/${totals.total}  all configured client scripts`);
+  const clientFloors = Object.fromEntries(Object.entries(policy.coverage.perFileLines)
+    .filter(([path]) => clientPolicy.include.includes(path)));
+  for (const [path, floor] of Object.entries(clientFloors)) {
+    const result = results.find(candidate => candidate.path === path);
+    if (result && result.percent < floor) console.log(`${path} uncovered lines: ${result.uncovered.join(',')}`);
+  }
+  enforcePerFileLineFloors(results, clientFloors, 'Browser per-file line coverage');
   if (aggregate < clientPolicy.lines) {
     const launchpadResult = results.find(result => result.path === 'static/observability.js');
     console.log(`Launchpad uncovered lines: ${launchpadResult?.uncovered.join(',')}`);
@@ -218,6 +277,17 @@ try {
   assert.ok(aggregate >= clientPolicy.lines, `Browser line coverage ${aggregate.toFixed(2)}% is below ${clientPolicy.lines}%`);
   assert.deepEqual(harness.exceptions, [], 'Runtime.exceptionThrown');
   assert.deepEqual(harness.localNetworkFailures, [], 'Network.loadingFailed');
-} finally {
-  await harness.close();
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
+  const configuredCdpPort = Number.parseInt(process.env.COVERAGE_CDP_PORT ?? process.env.CDP_PORT ?? '', 10);
+  const standaloneHarness = await startBrowserHarness({
+    root,
+    ...(Number.isInteger(configuredCdpPort) && configuredCdpPort > 0 ? { cdpPort: configuredCdpPort } : {}),
+  });
+  try {
+    await runBrowserCoverage(standaloneHarness);
+  } finally {
+    await standaloneHarness.close();
+  }
 }
