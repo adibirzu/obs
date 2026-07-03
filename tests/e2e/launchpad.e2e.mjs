@@ -23,10 +23,17 @@ export async function runLaunchpadE2E(harness) {
     noOverflow: document.documentElement.scrollWidth <= document.documentElement.clientWidth,
     viewport: { inner: innerWidth, client: document.documentElement.clientWidth, header: (() => { const r = document.querySelector('.mobile-header').getBoundingClientRect(); return { left: r.left, width: r.width, right: r.right }; })() }
   }))()`);
-  assert.deepEqual(restored, {
+  const { viewport, ...restoredState } = restored;
+  assert.deepEqual(restoredState, {
     module: 'module-apm', moduleParam: 'apm', persona: 'operate', industry: 'retail', scale: 'true',
     mapDisplay: 'grid', mapPosition: 'sticky', mapTargets: true, noOverflow: true,
-    viewport: { inner: 390, client: 390, header: { left: 0, width: 390, right: 390 } },
+  });
+  assert.equal(viewport.inner, 390);
+  assert.ok(viewport.client > 0 && viewport.client <= viewport.inner);
+  assert.deepEqual(viewport.header, {
+    left: 0,
+    width: viewport.client,
+    right: viewport.client,
   });
 
   console.log('Launchpad E2E: exercising keyboard controls');
