@@ -142,6 +142,12 @@ function controlGroups(diagram) {
   return [...categories.entries()].slice(0, 6).map(([title, items]) => ({ title, items: items.slice(0, 6), signals: ['collect', 'correlate', 'analyze'] }));
 }
 
+function syncArchitectureBoardLabel(diagramId) {
+  const activeTabId = `diagram-tab-${diagramId}`;
+  const board = $('#architecture-board');
+  if (board && document.getElementById(activeTabId)) board.setAttribute('aria-labelledby', activeTabId);
+}
+
 function renderDiagram() {
   const diagram = diagramById(state.activeDiagramId);
   const index = state.catalog.diagrams.findIndex(({ id }) => id === diagram.id) + 1;
@@ -150,7 +156,7 @@ function renderDiagram() {
   $('#diagram-title').textContent = diagram.title;
   $('#diagram-subtitle').textContent = diagram.subtitle;
   $('#diagram-purpose').textContent = diagram.purpose;
-  $('#architecture-board').setAttribute('aria-labelledby', `diagram-tab-${diagram.id}`);
+  syncArchitectureBoardLabel(diagram.id);
   replaceChildren($('#diagram-legend'), diagram.legend.map(legendKey));
 
   const flow = [

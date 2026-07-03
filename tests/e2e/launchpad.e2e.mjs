@@ -4,13 +4,8 @@ import { resolve } from 'node:path';
 import { startBrowserHarness } from './browser-harness.mjs';
 
 const root = resolve(new URL('../../', import.meta.url).pathname);
-const configuredCdpPort = Number.parseInt(process.env.E2E_CDP_PORT ?? process.env.CDP_PORT ?? '', 10);
-const harness = await startBrowserHarness({
-  root,
-  ...(Number.isInteger(configuredCdpPort) && configuredCdpPort > 0 ? { cdpPort: configuredCdpPort } : {}),
-});
 
-try {
+export async function runLaunchpadE2E(harness) {
   await harness.setViewport({ width: 390, height: 844 });
   console.log('Launchpad E2E: loading persisted mobile state');
   await harness.navigate('launchpad.html?module=apm&persona=operate&industry=retail&lens=2&scale-pattern=operator');
@@ -93,14 +88,102 @@ try {
   })`);
   assert.deepEqual(afterReload, { module: 'module-loganalytics', persona: 'build', industry: 'retail', scale: 'true', lens: '1' });
 
+  console.log('Launchpad E2E: neutralizing hostile query-builder input');
+  await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="monitoring"]').click()`);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-monitoring'`);
+  const hostileInput = '<img src=x onerror="window.__queryBuilderXss=true">';
+  await harness.evaluate(`(() => {
+    window.__queryBuilderXss = false;
+    const payload = ${JSON.stringify(hostileInput)};
+    const region = document.getElementById('regionSearch');
+    region.value = payload;
+    document.getElementById('addRegionBtn').click();
+    const namespace = document.getElementById('namespaceSearch');
+    namespace.value = payload;
+    namespace.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    const metric = document.getElementById('metricNameSearch');
+    metric.value = payload;
+    document.getElementById('runQuery1').click();
+  })()`);
+  assert.deepEqual(await harness.evaluate(`({
+    executed: window.__queryBuilderXss,
+    regionText: document.querySelector('#selectedRegions .tag')?.childNodes[0]?.textContent.trim(),
+    regionImageCount: document.querySelectorAll('#selectedRegions img').length,
+    resultContainsPayload: document.getElementById('queryResults')?.textContent.includes(${JSON.stringify(hostileInput)}),
+    resultImageCount: document.querySelectorAll('#queryResults img').length
+  })`), {
+    executed: false, regionText: hostileInput, regionImageCount: 0, resultContainsPayload: true, resultImageCount: 0,
+  });
+  await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="home"]').click()`);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-home'`);
+
   console.log('Launchpad E2E: exercising inspector lens tabs');
-  await harness.evaluate(`document.querySelector('.service-card.logs')?.click()`);
+  await harness.evaluate(`document.querySelector('.service-card.logs .service-card__inspect')?.focus()`);
+  await harness.press('Enter', 'Enter', 13);
   await harness.waitFor(`document.querySelector('#serviceInspector')?.classList.contains('is-open')`);
+  assert.deepEqual(await harness.evaluate(`({
+    role: document.querySelector('#serviceInspector')?.getAttribute('role'),
+    modal: document.querySelector('#serviceInspector')?.getAttribute('aria-modal'),
+    labelledBy: document.querySelector('#serviceInspector')?.getAttribute('aria-labelledby'),
+    active: document.activeElement?.id
+  })`), { role: 'dialog', modal: 'true', labelledBy: 'inspectorTitle', active: 'closeInspector' });
+  await harness.evaluate(`document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }))`);
+  assert.equal(await harness.evaluate(`document.activeElement?.id`), 'inspector-tab-level3');
   assert.equal(await harness.evaluate(`document.querySelector('.inspector-tab-btn[aria-selected="true"]')?.dataset.tab`), 'level2');
   await harness.evaluate(`document.querySelector('.inspector-tab-btn[aria-selected="true"]').focus()`);
   await harness.press('ArrowLeft', 'ArrowLeft', 37);
   assert.equal(await harness.evaluate(`document.querySelector('.inspector-tab-btn[aria-selected="true"]')?.dataset.tab`), 'level1');
   assert.equal(await harness.evaluate(`new URLSearchParams(location.search).get('lens')`), '0');
+  await harness.evaluate(`(() => {
+    Object.defineProperty(navigator, 'clipboard', { value: undefined, configurable: true });
+    document.execCommand = () => false;
+    document.querySelector('#inspector-tab-level3').click();
+    document.querySelector('#inspector-panel-level3 .copy-code-btn').click();
+  })()`);
+  await harness.waitFor(`document.querySelector('#clipboardStatus')?.getAttribute('role') === 'alert'`);
+  assert.match(await harness.evaluate(`document.querySelector('#clipboardStatus')?.textContent || ''`), /Copy failed/);
+  await harness.press('Escape', 'Escape', 27);
+  assert.equal(await harness.evaluate(`document.activeElement?.classList.contains('service-card__inspect')`), true);
+
+  console.log('Launchpad E2E: exercising visual controls and screenshot lightbox');
+  await harness.setViewport({ width: 1440, height: 1000 });
+  await harness.evaluate(`document.querySelector('.pillar-node[data-pillar="monitoring"] .node-content').focus()`);
+  await harness.press('Enter', 'Enter', 13);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-monitoring'`);
+  await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="loganalytics"]').click()`);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-loganalytics'`);
+  await harness.evaluate(`document.querySelector('.cluster-bubble').focus()`);
+  await harness.press(' ', 'Space', 32);
+  assert.match(await harness.evaluate(`document.querySelector('.cluster-detail-panel h4')?.textContent || ''`), /CrashLoopBackOff \(847 records\)/);
+  await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="apm"]').click()`);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-apm'`);
+  await harness.evaluate(`document.querySelector('#brazilMarker').focus()`);
+  await harness.press('Enter', 'Enter', 13);
+  assert.equal(await harness.evaluate(`document.querySelector('#regionDetail').classList.contains('highlight')`), true);
+  await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="fusion"]').click()`);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-fusion'`);
+  await harness.evaluate(`document.querySelector('[data-usecase="stuck-job"]').click(); document.querySelector('#stuckJob').focus()`);
+  await harness.press(' ', 'Space', 32);
+  assert.match(await harness.evaluate(`document.querySelector('#jobDetailPanel')?.style.animation || ''`), /pulseHighlight/);
+
+  await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="home"]').click()`);
+  await harness.waitFor(`document.querySelector('.module.active')?.id === 'module-home'`);
+  await harness.evaluate(`document.querySelector('.showcase-image').focus()`);
+  await harness.press('Enter', 'Enter', 13);
+  await harness.waitFor(`document.querySelector('.octo-lb')?.classList.contains('open')`);
+  assert.deepEqual(await harness.evaluate(`({
+    role: document.querySelector('.octo-lb')?.getAttribute('role'),
+    modal: document.querySelector('.octo-lb')?.getAttribute('aria-modal'),
+    labelledBy: document.querySelector('.octo-lb')?.getAttribute('aria-labelledby'),
+    active: document.activeElement?.className
+  })`), { role: 'dialog', modal: 'true', labelledBy: 'octo-lightbox-caption', active: 'octo-lb__x' });
+  await harness.evaluate(`document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }))`);
+  assert.equal(await harness.evaluate(`document.activeElement?.classList.contains('octo-lb__image')`), true);
+  await harness.press('Tab', 'Tab', 9);
+  assert.equal(await harness.evaluate(`document.activeElement?.classList.contains('octo-lb__x')`), true);
+  await harness.press('Escape', 'Escape', 27);
+  assert.equal(await harness.evaluate(`document.activeElement?.classList.contains('showcase-image')`), true);
+  await harness.setViewport({ width: 390, height: 844 });
 
   console.log('Launchpad E2E: exercising implementation tab systems');
   await harness.evaluate(`document.querySelector('.sidebar .nav-item[data-module="home"]').click()`);
@@ -156,6 +239,17 @@ try {
   assert.deepEqual(harness.exceptions, []);
   assert.deepEqual(harness.localNetworkFailures, []);
   console.log('Launchpad E2E: keyboard, mobile, persistence, lens, color, and reduced motion passed.');
-} finally {
-  await harness.close();
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
+  const configuredCdpPort = Number.parseInt(process.env.E2E_CDP_PORT ?? process.env.CDP_PORT ?? '', 10);
+  const harness = await startBrowserHarness({
+    root,
+    ...(Number.isInteger(configuredCdpPort) && configuredCdpPort > 0 ? { cdpPort: configuredCdpPort } : {}),
+  });
+  try {
+    await runLaunchpadE2E(harness);
+  } finally {
+    await harness.close();
+  }
 }

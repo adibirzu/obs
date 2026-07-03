@@ -526,9 +526,10 @@
             tab.addEventListener('click', handleUseCaseClick);
         });
 
-        // Pillar nodes click - navigate to module
-        document.querySelectorAll('.pillar-node').forEach(node => {
-            node.addEventListener('click', handlePillarClick);
+        // Pillar nodes navigate to their matching module.
+        document.querySelectorAll('.pillar-node .node-content').forEach(trigger => {
+            trigger.addEventListener('click', handlePillarClick);
+            bindKeyboardActivation(trigger);
         });
 
         // Cluster bubbles
@@ -540,6 +541,7 @@
         const brazilMarker = document.getElementById('brazilMarker');
         if (brazilMarker) {
             brazilMarker.addEventListener('click', handleBrazilClick);
+            bindKeyboardActivation(brazilMarker);
         }
 
         // Stuck job click
@@ -622,6 +624,19 @@
         }, 250));
     }
 
+    function bindKeyboardActivation(control) {
+        control.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                control.dispatchEvent(new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                }));
+            }
+        });
+    }
+
     // ============================================
     // Navigation Handlers
     // ============================================
@@ -674,7 +689,7 @@
     }
 
     function handlePillarClick(e) {
-        const pillar = e.currentTarget.dataset.pillar;
+        const pillar = e.currentTarget.closest('.pillar-node')?.dataset.pillar;
         const moduleMap = {
             'monitoring': 'monitoring',
             'stack': 'ebs',
@@ -1337,7 +1352,8 @@
         }, 2000);
     }
 
-    function handleBrazilClick() {
+    function handleBrazilClick(event) {
+        event?.preventDefault();
         const regionDetail = document.getElementById('regionDetail');
         if (regionDetail) {
             regionDetail.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2294,12 +2310,22 @@
             if (!container) return;
 
             // Check if already exists
-            const existing = container.querySelector(`[data-value="${value}"]`);
+            const existing = [...container.querySelectorAll('.tag')]
+                .some(candidate => candidate.dataset.value === value);
             if (existing) return;
 
             const tag = document.createElement('span');
             tag.className = 'tag';
-            tag.innerHTML = `${value} <button class="tag-remove" data-value="${value}">&times;</button>`;
+            tag.dataset.value = value;
+            tag.appendChild(document.createTextNode(`${value} `));
+
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'tag-remove';
+            removeButton.dataset.value = value;
+            removeButton.setAttribute('aria-label', `Remove ${value}`);
+            removeButton.textContent = '×';
+            tag.appendChild(removeButton);
             container.appendChild(tag);
         }
 
@@ -2531,6 +2557,86 @@
             });
         }
 
+        function appendQuerySummary(container, prefix, namespace, metric) {
+            container.appendChild(document.createTextNode(prefix));
+            const namespaceValue = document.createElement('strong');
+            namespaceValue.textContent = namespace;
+            container.appendChild(namespaceValue);
+            container.appendChild(document.createTextNode(' / '));
+            const metricValue = document.createElement('strong');
+            metricValue.textContent = metric;
+            container.appendChild(metricValue);
+        }
+
+        function appendSparkline(container, points, height = 60) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('viewBox', `0 0 200 ${height}`);
+            svg.style.cssText = `width: ${height === 60 ? '100%; max-width: 300px' : '200px'}; height: ${height}px;${height === 60 ? ' margin-top: 8px;' : ''}`;
+            const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyline.setAttribute('points', points);
+            polyline.setAttribute('fill', 'none');
+            polyline.setAttribute('stroke', 'var(--monitoring-color)');
+            polyline.setAttribute('stroke-width', '2');
+            svg.appendChild(polyline);
+            container.appendChild(svg);
+        }
+
+        function renderEmptyQueryResults(results) {
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = 'padding: 40px; text-align: center;';
+            const message = document.createElement('div');
+            message.style.cssText = 'font-size: 14px; color: var(--text-muted);';
+            message.textContent = 'Please configure at least one query with a namespace';
+            wrapper.appendChild(message);
+            results.replaceChildren(wrapper);
+        }
+
+        function renderQueryResults(results, queries) {
+            const wrapper = document.createElement('div');
+            wrapper.style.padding = '24px';
+            const heading = document.createElement('h4');
+            heading.style.cssText = 'color: var(--text-primary); margin-bottom: 16px;';
+            heading.textContent = 'Query Results';
+            wrapper.appendChild(heading);
+
+            queries.forEach((query, index) => {
+                const card = document.createElement('div');
+                card.style.cssText = 'padding: 16px; background: var(--surface-2); border-radius: 8px; margin-bottom: 12px;';
+                const summary = document.createElement('div');
+                summary.style.cssText = 'font-size: 14px; color: var(--text-primary); margin-bottom: 4px;';
+                appendQuerySummary(summary, `Query ${index + 1}: `, query.namespace, query.metric);
+                card.appendChild(summary);
+
+                const note = document.createElement('div');
+                note.style.cssText = 'font-size: 12px; color: var(--text-muted);';
+                note.textContent = '(Demo - connect to OCI API for real data)';
+                card.appendChild(note);
+                appendSparkline(card, `0,${40 + Math.random() * 15} 40,${20 + Math.random() * 20} 80,${30 + Math.random() * 15} 120,${15 + Math.random() * 20} 160,${25 + Math.random() * 15} 200,${10 + Math.random() * 20}`);
+                wrapper.appendChild(card);
+            });
+            results.replaceChildren(wrapper);
+        }
+
+        function renderExecutedQuery(results, namespace, metric) {
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = 'padding: 40px; text-align: center;';
+            const summary = document.createElement('div');
+            summary.style.cssText = 'font-size: 16px; color: var(--text-primary); margin-bottom: 8px;';
+            appendQuerySummary(summary, 'Query executed for ', namespace, metric);
+            wrapper.appendChild(summary);
+
+            const note = document.createElement('div');
+            note.style.cssText = 'font-size: 13px; color: var(--text-muted);';
+            note.textContent = '(This is a demo - connect to OCI API for real metrics data)';
+            wrapper.appendChild(note);
+
+            const chart = document.createElement('div');
+            chart.style.cssText = 'margin-top: 24px; padding: 20px; background: var(--surface-2); border-radius: 8px; display: inline-block;';
+            appendSparkline(chart, '0,60 30,50 60,55 90,30 120,40 150,20 180,35 200,25', 80);
+            wrapper.appendChild(chart);
+            results.replaceChildren(wrapper);
+        }
+
         // Run All Queries button
         const runAllBtn = document.getElementById('runAllQueries');
         if (runAllBtn) {
@@ -2549,34 +2655,11 @@
                 });
 
                 if (queries.length === 0) {
-                    results.innerHTML = `
-                        <div style="padding: 40px; text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-muted);">
-                                Please configure at least one query with a namespace
-                            </div>
-                        </div>
-                    `;
+                    renderEmptyQueryResults(results);
                     return;
                 }
 
-                let html = '<div style="padding: 24px;">';
-                html += '<h4 style="color: var(--text-primary); margin-bottom: 16px;">Query Results</h4>';
-                queries.forEach((q, i) => {
-                    html += `
-                        <div style="padding: 16px; background: var(--surface-2); border-radius: 8px; margin-bottom: 12px;">
-                            <div style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">
-                                Query ${i + 1}: <strong>${q.namespace}</strong> / <strong>${q.metric}</strong>
-                            </div>
-                            <div style="font-size: 12px; color: var(--text-muted);">(Demo - connect to OCI API for real data)</div>
-                            <svg viewBox="0 0 200 60" style="width: 100%; max-width: 300px; height: 60px; margin-top: 8px;">
-                                <polyline points="0,${40 + Math.random() * 15} 40,${20 + Math.random() * 20} 80,${30 + Math.random() * 15} 120,${15 + Math.random() * 20} 160,${25 + Math.random() * 15} 200,${10 + Math.random() * 20}"
-                                    fill="none" stroke="var(--monitoring-color)" stroke-width="2"/>
-                            </svg>
-                        </div>
-                    `;
-                });
-                html += '</div>';
-                results.innerHTML = html;
+                renderQueryResults(results, queries);
             });
         }
 
@@ -2616,28 +2699,76 @@
                 // Show placeholder result
                 const results = document.getElementById('queryResults');
                 if (results) {
-                    results.innerHTML = `
-                        <div style="padding: 40px; text-align: center;">
-                            <div style="font-size: 16px; color: var(--text-primary); margin-bottom: 8px;">
-                                Query executed for <strong>${namespace}</strong> / <strong>${metric}</strong>
-                            </div>
-                            <div style="font-size: 13px; color: var(--text-muted);">
-                                (This is a demo - connect to OCI API for real metrics data)
-                            </div>
-                            <div style="margin-top: 24px; padding: 20px; background: var(--surface-2); border-radius: 8px; display: inline-block;">
-                                <svg viewBox="0 0 200 80" style="width: 200px; height: 80px;">
-                                    <polyline points="0,60 30,50 60,55 90,30 120,40 150,20 180,35 200,25"
-                                        fill="none" stroke="var(--monitoring-color)" stroke-width="2"/>
-                                </svg>
-                            </div>
-                        </div>
-                    `;
+                    renderExecutedQuery(results, namespace, metric);
                 }
             });
         }
 
         moduleRoot.dataset.queryBuilderReady = 'true';
         return true;
+    }
+
+    let clipboardStatusTimer;
+
+    function announceClipboardStatus(message, { error = false } = {}) {
+        const status = document.getElementById('clipboardStatus');
+        if (!status) return;
+        clearTimeout(clipboardStatusTimer);
+        status.setAttribute('role', error ? 'alert' : 'status');
+        status.setAttribute('aria-live', error ? 'assertive' : 'polite');
+        status.textContent = message;
+        status.classList.add('has-message');
+        clipboardStatusTimer = setTimeout(() => {
+            status.classList.remove('has-message');
+            status.textContent = '';
+        }, 5000);
+    }
+
+    async function copyTextWithFallback(rawText) {
+        try {
+            if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable');
+            await navigator.clipboard.writeText(rawText);
+            announceClipboardStatus('Copied to clipboard.');
+            return true;
+        } catch (clipboardError) {
+            const previousFocus = document.activeElement;
+            const textarea = document.createElement('textarea');
+            textarea.value = rawText;
+            textarea.setAttribute('aria-hidden', 'true');
+            textarea.style.cssText = 'position:fixed; inset:auto auto 0 -9999px; opacity:0;';
+            document.body.appendChild(textarea);
+            try {
+                textarea.select();
+                if (typeof document.execCommand !== 'function' || !document.execCommand('copy')) {
+                    throw new Error('Legacy copy command unavailable');
+                }
+                announceClipboardStatus('Copied to clipboard.');
+                return true;
+            } catch (fallbackError) {
+                console.warn('Clipboard copy blocked', clipboardError, fallbackError);
+                announceClipboardStatus('Copy failed. Select the visible code and copy it manually.', { error: true });
+                return false;
+            } finally {
+                textarea.remove();
+                if (previousFocus instanceof HTMLElement) previousFocus.focus();
+            }
+        }
+    }
+
+    function showCopyFeedback(button, copied) {
+        const originalText = button.textContent;
+        button.textContent = copied ? 'Copied!' : 'Copy manually';
+        if (copied) {
+            button.style.background = '#2ea44f';
+            button.style.color = '#ffffff';
+            button.style.borderColor = '#2ea44f';
+        }
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '';
+            button.style.color = '';
+            button.style.borderColor = '';
+        }, 2000);
     }
 
     // ============================================
@@ -2692,46 +2823,11 @@
         // Copy code helper
         const copyBtns = document.querySelectorAll('.copy-code-btn');
         copyBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
                 const targetId = btn.dataset.copyTarget;
                 const codeElement = document.getElementById(targetId);
-
                 if (codeElement) {
-                    const rawText = codeElement.textContent;
-                    navigator.clipboard.writeText(rawText).then(() => {
-                        const originalText = btn.textContent;
-                        btn.textContent = 'Copied!';
-                        btn.style.background = '#2ea44f';
-                        btn.style.color = '#ffffff';
-                        btn.style.borderColor = '#2ea44f';
-
-                        setTimeout(() => {
-                            btn.textContent = originalText;
-                            btn.style.background = '';
-                            btn.style.color = '';
-                            btn.style.borderColor = '';
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Could not copy text: ', err);
-                        // Fallback implementation in case navigator.clipboard is unavailable
-                        const textarea = document.createElement('textarea');
-                        textarea.value = rawText;
-                        textarea.style.position = 'fixed';
-                        textarea.style.opacity = '0';
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        try {
-                            document.execCommand('copy');
-                            const originalText = btn.textContent;
-                            btn.textContent = 'Copied!';
-                            setTimeout(() => {
-                                btn.textContent = originalText;
-                            }, 2000);
-                        } catch (e) {
-                            console.error('Fallback copy failed', e);
-                        }
-                        document.body.removeChild(textarea);
-                    });
+                    showCopyFeedback(btn, await copyTextWithFallback(codeElement.textContent));
                 }
             });
         });
@@ -2940,14 +3036,14 @@
                     code: "DECLARE\n  l_sql_tune_task VARCHAR2(30);\nBEGIN\n  l_sql_tune_task := DBMS_SQLTUNE.create_tuning_task(\n    sql_id => '8t721mxgq52sw',\n    task_name => 'tune_portal_orders'\n  );\nEND;",
                     openSourceDesc: "Run SQL workload metrics extraction programmatically via Oracle Database REST API interfaces.",
                     openSourceTitle: "REST Endpoint Call (cURL)",
-                    openSourceCode: "curl -u admin:password \\\n  -X GET https://database-endpoint:5001/ords/admin/performance/ash"
+                    openSourceCode: "curl --config <TMP_0600_CURL_CONFIG> \\\n  -X GET <DB_MANAGEMENT_ENDPOINT>/ords/<DB_API_PATH>/performance/ash"
                 }
             }
         }
     };
 
     function initServiceInspector() {
-        const serviceCards = document.querySelectorAll('.service-card');
+        const inspectorTriggers = document.querySelectorAll('.service-card__inspect');
         const inspector = document.getElementById('serviceInspector');
         const scrim = document.getElementById('inspectorScrim');
         const closeBtn = document.getElementById('closeInspector');
@@ -2956,10 +3052,55 @@
         const bodyEl = document.getElementById('inspectorBody');
 
         if (!inspector || !scrim || !closeBtn || !titleEl || !eyebrowEl || !bodyEl) return;
+        let previousFocus = null;
 
-        function openInspector(serviceId) {
+        function inspectorFocusableElements() {
+            return [...inspector.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+                .filter(element => !element.closest('[hidden]') && getComputedStyle(element).visibility !== 'hidden');
+        }
+
+        function closeInspector() {
+            if (!inspector.classList.contains('is-open')) return;
+            inspector.classList.remove('is-open');
+            inspector.setAttribute('aria-hidden', 'true');
+            inspector.inert = true;
+            if (previousFocus?.isConnected) previousFocus.focus();
+            previousFocus = null;
+        }
+
+        function trapInspectorFocus(event) {
+            if (!inspector.classList.contains('is-open')) return;
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeInspector();
+                return;
+            }
+            if (event.key !== 'Tab') return;
+
+            const focusable = inspectorFocusableElements();
+            if (!focusable.length) {
+                event.preventDefault();
+                inspector.focus();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable.at(-1);
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            } else if (!inspector.contains(document.activeElement)) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+
+        function openInspector(serviceId, trigger) {
             const data = SERVICE_DETAILS[serviceId];
             if (!data) return;
+            previousFocus = trigger ?? document.activeElement;
 
             titleEl.textContent = data.title;
             eyebrowEl.textContent = data.eyebrow;
@@ -3057,62 +3198,30 @@
 
             // Bind newly rendered copy buttons
             bodyEl.querySelectorAll('.copy-code-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', async () => {
                     const targetId = btn.dataset.copyTarget;
                     const codeElement = document.getElementById(targetId);
                     if (codeElement) {
-                        const rawText = codeElement.textContent;
-                        navigator.clipboard.writeText(rawText).then(() => {
-                            const originalText = btn.textContent;
-                            btn.textContent = 'Copied!';
-                            btn.style.background = '#2ea44f';
-                            btn.style.color = '#ffffff';
-                            btn.style.borderColor = '#2ea44f';
-
-                            setTimeout(() => {
-                                btn.textContent = originalText;
-                                btn.style.background = '';
-                                btn.style.color = '';
-                                btn.style.borderColor = '';
-                            }, 2000);
-                        });
+                        showCopyFeedback(btn, await copyTextWithFallback(codeElement.textContent));
                     }
                 });
             });
 
+            inspector.inert = false;
             inspector.classList.add('is-open');
             inspector.setAttribute('aria-hidden', 'false');
+            closeBtn.focus();
         }
 
-        function closeInspector() {
-            inspector.classList.remove('is-open');
-            inspector.setAttribute('aria-hidden', 'true');
-        }
-
-        // Bind click on service cards (intercept and open inspector)
-        serviceCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Determine service from class list
-                const classes = Array.from(card.classList);
-                const serviceId = classes.find(c => ['monitoring', 'logs', 'apm', 'stack', 'opsinsights', 'dbmgmt'].includes(c));
-                
-                if (serviceId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openInspector(serviceId);
-                }
+        inspectorTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                openInspector(trigger.dataset.serviceId, trigger);
             });
         });
 
         closeBtn.addEventListener('click', closeInspector);
         scrim.addEventListener('click', closeInspector);
-
-        // Escape key to close slideover
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && inspector.classList.contains('is-open')) {
-                closeInspector();
-            }
-        });
+        inspector.addEventListener('keydown', trapInspectorFocus);
     }
 
     // ============================================

@@ -99,11 +99,11 @@ observability_tier = enhanced             # baseline | enhanced | critical` },
       exec: ["Protects monitoring credentials and supports compliance."],
       arch: ["Define secret ownership, rotation cadence, break-glass, and audit review.", "Separate read-only monitoring, diagnostic, and administrative credentials."],
       prac: ["Database Management and the Management Agent read monitoring passwords from Vault by OCID."],
-      code: { lang: "OCI CLI", body: `oci vault secret create-base64 \\
-  --compartment-id $OBS_CMPT \\
-  --secret-name dbsnmp-monitoring \\
-  --vault-id $VAULT --key-id $KEY \\
-  --secret-content-content $(printf '%s' "$PW" | base64)` },
+      code: { lang: "Secure command document", body: `# Never place secret material or environment expansion on argv.
+# Prepare the complete request in a temporary mode-0600 document:
+<TMP_0600_SECRET_CREATE_JSON>
+# Pass it as file://<TMP_0600_SECRET_CREATE_JSON> to the wrapper's validated --from-json input.
+# Register a cleanup trap before writing it, then remove it on every exit path.` },
       docs: "https://docs.oracle.com/en-us/iaas/Content/KeyManagement/home.htm" },
     audit: { level: "L0", icon: "file-search", name: "OCI Audit",
       tagline: "Tenancy-wide API and change visibility, on by default.",

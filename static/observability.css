@@ -1242,6 +1242,12 @@ body.mobile-nav-open .mobile-drawer {
     transform: scale(1.05);
 }
 
+.pillar-node .node-content:focus-visible {
+    outline: 3px solid var(--focus-ring, var(--oci-red-light));
+    outline-offset: 4px;
+    background: var(--surface-3);
+}
+
 .pillar-icon {
     width: 40px;
     height: 40px;
@@ -2333,6 +2339,9 @@ body.mobile-nav-open .mobile-drawer {
 }
 
 .job-cell {
+    appearance: none;
+    width: 100%;
+    font-family: inherit;
     padding: 20px 16px;
     border-radius: var(--radius-md);
     text-align: center;
@@ -2371,6 +2380,11 @@ body.mobile-nav-open .mobile-drawer {
 
 .job-cell:hover {
     transform: scale(1.05);
+}
+
+.job-cell:focus-visible {
+    outline: 3px solid var(--focus-ring, var(--oci-red-light));
+    outline-offset: 3px;
 }
 
 .job-name {
@@ -2633,6 +2647,9 @@ body.mobile-nav-open .mobile-drawer {
 }
 
 .cluster-bubble {
+    appearance: none;
+    font-family: inherit;
+    color: inherit;
     position: absolute;
     left: var(--x);
     top: var(--y);
@@ -2675,6 +2692,13 @@ body.mobile-nav-open .mobile-drawer {
 
 .cluster-bubble:hover {
     transform: translate(-50%, -50%) scale(1.1);
+    z-index: 10;
+}
+
+.cluster-bubble:focus-visible {
+    outline: 3px solid var(--focus-ring, var(--oci-red-light));
+    outline-offset: 4px;
+    transform: translate(-50%, -50%) scale(1.08);
     z-index: 10;
 }
 
@@ -2914,6 +2938,16 @@ body.mobile-nav-open .mobile-drawer {
 
 .session-marker:hover {
     transform: scale(1.5);
+}
+
+.session-marker-link:focus-visible {
+    outline: none;
+}
+
+.session-marker-link:focus-visible .session-marker {
+    stroke: var(--surface-0);
+    stroke-width: 4px;
+    filter: drop-shadow(0 0 8px var(--focus-ring, var(--oci-red-light)));
 }
 
 .session-marker.healthy {
@@ -3784,11 +3818,21 @@ body.mobile-nav-open .mobile-drawer {
 }
 
 .showcase-image {
+    appearance: none;
+    display: block;
+    padding: 0;
+    border: 0;
+    color: inherit;
     position: relative;
     width: 100%;
     height: 180px;
     overflow: hidden;
     background: var(--surface-2);
+}
+
+.showcase-image:focus-visible {
+    outline: 3px solid var(--focus-ring, var(--oci-red-light));
+    outline-offset: 4px;
 }
 
 .showcase-image img {
@@ -5440,6 +5484,31 @@ body.mobile-nav-open .mobile-drawer {
 
 .service-card:hover .feature-tag {
     background: var(--surface-hover);
+}
+
+.service-card__inspect {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 20px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    color: var(--text-primary);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.service-card__inspect:hover {
+    background: var(--surface-hover);
+}
+
+.service-card__inspect:focus-visible {
+    outline: 3px solid var(--focus-ring, #2f6fed);
+    outline-offset: 3px;
 }
 
 /* Service Card Header with Tier Badges */
@@ -10140,6 +10209,30 @@ a.service-card {
     flex: 1;
     overflow-y: auto;
     padding: 28px;
+}
+
+.clipboard-status {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 11000;
+    max-width: min(360px, calc(100vw - 48px));
+    min-height: 48px;
+    padding: 12px 16px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    background: var(--surface-1, #fff);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.clipboard-status.has-message {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Service Inspector Tab System styling */
