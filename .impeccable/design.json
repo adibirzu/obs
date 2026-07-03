@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-02T21:03:27Z",
+  "title": "Design System: OCI Observability Atlas",
+  "extensions": {
+    "colorMeta": {
+      "redwood-signal": {
+        "role": "primary",
+        "displayName": "Redwood Signal",
+        "canonical": "#C74634",
+        "tonalRamp": ["oklch(18% 0.08 31)", "oklch(28% 0.12 31)", "oklch(40% 0.15 31)", "#C74634", "oklch(66% 0.13 31)", "oklch(77% 0.09 31)", "#F6E1DC", "oklch(95% 0.02 31)"]
+      },
+      "deep-telemetry-blue": {
+        "role": "secondary",
+        "displayName": "Deep Telemetry Blue",
+        "canonical": "#04536F",
+        "tonalRamp": ["oklch(18% 0.05 225)", "oklch(27% 0.07 225)", "#04536F", "oklch(47% 0.09 225)", "oklch(59% 0.08 225)", "oklch(71% 0.06 225)", "#DCE7EC", "oklch(95% 0.015 225)"]
+      },
+      "diagnostic-plum": {
+        "role": "secondary",
+        "displayName": "Diagnostic Plum",
+        "canonical": "#6C3F49",
+        "tonalRamp": ["oklch(18% 0.035 8)", "oklch(27% 0.05 8)", "#6C3F49", "oklch(47% 0.07 8)", "oklch(59% 0.06 8)", "oklch(71% 0.045 8)", "#E8E1E5", "oklch(95% 0.012 8)"]
+      },
+      "trace-ochre": {
+        "role": "tertiary",
+        "displayName": "Trace Ochre",
+        "canonical": "#C58C52",
+        "tonalRamp": ["oklch(18% 0.04 62)", "oklch(29% 0.07 62)", "oklch(42% 0.10 62)", "#C58C52", "oklch(68% 0.10 62)", "oklch(79% 0.07 62)", "#FBF1D8", "oklch(96% 0.02 62)"]
+      },
+      "control-plane-pine": {
+        "role": "tertiary",
+        "displayName": "Control-Plane Pine",
+        "canonical": "#315357",
+        "tonalRamp": ["oklch(18% 0.025 190)", "oklch(27% 0.035 190)", "#315357", "oklch(46% 0.045 190)", "oklch(59% 0.04 190)", "oklch(72% 0.03 190)", "#E3ECEB", "oklch(95% 0.01 190)"]
+      },
+      "infrastructure-ink": {
+        "role": "neutral",
+        "displayName": "Infrastructure Ink",
+        "canonical": "#2A2F2F",
+        "tonalRamp": ["#2A2F2F", "#3B4140", "#5A6160", "#6B7170", "#8A908F", "#AAB0AF", "#E4E7E6", "#FBF9F8"]
+      },
+      "atlas-ground": {
+        "role": "neutral",
+        "displayName": "Atlas Ground",
+        "canonical": "#FBF9F8",
+        "tonalRamp": ["#2A2F2F", "#3B4140", "#5A6160", "#8A908F", "#CBD0CF", "#E4E7E6", "#F3F4F3", "#FBF9F8"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Atlas Display", "purpose": "Page-defining questions and major architectural narratives." },
+      "headline": { "displayName": "Section Headline", "purpose": "Major sections and architecture explanations." },
+      "title": { "displayName": "System Title", "purpose": "Services, cards, dialogs, and workflow stages." },
+      "body": { "displayName": "Technical Reading", "purpose": "Approachable long-form explanations and guidance." },
+      "label": { "displayName": "Interface Label", "purpose": "Navigation, filters, and actions." },
+      "mono": { "displayName": "Telemetry Label", "purpose": "Levels, source badges, metrics, codes, and compact metadata." }
+    },
+    "shadows": [
+      { "name": "quiet-edge", "value": "0 1px 2px rgba(42, 47, 47, 0.06)", "purpose": "Minimal separation for contained surfaces." },
+      { "name": "interactive-lift", "value": "0 4px 12px rgba(42, 47, 47, 0.08), 0 2px 4px rgba(42, 47, 47, 0.04)", "purpose": "Hovered cards and active panels." },
+      { "name": "raised-panel", "value": "0 12px 28px rgba(42, 47, 47, 0.12), 0 4px 8px rgba(42, 47, 47, 0.05)", "purpose": "Inspectors, menus, and prominent media." },
+      { "name": "overlay-plane", "value": "0 24px 56px rgba(42, 47, 47, 0.16), 0 8px 16px rgba(42, 47, 47, 0.06)", "purpose": "Dialogs and overlays only." },
+      { "name": "focus-halo", "value": "0 0 0 3px rgba(4, 83, 111, 0.35)", "purpose": "Shape-following keyboard focus." }
+    ],
+    "motion": [
+      { "name": "duration-fast", "value": "120ms", "purpose": "Hover, focus, and compact control feedback." },
+      { "name": "duration-base", "value": "200ms", "purpose": "Selection and local state changes." },
+      { "name": "duration-slow", "value": "320ms", "purpose": "Inspectors, workflow steps, and spatial transitions." },
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default state transition." },
+      { "name": "ease-emphasized", "value": "cubic-bezier(0.2, 0, 0, 1)", "purpose": "Purposeful path and panel movement." },
+      { "name": "ease-out", "value": "cubic-bezier(0, 0, 0.2, 1)", "purpose": "Entrances and completion states." },
+      { "name": "reduced-motion", "value": "prefers-reduced-motion: reduce", "purpose": "Replace spatial travel with instant state, highlight, or crossfade." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "520px" },
+      { "name": "small", "value": "560px" },
+      { "name": "medium", "value": "680px" },
+      { "name": "navigation", "value": "920px" },
+      { "name": "wide", "value": "1080px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The decisive action used once per decision cluster.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Find your path <span aria-hidden=\"true\">→</span></button>",
+      "css": ".ds-btn-primary { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 0; border-radius: 999px; background: var(--action-primary, #C74634); color: #fff; font: 600 13px/1.45 var(--font-body, Figtree, sans-serif); cursor: pointer; transition: background 120ms cubic-bezier(0.4, 0, 0.2, 1), transform 120ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: var(--action-primary-hover, #B23C2B); } .ds-btn-primary:active { background: var(--action-primary-active, #9C3424); transform: translateY(.5px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--focus-ring, #04536F); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A clear alternative action without competing with the primary path.",
+      "html": "<button class=\"ds-btn-secondary\" type=\"button\">Explore the ladder</button>",
+      "css": ".ds-btn-secondary { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 16px; border: 0; border-radius: 999px; background: transparent; color: var(--action-secondary, #04536F); box-shadow: inset 0 0 0 1.5px var(--action-secondary, #04536F); font: 600 13px/1.45 var(--font-body, Figtree, sans-serif); cursor: pointer; transition: background 120ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { background: var(--surface-sunken, #F3F4F3); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--focus-ring, #04536F); outline-offset: 3px; }"
+    },
+    {
+      "name": "Telemetry Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Compact metadata for services, protocols, and signal types.",
+      "html": "<button class=\"ds-chip\" type=\"button\" aria-pressed=\"false\">OpenTelemetry</button>",
+      "css": ".ds-chip { min-height: 32px; padding: 2px 10px; border: 1px solid var(--border-subtle, #E4E7E6); border-radius: 999px; background: var(--surface-sunken, #F3F4F3); color: var(--text-muted, #6B7170); font: 500 12px/1.45 var(--font-mono, 'Roboto Mono', monospace); cursor: pointer; transition: background 120ms cubic-bezier(0.4, 0, 0.2, 1), border-color 120ms cubic-bezier(0.4, 0, 0.2, 1), color 120ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-chip:hover, .ds-chip[aria-pressed=\"true\"] { border-color: var(--action-secondary, #04536F); background: var(--blue-tint, #DCE7EC); color: var(--action-secondary, #04536F); } .ds-chip:focus-visible { outline: 2px solid var(--focus-ring, #04536F); outline-offset: 2px; }"
+    },
+    {
+      "name": "Use-Case Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "An interactive route into a user-specific observability path.",
+      "html": "<button class=\"ds-use-case\" type=\"button\"><span class=\"ds-use-case__code\">PATH 03</span><strong>Cloud-native on Kubernetes</strong><span>Trace services, collect cluster signals, and correlate failures.</span></button>",
+      "css": ".ds-use-case { width: min(100%, 320px); display: grid; gap: 10px; padding: 24px; border: 1px solid var(--border-subtle, #E4E7E6); border-radius: 16px; background: var(--surface-card, #fff); color: var(--text-body, #3B4140); text-align: left; cursor: pointer; transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1), border-color 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-use-case strong { color: var(--text-strong, #2A2F2F); font: 400 22px/1.2 var(--font-display, Georgia, serif); } .ds-use-case span:last-child { font: 400 14px/1.6 var(--font-body, Figtree, sans-serif); } .ds-use-case__code { color: var(--action-secondary, #04536F); font: 500 11px/1.45 var(--font-mono, 'Roboto Mono', monospace); letter-spacing: .08em; } .ds-use-case:hover { transform: translateY(-2px); border-color: var(--action-secondary, #04536F); box-shadow: 0 4px 12px rgba(42,47,47,.08), 0 2px 4px rgba(42,47,47,.04); } .ds-use-case:focus-visible { outline: 2px solid var(--focus-ring, #04536F); outline-offset: 3px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A labeled search field for service and architecture discovery.",
+      "html": "<label class=\"ds-field\"><span>Search services</span><input type=\"search\" placeholder=\"Try audit, fleet, or path\"></label>",
+      "css": ".ds-field { width: min(100%, 360px); display: grid; gap: 6px; color: var(--text-muted, #6B7170); font: 600 11px/1.45 var(--font-body, Figtree, sans-serif); } .ds-field input { min-height: 44px; padding: 10px 12px; border: 1px solid var(--border-default, #CBD0CF); border-radius: 10px; background: var(--surface-card, #fff); color: var(--text-strong, #2A2F2F); font: 400 16px/1.45 var(--font-body, Figtree, sans-serif); } .ds-field input::placeholder { color: var(--text-muted, #6B7170); } .ds-field input:focus { border-color: var(--action-secondary, #04536F); outline: none; box-shadow: 0 0 0 3px rgba(4,83,111,.2); }"
+    },
+    {
+      "name": "Atlas Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Compact wayfinding that keeps the current level and primary destination visible.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Atlas sections\"><a href=\"#start\" aria-current=\"page\">Start</a><a href=\"#paths\">Paths</a><a href=\"#interlocks\">Interlocks</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 4px; padding: 8px; border-bottom: 1px solid var(--border-subtle, #E4E7E6); background: color-mix(in srgb, var(--surface-page, #FBF9F8) 92%, transparent); font: 600 13px/1.45 var(--font-body, Figtree, sans-serif); } .ds-nav a { min-height: 40px; display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 999px; color: var(--text-muted, #6B7170); text-decoration: none; transition: background 120ms cubic-bezier(0.4, 0, 0.2, 1), color 120ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav a:hover { background: var(--surface-sunken, #F3F4F3); color: var(--text-strong, #2A2F2F); } .ds-nav a[aria-current=\"page\"] { color: var(--action-secondary, #04536F); } .ds-nav a:focus-visible { outline: 2px solid var(--focus-ring, #04536F); outline-offset: 2px; }"
+    },
+    {
+      "name": "Workflow Path",
+      "kind": "custom",
+      "refersTo": "workflow-stage",
+      "description": "An always-legible sequence for showing signal movement and operational handoffs.",
+      "html": "<ol class=\"ds-workflow\"><li><strong>Instrument</strong><span>OTel</span></li><li><strong>Collect</strong><span>Agents</span></li><li><strong>Analyse</strong><span>OCI O&amp;M</span></li><li><strong>Act</strong><span>Runbooks</span></li></ol>",
+      "css": ".ds-workflow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0; padding: 0; list-style: none; } .ds-workflow li { position: relative; min-width: 128px; display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--border-default, #CBD0CF); border-radius: 10px; background: var(--surface-card, #fff); } .ds-workflow li:not(:last-child)::after { content: '→'; position: absolute; left: calc(100% + 3px); top: 50%; color: var(--action-secondary, #04536F); transform: translateY(-50%); } .ds-workflow strong { color: var(--text-strong, #2A2F2F); font: 400 18px/1.2 var(--font-display, Georgia, serif); } .ds-workflow span { color: var(--text-muted, #6B7170); font: 500 11px/1.45 var(--font-mono, 'Roboto Mono', monospace); } @media (max-width: 680px) { .ds-workflow { display: grid; } .ds-workflow li:not(:last-child)::after { content: '↓'; left: 50%; top: calc(100% + 6px); transform: translateX(-50%); } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Living Signal Atlas",
+    "overview": "The interface behaves like a working systems map: calm enough for careful architecture review, structured enough for rapid scanning, and alive where movement explains a path. Its physical character is a field atlas laid across an operations table—authoritative source material, precise annotations, and visible routes connecting signals to decisions.\n\nThe visual language is authoritative, practical, and approachable. Oracle Redwood provides familiarity without turning the experience into an Oracle campaign. Multicloud sources receive meaningful visual weight, while OCI services remain specific and technically legible. Motion is explanatory: it shows telemetry movement, workflow sequence, state change, and control-plane handoff. It is never ambient decoration.\n\nThe system explicitly rejects generic SaaS styling, sales-heavy Oracle imitation, ornamental cloud imagery, dense product catalogs without guidance, and multicloud diagrams that reduce non-OCI environments to decorative inputs.",
+    "keyCharacteristics": [
+      "Cartographic hierarchy: routes, levels, and relationships lead; product lists follow.",
+      "Quiet Redwood foundations with a functional multicolor vocabulary for service families and system states.",
+      "Serif-led editorial authority balanced by a humanist sans for dense technical reading.",
+      "Layered-by-state surfaces: flat by default, raised only when hierarchy or interaction requires it.",
+      "Purposeful motion with equivalent static and reduced-motion meaning."
+    ],
+    "rules": [
+      { "name": "The Meaningful Motion Rule", "body": "Animate a route, handoff, progression, or state—not the existence of a section. Content remains visible before animation runs, and reduced-motion users receive the same information without spatial travel.", "section": "elevation" },
+      { "name": "The Signal Rarity Rule", "body": "Redwood Signal is reserved for primary actions and critical path emphasis; if every element is red, nothing is a signal.", "section": "colors" },
+      { "name": "The Route Color Rule", "body": "Service-family colors encode meaning consistently across diagrams, filters, cards, and legends. Never assign them decoratively.", "section": "colors" },
+      { "name": "The Contrast Before Subtlety Rule", "body": "Body and placeholder text must reach 4.5:1 contrast. Muted Stone is the lightest default prose color on Atlas Ground.", "section": "colors" },
+      { "name": "The Question-Led Hierarchy Rule", "body": "Headings name the user question or system outcome before naming products.", "section": "typography" },
+      { "name": "The Serif Authority Rule", "body": "Georgia carries narrative hierarchy, not dense UI. Figtree owns controls, tables, filters, and long explanations.", "section": "typography" },
+      { "name": "The Legibility Floor Rule", "body": "Display tracking never falls below -0.04em; body text never shrinks below 0.875rem for application UI or 1rem for reading surfaces.", "section": "typography" },
+      { "name": "The Flat-at-Rest Rule", "body": "Ordinary cards and controls are flat at rest. Elevation communicates hierarchy or state; it is never surface decoration.", "section": "elevation" },
+      { "name": "The One Edge Rule", "body": "A component may use a structural border or a broad shadow, but never the decorative one-pixel-border-plus-wide-shadow ghost-card combination.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do begin with an operating question, user role, or outcome before exposing service names.",
+      "Do use Redwood Signal sparingly and Deep Telemetry Blue consistently for system orientation and focus.",
+      "Do show telemetry paths, workflow progression, aggregation, and control-plane handoffs with purposeful motion and an equivalent static explanation.",
+      "Do give OCI, other clouds, Kubernetes, and on-premises sources meaningful labels and visual weight.",
+      "Do preserve keyboard access, visible focus, semantic controls, WCAG 2.2 AA contrast, and prefers-reduced-motion alternatives.",
+      "Do distinguish documented capabilities from independent architecture guidance and keep source links close to the claim they support."
+    ],
+    "donts": [
+      "Don't create generic SaaS landing pages built from interchangeable hero, metric, and card-grid templates.",
+      "Don't use sales-heavy Oracle imitation or any presentation that could be mistaken for an official Oracle product or campaign.",
+      "Don't use decorative cloud imagery, motion, or jargon that does not explain a real system relationship.",
+      "Don't build dense product catalogs that expose service names without helping users understand sequence, ownership, or outcomes.",
+      "Don't make multicloud comparisons that treat non-OCI environments as secondary or merely decorative inputs.",
+      "Don't add colored side-stripe borders, gradient text, decorative grid backgrounds, glassmorphism, or repeated tiny uppercase section eyebrows.",
+      "Don't pair a one-pixel border with a wide soft shadow, round ordinary cards beyond 16px, or hide essential content until an animation fires."
+    ]
+  }
+}

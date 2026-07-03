@@ -1,6 +1,6 @@
 # OCI Observability Atlas
 
-**A persona- and industry-driven path from L0 to L5 for designing enterprise observability on Oracle Cloud Infrastructure — find the right O&M and AI services for who you are and what you run, and enable them when you need them.**
+**An operating-goal-driven path from L0 to L4 for designing enterprise observability across OCI and multicloud estates, with an operator-scale architecture extension for multitenant platforms.**
 
 🔗 **Live:** [obs.octodemo.cloud](https://obs.octodemo.cloud) · mirror: [adibirzu.github.io/obs](https://adibirzu.github.io/obs/)
 
@@ -13,38 +13,65 @@ Built with the Oracle Redwood design language (Georgia + Figtree, warm-stone pal
 
 ## What this is
 
-A single-page guide that helps **any user** find the right OCI Observability & Management (O&M) services for their role, industry, and use case, and adopt them in the right order:
+A guided Atlas that helps users find the right observability capabilities for an operating goal, optionally refine the route by role or industry, and adopt them in a clear order:
 
-- **Start by persona + industry** — pick who you are and where you work; the page tailors the levels, services, and default lens. Access is governed by OCI IAM (personas → OCI Groups + scoped policies).
+- **Start with an operating goal** — choose protect, diagnose, optimize, or govern; role and industry are optional refinements.
 - **Use-case finder** — pick your estate pattern (traditional app, database-centric, OKE, Oracle apps, hybrid, agentic) and get a recommended path with concrete outcomes.
-- **The L0 → L5 ladder** — 31 O&M and AI services, each opening an inspector with Executive / Architect / Practitioner lenses, a "Relevant to" persona row, copy-ready MQL/OCL/OTel snippets, and curated guides + open-source projects.
+- **The L0 to L4 maturity path** — services open an inspector with Executive, Architect, and Practitioner lenses, copy-ready MQL/OCL/OTel snippets, and curated guides and projects.
 - **Collection-agent comparison** — Oracle Cloud Agent vs. Management Agent vs. Unified Monitoring Agent.
 - **AI agent observability (L4)** — the SAIF / Zero Trust / Observability triad and a modern Instrument → Collect → Analyse → Evaluate → Act reference diagram.
-- **Multitenancy at scale (L5)** — centralized Log Analytics aggregation across tenants and clouds, with per-tenant isolation by compartment + IAM (see below).
+- **Operator-scale architecture extension** — centralized Log Analytics aggregation across tenants and clouds, with per-tenant isolation by compartment and IAM. This is a scale pattern, not a fifth maturity level.
 - **Security + observability** — observability framed as an extension of OCI Security (Cloud Guard + Instance Security, IAM, Data Safe, Access Governance, Audit, ZPR): Security *detects*, observability *explains* and forwards to 3rd-party SIEMs (Splunk, Microsoft Sentinel, Elastic, Datadog).
 - **Resources** — curated DevRel guides, demos, and the maintainer's public observability projects, mapped per service.
-- **[Interactive launchpad](https://obs.octodemo.cloud/launchpad.html)** — the companion operations console.
+- **[OCI Observability Service Interlocks](interlocks.html)** — six accessible, interactive interlock views plus poster-grade editable Draw.io and Excalidraw sources covering Network, Security, IAM & Governance, Landing Zones, Operations & Lifecycle, and the end-to-end Cloud Foundation operating model.
+- **[Interactive launchpad](launchpad.html)** — the companion operations console.
 
-## Start with you — personas and industries
+Product status and remaining work are tracked in [`docs/PRODUCT-ROADMAP.md`](docs/PRODUCT-ROADMAP.md).
 
-The site opens with a **persona + industry** selector, not a product list. Pick who you are and where you work, and it points you at the right levels, services, and default lens.
+## OCI Observability Service Interlocks
+
+The interlocks addon turns the six Cloud Foundation posters into a maintainable, data-driven system:
+
+- [`interlocks.html`](interlocks.html) provides WCAG-oriented keyboard tabs, source → control-plane → outcome maps, operating loops, service search and filters, focus-managed detail dialogs, editable-file downloads, and official Oracle documentation links. Its generated catalog script also works when the page is opened directly from disk.
+- [`assets/diagrams/oci-observability-service-interlocks-documented.drawio`](assets/diagrams/oci-observability-service-interlocks-documented.drawio) is the source-grounded Draw.io workbook with six editable vector sheets on 3000 × 4243 A-series 4K poster canvases. Each `DOC-xx` badge opens an official Oracle source.
+- [`assets/diagrams/interlocks-documented/`](assets/diagrams/interlocks-documented/) contains six standalone documented Draw.io posters and six dense full-poster Excalidraw files. Six print-quality vector PDFs are generated into the release package. Earlier editable editions remain under `assets/diagrams/interlocks-infographic/` and `assets/diagrams/interlocks/` without being replaced.
+- [`assets/interlocks/catalog.json`](assets/interlocks/catalog.json) is the canonical service and diagram catalog shared by the site and generator.
+- [`assets/interlocks/documentation-sources.json`](assets/interlocks/documentation-sources.json) records the official source for every catalog entry and separates documented capabilities from independent reference-architecture inferences.
+- [`governance/external-links.json`](governance/external-links.json) records the latest HTTP status and verification date for every public reference discovered in source files. [`governance/telemetry-contracts.json`](governance/telemetry-contracts.json) and [`governance/roadmap-renames.json`](governance/roadmap-renames.json) enforce signal ownership, review dates, and current service names during compilation.
+- [`scripts/generate-interlocks-drawio.mjs`](scripts/generate-interlocks-drawio.mjs) rebuilds the workbook, source register, all 12 standalone editable diagrams, and the browser-safe catalog script without third-party dependencies.
+- [`assets/interlocks/{network,domain}-drilldowns.js`](assets/interlocks/) defines ten guided workflows for each of the six domains. [`scripts/generate-usecase-artifacts.mjs`](scripts/generate-usecase-artifacts.mjs) and [`scripts/generate-usecase-pdf.mjs`](scripts/generate-usecase-pdf.mjs) create matching Draw.io, Excalidraw, and vector PDF files under `assets/diagrams/usecases/`.
+
+After changing the catalog, regenerate and verify the addon:
+
+```bash
+npm run generate:interlocks:documented
+npm run generate:interlocks:pdf
+npm run generate:usecase-artifacts
+npm run generate:usecase-pdf
+npm run governance:refresh-links # networked maintenance operation
+npm run build                    # offline governance verification + tests
+```
+
+## Start with an operating goal
+
+The site opens with four operating goals, not a product list. Responsibility and industry are optional refinements that adjust the recommended levels, services, default lens, and matching community scenarios.
 
 | Persona | Default lens | Levels |
 |---|---|---|
 | Executive / service owner | Executive | L0, L1, L4 |
-| Platform engineer / cloud architect | Architect | L0–L3, L5 |
+| Platform engineer / cloud architect | Architect | L0–L3, Scale pattern |
 | SRE / operations (NOC) | Practitioner | L1–L3 |
 | DBA / database team | Practitioner | L2 |
 | Security / SOC / governance | Architect | L0, L2, L4 |
 | Developer / application team | Practitioner | L1, L3 |
 | AI / ML engineer | Architect | L4 |
-| Operator / ISV (multitenancy) | Architect | L0, L5 |
+| Operator / ISV (multitenancy) | Architect | L0, Scale pattern |
 
-Industries (aligned with [Oracle's industry naming](https://www.oracle.com/industries/) — Financial Services/Banking, Communications, Government, Healthcare, Oil and Gas, Retail, High Technology) tilt the emphasis — e.g. Banking leans on L2 database depth and L0 audit; High Technology leans on L5 multitenancy; Oil and Gas leans on hybrid/edge collection.
+Industries (aligned with [Oracle's industry naming](https://www.oracle.com/industries/) — Financial Services/Banking, Communications, Government, Healthcare, Oil and Gas, Retail, High Technology) tilt the emphasis. Banking leans on L2 database depth and L0 audit, High Technology emphasizes the operator scale pattern, and Oil and Gas emphasizes hybrid and edge collection.
 
 **Access is governed by OCI IAM.** Each persona maps to an **OCI Group** with **policies scoped to compartments** — an *admin* group manages the services, a *reader* group has read-only access — in the Landing Zone Common Identity Domain.
 
-## The L0 → L5 model
+## The L0 to L4 model
 
 | Level | Theme | Question it answers | Example services |
 |---|---|---|---|
@@ -53,16 +80,17 @@ Industries (aligned with [Oracle's industry naming](https://www.oracle.com/indus
 | **L2** | Diagnose deep | Why did it happen, and are we out of room? | Database Management, Ops Insights, Log Analytics, Management Agent, Stack Monitoring, Java Management |
 | **L3** | Correlate & automate | What's the business impact, and what can self-heal? | APM + OpenTelemetry, Connector Hub, Resource Scheduler, OS Management Hub, Fleet App Mgmt |
 | **L4** | Observe & govern AI | Is the agent correct, grounded, safe, improving? | APM GenAI, Generative AI (judge) + guardrails, Logging Analytics anomaly, Data Science eval, Cloud Guard Instance Security, Gen AI Agents |
-| **L5** | Operate multitenancy | How do operators run it across tenants and clouds? | Centralized Log Analytics aggregation, multicloud ingestion, per-tenant isolation by compartment + IAM |
+
+The **operator-scale architecture extension** answers how operators run the model across tenants and clouds. It adds centralized Log Analytics aggregation, multicloud ingestion, and per-tenant isolation without extending the core maturity ladder.
 
 > Stack Monitoring's capabilities are converging into OCI Monitoring — there is no need to replace it with separate services.
 
-## L5 — Multitenancy and observability at scale
+## Operator-scale architecture extension
 
 The multitenant approach is **not just access scoping**. The real model is **centralized aggregation**:
 
 1. **Sources** — per-tenant OCI tenancies (OKE, databases, OCI services, audit logs) **and** other clouds / on-premises: AWS (incl. EKS), Microsoft Azure (incl. Oracle Database@Azure, AKS), Google Cloud (GKE), on-prem K8s/VMs/databases, and Fusion SaaS / OIC.
-2. **Collect** — the documented OCI Logging Analytics ingestion paths: the **Management Agent**, **on-demand / REST upload**, **Object Storage buckets** (continuous collection), and **Service Connector Hub** — which also pulls **custom and cross-tenancy logs from OCI Streaming** ([ingest from Streaming via Service Connector](https://docs.oracle.com/en-us/iaas/log-analytics/doc/ingest-custom-logs-from-oci-streaming-service-using-service-connector.html), [collect from an Object Storage bucket](https://docs.oracle.com/en-us/iaas/log-analytics/doc/collect-logs-from-your-oci-object-storage-bucket.html)). For Kubernetes, **FluentD / Fluent-Bit via Helm** (the [`oracle-quickstart/oci-kubernetes-monitoring`](https://github.com/oracle-quickstart/oci-kubernetes-monitoring) solution — **OKE and AWS EKS are documented**, other clusters via the generic Helm path).
+2. **Collect** — the documented Oracle Log Analytics ingestion paths: the **Management Agent**, **on-demand / REST upload**, **Object Storage buckets** (continuous collection), and **Service Connector Hub** — which also pulls **custom and cross-tenancy logs from OCI Streaming** ([ingest from Streaming via Service Connector](https://docs.oracle.com/en-us/iaas/log-analytics/doc/ingest-custom-logs-from-oci-streaming-service-using-service-connector.html), [collect from an Object Storage bucket](https://docs.oracle.com/en-us/iaas/log-analytics/doc/collect-logs-from-your-oci-object-storage-bucket.html)). For Kubernetes, **FluentD / Fluent-Bit via Helm** (the [`oracle-quickstart/oci-kubernetes-monitoring`](https://github.com/oracle-quickstart/oci-kubernetes-monitoring) solution — **OKE and AWS EKS are documented**, other clusters via the generic Helm path).
 3. **Aggregate & analyse** — a central **OCI Log Analytics**: 250+ out-of-the-box sources, clustering, link analysis, detection rules, tiered (active + archive) storage, and GenAI-assisted analytics. The same **Service Connector → Streaming / REST API** paths can also fan out to **3rd-party SIEM & observability tools** (Splunk, Elastic, Datadog, Microsoft Sentinel) via [log shippers](https://docs.oracle.com/en/learn/ocilogs-log-shipper/index.html) or [OCI Functions](https://docs.oracle.com/en/learn/oci-logs-ms-azure-sentinel/).
 4. **Operate** — an operator cross-tenant fleet view (SLOs, capacity, chargeback) plus per-tenant views.
 
@@ -95,17 +123,9 @@ References (public): [OCI Log Analytics](https://www.oracle.com/manageability/lo
 
 This guide is meant to grow. To add a use case (e.g. "observability for an EBS estate" or "tracing a CrewAI multi-agent app"):
 
-1. Read **[docs/PROPOSE-A-SCENARIO.md](docs/PROPOSE-A-SCENARIO.md)** — the scenario template and what a good one contains.
+1. Read **[the worked reference scenario](docs/scenarios/retail-checkout-multicloud.md)** and **[docs/PROPOSE-A-SCENARIO.md](docs/PROPOSE-A-SCENARIO.md)**.
 2. Open a **[Monitoring scenario issue](../../issues/new?template=monitoring-scenario.yml)** (or copy the template into a PR).
-3. Or extend the data directly: add an entry to [`assets/resources.js`](assets/resources.js) (links/projects per service) or propose a new finder pattern in [`assets/guide.js`](assets/guide.js).
-
-## Propose a new monitoring scenario
-
-This guide is meant to grow. To add a use case (e.g. "observability for an EBS estate" or "tracing a CrewAI multi-agent app"):
-
-1. Read **[docs/PROPOSE-A-SCENARIO.md](docs/PROPOSE-A-SCENARIO.md)** — the scenario template and what a good one contains.
-2. Open a **[Monitoring scenario issue](../../issues/new?template=monitoring-scenario.yml)** (or copy the template into a PR).
-3. Or extend the data directly: add an entry to [`assets/resources.js`](assets/resources.js) (links/projects per service) or propose a new finder pattern in [`assets/guide.js`](assets/guide.js).
+3. Follow [`CONTRIBUTING.md`](CONTRIBUTING.md) for the JSON/Markdown file contract, ownership boundaries, and acceptance gates.
 
 ## Run locally
 
@@ -116,19 +136,45 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-No dependencies, no build. Fonts load from Google Fonts; all other assets are vendored.
+The source site has no runtime package dependencies and can be served without compilation. Release PDFs, deterministic diagrams, validation reports, and the packaged site are produced by the documented build pipeline. Fonts load from Google Fonts; all other runtime assets are vendored.
+
+## Quality and release pipeline
+
+Pull requests and commits to `main` run the same gates available locally:
+
+```bash
+npm run lint               # JavaScript, JSON, shell, HTML, CSS, and YAML checks
+npm run security:scan      # secrets and proprietary-identifier redaction gate
+npm run artifacts:check    # deterministic generated-vector drift check
+npm run test:ci            # complete suite, at least 40 tests, no skips
+npm run test:coverage:ci   # fail below 80% line coverage
+npm run test:smoke         # four site surfaces at desktop and mobile widths
+npm run release:build      # build the distributable site and hash manifest
+```
+
+[`governance/artifact-policy.json`](governance/artifact-policy.json) is the machine-readable distribution contract. Editable Draw.io and Excalidraw diagrams, generated catalog data, and source registers are version-controlled because reviewers need to inspect their diffs. Compiled PDFs, raster previews, archives, and `dist/` packages are release-only outputs and are rebuilt in CI. The release manifest records every packaged file's SHA-256 digest and classification.
 
 ## Repository layout
 
 ```
 index.html                     the guide (single page)
+interlocks.html                six-sheet interlock explorer and service reference
 launchpad.html                 companion operations console
 assets/
   guide.css / guide.js         page styles + behaviour (data-driven catalog)
   resources.js                 curated guides + projects per service (shared)
   launchpad-resources.js       injects "Further reading" into launchpad modules
   redwood/                     vendored Oracle Redwood tokens + brand assets
-  diagrams/                    lz-addons-architecture .svg / .drawio / .excalidraw
+  diagrams/                    architecture .svg / .drawio / .excalidraw assets
+    interlocks/                compatibility copies and manually edited sources
+    interlocks-infographic/    six 4K infographic Draw.io + six Excalidraw posters
+    interlocks-documented/     six source-linked Draw.io + six full-poster Excalidraw files
+  interlocks/                  canonical catalog, generated local data, styles, and behaviour
+scripts/
+  generate-interlocks-drawio.mjs  reproducible six-sheet Draw.io generator
+  interlocks-documented-excalidraw.mjs  full-poster documented Excalidraw renderer
+tests/
+  interlocks.test.mjs          catalog, generator, and page integration tests
 static/                        launchpad assets (css/js/icons)
 docs/
   observability-design-guide.md   full enterprise design guide (reference)
@@ -146,4 +192,4 @@ CNAME                          custom domain (obs.octodemo.cloud)
 
 ## License
 
-MIT — see [LICENSE](LICENSE) if present, or treat the content as reference material. Oracle, OCI, and Redwood are trademarks of Oracle and/or its affiliates. Service names and support status change; recheck the official OCI documentation.
+MIT — see [LICENSE](LICENSE). Oracle, OCI, and Redwood are trademarks of Oracle and/or its affiliates. Service names and support status change; recheck the official OCI documentation.
