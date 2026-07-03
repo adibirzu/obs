@@ -232,6 +232,12 @@ test('verified release is uploaded and deployed to GitHub Pages with public URL 
   assert.match(workflow, /pages: write/);
   assert.match(workflow, /id-token: write/);
   assert.match(workflow, /path: dist\/site/);
+  const pagesArtifactName = 'github-pages-${{ github.run_id }}-${{ github.run_attempt }}';
+  assert.equal(
+    workflow.split(pagesArtifactName).length - 1,
+    2,
+    'the upload and deployment steps must share a retry-safe artifact name',
+  );
   assert.match(workflow, /verify-public-deployment\.mjs/);
   assert.match(verificationLibrary, /interlocks\.html/);
   assert.match(verificationLibrary, /requiredPdfCount/);
