@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://obs.octodemo.cloud/schemas/external-links.schema.json",
+  "title": "External link verification registry",
+  "type": "object",
+  "required": ["schemaVersion", "checkedAt", "policy", "links"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "checkedAt": { "type": "string", "format": "date" },
+    "policy": {
+      "type": "object",
+      "required": ["maxAgeDays", "acceptedStatusCodes"],
+      "properties": {
+        "maxAgeDays": { "type": "integer", "minimum": 1 },
+        "acceptedStatusCodes": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 100, "maximum": 599 },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url", "statusCode", "lastChecked", "sources"],
+        "properties": {
+          "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+          "statusCode": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+          "lastChecked": { "type": "string", "format": "date" },
+          "sources": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+          "redirectedTo": { "type": "string", "format": "uri" },
+          "exemption": { "type": "string", "minLength": 12 }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": { "properties": { "statusCode": { "type": "null" } } },
+            "then": { "required": ["exemption"] }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

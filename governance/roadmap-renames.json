@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "scan": {
+    "extensions": [".html", ".md", ".js", ".mjs", ".json", ".yml", ".yaml"],
+    "excludeDirectories": [".git", ".impeccable", ".playwright-cli", "node_modules", "assets/diagrams", "governance", "tests"],
+    "excludeFiles": ["assets/interlocks/catalog-data.js"]
+  },
+  "claims": [
+    {
+      "id": "logan-published-boundary",
+      "subject": "Oracle Log Analytics signal boundary",
+      "claim": "Logan owns indexed log and event records; Prometheus exporter metrics remain in a metric backend and APM traces remain in APM, joined only through shared correlation fields.",
+      "status": "current",
+      "verifiedOn": "2026-07-03",
+      "reviewAfter": "2026-10-01",
+      "sourceUrl": "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm"
+    },
+    {
+      "id": "logging-analytics-rename",
+      "subject": "Oracle Logging Analytics rename",
+      "claim": "Project-facing service references use Oracle Log Analytics; historical URLs and repository identifiers remain unchanged.",
+      "status": "current",
+      "verifiedOn": "2026-07-03",
+      "reviewAfter": "2026-10-01",
+      "sourceUrl": "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm"
+    },
+    {
+      "id": "stack-monitoring-service-change",
+      "subject": "Stack Monitoring service naming",
+      "claim": "Project-facing references use Stack Monitoring and track Oracle service-change announcements in the source registry.",
+      "status": "current",
+      "verifiedOn": "2026-07-03",
+      "reviewAfter": "2026-10-01",
+      "sourceUrl": "https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm"
+    }
+  ],
+  "renames": [
+    {
+      "id": "monitoring-alarms",
+      "deprecated": "OCI Alarms",
+      "canonical": "Monitoring Alarms",
+      "effectiveOn": "2026-07-03",
+      "allowedPaths": []
+    },
+    {
+      "id": "oracle-log-analytics",
+      "deprecated": "OCI Logging Analytics",
+      "canonical": "Oracle Log Analytics",
+      "effectiveOn": "2026-07-03",
+      "allowedPaths": []
+    },
+    {
+      "id": "operations-insights",
+      "deprecated": "Ops Insight",
+      "canonical": "Operations Insights",
+      "effectiveOn": "2026-07-03",
+      "allowedPaths": []
+    }
+  ]
+}

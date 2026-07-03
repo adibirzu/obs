@@ -1,0 +1,1766 @@
+{
+  "schemaVersion": "1.0.0",
+  "checkedAt": "2026-07-03",
+  "policy": {
+    "maxAgeDays": 30,
+    "acceptedStatusCodes": [
+      401,
+      403,
+      405,
+      429
+    ]
+  },
+  "links": [
+    {
+      "url": "https://adibirzu.github.io/obs/",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://obs.octodemo.cloud/",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://app.diagrams.net/",
+      "sources": [
+        "interlocks.html",
+        "scripts/generate-interlocks-pdf.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/cloud-infrastructure/post/get-insight-into-api-gateway-logs-using-oci-logging-analytics",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://blogs.oracle.com/observability/api-observability-log-analytics",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/integration/oci-logging-analytics-dashboards-for-oracle-integration-oic",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/observability/",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/observability/level-up-your-skills-oci-2025-observability-professional-certification-is-here",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/observability/post/connect-apm-with-log-analytics-and-more",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://blogs.oracle.com/observability/connect-apm-with-log-analytics-and-more",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/observability/post/monitoring-oci-waf--la",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://blogs.oracle.com/observability/monitoring-oci-waf--la",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://blogs.oracle.com/observability/post/oracle-cloud-infrastructure-security-fundamentals-dashboards-using-oci-logging-analytics",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://blogs.oracle.com/observability/oracle-cloud-infrastructure-security-fundamentals-dashboards-using-oci-logging-analytics",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://convert.diagrams.net/node/export",
+      "sources": [
+        "scripts/generate-interlocks-pdf.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/application-performance-monitoring-data-sources.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/application-performance-monitoring.html",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/configure-attributes-real-user-monitoring.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/configure-browser-agent-real-user-monitoring.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/use-synthetic-monitoring.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/home.htm",
+      "sources": [
+        "assets/scenarios/retail-checkout-multicloud.json",
+        "docs/observability-design-guide.md",
+        "docs/scenarios/retail-checkout-multicloud.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/index.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/home.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/cloud-guard/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/cloud-guard/home.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/cloud-guard/using/cgis.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/cloud-guard/using/cgis.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/APIGateway/home.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Audit/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Balance/Concepts/balanceoverview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/budgetsoverview.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costanalysisoverview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costmanagementoverview.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/certificates/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/monitoring-and-observability.htm",
+      "sources": [
+        "launchpad.html",
+        "static/observability.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/oci-landing-zones-overview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/CloudAdvisor/Concepts/cloudadvisoroverview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/connector-hub/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/connector-hub/overview.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengmonitoringclusters.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Email/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Events/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/fleet-management/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/General/Concepts/announcements.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/General/Concepts/servicelimits.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/General/service-limits/default.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/General/organization/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/generative-ai-agents/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "index.html",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/GSG/Concepts/finding-resources.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/HealthChecks/Concepts/healthchecks.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/home.htm",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/domains/overview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/KeyManagement/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/audit_logs.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/custom_logs.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Logging/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "docs/observability-design-guide.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "launchpad.html",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Monitoring/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "assets/scenarios/retail-checkout-multicloud.json",
+        "docs/observability-design-guide.md",
+        "docs/scenarios/retail-checkout-multicloud.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Monitoring/Tasks/managingalarms.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/network-firewall/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/overview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/path_analyzer.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Notification/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "docs/observability-design-guide.md",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Quotas/Concepts/resourcequotas_topic-Available_Quotas_by_Service.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/resource-analytics/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/resource-scheduler/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/security-zone/using/security-zones.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/service-connector-hub/overview.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/connector-hub/overview.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/Tagging/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/Content/WAF/home.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/data-safe/doc/activity-auditing.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/data-safe/doc/registering-oracle-database.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en/cloud/paas/data-safe/books.html",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/data-safe/index.html",
+      "sources": [
+        "assets/guide.js",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/data-science/using/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/data-science/using/home.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/database-management/doc/database-management-oracle-databases.html",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "docs/observability-design-guide.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/database-management/doc/database-management.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/database-management/doc/database-management-oracle-databases.html",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/database-management/doc/enable-database-management-oracle-cloud-databases.html",
+      "sources": [
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/database-management/doc/performance-hub.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/database-management/home.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/database-management/home.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/disaster-recovery/doc/how-disaster-recovery-works.html",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/integration/index.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/application-integration/index.html",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/jms/doc/overview-java-management-service.html",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/log-analytics/doc/collect-logs-from-your-oci-object-storage-bucket.html",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/log-analytics/doc/create-parser.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/log-analytics/doc/ingest-custom-logs-from-oci-streaming-service-using-service-connector.html",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/log-analytics/doc/ingest-logs-from-other-oci-services-using-service-connector.html",
+      "sources": [
+        "README.md",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/log-analytics/doc/kubernetes-solution.html",
+      "sources": [
+        "README.md",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm",
+      "sources": [
+        "README.md",
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "assets/scenarios/retail-checkout-multicloud.json",
+        "docs/observability-design-guide.md",
+        "docs/scenarios/retail-checkout-multicloud.md",
+        "index.html",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/management-agents/doc/set-management-agents-collect-prometheus-metrics.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/management-agents/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/management-dashboard/home.htm",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/operations-insights/doc/analyzing-database-fleet-resource-usage.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/operations-insights/home.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/operations-insights/doc/capacity-planning.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/operations-insights/doc/database-capacity-planning.html",
+      "sources": [
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
+        "docs/observability-design-guide.md",
+        "index.html",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/operations-insights/home.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/osmh/doc/overview.htm",
+      "sources": [
+        "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/security-zone/home.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/security-zone/home.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/introduction.html",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/promotion-and-discovery.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm",
+      "sources": [
+        "assets/guide.js",
+        "docs/observability-design-guide.md",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en/cloud/paas/access-governance/index.html",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en/learn/oci-logs-ms-azure-sentinel/",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en/learn/ocilogs-log-shipper/index.html",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/en/learn/ofaob/index.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/iaas/application-performance-monitoring/doc/configure-open-source-tracing-systems.html",
+      "sources": [
+        "assets/guide.js",
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/configure-open-source-tracing-systems.html",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/iaas/Content/Audit/Concepts/auditoverview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/Audit/Concepts/auditoverview.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/iaas/Content/fleet-management/overview.htm",
+      "sources": [
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/fleet-management/overview.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/iaas/Content/Network/Concepts/vcn-flow-logs.htm",
+      "sources": [
+        "assets/interlocks/documentation-sources.json",
+        "scripts/generate-interlocks-drawio.mjs"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/vcn-flow-logs.htm",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://docs.oracle.com/iaas/logging-analytics/doc/architecture-logging-analytics.html",
+      "sources": [
+        "index.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://docs.oracle.com/en-us/iaas/log-analytics/doc/architecture-logging-analytics.html",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://education.oracle.com/oracle-cloud-infrastructure-2024-observability-professional/pexam_1Z0-1111-25",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://excalidraw.com/",
+      "sources": [
+        "scripts/generate-interlocks-drawio.mjs",
+        "scripts/generate-usecase-artifacts.mjs",
+        "scripts/interlocks-documented-excalidraw.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://fonts.googleapis.com/",
+      "sources": [
+        "index.html",
+        "interlocks.html",
+        "launchpad.html",
+        "scripts/validate-governance.mjs"
+      ],
+      "statusCode": null,
+      "lastChecked": "2026-07-03",
+      "exemption": "Origin-only browser preconnect; it is not a document endpoint and intentionally returns no content page."
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://fonts.gstatic.com/",
+      "sources": [
+        "index.html",
+        "interlocks.html",
+        "launchpad.html",
+        "scripts/validate-governance.mjs"
+      ],
+      "statusCode": null,
+      "lastChecked": "2026-07-03",
+      "exemption": "Origin-only browser preconnect; it is not a document endpoint and intentionally returns no content page."
+    },
+    {
+      "url": "https://github.com/adibirzu/azurelogs2oci",
+      "sources": [
+        "README.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/gcplogs2oci",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/logan-security-dashboard",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/LoggingAnalyticsFiles",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/mcp_oci_opsi",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/mcp-oci-database-observatory",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/mcp-oci-logan-server",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/multi-mcp-gateway",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/Multicloud",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/obs.git",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://github.com/adibirzu/obs",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/ObservabilityKB",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-apm-monitoring",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-container-monitoring",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-dbman-opsi",
+      "sources": [
+        "assets/resources.js",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-log-analytics-detections",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-mcp-gateway",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-metrics-report",
+      "sources": [
+        "assets/resources.js",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-monitoring-view",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-scheduled-report-automation",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-skills",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-splunk",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-usage-to-adw-function",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci-zpr-visibility",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/oci2azurelogs",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/OCILoggingAnalytics",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/adibirzu/octo-observability-demo",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/obs_v2/addons/oci-db-observability",
+      "sources": [
+        "README.md",
+        "assets/resources.js",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management",
+      "sources": [
+        "README.md",
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/application-performance-monitoring/How%20to%20Use%20APM",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/finops",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/fusion-hcm-to-la",
+      "sources": [
+        "assets/resources.js",
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/oci-monitoring/custom-metrics/custom-metric-FN-services-limit-monitoring",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/oci-monitoring/custom-metrics/custom-metric-python-SDK-services-limit-monitoring",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-quickstart/oci-kubernetes-monitoring",
+      "sources": [
+        "README.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle-quickstart/oci-o11y-solutions/tree/main/knowledge-content/MAP/security-fundamentals-dashboards",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://github.com/oracle/oracle-db-tools",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://json-schema.org/draft/2020-12/schema",
+      "sources": [
+        "scripts/validate-governance.mjs"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://karthicin.medium.com/customised-alarm-notification-in-oci-e5b367ca20bc",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://karthicin.medium.com/how-to-use-oci-apm-in-kubernetes-environment-for-java-application-56de2c770a69",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://karthicin.medium.com/storing-apm-synthetic-monitor-error-logs-in-oci-logging-c2296ce6072f",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://learnoci.cloud/how-to-enable-operations-insight-for-oracle-dbcs-51dac10da833",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://learnoci.cloud/how-to-ingest-data-safe-audit-events-in-oci-logging-efc1d65eefad",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://learnoci.cloud/oci-database-management-new-features-announced-f9991cba2cc2",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://learnoci.cloud/oke-log-collection-using-oci-logging-3f1e732928b3",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://learnoci.cloud/stream-oci-logs-to-splunk-v9-1-c71c93e470fe",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://learnoci.cloud/use-auditd-logs-in-oci-with-logging-service-5caa13719315",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/",
+      "sources": [
+        "README.md",
+        "launchpad.html",
+        "static/observability.js"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/home",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=database%20management",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=E-Business%20Suite",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=log%20analytics",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=observability",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=operations%20insights",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=ops%20insights",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=security",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=log%20analytics",
+      "sources": [
+        "index.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&search=log%20analytics",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=598",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=598",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=928",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=928",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=932",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=932",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://medium.com/@erikasciunzi/enable-observability-for-oci-native-database-deploy-235484953e46",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 403,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://medium.com/@rishabhghosh24/enable-oci-ops-insight-on-oracle-autonomous-database-serverless-61efab78f927",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 403,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://modelcontextprotocol.io/introduction",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://modelcontextprotocol.io/docs/getting-started/intro",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://obs.octodemo.cloud/",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://opentelemetry.io/",
+      "sources": [
+        "docs/observability-design-guide.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://opentelemetry.io/docs/specs/semconv/",
+      "sources": [
+        "assets/scenarios/retail-checkout-multicloud.json",
+        "docs/scenarios/retail-checkout-multicloud.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/oracle-quickstart/oci-kubernetes-monitoring/main/logan/images/cluster-view.png",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/oracle-quickstart/oci-kubernetes-monitoring/main/logan/images/kubernetes-cluster-summary-dashboard.png",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/oracle-quickstart/oci-kubernetes-monitoring/main/logan/images/kubernetes-nodes-dashboard.png",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/oracle-quickstart/oci-kubernetes-monitoring/main/logan/images/kubernetes-workloads-dashboard.png",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.ateam-oracle.com/",
+      "sources": [
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.ateam-oracle.com/configure-fusion-applications-audit-and-security-logs-ingestion-in-oci-log-analytics-part-1",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.ateam-oracle.com/configure-fusion-applications-audit-and-security-logs-ingestion-in-oci-log-analytics-part-2",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.ateam-oracle.com/leveraging-logging-analytics-for-oracle-integration-cloud-logging-and-monitoring",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/cloud/costestimator.html",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/cloud/free/",
+      "sources": [
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/industries/",
+      "sources": [
+        "README.md"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/manageability/",
+      "sources": [
+        "assets/resources.js",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/manageability/log-analytics/",
+      "sources": [
+        "README.md",
+        "index.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/security/cloud-security/access-governance/",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/security/cloud-security/cloud-guard/",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.oracle.com/security/database-security/audit-vault-database-firewall/",
+      "sources": [
+        "assets/guide.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.youtube.com/playlist?list=PLKCk3OyNwIzuPiRO8q1m3oPZ8kGJ0xOqh",
+      "sources": [
+        "launchpad.html"
+      ],
+      "statusCode": 200,
+      "redirectedTo": "https://www.youtube.com/playlist?list=PLKCk3OyNwIzuPiRO8q1m3oPZ8kGJ0xOqh&cbrd=1&ucbcb=1",
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1bJb92put4k",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3k9jrkOlBkc",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Y45kPRn_c7s",
+      "sources": [
+        "assets/resources.js"
+      ],
+      "statusCode": 200,
+      "lastChecked": "2026-07-03"
+    }
+  ]
+}

@@ -4,6 +4,8 @@ The Observability Atlas grows by adding **scenarios** — concrete, reusable ans
 
 Anyone can propose one. This page explains what a good scenario contains and how to submit it.
 
+Use the complete [retail checkout reference scenario](scenarios/retail-checkout-multicloud.md) as the worked example. Machine-readable submissions follow [`governance/schemas/community-scenario.schema.json`](../governance/schemas/community-scenario.schema.json), and [`CONTRIBUTING.md`](../CONTRIBUTING.md) defines ownership and the merge-blocking acceptance checklist.
+
 ## What a scenario is
 
 A scenario is **service-oriented**, not tool-oriented. It starts from a business service or workload and works down to telemetry — the same discipline the [design guide](observability-design-guide.md) describes. A strong scenario:
@@ -35,6 +37,20 @@ Copy this into an issue or PR and fill it in. Keep it concrete; cite real OCI se
 **Key signals**
 - <metric / log / trace / database signal> — <why it matters> — <source service>
 
+**System prerequisites**
+- <required IAM access, collection state, parser/source, agent/instrumentation, scope, and clock assumptions>
+
+**Distributed correlation keys**
+- <trace_id, service.name, resource/entity id, tenant key, UTC event time, and domain-specific request/network/change keys>
+
+**Telemetry boundaries**
+- Logan: <log and event fields only>
+- Prometheus: <metric and exemplar fields only; metric backend remains authoritative>
+- APM: <trace/span, RUM, and synthetic fields only>
+
+**Empty-result behavior**
+- <state explicitly that zero rows are inconclusive; verify permissions, region, tenancy/compartment scope, collection health, field mappings, and time window before concluding absence>
+
 **Alarms (actionable only)**
 - <condition> → severity <Sev 1–4> → topic <name> → runbook <link>
 
@@ -53,7 +69,14 @@ Copy this into an issue or PR and fill it in. Keep it concrete; cite real OCI se
 
 **Option A — open an issue (easiest).** Use the [Monitoring scenario issue form](../../issues/new?template=monitoring-scenario.yml). It captures the same fields and is a good place to discuss before any code.
 
-**Option B — open a pull request.** Two low-risk places to contribute data:
+**Option B — open a pull request.** A complete scenario contribution includes:
+
+- `assets/scenarios/<scenario-id>.json` for runtime discovery and Interlock mappings.
+- `docs/scenarios/<scenario-id>.md` for the end-to-end operating guide.
+- An entry in `assets/scenarios/index.json`.
+- Tests proving query, operating-profile, Finder, and Interlock behavior.
+
+Two additional low-risk places to contribute data are:
 
 - **Add references for a service** — append to the matching group in [`assets/resources.js`](../assets/resources.js):
   ```js
@@ -73,5 +96,6 @@ Before a scenario is merged, it should satisfy:
 - [ ] Every service framed as an add-on that enables after the Landing Zone is live.
 - [ ] Alarms are actionable and each has an owner + runbook.
 - [ ] Dashboards have an audience and an owner.
+- [ ] Prerequisites, distributed correlation keys, telemetry boundaries, and the empty-result caveat are explicit.
 - [ ] No secrets, OCIDs, public IPs, tenancy namespaces, or customer data in any example.
-- [ ] Links resolve and are public.
+- [ ] `npm run governance:refresh-links` records current public-link status and `npm run build` passes offline governance checks.
