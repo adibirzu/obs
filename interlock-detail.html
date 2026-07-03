@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A focused OCI Observability interlock workflow detail." />
+  <meta name="theme-color" content="#FBF9F8" />
+  <title>Interlock detail — OCTO Observability Atlas</title>
+  <link rel="icon" type="image/png" href="assets/octo/octo-logo.png?v=4" />
+  <link rel="stylesheet" href="assets/redwood/styles.css" />
+  <link rel="stylesheet" href="assets/interlocks/interlocks.css" />
+</head>
+<body class="interlock-detail-page">
+  <header class="interlock-nav">
+    <div class="interlock-wrap interlock-nav__row">
+      <a class="interlock-brand" href="interlocks.html" aria-label="Back to OCI Observability Service Interlocks">
+        <img src="assets/octo/octo-logo.png?v=4" alt="" width="38" height="38" />
+        <span>Observability Atlas</span>
+      </a>
+      <nav aria-label="Detail page"><a href="interlocks.html">All interlocks</a><a class="interlock-button interlock-button--quiet" href="index.html">Back to atlas</a></nav>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="interlock-section interlock-section--detail" aria-labelledby="detail-title">
+      <div class="interlock-wrap">
+        <a class="detail-back" id="detail-back" href="interlocks.html">← Back to interlocks</a>
+        <article class="usecase-detail" id="usecase-detail" aria-live="polite"></article>
+      </div>
+    </section>
+  </main>
+  <div class="visually-hidden" id="page-status" role="status" aria-live="polite"></div>
+  <script defer src="assets/interlocks/catalog-data.js"></script>
+  <script defer src="assets/interlocks/workflow-governance.js"></script>
+  <script defer src="assets/interlocks/network-drilldowns.js"></script>
+  <script defer src="assets/interlocks/domain-drilldowns.js"></script>
+  <script defer src="assets/interlocks/usecase-detail.js"></script>
+</body>
+</html>

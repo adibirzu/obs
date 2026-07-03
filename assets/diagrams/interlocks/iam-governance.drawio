@@ -1,0 +1,1057 @@
+<mxfile host="Electron" agent="OCI Observability Atlas generator" compressed="false">
+  <diagram id="iam-governance" name="3 - IAM Governance">
+    <mxGraphModel dx="2264" dy="1545" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="3394" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iam-governance-e-218" edge="1" parent="1" source="iam-governance-v-216" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-109" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-173" edge="1" parent="1" source="iam-governance-v-171" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-111" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-167" edge="1" parent="1" source="iam-governance-v-165" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-109" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-212" edge="1" parent="1" source="iam-governance-v-210" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-107" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Georgia;fontStyle=1;fontSize=46;fontColor=#102A43;whiteSpace=wrap;" value="OCI Observability × IAM and Governance Interlock" vertex="1">
+          <mxGeometry height="76" width="2300" x="50" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-2" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=21;fontColor=#145CA8;whiteSpace=wrap;" value="Identity telemetry, access governance, audit visibility, tenancy control, compliance evidence, and policy-driven operations across OCI Cloud Foundation" vertex="1">
+          <mxGeometry height="48" width="2160" x="120" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-3" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=2;" value="Identity and access" vertex="1">
+          <mxGeometry height="62" width="375" x="50" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-4" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#145CA8;strokeWidth=2;" value="Observability services" vertex="1">
+          <mxGeometry height="62" width="375" x="435" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-5" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;" value="Governance outcomes" vertex="1">
+          <mxGeometry height="62" width="375" x="820" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-6" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#667085;strokeWidth=2;" value="Audit and metadata" vertex="1">
+          <mxGeometry height="62" width="375" x="1205" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-7" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#D13C36;strokeWidth=2;" value="Risk and privilege" vertex="1">
+          <mxGeometry height="62" width="375" x="1590" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-8" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#D6A400;strokeWidth=2;" value="Cost and quota" vertex="1">
+          <mxGeometry height="62" width="375" x="1975" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-9" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=18;fontFamily=Arial;fontSize=16;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1.5;" value="PURPOSE  ·  Show how OCI Observability services interlock with IAM and governance to monitor access, capture audit trails, detect policy changes, track tenancy structure, govern compartments, alert on risk, support compliance evidence, and improve cloud operating-model maturity." vertex="1">
+          <mxGeometry height="104" width="2300" x="50" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-10" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#6A3D9A;strokeColor=#6A3D9A;" value="OCI IAM &amp; GOVERNANCE FOUNDATION" vertex="1">
+          <mxGeometry height="64" width="650" x="50" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-11" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#145CA8;strokeColor=#145CA8;" value="OCI OBSERVABILITY &amp; MANAGEMENT CONTROL PLANE" vertex="1">
+          <mxGeometry height="64" width="640" x="880" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-12" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#256D3F;strokeColor=#256D3F;" value="OPERATIONS, GOVERNANCE &amp; ENGINEERING OUTCOMES" vertex="1">
+          <mxGeometry height="64" width="650" x="1700" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-13" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-14" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="1. IDENTITY AND ACCESS CONTROL" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-15" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• OCI IAM" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-16" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Identity Domains" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-17" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Users" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="556.952380952381" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-18" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Groups" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="556.952380952381" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-19" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Dynamic Groups" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="585.9047619047619" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-20" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Policies" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="585.9047619047619" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-21" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Compartments" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="614.8571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-22" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Tenancy Root" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="614.8571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-23" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Authentication" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="643.8095238095239" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-24" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Authorization" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="643.8095238095239" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-25" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• MFA" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="672.7619047619048" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-26" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• API Keys" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="672.7619047619048" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-27" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="721.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-28" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="2. FEDERATION AND HYBRID IDENTITY" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="729.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-29" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• SAML Federation" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="769.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-30" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• OpenID Connect" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="769.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-31" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• External Identity Provider" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="804.4571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-32" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Enterprise Directory" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="804.4571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-33" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Hybrid IAM" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="839.2" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-34" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Multicloud IAM" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="839.2" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-35" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Oracle Apps IAM" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="873.9428571428572" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-36" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• OCI IAM PaaS" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="873.9428571428572" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-37" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• OCI IAM Fusion" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="908.6857142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-38" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="963.4285714285714" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-39" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="3. ACCESS GOVERNANCE" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="971.4285714285714" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-40" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Access Governance" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="1011.4285714285714" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-41" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Access Reviews" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="1011.4285714285714" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-42" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Entitlement Reviews" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="1046.1714285714286" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-43" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Segregation of Duties" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="1046.1714285714286" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-44" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Privileged Access Review" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="1080.9142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-45" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Orphaned Accounts" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="1080.9142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-46" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Access Certification" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="1115.6571428571428" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-47" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Identity Lifecycle" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="1115.6571428571428" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-48" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Joiner / Mover / Leaver" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="64" y="1150.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-49" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Role Mining" vertex="1">
+          <mxGeometry height="28.742857142857144" width="308" x="378" y="1150.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-50" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="1205.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-51" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="4. TENANCY AND ORGANIZATION" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="1213.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-52" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Tenancy" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1253.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-53" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Compartments" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1253.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-54" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Compartment Hierarchy" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1282.095238095238" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-55" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Organization Management" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1282.095238095238" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-56" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Parent and Child Tenancies" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1311.047619047619" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-57" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Subscription Mapping" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1311.047619047619" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-58" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Tag Namespaces" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1340" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-59" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Defined Tags" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1340" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-60" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Freeform Tags" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1368.952380952381" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-61" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Cost Tracking Tags" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1368.952380952381" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-62" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Resource Groups" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1397.904761904762" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-63" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Operating Model" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1397.904761904762" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-64" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="1446.857142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-65" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="5. AUDIT AND COMPLIANCE" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="1454.857142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-66" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• OCI Audit" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1494.857142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-67" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Audit Logs" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1494.857142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-68" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Policy Change History" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1523.8095238095239" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-69" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Identity Activity Records" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1523.8095238095239" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-70" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Resource Lifecycle Events" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1552.7619047619048" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-71" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Governance Evidence" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1552.7619047619048" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-72" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Compliance Evidence" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1581.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-73" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• GDPR" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1581.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-74" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• DORA" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1610.6666666666667" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-75" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• EU AI Act" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1610.6666666666667" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-76" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• NIS2" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1639.6190476190477" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-77" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• SAMA" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1639.6190476190477" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-78" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="1688.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-79" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="6. COST, QUOTA AND USAGE GOVERNANCE" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="1696.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-80" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Cost Analysis" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1736.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-81" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Budgets" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1736.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-82" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Service Limits" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1765.5238095238096" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-83" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Service Quotas" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1765.5238095238096" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-84" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Usage Reports" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1794.4761904761906" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-85" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Cost Tracking Tags" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1794.4761904761906" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-86" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Compartment Allocation" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1823.4285714285716" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-87" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Forecasting" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1823.4285714285716" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-88" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Spend Anomaly Context" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1852.3809523809525" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-89" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Resource Utilization" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1852.3809523809525" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-90" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Cloud Advisor" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1881.3333333333335" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-91" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFCF5;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="229.71428571428572" width="650" x="50" y="1930.2857142857142" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-92" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="7. GOVERNANCE GUARDRAILS AND LANDING-ZONE CONTROLS" vertex="1">
+          <mxGeometry height="34" width="622" x="64" y="1938.2857142857142" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-93" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Landing Zone Policies" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="1978.2857142857142" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-94" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Baseline IAM Policies" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="1978.2857142857142" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-95" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Baseline Compartments" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="2007.2380952380952" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-96" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Baseline Tags" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="2007.2380952380952" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-97" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Required Logging" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="2036.1904761904761" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-98" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Required Alarms" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="2036.1904761904761" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-99" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Baseline Budgets" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="2065.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-100" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Quota Controls" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="2065.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-101" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Security Baselines" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="2094.095238095238" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-102" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Landing Zone Drift" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="2094.095238095238" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-103" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Operational Readiness" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="64" y="2123.047619047619" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-104" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="• Policy Validation" vertex="1">
+          <mxGeometry height="22.952380952380953" width="308" x="378" y="2123.047619047619" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-105" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#EEF6FF;strokeColor=#8CB7E8;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="552" width="640" x="880" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-106" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#145CA8;whiteSpace=wrap;" value="A. CORE OBSERVABILITY" vertex="1">
+          <mxGeometry height="34" width="612" x="894" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-107" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Monitoring&amp;#xa;Collects service and custom metrics, evaluates MQL queries, and provides the metric foundation for health and capacity views." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-108" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Logging&amp;#xa;Centralizes service logs, custom application logs, and audit records in searchable log groups with controlled retention." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="612.1666666666666" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-109" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Events&amp;#xa;Detects resource lifecycle and state changes and routes matching events to notification or automation targets." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="696.3333333333334" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-110" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Alarms&amp;#xa;Evaluates metric streams against MQL thresholds and emits stateful, severity-aware operational alarm messages." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="780.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-111" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Notifications&amp;#xa;Publishes messages through topics and subscriptions to people, HTTPS endpoints, functions, and supported delivery channels." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="864.6666666666667" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-112" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Announcements&amp;#xa;Provides tenancy-scoped information about service events, planned maintenance, advisories, and operational notices." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="948.8333333333334" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-113" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#EEF6FF;strokeColor=#8CB7E8;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="552" width="640" x="880" y="1044" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-114" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#145CA8;whiteSpace=wrap;" value="B. ADVANCED ANALYTICS" vertex="1">
+          <mxGeometry height="34" width="612" x="894" y="1052" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-115" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Logging Analytics&amp;#xa;Indexes and enriches logs for interactive search, clustering, link analysis, anomaly detection, and root-cause investigation." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="1092" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-116" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Application Performance Monitoring&amp;#xa;Correlates distributed traces, application topology, synthetic monitoring, and real-user experience for service transactions." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="1176.1666666666667" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-117" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Stack Monitoring&amp;#xa;Discovers and monitors application-stack resources, their health, performance, and topology relationships across infrastructure layers." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="1260.3333333333333" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-118" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Ops Insights&amp;#xa;Analyzes long-term database and host utilization, SQL behavior, capacity trends, and enterprise-wide performance history." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="1344.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-119" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="Resource Analytics&amp;#xa;Provides near-real-time inventory, relationship, and configuration metadata through SQL, property graphs, and analytics dashboards." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="1428.6666666666667" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-120" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="OCI Database Management&amp;#xa;Provides fleet health, performance diagnostics, SQL monitoring, configuration visibility, and management for Oracle databases." vertex="1">
+          <mxGeometry height="77.16666666666667" width="612" x="894" y="1512.8333333333335" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-121" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#EEF6FF;strokeColor=#8CB7E8;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="552" width="640" x="880" y="1608" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-122" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#145CA8;whiteSpace=wrap;" value="C. GOVERNANCE AND OPTIMIZATION" vertex="1">
+          <mxGeometry height="34" width="612" x="894" y="1616" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-123" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="Cloud Advisor&amp;#xa;Produces prioritized recommendations for cost, security, availability, performance, and operational improvement across OCI resources." vertex="1">
+          <mxGeometry height="84" width="612" x="894" y="1656" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-124" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="Cost Analysis&amp;#xa;Analyzes OCI spending by service, compartment, tag, subscription, and time period for allocation and optimization decisions." vertex="1">
+          <mxGeometry height="84" width="612" x="894" y="1747" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-125" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="Limits, Quotas, and Budgets&amp;#xa;Tracks service limits and consumption controls, compartment quotas, budget thresholds, and forecasted spend pressure." vertex="1">
+          <mxGeometry height="84" width="612" x="894" y="1838" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-126" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="Tenancy Explorer&amp;#xa;Provides inventory-oriented discovery of resources across compartments and tenancies to support visibility and governance reviews." vertex="1">
+          <mxGeometry height="84" width="612" x="894" y="1929" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-127" parent="1" style="rounded=1;arcSize=7;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=12;fontFamily=Arial;fontStyle=1;fontSize=15;fontColor=#102A43;fillColor=#FFFFFF;strokeColor=#8CB7E8;strokeWidth=1.4;" value="Organization Management&amp;#xa;Governs parent and child tenancies, subscription mapping, organization-wide visibility, and supported cross-tenancy administration models." vertex="1">
+          <mxGeometry height="84" width="612" x="894" y="2020" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-128" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F0F8F2;strokeColor=#90C49F;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="326.4" width="650" x="1700" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-129" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#256D3F;whiteSpace=wrap;" value="1. IDENTITY AND ACCESS VISIBILITY" vertex="1">
+          <mxGeometry height="34" width="622" x="1714" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-130" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• User and group activity" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-131" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Failed and federated login monitoring" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="582" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-132" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• API credential usage" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="636" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-133" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Access governance status" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-134" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F0F8F2;strokeColor=#90C49F;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="326.4" width="650" x="1700" y="818.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-135" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#256D3F;whiteSpace=wrap;" value="2. POLICY AND GOVERNANCE DRIFT" vertex="1">
+          <mxGeometry height="34" width="622" x="1714" y="826.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-136" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Policy drift detection" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="866.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-137" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Missing governance baselines" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="920.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-138" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Unauthorized resource changes" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="974.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-139" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Landing-zone baseline drift" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1028.4" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-140" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F0F8F2;strokeColor=#90C49F;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="326.4" width="650" x="1700" y="1156.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-141" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#256D3F;whiteSpace=wrap;" value="3. AUDIT AND COMPLIANCE EVIDENCE" vertex="1">
+          <mxGeometry height="34" width="622" x="1714" y="1164.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-142" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Who changed what and when" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1204.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-143" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Compartment and tenancy history" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1258.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-144" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Regulatory reporting support" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1312.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-145" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Internal audit evidence" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1366.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-146" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F0F8F2;strokeColor=#90C49F;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="326.4" width="650" x="1700" y="1495.1999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-147" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#256D3F;whiteSpace=wrap;" value="4. GOVERNANCE AUTOMATION" vertex="1">
+          <mxGeometry height="34" width="622" x="1714" y="1503.1999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-148" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Event-driven workflows" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1543.1999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-149" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Owner notification and tickets" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1597.1999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-150" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Policy validation runbooks" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1651.1999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-151" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Evidence capture after remediation" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1705.1999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-152" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F0F8F2;strokeColor=#90C49F;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="326.4" width="650" x="1700" y="1833.6" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-153" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#256D3F;whiteSpace=wrap;" value="5. EXECUTIVE OPERATING MODEL" vertex="1">
+          <mxGeometry height="34" width="622" x="1714" y="1841.6" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-154" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Tenancy governance dashboard" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1881.6" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-155" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Organization-wide visibility" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1935.6" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-156" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Resource ownership reporting" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="1989.6" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-157" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#90C49F;strokeWidth=1;" value="• Cloud foundation maturity reporting" vertex="1">
+          <mxGeometry height="48" width="622" x="1714" y="2043.6" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-158" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#6A3D9A;strokeColor=#6A3D9A;" value="TELEMETRY &amp; SIGNAL FLOW" vertex="1">
+          <mxGeometry height="62" width="156" x="712" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-159" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="sign-ins" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="533.8571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-160" edge="1" parent="1" source="iam-governance-v-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-159" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-161" edge="1" parent="1" source="iam-governance-v-159" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-107" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-162" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="policy evaluation" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="577.8571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-163" edge="1" parent="1" source="iam-governance-v-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-162" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-164" edge="1" parent="1" source="iam-governance-v-162" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-108" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-165" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="credential usage" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="621.8571428571429" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-166" edge="1" parent="1" source="iam-governance-v-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-165" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-168" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="federated logins" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="775.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-169" edge="1" parent="1" source="iam-governance-v-27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-168" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-170" edge="1" parent="1" source="iam-governance-v-168" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-110" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-171" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="assertions" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="819.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-172" edge="1" parent="1" source="iam-governance-v-27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-171" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-174" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="provider changes" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="863.5714285714287" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-175" edge="1" parent="1" source="iam-governance-v-27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-174" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-176" edge="1" parent="1" source="iam-governance-v-174" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-112" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-177" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="review status" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1017.2857142857143" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-178" edge="1" parent="1" source="iam-governance-v-38" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-177" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-179" edge="1" parent="1" source="iam-governance-v-177" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-115" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-180" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="excess privilege" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1061.2857142857142" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-181" edge="1" parent="1" source="iam-governance-v-38" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-180" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-182" edge="1" parent="1" source="iam-governance-v-180" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-116" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-183" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="certification evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1105.2857142857142" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-184" edge="1" parent="1" source="iam-governance-v-38" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-183" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-185" edge="1" parent="1" source="iam-governance-v-183" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-117" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-186" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="structure changes" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-187" edge="1" parent="1" source="iam-governance-v-50" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-186" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-188" edge="1" parent="1" source="iam-governance-v-186" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-118" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-189" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="tag compliance" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1303" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-190" edge="1" parent="1" source="iam-governance-v-50" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-189" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-191" edge="1" parent="1" source="iam-governance-v-189" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-119" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-192" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="ownership state" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1347" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-193" edge="1" parent="1" source="iam-governance-v-50" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-192" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-194" edge="1" parent="1" source="iam-governance-v-192" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-120" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-195" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="API calls" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1500.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-196" edge="1" parent="1" source="iam-governance-v-64" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-195" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-197" edge="1" parent="1" source="iam-governance-v-195" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-123" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-198" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="change history" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1544.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-199" edge="1" parent="1" source="iam-governance-v-64" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-198" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-200" edge="1" parent="1" source="iam-governance-v-198" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-124" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-201" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="control evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1588.7142857142858" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-202" edge="1" parent="1" source="iam-governance-v-64" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-201" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-203" edge="1" parent="1" source="iam-governance-v-201" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-125" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-204" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="budget thresholds" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1742.4285714285716" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-205" edge="1" parent="1" source="iam-governance-v-78" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-204" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-206" edge="1" parent="1" source="iam-governance-v-204" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-126" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-207" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="quota pressure" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1786.4285714285716" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-208" edge="1" parent="1" source="iam-governance-v-78" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-207" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-209" edge="1" parent="1" source="iam-governance-v-207" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-127" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-210" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="cost anomalies" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1830.4285714285716" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-211" edge="1" parent="1" source="iam-governance-v-78" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-210" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-213" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="baseline drift" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="1984.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-214" edge="1" parent="1" source="iam-governance-v-91" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-213" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-215" edge="1" parent="1" source="iam-governance-v-213" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-108" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-216" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="required controls" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="2028.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-217" edge="1" parent="1" source="iam-governance-v-91" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-216" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-219" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="readiness checks" vertex="1">
+          <mxGeometry height="34" width="144" x="718" y="2072.142857142857" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-220" edge="1" parent="1" source="iam-governance-v-91" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-219" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-221" edge="1" parent="1" source="iam-governance-v-219" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6A3D9A;fontColor=#6A3D9A;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-110" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-222" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#256D3F;strokeColor=#256D3F;" value="INSIGHTS &amp; ACTIONS FLOW" vertex="1">
+          <mxGeometry height="62" width="156" x="1532" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-223" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="dashboard" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="582.2" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-224" edge="1" parent="1" source="iam-governance-v-107" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-223" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-225" edge="1" parent="1" source="iam-governance-v-223" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-128" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-226" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="alarm" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="626.2" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-227" edge="1" parent="1" source="iam-governance-v-108" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-226" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-228" edge="1" parent="1" source="iam-governance-v-226" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-128" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-229" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="670.2" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-230" edge="1" parent="1" source="iam-governance-v-109" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-229" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-231" edge="1" parent="1" source="iam-governance-v-229" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-128" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-232" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="dashboard" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="920.5999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-233" edge="1" parent="1" source="iam-governance-v-110" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-232" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-234" edge="1" parent="1" source="iam-governance-v-232" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-134" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-235" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="alarm" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="964.5999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-236" edge="1" parent="1" source="iam-governance-v-111" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-235" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-237" edge="1" parent="1" source="iam-governance-v-235" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-134" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-238" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1008.5999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-239" edge="1" parent="1" source="iam-governance-v-112" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-238" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-240" edge="1" parent="1" source="iam-governance-v-238" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-134" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-241" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="dashboard" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1259" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-242" edge="1" parent="1" source="iam-governance-v-115" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-241" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-243" edge="1" parent="1" source="iam-governance-v-241" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-140" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-244" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="alarm" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1303" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-245" edge="1" parent="1" source="iam-governance-v-116" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-244" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-246" edge="1" parent="1" source="iam-governance-v-244" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-140" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-247" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1347" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-248" edge="1" parent="1" source="iam-governance-v-117" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-247" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-249" edge="1" parent="1" source="iam-governance-v-247" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-140" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-250" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="dashboard" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1597.3999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-251" edge="1" parent="1" source="iam-governance-v-118" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-250" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-252" edge="1" parent="1" source="iam-governance-v-250" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-146" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-253" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="alarm" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1641.3999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-254" edge="1" parent="1" source="iam-governance-v-119" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-253" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-255" edge="1" parent="1" source="iam-governance-v-253" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-146" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-256" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1685.3999999999999" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-257" edge="1" parent="1" source="iam-governance-v-120" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-256" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-258" edge="1" parent="1" source="iam-governance-v-256" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-146" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-259" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="dashboard" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1935.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-260" edge="1" parent="1" source="iam-governance-v-123" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-259" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-261" edge="1" parent="1" source="iam-governance-v-259" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-152" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-262" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="alarm" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="1979.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-263" edge="1" parent="1" source="iam-governance-v-124" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-262" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-264" edge="1" parent="1" source="iam-governance-v-262" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-152" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-265" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#256D3F;fillColor=#FFFFFF;strokeColor=#256D3F;strokeWidth=1;" value="evidence" vertex="1">
+          <mxGeometry height="34" width="144" x="1538" y="2023.8" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-266" edge="1" parent="1" source="iam-governance-v-125" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-265" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-e-267" edge="1" parent="1" source="iam-governance-v-265" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#256D3F;fontColor=#256D3F;fontSize=11;labelBackgroundColor=#FFFFFF;" target="iam-governance-v-152" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-268" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacing=18;fontFamily=Arial;fontSize=16;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1.5;" value="CROSS-DOMAIN CORRELATION  ·  identity  ·  network  ·  security  ·  workload  ·  topology  ·  ownership  ·  cost  ·  lifecycle" vertex="1">
+          <mxGeometry height="64" width="2300" x="50" y="2180" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-269" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#6A3D9A;strokeColor=#6A3D9A;" value="INTERLOCK EXAMPLES" vertex="1">
+          <mxGeometry height="52" width="2300" x="50" y="2270" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-270" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="286" width="448.8" x="50" y="2336" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-271" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="1. IAM POLICY CHANGE" vertex="1">
+          <mxGeometry height="48" width="420.8" x="64" y="2348" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-272" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Source signal" vertex="1">
+          <mxGeometry height="31" width="412.8" x="68" y="2406" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-273" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="OCI observability" vertex="1">
+          <mxGeometry height="31" width="412.8" x="68" y="2445" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-274" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#F7F2FC;strokeColor=#6A3D9A;strokeWidth=1;" value="Alarm / insight" vertex="1">
+          <mxGeometry height="31" width="412.8" x="68" y="2484" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-275" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Operational action" vertex="1">
+          <mxGeometry height="31" width="412.8" x="68" y="2523" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-276" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Evidence / outcome" vertex="1">
+          <mxGeometry height="31" width="412.8" x="68" y="2562" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-277" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="286" width="448.8" x="512.8" y="2336" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-278" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="2. ACCESS REVIEW" vertex="1">
+          <mxGeometry height="48" width="420.8" x="526.8" y="2348" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-279" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Source signal" vertex="1">
+          <mxGeometry height="31" width="412.8" x="530.8" y="2406" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-280" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="OCI observability" vertex="1">
+          <mxGeometry height="31" width="412.8" x="530.8" y="2445" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-281" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#F7F2FC;strokeColor=#6A3D9A;strokeWidth=1;" value="Alarm / insight" vertex="1">
+          <mxGeometry height="31" width="412.8" x="530.8" y="2484" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-282" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Operational action" vertex="1">
+          <mxGeometry height="31" width="412.8" x="530.8" y="2523" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-283" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Evidence / outcome" vertex="1">
+          <mxGeometry height="31" width="412.8" x="530.8" y="2562" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-284" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="286" width="448.8" x="975.6" y="2336" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-285" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="3. COMPARTMENT AND TAG DRIFT" vertex="1">
+          <mxGeometry height="48" width="420.8" x="989.6" y="2348" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-286" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Source signal" vertex="1">
+          <mxGeometry height="31" width="412.8" x="993.6" y="2406" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-287" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="OCI observability" vertex="1">
+          <mxGeometry height="31" width="412.8" x="993.6" y="2445" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-288" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#F7F2FC;strokeColor=#6A3D9A;strokeWidth=1;" value="Alarm / insight" vertex="1">
+          <mxGeometry height="31" width="412.8" x="993.6" y="2484" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-289" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Operational action" vertex="1">
+          <mxGeometry height="31" width="412.8" x="993.6" y="2523" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-290" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Evidence / outcome" vertex="1">
+          <mxGeometry height="31" width="412.8" x="993.6" y="2562" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-291" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="286" width="448.8" x="1438.4" y="2336" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-292" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="4. BUDGET AND QUOTA" vertex="1">
+          <mxGeometry height="48" width="420.8" x="1452.4" y="2348" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-293" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Source signal" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1456.4" y="2406" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-294" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="OCI observability" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1456.4" y="2445" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-295" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#F7F2FC;strokeColor=#6A3D9A;strokeWidth=1;" value="Alarm / insight" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1456.4" y="2484" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-296" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Operational action" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1456.4" y="2523" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-297" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Evidence / outcome" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1456.4" y="2562" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-298" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="286" width="448.8" x="1901.2" y="2336" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-299" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="5. ORGANIZATION GOVERNANCE" vertex="1">
+          <mxGeometry height="48" width="420.8" x="1915.2" y="2348" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-300" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Source signal" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1919.2" y="2406" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-301" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="OCI observability" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1919.2" y="2445" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-302" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#F7F2FC;strokeColor=#6A3D9A;strokeWidth=1;" value="Alarm / insight" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1919.2" y="2484" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-303" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Operational action" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1919.2" y="2523" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-304" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="Evidence / outcome" vertex="1">
+          <mxGeometry height="31" width="412.8" x="1919.2" y="2562" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-305" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F7F6F4;strokeColor=#C8C4BF;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="410" width="563" x="50" y="2650" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-306" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#102A43;whiteSpace=wrap;" value="HOW IT WORKS" vertex="1">
+          <mxGeometry height="40" width="535" x="64" y="2662" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-307" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Collect domain signals" vertex="1">
+          <mxGeometry height="31" width="527" x="68" y="2710" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-308" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Normalize and enrich context" vertex="1">
+          <mxGeometry height="31" width="527" x="68" y="2748" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-309" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Correlate services and changes" vertex="1">
+          <mxGeometry height="31" width="527" x="68" y="2786" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-310" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Alert accountable owners" vertex="1">
+          <mxGeometry height="31" width="527" x="68" y="2824" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-311" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Validate operational action" vertex="1">
+          <mxGeometry height="31" width="527" x="68" y="2862" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-312" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F7F6F4;strokeColor=#C8C4BF;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="410" width="563" x="629" y="2650" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-313" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#102A43;whiteSpace=wrap;" value="KEY COMPONENTS" vertex="1">
+          <mxGeometry height="40" width="535" x="643" y="2662" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-314" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Foundation services" vertex="1">
+          <mxGeometry height="31" width="527" x="647" y="2710" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-315" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Observability control plane" vertex="1">
+          <mxGeometry height="31" width="527" x="647" y="2748" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-316" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Automation and integrations" vertex="1">
+          <mxGeometry height="31" width="527" x="647" y="2786" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-317" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Governance context" vertex="1">
+          <mxGeometry height="31" width="527" x="647" y="2824" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-318" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Outcome dashboards" vertex="1">
+          <mxGeometry height="31" width="527" x="647" y="2862" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-319" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F7F2FC;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="410" width="563" x="1208" y="2650" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-320" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="REFERENCE OPERATING MODEL" vertex="1">
+          <mxGeometry height="40" width="535" x="1222" y="2662" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-321" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="1. Detect" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2710" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-322" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="2. Correlate" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2748" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-323" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="3. Review" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2786" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-324" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="4. Notify" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2824" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-325" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="5. Remediate" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2862" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-326" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="6. Certify" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2900" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-327" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#6A3D9A;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1;" value="7. Govern" vertex="1">
+          <mxGeometry height="31" width="527" x="1226" y="2938" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-328" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#F7F6F4;strokeColor=#C8C4BF;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="410" width="563" x="1787" y="2650" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-329" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#102A43;whiteSpace=wrap;" value="INTERLOCK OUTCOMES" vertex="1">
+          <mxGeometry height="40" width="535" x="1801" y="2662" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-330" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ User and group activity" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2710" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-331" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Failed and federated login monitoring" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2748" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-332" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ API credential usage" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2786" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-333" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Access governance status" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2824" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-334" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Policy drift detection" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2862" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-335" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Missing governance baselines" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2900" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-336" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Unauthorized resource changes" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2938" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-337" parent="1" style="rounded=1;arcSize=5;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=8;fontFamily=Arial;fontSize=14;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#C8C4BF;strokeWidth=1;" value="✓ Landing-zone baseline drift" vertex="1">
+          <mxGeometry height="31" width="527" x="1805" y="2976" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-338" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=20;fontColor=#FFFFFF;fillColor=#102A43;strokeColor=#102A43;" value="SIGNAL TYPES &amp; EVIDENCE" vertex="1">
+          <mxGeometry height="48" width="2300" x="50" y="3080" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-339" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#6A3D9A;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="124" width="448.8" x="50" y="3138" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-340" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#6A3D9A;whiteSpace=wrap;" value="METRICS&amp;#xa;health · latency · utilization · capacity" vertex="1">
+          <mxGeometry height="94" width="420.8" x="64" y="3150" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-341" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#145CA8;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="124" width="448.8" x="512.8" y="3138" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-342" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#145CA8;whiteSpace=wrap;" value="LOGS &amp; FINDINGS&amp;#xa;audit · traffic · threat · workload" vertex="1">
+          <mxGeometry height="94" width="420.8" x="526.8" y="3150" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-343" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="124" width="448.8" x="975.6" y="3138" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-344" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#2E7D32;whiteSpace=wrap;" value="EVENTS &amp; CHANGES&amp;#xa;lifecycle · policy · configuration · drift" vertex="1">
+          <mxGeometry height="94" width="420.8" x="989.6" y="3150" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-345" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#667085;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="124" width="448.8" x="1438.4" y="3138" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-346" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#667085;whiteSpace=wrap;" value="DIAGNOSTICS&amp;#xa;path · topology · traces · root cause" vertex="1">
+          <mxGeometry height="94" width="420.8" x="1452.4" y="3150" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-347" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=42;spacingLeft=16;spacingRight=14;fontFamily=Arial;fontSize=15;fontColor=#182230;fillColor=#FFFFFF;strokeColor=#D13C36;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="124" width="448.8" x="1901.2" y="3138" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-348" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Arial;fontStyle=1;fontSize=17;fontColor=#D13C36;whiteSpace=wrap;" value="EVIDENCE &amp; ACTIONS&amp;#xa;alarms · reports · runbooks · remediation" vertex="1">
+          <mxGeometry height="94" width="420.8" x="1915.2" y="3150" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-governance-v-349" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=14;fontColor=#52606D;whiteSpace=wrap;" value="Editable vector poster · 2400 × 3394 A-series canvas · generated from assets/interlocks/catalog.json · independent community reference" vertex="1">
+          <mxGeometry height="26" width="2300" x="50" y="3352" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

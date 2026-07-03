@@ -6,6 +6,7 @@
 # Tooling logs
 firebase-debug.log
 *.log
+node_modules/
 
 # Secrets / env — never commit
 .env
@@ -20,3 +21,9 @@ credentials/
 .playwright-cli/
 playwright-report/
 test-results/
+
+# Reproducible release-only outputs (see governance/artifact-policy.json)
+dist/
+assets/diagrams/**/*.pdf
+assets/diagrams/*.zip
+assets/diagrams/*-infographic-*.png

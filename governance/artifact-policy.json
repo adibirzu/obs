@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "versionControl": {
+    "rationale": "Editable vector diagrams are reviewable project assets and remain versioned beside their source declarations.",
+    "generatedExtensions": [".drawio", ".excalidraw"],
+    "generatedRoots": [
+      "assets/diagrams/interlocks",
+      "assets/diagrams/interlocks-documented",
+      "assets/diagrams/interlocks-infographic",
+      "assets/diagrams/usecases"
+    ],
+    "generatedFiles": [
+      "assets/diagrams/oci-observability-service-interlocks-documented.drawio",
+      "assets/diagrams/oci-observability-service-interlocks-infographic.drawio",
+      "assets/diagrams/oci-observability-service-interlocks.drawio",
+      "assets/diagrams/usecases/manifest.json",
+      "assets/interlocks/catalog-data.js",
+      "assets/interlocks/documentation-sources.json"
+    ],
+    "authoredRoots": [
+      "assets/diagrams/marketing-interlocks"
+    ]
+  },
+  "releaseOnly": {
+    "rationale": "Compiled PDFs, raster previews, archives, and packaged site output are reproducible release products and do not belong in source control.",
+    "generatedExtensions": [".pdf", ".png", ".zip"],
+    "generatedRoots": ["assets/diagrams", "dist"]
+  },
+  "releasePackage": {
+    "output": "dist/site",
+    "include": [
+      "CONTRIBUTING.md",
+      "LICENSE",
+      "index.html",
+      "launchpad.html",
+      "interlocks.html",
+      "interlock-detail.html",
+      "docs/PROPOSE-A-SCENARIO.md",
+      "docs/scenarios",
+      "assets",
+      "static"
+    ],
+    "excludeDirectories": [".DS_Store"],
+    "requiredPaths": ["index.html", "interlocks.html", "launchpad.html", "interlock-detail.html"],
+    "requiredPdfCount": 66,
+    "manifest": "dist/release-manifest.json"
+  }
+}

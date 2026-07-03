@@ -34,7 +34,7 @@
     L2: { label: "L2 · Diagnose deep", color: "var(--l2)", anchor: "#lvl-L2" },
     L3: { label: "L3 · Correlate and automate", color: "var(--l3)", anchor: "#lvl-L3" },
     L4: { label: "L4 · Observe and govern AI", color: "var(--l4)", anchor: "#lvl-L4" },
-    L5: { label: "L5 · Operate multitenancy", color: "var(--l5)", anchor: "#multitenancy" },
+    L5: { label: "Scale pattern · operator architecture", color: "var(--scale, var(--l5))", anchor: "#scale-pattern" },
   };
 
   const PERSONAS = [
@@ -87,10 +87,10 @@
       emphasis: ["L2 database depth", "L0 audit and governance", "fast L1 → L3 correlation"] },
     { id: "comms", icon: "telco", name: "Communications", pattern: "oke",
       focus: "Cloud-native scale, network visibility, and often multitenant operator platforms.",
-      emphasis: ["L3 tracing on OKE", "L5 multitenancy", "open-source fan-out"] },
+      emphasis: ["L3 tracing on OKE", "operator-scale multitenancy", "open-source fan-out"] },
     { id: "government", icon: "public", name: "Government", pattern: "hybrid",
       focus: "National, state, and local: sovereignty (often DRCC), strong audit, and hybrid estates.",
-      emphasis: ["L0 audit", "L5 dedicated-region operation", "hybrid collection"] },
+      emphasis: ["L0 audit", "operator-scale dedicated-region operation", "hybrid collection"] },
     { id: "healthcare", icon: "health", name: "Healthcare", pattern: "apps",
       focus: "Sensitive data, compliance, and reliability across Oracle applications and databases.",
       emphasis: ["L0 governance", "L2 database", "L2 security detections"] },
@@ -102,7 +102,25 @@
       emphasis: ["L3 APM and RUM", "L1 alarms", "L2 capacity"] },
     { id: "hightech", icon: "tech", name: "High Technology", pattern: "agentic",
       focus: "Multitenant SaaS and ISV platforms: per-customer SLOs, AI products, and operator-scale aggregation.",
-      emphasis: ["L5 multitenancy", "L4 AI agents", "L0 per-tenant governance"] },
+      emphasis: ["operator-scale multitenancy", "L4 AI agents", "L0 per-tenant governance"] },
+  ];
+
+  const GOALS = [
+    { id: "protect", name: "Keep services healthy", pattern: "trad", levels: ["L0", "L1"],
+      consequence: "Operational consequence: establish governed telemetry, actionable alarms, and ownership before incidents begin." },
+    { id: "diagnose", name: "Find root cause across clouds", pattern: "hybrid", levels: ["L1", "L2", "L3"], recommended: true,
+      consequence: "Operational consequence: carry one correlation context from each environment through metrics, logs, traces, and database signals." },
+    { id: "optimize", name: "Plan capacity and resilience", pattern: "dbc", levels: ["L1", "L2"],
+      consequence: "Operational consequence: combine current health with fleet trends, forecasts, and recovery indicators before capacity becomes an incident." },
+    { id: "govern", name: "Govern security and AI systems", pattern: "agentic", levels: ["L0", "L4"],
+      consequence: "Operational consequence: join audit evidence, policy decisions, agent traces, quality evaluation, and controlled response." },
+  ];
+
+  const ROLES = [
+    { id: "own", name: "Own", detail: "Service owners and executives", lens: 0, levels: ["L0", "L1", "L4"], services: ["Dashboards", "Monitoring", "Ops Insights"] },
+    { id: "build", name: "Build", detail: "Architects, platform teams, developers, and AI engineers", lens: 1, levels: ["L0", "L1", "L3", "L4"], services: ["OpenTelemetry", "APM", "Connector Hub"] },
+    { id: "operate", name: "Operate", detail: "SRE, NOC, and database teams", lens: 2, levels: ["L1", "L2", "L3"], services: ["Monitoring", "Log Analytics", "Database Management"] },
+    { id: "govern", name: "Govern", detail: "Security, compliance, and operator teams", lens: 1, levels: ["L0", "L2", "L4", "L5"], services: ["Audit", "IAM", "Log Analytics"] },
   ];
 
   // Expose for guide.js (inspector "relevant to" chips + persona-aware nav)
@@ -110,7 +128,12 @@
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  let chosen = { persona: null, industry: null };
+  const stored = window.OBS_STATE?.read?.() || {};
+  let chosen = Object.freeze({
+    goal: GOALS.some((goal) => goal.id === stored.goal) ? stored.goal : "diagnose",
+    persona: ROLES.some((role) => role.id === stored.persona) ? stored.persona : null,
+    industry: INDUSTRIES.some((industry) => industry.id === stored.industry) ? stored.industry : null,
+  });
 
   // When the ladder/finder anchors are not on this page (e.g. the launchpad),
   // cross-link back to the main guide instead of producing dead in-page links.
@@ -121,42 +144,96 @@
     return `<a class="lvlchip" href="${xref()}${l.anchor}" style="--lv:${l.color}"><span class="dot"></span>${l.label}</a>`;
   }
 
+  function choose(patch) {
+    chosen = Object.freeze({ ...chosen, ...patch });
+    const role = ROLES.find((item) => item.id === chosen.persona);
+    const statePatch = Object.prototype.hasOwnProperty.call(patch, "persona")
+      ? { ...patch, lens: role ? String(role.lens) : "1" }
+      : patch;
+    window.OBS_STATE?.replace?.(statePatch);
+    mark();
+    render();
+    emitProfileChange();
+  }
+
+  function emitProfileChange() {
+    document.dispatchEvent(new CustomEvent("obs:profile-change", {
+      detail: Object.freeze({ ...chosen }),
+    }));
+  }
+
+  function bindOptionCluster(host, selector) {
+    if (!host) return;
+    host.addEventListener("keydown", (event) => {
+      if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+      const options = $$(selector, host).filter((option) => !option.disabled);
+      const currentIndex = options.indexOf(document.activeElement);
+      if (currentIndex < 0 || options.length === 0) return;
+      event.preventDefault();
+      const nextIndex = event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? options.length - 1
+          : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + options.length) % options.length;
+      options[nextIndex].focus();
+    });
+  }
+
   function buildSelector() {
-    const pHost = $("#personaPick"), iHost = $("#industryPick");
-    if (pHost) pHost.innerHTML = PERSONAS.map((p) =>
-      `<button class="pickchip" type="button" data-persona="${p.id}">${I[p.icon]}<span>${p.name}</span></button>`).join("");
-    if (iHost) iHost.innerHTML = INDUSTRIES.map((d) =>
-      `<button class="pickchip" type="button" data-industry="${d.id}">${I[d.icon]}<span>${d.name}</span></button>`).join("");
-    $$("#personaPick .pickchip").forEach((b) => b.addEventListener("click", () => { chosen.persona = b.dataset.persona; mark(); render(); }));
-    $$("#industryPick .pickchip").forEach((b) => b.addEventListener("click", () => { chosen.industry = b.dataset.industry; mark(); render(); }));
+    const goalHost = $("#goalPick"), roleHost = $("#rolePick"), industryHost = $("#industryPick");
+    if (goalHost) goalHost.innerHTML = GOALS.map((goal) => `
+      <button class="goal-card" type="button" data-goal="${goal.id}" aria-pressed="false">
+        <span class="goal-card__name">${goal.name}</span>
+        <span class="goal-card__effect">${goal.consequence.replace("Operational consequence: ", "")}</span>
+        ${goal.recommended ? '<span class="goal-card__recommended">Recommended starting point</span>' : ""}
+      </button>`).join("");
+    if (roleHost) roleHost.innerHTML = ROLES.map((role) =>
+      `<button class="pickchip" type="button" data-persona="${role.id}" aria-pressed="false"><span><b>${role.name}</b><small>${role.detail}</small></span></button>`).join("");
+    if (industryHost) industryHost.insertAdjacentHTML("beforeend", INDUSTRIES.map((industry) =>
+      `<option value="${industry.id}">${industry.name}</option>`).join(""));
+
+    $$("#goalPick [data-goal]").forEach((button) => button.addEventListener("click", () => choose({ goal: button.dataset.goal })));
+    $$("#rolePick [data-persona]").forEach((button) => button.addEventListener("click", () => {
+      const persona = chosen.persona === button.dataset.persona ? null : button.dataset.persona;
+      choose({ persona });
+    }));
+    industryHost?.addEventListener("change", () => choose({ industry: industryHost.value || null }));
+    bindOptionCluster(goalHost, "[data-goal]");
+    bindOptionCluster(roleHost, "[data-persona]");
+    window.OBS_STATE?.replace?.({ goal: chosen.goal });
+    mark();
+    render();
+    emitProfileChange();
   }
   function mark() {
-    $$("#personaPick .pickchip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.persona === chosen.persona));
-    $$("#industryPick .pickchip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.industry === chosen.industry));
+    $$("#goalPick [data-goal]").forEach((button) => button.setAttribute("aria-pressed", button.dataset.goal === chosen.goal));
+    $$("#rolePick [data-persona]").forEach((button) => button.setAttribute("aria-pressed", button.dataset.persona === chosen.persona));
+    const industry = $("#industryPick");
+    if (industry) industry.value = chosen.industry || "";
   }
 
   function render() {
     const res = $("#startResult"); if (!res) return;
-    const p = PERSONAS.find((x) => x.id === chosen.persona);
+    const goal = GOALS.find((x) => x.id === chosen.goal) || GOALS.find((x) => x.recommended);
+    const p = ROLES.find((x) => x.id === chosen.persona);
     const d = INDUSTRIES.find((x) => x.id === chosen.industry);
-    if (!p && !d) { res.classList.remove("show"); return; }
-    window.__obsLens = p ? p.lens : 0;     // default inspector lens for guide.js
-    const lensName = ["Executive", "Architect", "Practitioner"][p ? p.lens : 0];
-    const levels = [...new Set([...(p ? p.levels : []), ...(d ? d.emphasis.map(matchLevel).filter(Boolean) : [])])];
-    const lead = p && d
-      ? `<b>${p.name}</b> · <b>${d.name}</b>`
-      : p ? `<b>${p.name}</b>` : `<b>${d.name}</b>`;
+    window.__obsLens = p ? p.lens : 1;
+    const lensName = ["Executive", "Architect", "Practitioner"][p ? p.lens : 1];
+    const levels = [...new Set([...(goal?.levels || []), ...(p ? p.levels : []), ...(d ? d.emphasis.map(matchLevel).filter(Boolean) : [])])];
+    const pattern = d?.pattern || goal.pattern;
     res.innerHTML = `
-      <p class="start__lead">${lead}, start here:</p>
-      ${p ? `<p class="start__line">${p.uses} Your default lens is <b>${lensName}</b>.</p>` : ""}
-      ${d ? `<p class="start__line">Industry focus — ${d.focus}</p>` : ""}
+      <p class="start__lead">Recommended pathway: ${goal.name}</p>
+      <p class="start__line"><b>${goal.consequence}</b></p>
+      ${p ? `<p class="start__line"><b>${p.name}</b> refinement: ${p.detail}. Your default inspector lens is <b>${lensName}</b>.</p>` : '<p class="start__line">No role refinement is required. The Architect lens is the balanced default.</p>'}
+      ${d ? `<p class="start__line"><b>${d.name}</b> refinement: ${d.focus}</p>` : ""}
       <div class="start__levels">${levels.map(lvlChip).join("")}</div>
-      ${p ? `<div class="start__svc"><span class="start__k">You'll mostly look at</span> ${p.services.map((s) => `<span class="tag">${s}</span>`).join("")}</div>` : ""}
+      ${p ? `<div class="start__svc"><span class="start__k">Primary capabilities</span> ${p.services.map((s) => `<span class="tag">${s}</span>`).join("")}</div>` : ""}
       <div class="start__cta">
-        ${d ? (xref()
-          ? `<a class="linkbtn" href="index.html#finder">See the ${d.name} use-case path ${arrow()}</a>`
-          : `<button class="linkbtn" id="startToFinder" type="button" data-uc="${d.pattern}">See the ${d.name} use-case path ${arrow()}</button>`) : ""}
-        ${p ? `<a class="linkbtn" href="${xref()}#personas">How your persona uses the data ${arrow()}</a>` : ""}
+        <a class="linkbtn" href="interlocks.html">Explore interlock workflows ${arrow()}</a>
+        ${xref()
+          ? `<a class="linkbtn" href="index.html?pattern=${pattern}#finder">Open the recommended path ${arrow()}</a>`
+          : `<button class="linkbtn" id="startToFinder" type="button" data-uc="${pattern}">Open the recommended path ${arrow()}</button>`}
+        ${p ? `<a class="linkbtn" href="${xref()}#personas">Explore detailed practitioner views ${arrow()}</a>` : ""}
       </div>`;
     res.classList.add("show");
     const f = $("#startToFinder");
@@ -174,7 +251,7 @@
       <article class="pcard" data-lens="${p.lens}">
         <div class="pcard__top"><span class="pcard__ic">${I[p.icon]}</span><div><h3>${p.name}</h3><span class="pcard__lens">Default lens · ${["Executive","Architect","Practitioner"][p.lens]}</span></div></div>
         <p class="pcard__sum">${p.summary}</p>
-        <div class="pcard__levels">${p.levels.map((k) => `<span class="lvltag" style="--lv:${LVL[k].color}">${k}</span>`).join("")}</div>
+        <div class="pcard__levels">${p.levels.map((k) => `<span class="lvltag" style="--lv:${LVL[k].color}">${k === "L5" ? "Scale" : k}</span>`).join("")}</div>
         <dl class="pcard__dl">
           <dt>Identifies</dt><dd>${p.identifies}</dd>
           <dt>Uses it to</dt><dd>${p.uses}</dd>

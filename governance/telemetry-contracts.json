@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "verifiedOn": "2026-07-03",
+  "sharedCorrelationFields": [
+    "timestamp",
+    "trace_id",
+    "service_name",
+    "tenant_key",
+    "labels"
+  ],
+  "contracts": {
+    "logan": {
+      "owner": "Oracle Log Analytics (Logan)",
+      "signalTypes": ["logs", "events"],
+      "allowedFields": [
+        "timestamp",
+        "trace_id",
+        "service_name",
+        "tenant_key",
+        "entity_id",
+        "log_source",
+        "event_id",
+        "log_group_id",
+        "severity",
+        "message",
+        "labels"
+      ],
+      "forbiddenFields": ["metric_name", "metric_value", "metric_type", "scrape_interval", "parent_span_id", "span_duration_ms"]
+    },
+    "prometheus": {
+      "owner": "Prometheus-compatible metric backend",
+      "signalTypes": ["metrics", "exemplars"],
+      "allowedFields": [
+        "timestamp",
+        "trace_id",
+        "service_name",
+        "tenant_key",
+        "metric_name",
+        "metric_value",
+        "metric_type",
+        "labels",
+        "instance",
+        "job",
+        "scrape_interval"
+      ],
+      "forbiddenFields": ["log_source", "event_id", "log_group_id", "message", "raw_log", "span_id", "parent_span_id", "span_duration_ms"]
+    },
+    "apm": {
+      "owner": "OCI Application Performance Monitoring",
+      "signalTypes": ["traces", "spans", "real-user monitoring", "synthetics"],
+      "allowedFields": [
+        "timestamp",
+        "trace_id",
+        "service_name",
+        "tenant_key",
+        "labels",
+        "span_id",
+        "parent_span_id",
+        "operation_name",
+        "span_duration_ms",
+        "status_code",
+        "attributes"
+      ],
+      "forbiddenFields": ["log_source", "event_id", "log_group_id", "message", "raw_log", "metric_name", "metric_value", "metric_type", "scrape_interval"]
+    }
+  }
+}

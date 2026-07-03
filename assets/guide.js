@@ -99,11 +99,11 @@ observability_tier = enhanced             # baseline | enhanced | critical` },
       exec: ["Protects monitoring credentials and supports compliance."],
       arch: ["Define secret ownership, rotation cadence, break-glass, and audit review.", "Separate read-only monitoring, diagnostic, and administrative credentials."],
       prac: ["Database Management and the Management Agent read monitoring passwords from Vault by OCID."],
-      code: { lang: "OCI CLI", body: `oci vault secret create-base64 \\
-  --compartment-id $OBS_CMPT \\
-  --secret-name dbsnmp-monitoring \\
-  --vault-id $VAULT --key-id $KEY \\
-  --secret-content-content $(printf '%s' "$PW" | base64)` },
+      code: { lang: "Secure command document", body: `# Never place secret material or environment expansion on argv.
+# Prepare the complete request in a temporary mode-0600 document:
+<TMP_0600_SECRET_CREATE_JSON>
+# Pass it as file://<TMP_0600_SECRET_CREATE_JSON> to the wrapper's validated --from-json input.
+# Register a cleanup trap before writing it, then remove it on every exit path.` },
       docs: "https://docs.oracle.com/en-us/iaas/Content/KeyManagement/home.htm" },
     audit: { level: "L0", icon: "file-search", name: "OCI Audit",
       tagline: "Tenancy-wide API and change visibility, on by default.",
@@ -191,7 +191,7 @@ oci ons subscription create --topic-id $TOPIC \\
   --database-id $DB_OCID \\
   --compartment-id $OBS_CMPT` },
       docs: "https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html" },
-    analyze: { level: "L2", icon: "scan-search", name: "OCI Log Analytics",
+    analyze: { level: "L2", icon: "scan-search", name: "Oracle Log Analytics (Logan)",
       tagline: "Index, enrich, cluster, and correlate logs for root-cause work.",
       lz: "Add the advanced analysis tier when log search alone is not enough. Feed it from Logging through Connector Hub.",
       exec: ["Answers the question, why did it happen?", "Pattern detection, clustering, and link analysis across sources."],
@@ -275,7 +275,7 @@ OTEL_PROPAGATORS=tracecontext,baggage` },
     { "type": "LOG", "savedSearchId": "ocid1.logsavedsearch..." }
   ]
 }` },
-      docs: "https://docs.oracle.com/en-us/iaas/Content/ManagementDashboard/home.htm" },
+      docs: "https://docs.oracle.com/en-us/iaas/management-dashboard/home.htm" },
 
     /* --- Additional L2 coverage --- */
     stack: { level: "L2", icon: "layers", name: "OCI Stack Monitoring",
@@ -299,7 +299,7 @@ OTEL_PROPAGATORS=tracecontext,baggage` },
 # - discover JDKs + applications via the Management Agent
 # - flag versions needing updates or past end of support
 # - drill into Java Flight Recorder performance data` },
-      docs: "https://docs.oracle.com/en-us/iaas/jms/home.htm" },
+      docs: "https://docs.oracle.com/en-us/iaas/jms/doc/overview-java-management-service.html" },
 
     /* --- Additional L3 coverage (manage + automate) --- */
     resched: { level: "L3", icon: "calendar-clock", name: "OCI Resource Scheduler",
@@ -360,7 +360,7 @@ score = judge(rubric, agent_output, retrieved_context)
 guard = guardrails(agent_output)    # moderation / prompt-injection / PII
 advance = score >= threshold and guard.safe   # gate the change` },
       docs: "https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm" },
-    ai_logan: { level: "L4", icon: "scan-search", name: "Agent anomaly detection — Logging Analytics",
+    ai_logan: { level: "L4", icon: "scan-search", name: "Agent anomaly detection: Logan",
       tagline: "Machine-learning clustering over agent, broker, and gateway logs.",
       lz: "Feed agent logs from Logging through Connector Hub; detections map to MITRE.",
       exec: ["Surfaces unusual agent behaviour you did not predict — drift and tool-call shifts.", "Detections map to MITRE ATT&CK and MITRE ATLAS, in language the SOC already uses."],
@@ -480,6 +480,42 @@ graph.add_node("explain",   call_generative_ai_summary)
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
+  const TELEMETRY_ROUTES = Object.freeze({
+    oci: Object.freeze({ name: "OCI", source: "Native services, applications, databases, and OKE", contract: "OCI metrics, logs, events, and OpenTelemetry", egress: "Service Gateway or private endpoint", handoff: "OCI service identity and compartment policy", destination: "Monitoring, Logging, Log Analytics, APM" }),
+    aws: Object.freeze({ name: "AWS", source: "Accounts, workloads, databases, and EKS", contract: "OpenTelemetry, CloudWatch export, and structured logs", egress: "Collector, HTTPS, Streaming, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Log Analytics, APM, Monitoring, and external SIEM" }),
+    azure: Object.freeze({ name: "Azure", source: "Subscriptions, applications, databases, and AKS", contract: "OpenTelemetry, Azure Monitor export, and structured logs", egress: "Collector, HTTPS, Event Hub, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Log Analytics, APM, Monitoring, and external SIEM" }),
+    gcp: Object.freeze({ name: "GCP", source: "Projects, applications, databases, and GKE", contract: "OpenTelemetry, Cloud Logging export, and structured logs", egress: "Collector, HTTPS, Pub/Sub bridge, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Log Analytics, APM, Monitoring, and external SIEM" }),
+    kubernetes: Object.freeze({ name: "Kubernetes", source: "Workload, platform, and cluster signals", contract: "OpenTelemetry", egress: "Collector or Fluent Bit", handoff: "OCI ingestion boundary", destination: "Monitoring, Log Analytics, and APM" }),
+    onprem: Object.freeze({ name: "On-premises", source: "Hosts, applications, middleware, and databases", contract: "OpenTelemetry, syslog, JMX, database, and host telemetry", egress: "Management Gateway, collector, or controlled HTTPS", handoff: "Enterprise network, identity, and tenancy boundary", destination: "Database Management, Log Analytics, APM, Monitoring" }),
+  });
+
+  function buildTelemetryRoute() {
+    const route = $("#telemetry-route");
+    if (!route) return;
+    const storedSource = window.OBS_STATE?.read?.().source;
+    const initial = TELEMETRY_ROUTES[storedSource] ? storedSource : "kubernetes";
+
+    const render = (key) => {
+      const value = TELEMETRY_ROUTES[key];
+      if (!value) return;
+      $$("[data-source]", route).forEach((button) => button.setAttribute("aria-pressed", button.dataset.source === key));
+      $("#route-source").textContent = value.name;
+      $("#route-source-detail").textContent = value.source;
+      $("#route-contract").textContent = value.contract;
+      $("#route-egress").textContent = value.egress;
+      $("#route-egress-detail").textContent = "Controlled egress path";
+      $("#route-handoff").textContent = value.handoff;
+      $("#route-handoff-detail").textContent = "Cross-cloud control-plane handoff";
+      $("#route-destination").textContent = value.destination;
+      $("#route-destination-detail").textContent = "Downstream analysis, alerting, and response";
+      $("#telemetry-route-detail").setAttribute("aria-label", `${value.name} vendor-neutral telemetry contract and destination route`);
+      window.OBS_STATE?.replace?.({ source: key });
+    };
+
+    $$("[data-source]", route).forEach((button) => button.addEventListener("click", () => render(button.dataset.source)));
+    render(initial);
+  }
+
   /* ---- Learn-more resources (from assets/resources.js) ---- */
   const RES = window.OBS_RESOURCES || [];
   const COMP_RES = {}, COMP_PROJ = {};
@@ -567,13 +603,24 @@ graph.add_node("explain",   call_generative_ai_summary)
     $("#i-resources").innerHTML = (rs || pr)
       ? `<h4 class="ilearn__h">Learn more</h4>${rs ? `<ul class="ilearn">${rs.map(resItem).join("")}</ul>` : ""}${pr ? `<p class="projlabel">${ic("github")} Projects by @adibirzu</p><ul class="ilearn">${pr.map(projItem).join("")}</ul>` : ""}`
       : "";
-    selectLens(typeof window.__obsLens === "number" ? window.__obsLens : 0);
+    const storedLens = Number(window.OBS_STATE?.read?.().lens);
+    selectLens(Number.isInteger(storedLens) && storedLens >= 0 && storedLens <= 2
+      ? storedLens
+      : (typeof window.__obsLens === "number" ? window.__obsLens : 0));
 
     $("#i-copy").addEventListener("click", (e) => {
       const btn = e.currentTarget;
-      navigator.clipboard?.writeText(c.code.body).then(() => {
+      const write = navigator.clipboard?.writeText?.(c.code.body);
+      if (!write) {
+        showToast("Copy failed. Select the snippet and copy it manually.", "error");
+        return;
+      }
+      write.then(() => {
         btn.innerHTML = ic("check") + " Copied"; btn.classList.add("ok");
+        showToast("Copied to clipboard.", "success");
         setTimeout(() => { btn.innerHTML = ic("copy") + " Copy"; btn.classList.remove("ok"); }, 1600);
+      }).catch(() => {
+        showToast("Copy failed. Select the snippet and copy it manually.", "error");
       });
     });
 
@@ -591,8 +638,40 @@ graph.add_node("explain",   call_generative_ai_summary)
     lastFocus?.focus();
   }
   function selectLens(idx) {
-    $$(".lens button").forEach((b, i) => b.setAttribute("aria-selected", i === idx));
-    $$(".lenspanel").forEach((p, i) => p.classList.toggle("active", i === idx));
+    $$(".lens button").forEach((button, i) => {
+      const active = i === idx;
+      button.setAttribute("aria-selected", active);
+      button.tabIndex = active ? 0 : -1;
+    });
+    $$(".lenspanel").forEach((panel, i) => {
+      const active = i === idx;
+      panel.classList.toggle("active", active);
+      panel.hidden = !active;
+    });
+    window.__obsLens = idx;
+    window.OBS_STATE?.replace?.({ lens: idx });
+  }
+
+  function onLensKeydown(event) {
+    const tabs = $$(".lens button");
+    const current = tabs.indexOf(event.currentTarget);
+    const keys = { ArrowLeft: current - 1, ArrowRight: current + 1, Home: 0, End: tabs.length - 1 };
+    if (!(event.key in keys)) return;
+    event.preventDefault();
+    const next = (keys[event.key] + tabs.length) % tabs.length;
+    selectLens(next);
+    tabs[next].focus();
+  }
+
+  let toastTimer = null;
+  function showToast(message, tone = "info") {
+    const toast = $("#toast");
+    if (!toast) return;
+    clearTimeout(toastTimer);
+    toast.textContent = message;
+    toast.dataset.tone = tone;
+    toast.classList.add("show");
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 3200);
   }
   // simple focus trap
   function trap(e) {
@@ -612,37 +691,134 @@ graph.add_node("explain",   call_generative_ai_summary)
       u.addEventListener("click", () => runFinder(u.dataset.uc));
     });
   }
-  function runFinder(key) {
+  function runFinder(key, { focus = true } = {}) {
     const p = PATTERNS[key], res = $("#finderResult");
+    if (!p || !res) return;
     $("#fr-name").textContent = p.name;
     $("#fr-detail").textContent = p.detail || "";
     $("#fr-start").textContent = p.start;
     $("#fr-outcomes").innerHTML = (p.outcomes || []).map((o) =>
       `<li>${ic("check")}<span>${o}</span></li>`).join("");
     const path = $("#fr-path"); path.innerHTML = "";
-    p.path.forEach((id, i) => {
+    p.path.forEach((id) => {
       const c = C[id], lv = LEVELS[c.level];
+      const item = document.createElement("li");
       const chip = document.createElement("button");
       chip.className = "pathchip"; chip.type = "button";
       chip.style.setProperty("--lv", lv.color);
       chip.innerHTML = `<span class="dot"></span>${c.name}`;
       chip.addEventListener("click", () => openInspector(id));
-      path.appendChild(chip);
-      if (i < p.path.length - 1) {
-        const a = document.createElement("span"); a.className = "arrow"; a.innerHTML = ic("arrow-right");
-        path.appendChild(a);
-      }
+      item.appendChild(chip);
+      path.appendChild(item);
     });
+    const activeCard = $(`.uc[data-uc="${key}"]`);
+    if (window.matchMedia("(max-width: 560px)").matches && activeCard) activeCard.after(res);
+    else $(".finder")?.append(res);
     res.classList.add("show");
     const set = new Set(p.path);
     $$(".card").forEach((card) => card.classList.toggle("dim", !set.has(card.dataset.comp)));
     $$(".uc[data-uc]").forEach((u) => u.setAttribute("aria-pressed", u.dataset.uc === key));
-    res.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    window.OBS_STATE?.replace?.({ pattern: key });
+    $("#finder-status").textContent = `${p.name} route selected. ${p.path.length} ordered capabilities are ready.`;
+    if (focus) requestAnimationFrame(() => {
+      res.focus({ preventScroll: true });
+      res.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
   function clearFinder() {
     $$(".card").forEach((card) => card.classList.remove("dim"));
     $$(".uc[data-uc]").forEach((u) => u.setAttribute("aria-pressed", "false"));
     $("#finderResult").classList.remove("show");
+    $(".finder")?.append($("#finderResult"));
+    window.OBS_STATE?.replace?.({ pattern: null });
+    $("#finder-status").textContent = "Recommended path cleared.";
+  }
+
+  /* ---- Community operating-profile scenarios ---- */
+  let communityScenarios = Object.freeze([]);
+  let scenarioProfile = Object.freeze(window.OBS_STATE?.read?.() || {});
+
+  function scenarioNode(tag, text, className) {
+    const node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (className) node.className = className;
+    return node;
+  }
+
+  function applyScenario(scenario) {
+    const pattern = (scenario.discovery.finderPatterns || []).find(key => PATTERNS[key]);
+    if (!pattern) return;
+    runFinder(pattern);
+    const result = $("#finderResult");
+    result.querySelector(".finder__scenario")?.remove();
+    const context = scenarioNode("aside", undefined, "finder__scenario");
+    context.append(
+      scenarioNode("strong", `Community profile · ${scenario.title}`),
+      scenarioNode("span", `${scenario.failurePoints.length} failure points · ${scenario.telemetry.metrics.length} measurable signals`),
+    );
+    const guide = scenarioNode("a", "Open the end-to-end scenario →");
+    guide.href = `docs/scenarios/${scenario.id}.md`;
+    context.append(guide);
+    result.insertBefore(context, $("#fr-detail"));
+    $("#finder-status").textContent = `${scenario.title} community scenario selected and mapped to the ${PATTERNS[pattern].name} route.`;
+  }
+
+  function scenarioCard(match) {
+    const { scenario } = match;
+    const card = scenarioNode("article", undefined, "scenario-card");
+    card.append(
+      scenarioNode("span", "Reference community scenario", "scenario-card__kicker"),
+      scenarioNode("h3", scenario.title),
+      scenarioNode("p", scenario.summary),
+    );
+    const meta = scenarioNode("div", undefined, "scenario-card__meta");
+    const providers = [...new Set(scenario.topology.environments.map(({ provider }) => provider))];
+    providers.forEach(provider => meta.append(scenarioNode("span", provider, "tag")));
+    meta.append(scenarioNode("span", `${scenario.failurePoints.length} failure points`, "tag"));
+    const actions = scenarioNode("div", undefined, "scenario-card__actions");
+    const use = scenarioNode("button", "Use this operating profile");
+    use.type = "button";
+    use.addEventListener("click", () => applyScenario(scenario));
+    const interlock = scenario.discovery.interlocks?.[0];
+    const interlocks = scenarioNode("a", "Open mapped Interlock");
+    interlocks.href = interlock
+      ? `interlock-detail.html?diagram=${encodeURIComponent(interlock.diagram)}&usecase=${encodeURIComponent(interlock.workflow)}`
+      : "interlocks.html";
+    const guide = scenarioNode("a", "Read scenario");
+    guide.href = `docs/scenarios/${scenario.id}.md`;
+    actions.append(use, interlocks, guide);
+    card.append(meta, actions);
+    return card;
+  }
+
+  function renderCommunityScenarioMatches() {
+    const host = $("#scenario-matches");
+    const search = $("#scenario-search");
+    if (!host) return;
+    const matches = window.OBS_SCENARIOS?.matchScenarios(communityScenarios, {
+      ...scenarioProfile,
+      query: search?.value || "",
+    }) || [];
+    host.replaceChildren(...matches.slice(0, 3).map(scenarioCard));
+    if (!matches.length && search?.value.trim()) host.append(scenarioNode("p", "No community scenario matches yet. Try a provider, workload, failure, or operating goal.", "scenario-empty"));
+  }
+
+  async function buildCommunityScenarioFinder() {
+    const search = $("#scenario-search");
+    if (!search || !window.OBS_SCENARIOS) return;
+    scenarioProfile = Object.freeze({ ...scenarioProfile, ...(window.OBS_STATE?.read?.() || {}) });
+    search.addEventListener("input", renderCommunityScenarioMatches);
+    document.addEventListener("obs:profile-change", event => {
+      scenarioProfile = Object.freeze({ ...scenarioProfile, ...event.detail });
+      renderCommunityScenarioMatches();
+    });
+    try {
+      communityScenarios = await window.OBS_SCENARIOS.load();
+      renderCommunityScenarioMatches();
+    } catch (error) {
+      console.error("Unable to load community scenarios", error);
+      $("#scenario-matches").replaceChildren(scenarioNode("p", "Community scenarios are unavailable. The built-in Finder patterns remain available.", "scenario-empty"));
+    }
   }
 
   /* ---- Scroll progress + reveal + level scroll-spy ---- */
@@ -661,21 +837,35 @@ graph.add_node("explain",   call_generative_ai_summary)
     }, { threshold: 0.12 });
     $$(".reveal").forEach((e) => io.observe(e));
 
-    // scroll-spy: highlight the level nav link for the station in view
+    // scroll-spy: highlight the level nav and persist the current ladder state
     const spy = new IntersectionObserver((ents) => {
       ents.forEach((en) => {
         if (en.isIntersecting) {
           const lv = en.target.dataset.level;
           $$(".levelnav a").forEach((a) => a.classList.toggle("active", a.dataset.lv === lv));
+          window.OBS_STATE?.replace?.({ level: lv });
         }
       });
     }, { rootMargin: "-45% 0px -45% 0px" });
     $$(".station").forEach((s) => spy.observe(s));
+
+    const mobileSpy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        $$(".mobile-contents__link[data-section]").forEach((link) => {
+          if (link.dataset.section === entry.target.id) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    ["start", "finder", "ladder"].map((id) => document.getElementById(id)).filter(Boolean).forEach((section) => mobileSpy.observe(section));
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     buildLadder();
     buildFinder();
+    buildCommunityScenarioFinder();
+    buildTelemetryRoute();
     buildResources();
     scrollFx();
     $("#i-close").addEventListener("click", closeInspector);
@@ -684,9 +874,17 @@ graph.add_node("explain",   call_generative_ai_summary)
       if (e.key === "Escape" && insp.classList.contains("open")) closeInspector();
       trap(e);
     });
-    $$(".lens button").forEach((b, i) => b.addEventListener("click", () => selectLens(i)));
+    $$(".lens button").forEach((b, i) => {
+      b.addEventListener("click", () => selectLens(i));
+      b.addEventListener("keydown", onLensKeydown);
+    });
     $("#finderClear")?.addEventListener("click", clearFinder);
     // wire diagram chips (the AI reference-architecture pipeline)
     $$(".dchip[data-comp]").forEach((d) => d.addEventListener("click", () => openInspector(d.dataset.comp)));
+    const restored = window.OBS_STATE?.read?.() || {};
+    if (PATTERNS[restored.pattern]) runFinder(restored.pattern, { focus: false });
+    if (/^L[0-4]$/.test(restored.level || "")) {
+      requestAnimationFrame(() => document.getElementById(`lvl-${restored.level}`)?.scrollIntoView({ block: "start" }));
+    }
   });
 })();

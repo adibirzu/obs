@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "retail-checkout-multicloud",
+  "title": "Retail checkout across AWS, Azure, OCI, and an on-premises database",
+  "summary": "Trace a customer checkout from an AWS storefront through Azure payments and an OCI order service to an on-premises Oracle database without collapsing metrics, logs, and traces into one ambiguous contract.",
+  "status": "reference",
+  "updated": "2026-07-03",
+  "ownership": {
+    "communityAuthor": "Owns the topology hypothesis, reproducible synthetic evidence, runbook, and public-source citations.",
+    "projectMaintainer": "Owns schema conformance, editorial quality, security review, discovery mappings, and merge decisions.",
+    "serviceOwners": [
+      "Storefront team",
+      "Payments team",
+      "Order platform team",
+      "Database operations team",
+      "Observability platform team"
+    ]
+  },
+  "discovery": {
+    "queryTerms": [
+      "retail",
+      "checkout",
+      "multicloud",
+      "aws",
+      "eks",
+      "azure",
+      "aks",
+      "oci",
+      "oke",
+      "on-premises",
+      "payment",
+      "order",
+      "latency",
+      "trace",
+      "prometheus"
+    ],
+    "personas": ["operate", "build"],
+    "industries": ["retail"],
+    "goals": ["diagnose", "protect"],
+    "finderPatterns": ["hybrid", "oke"],
+    "interlocks": [
+      { "diagram": "network", "workflow": "hybrid-connectivity", "reason": "Localize cross-cloud route, DNS, tunnel, and egress failures." },
+      { "diagram": "operations-lifecycle", "workflow": "incident-correlation", "reason": "Join symptoms into one incident timeline without mixing signal ownership." },
+      { "diagram": "end-to-end", "workflow": "customer-journey", "reason": "Follow one checkout across service and cloud boundaries." },
+      { "diagram": "end-to-end", "workflow": "service-degradation", "reason": "Relate customer impact to the failing service boundary." }
+    ]
+  },
+  "topology": {
+    "businessService": "Customer checkout",
+    "serviceLevelObjective": "99.9% successful checkout completion with p95 end-to-end latency below 2.5 seconds over a rolling 30-day window.",
+    "environments": [
+      {
+        "id": "aws-storefront",
+        "provider": "aws",
+        "runtime": "Amazon EKS",
+        "workloads": ["Web storefront", "Cart API", "OpenTelemetry Collector"],
+        "egress": "Controlled HTTPS OTLP and structured-log export",
+        "owner": "Storefront team"
+      },
+      {
+        "id": "azure-payments",
+        "provider": "azure",
+        "runtime": "Azure Kubernetes Service",
+        "workloads": ["Payment adapter", "Fraud decision client", "OpenTelemetry Collector"],
+        "egress": "Controlled HTTPS OTLP and event export",
+        "owner": "Payments team"
+      },
+      {
+        "id": "oci-orders",
+        "provider": "oci",
+        "runtime": "Oracle Kubernetes Engine",
+        "workloads": ["Order API", "Inventory reservation", "Service Connector handoff"],
+        "egress": "OCI service identity with private or service-gateway paths",
+        "owner": "Order platform team"
+      },
+      {
+        "id": "onprem-order-db",
+        "provider": "on-premises",
+        "runtime": "Oracle Database behind an enterprise network boundary",
+        "workloads": ["Order schema", "Inventory schema", "Management Agent or approved collector"],
+        "egress": "Management Gateway or controlled outbound HTTPS",
+        "owner": "Database operations team"
+      }
+    ],
+    "route": [
+      "Customer → AWS storefront",
+      "AWS Cart API → Azure payment adapter",
+      "Azure payment adapter → OCI Order API",
+      "OCI Order API → on-premises Oracle Database",
+      "Telemetry collectors → governed metric, log, and trace destinations"
+    ]
+  },
+  "telemetry": {
+    "metrics": [
+      {
+        "name": "http.server.request.duration",
+        "unit": "s",
+        "owner": "Application metric backend",
+        "source": "OpenTelemetry HTTP server instrumentation",
+        "dimensions": ["service.name", "http.request.method", "http.response.status_code", "cloud.provider"],
+        "failureThreshold": "p95 > 1.2 s for 10 minutes on any checkout service"
+      },
+      {
+        "name": "http.client.request.duration",
+        "unit": "s",
+        "owner": "Application metric backend",
+        "source": "OpenTelemetry HTTP client instrumentation",
+        "dimensions": ["service.name", "server.address", "http.request.method", "error.type"],
+        "failureThreshold": "p95 > 800 ms for a cross-cloud dependency for 10 minutes"
+      },
+      {
+        "name": "kube_pod_container_status_restarts_total",
+        "unit": "{restart}",
+        "owner": "Prometheus",
+        "source": "kube-state-metrics",
+        "dimensions": ["cluster", "namespace", "pod", "container"],
+        "failureThreshold": "increase > 3 restarts in 15 minutes for a checkout component"
+      },
+      {
+        "name": "container_cpu_usage_seconds_total",
+        "unit": "s",
+        "owner": "Prometheus",
+        "source": "Container runtime metrics",
+        "dimensions": ["cluster", "namespace", "pod", "container"],
+        "failureThreshold": "sustained utilization above 85% of the configured CPU limit for 15 minutes"
+      },
+      {
+        "name": "otelcol_exporter_send_failed_spans",
+        "unit": "{span}",
+        "owner": "Prometheus",
+        "source": "OpenTelemetry Collector internal metrics",
+        "dimensions": ["exporter", "service.instance.id"],
+        "failureThreshold": "increase > 0 for 5 minutes"
+      },
+      {
+        "name": "CpuUtilization",
+        "unit": "%",
+        "owner": "OCI Monitoring",
+        "source": "OCI service metric namespace appropriate to the emitting resource",
+        "dimensions": ["resourceId"],
+        "failureThreshold": "mean > 85% for 15 minutes after confirming the namespace returns datapoints"
+      },
+      {
+        "name": "db.client.operation.duration",
+        "unit": "s",
+        "owner": "Application metric backend",
+        "source": "OpenTelemetry database client instrumentation",
+        "dimensions": ["service.name", "db.system.name", "db.operation.name"],
+        "failureThreshold": "p95 > 500 ms for order write operations for 10 minutes"
+      }
+    ],
+    "logs": {
+      "owner": "Oracle Log Analytics (Logan) for parsed log and event records",
+      "recordTypes": ["checkout application log", "payment decision event", "Kubernetes event", "OCI Audit event", "database alert record"],
+      "requiredFields": ["event_time", "service_name", "severity", "trace_id", "deployment_environment", "cloud_provider", "event_type"],
+      "prohibitedFields": ["metric_value", "metric_unit", "span_duration_ms", "parent_span_id"],
+      "retentionRule": "Store only approved operational fields; exclude payment data, credentials, prompts, and customer-identifying payloads."
+    },
+    "traces": {
+      "owner": "Application Performance Monitoring",
+      "transport": "OpenTelemetry Protocol through an approved collector and private ingest credential",
+      "requiredFields": ["trace_id", "span_id", "parent_span_id", "service.name", "span.kind", "span.status", "cloud.provider"],
+      "prohibitedFields": ["metric_value", "metric_unit", "logan_log_source", "logan_entity_id"],
+      "samplingRule": "Retain all failed synthetic checkouts and an approved probabilistic sample of successful checkouts."
+    },
+    "boundaries": {
+      "logan": "Logan owns parsed log and event records. Prometheus exporter output may be collected as records for investigation, but Logan does not become the authoritative metric backend.",
+      "prometheus": "Prometheus owns time-series samples, labels, recording rules, and exporter health. Exemplars may carry trace_id for navigation.",
+      "apm": "APM owns trace and span topology, duration, status, RUM, and synthetic evidence. It links to logs by trace_id without adopting Logan metadata."
+    }
+  },
+  "failurePoints": [
+    {
+      "id": "storefront-saturation",
+      "component": "AWS storefront pods",
+      "symptom": "Checkout latency rises while pod CPU and restart counts increase.",
+      "evidence": ["http.server.request.duration", "container_cpu_usage_seconds_total", "kube_pod_container_status_restarts_total"],
+      "interlocks": [{ "diagram": "operations-lifecycle", "workflow": "capacity-planning" }],
+      "firstAction": "Confirm whether saturation, restart churn, or a downstream wait dominates the affected traces."
+    },
+    {
+      "id": "payment-dependency-timeout",
+      "component": "Azure payment adapter",
+      "symptom": "Payment calls time out or return an elevated error ratio.",
+      "evidence": ["http.client.request.duration", "payment decision event", "span.status"],
+      "interlocks": [{ "diagram": "end-to-end", "workflow": "customer-journey" }],
+      "firstAction": "Use trace_id to separate payment-provider rejection from network or adapter latency."
+    },
+    {
+      "id": "cross-cloud-route-loss",
+      "component": "Azure-to-OCI network handoff",
+      "symptom": "The payment adapter cannot reach the OCI Order API.",
+      "evidence": ["http.client.request.duration", "structured connection error", "route and flow evidence"],
+      "interlocks": [{ "diagram": "network", "workflow": "hybrid-connectivity" }],
+      "firstAction": "Validate DNS, route, egress policy, and destination policy before changing application configuration."
+    },
+    {
+      "id": "order-api-regression",
+      "component": "OCI Order API",
+      "symptom": "A deployment raises 5xx responses and span error status.",
+      "evidence": ["http.server.request.duration", "span.status", "deployment event"],
+      "interlocks": [{ "diagram": "end-to-end", "workflow": "release-validation" }],
+      "firstAction": "Compare pre- and post-deployment error and latency evidence, then follow the approved rollback decision."
+    },
+    {
+      "id": "database-write-contention",
+      "component": "On-premises order database",
+      "symptom": "Order writes slow while database sessions wait on contention.",
+      "evidence": ["db.client.operation.duration", "database alert record", "database performance evidence"],
+      "interlocks": [{ "diagram": "operations-lifecycle", "workflow": "database-insight" }],
+      "firstAction": "Correlate the slow span to database-side session and wait evidence using an approved non-sensitive operation identifier."
+    },
+    {
+      "id": "telemetry-export-loss",
+      "component": "OpenTelemetry Collector",
+      "symptom": "Application health appears normal but trace coverage drops.",
+      "evidence": ["otelcol_exporter_send_failed_spans", "collector logs", "synthetic trace integrity check"],
+      "interlocks": [{ "diagram": "operations-lifecycle", "workflow": "fleet-health" }],
+      "firstAction": "Treat missing telemetry as collection degradation, not service health, and restore the exporter queue or destination path."
+    }
+  ],
+  "workflow": {
+    "prerequisites": [
+      "Named service owners and an incident commander for the checkout journey.",
+      "Synchronized UTC clocks and consistent service.name values across all environments.",
+      "OpenTelemetry instrumentation and collector health metrics in each Kubernetes environment.",
+      "Approved IAM, network egress, encryption, and retention policies for every telemetry handoff.",
+      "A Logan parser/source association for each approved structured log and event record.",
+      "Metric scrape targets and recording rules validated in the authoritative metric backend.",
+      "A privacy-safe synthetic checkout that emits a deterministic scenario_run_id."
+    ],
+    "correlationKeys": ["trace_id", "span_id", "service.name", "service.instance.id", "cloud.provider", "cloud.region", "k8s.cluster.name", "deployment.environment.name", "scenario_run_id", "order_reference_hash", "event_time"],
+    "steps": [
+      "Detect customer impact from the synthetic checkout and SLO burn signal.",
+      "Open the failing trace and identify the first unhealthy service boundary.",
+      "Pivot by trace_id and UTC window into Logan for related logs and change events.",
+      "Inspect Prometheus or OCI Monitoring metrics in their authoritative backend for saturation, restarts, and collector loss.",
+      "Assign the failing boundary to its service owner and follow the mapped Interlock runbook.",
+      "Validate recovery with a new synthetic checkout and record the incident evidence without customer payloads."
+    ],
+    "emptyResult": "A zero-row query or missing trace is inconclusive. Verify permissions, tenancy or account, region, time window, clock skew, parser and source association, collector/exporter health, field mappings, and correlation-key propagation before concluding that an event did not occur."
+  },
+  "references": [
+    "https://docs.oracle.com/en-us/iaas/Content/Monitoring/home.htm",
+    "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm",
+    "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/home.htm",
+    "https://opentelemetry.io/docs/specs/semconv/"
+  ]
+}

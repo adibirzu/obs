@@ -1,0 +1,16 @@
+title = "OCI Observability Atlas secret scanning"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated binary release assets and explicit placeholder forms"
+paths = [
+  '''assets/diagrams/.*\.pdf$''',
+  '''assets/diagrams/.*\.png$''',
+  '''assets/diagrams/.*\.zip$'''
+]
+regexes = [
+  '''<[A-Z][A-Z0-9_]*>''',
+  '''\$\{[A-Z][A-Z0-9_]*\}'''
+]

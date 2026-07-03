@@ -1,0 +1,655 @@
+{
+  "schemaVersion": "1.0.0",
+  "algorithm": "sha256",
+  "generatedBy": "npm run artifacts:update-snapshot",
+  "files": [
+    {
+      "path": "assets/diagrams/interlocks-documented/end-to-end-documented.drawio",
+      "sha256": "db66a466493fdf93904808d09d5753266303e6414bcfc6fcbaf8c0574dc2ebb0"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/end-to-end-documented.excalidraw",
+      "sha256": "c6654930d7bb5aa53c8e53a5455c5a00eb655b9ff7296eae7be9bc7d47f3e05b"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/iam-governance-documented.drawio",
+      "sha256": "3a762e75f91ed0d9cdac5612cf5f69a63503ebaf7418d83aa05836b624973a3f"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/iam-governance-documented.excalidraw",
+      "sha256": "ffe178368dd2c718c2445080355df829023b94063614d6b97d6c2b1cf5098e2b"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/landing-zone-documented.drawio",
+      "sha256": "e84f878769ff4e282b351a8779b3251da94b35e49f1711d48e55182f24912cfd"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/landing-zone-documented.excalidraw",
+      "sha256": "0fa3cdec71b01163b98f492a2f043b5f2c859ace0064689d7de15e3861ff4189"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/network-documented.drawio",
+      "sha256": "849dc96fb2cda973c89818b58e1279269347ca1a91ad74a20dab270a81a446cd"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/network-documented.excalidraw",
+      "sha256": "2b45bc0b6d71ca3d7786acbacd3398c77bcc5e96ad9abd0c37855116fb734aed"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/operations-lifecycle-documented.drawio",
+      "sha256": "2eadabde9a97716c1ad2c12cb5cf93a568c1bf13b0f8f5eed5d4e396367d0c8b"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/operations-lifecycle-documented.excalidraw",
+      "sha256": "eb98476488aa501056af82f88e4e70cb1ee9c4249617a41a244fc4c7a65bb53b"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/security-documented.drawio",
+      "sha256": "f37212a1bae23636c1fe201f2d91f7605f4ff462af23ce27d21cdb1469554d70"
+    },
+    {
+      "path": "assets/diagrams/interlocks-documented/security-documented.excalidraw",
+      "sha256": "08ff12e5731bc1c0f51a369a3fbddc443b421df86a34f01ea4abd952e00707cf"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/end-to-end.drawio",
+      "sha256": "51c645048c1523aaa08974ec2f4c39791e54e31eadc6865de382d54349125af1"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/end-to-end.excalidraw",
+      "sha256": "a30e58e0a7efa981a50b5cc80d26176c544df2217e6d9d28ea82e19cf5cd3a10"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/iam-governance.drawio",
+      "sha256": "a8bca04e919addb558313bbf0b1ac6ec37f3c5371b2fe494d5d15af6b0976243"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/iam-governance.excalidraw",
+      "sha256": "a60f1531a642ead771c2fb3cccc304f1d3fc3429aa6c914b06c391dacf51fca8"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/landing-zone.drawio",
+      "sha256": "fa7aa1c0f00fdde0393f3465abf85964ec179df644e1407593a1757b2d6c7211"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/landing-zone.excalidraw",
+      "sha256": "96580c8b581c2c82c748df5e255b105ed66faffbe9193ed0be4f51e35e054448"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/network.drawio",
+      "sha256": "36c0bb570b82fc3821350a4802df4a24ca314d2d3f1c9da45b4f00cd84e0ba6c"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/network.excalidraw",
+      "sha256": "70744cd29d0df7ab5574c2c8214c99641a946eff0a8a298c14e26f317ba8519b"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/operations-lifecycle.drawio",
+      "sha256": "fcf1d42643304561bef2e82e5b22cac094ccec6e98d3957691ecc74ba7d7c33b"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/operations-lifecycle.excalidraw",
+      "sha256": "e505394050b774b2b82bd5d335dc9488e530043aa19159c7c221f6bc8055561d"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/security.drawio",
+      "sha256": "66abe55c5d820e4a249033832f28db3ad2662e3b374eaa0a8ca61ab13c6a3d84"
+    },
+    {
+      "path": "assets/diagrams/interlocks-infographic/security.excalidraw",
+      "sha256": "982fcd848ee586ea371041aea17775e8f1a6e348ec7c522b8e9df393fead3261"
+    },
+    {
+      "path": "assets/diagrams/interlocks/end-to-end.drawio",
+      "sha256": "863bab9bb4e22e939db273d69576b5c4bf90ddac9df86e9984714f925e7ae82b"
+    },
+    {
+      "path": "assets/diagrams/interlocks/end-to-end.excalidraw",
+      "sha256": "a0a097c72a4fa84353429fedebff1d8b9921bac7424f10b835449cc2548327ff"
+    },
+    {
+      "path": "assets/diagrams/interlocks/iam-governance.drawio",
+      "sha256": "282f2b004b98ea9aeb1bb555eeef6dc20ce5fc7dab2e4612f511f37b0b77b831"
+    },
+    {
+      "path": "assets/diagrams/interlocks/iam-governance.excalidraw",
+      "sha256": "16d5397a5e05289393c1de7324bff38bf5be4f65c18c5d6d6620086c8ca78745"
+    },
+    {
+      "path": "assets/diagrams/interlocks/landing-zone.drawio",
+      "sha256": "da03b8be0529a23b132c6d65e9021eb6134821ffab3b19f54b835f3902b15977"
+    },
+    {
+      "path": "assets/diagrams/interlocks/landing-zone.excalidraw",
+      "sha256": "a63ced731411e196d70413417460042dfcd051cc7fbd1815a11469d325081e77"
+    },
+    {
+      "path": "assets/diagrams/interlocks/network.drawio",
+      "sha256": "b25c21671b79f4450f807c600d0ec369c8f59f587fa82b411b9dd79180a753ef"
+    },
+    {
+      "path": "assets/diagrams/interlocks/network.excalidraw",
+      "sha256": "ae338bfd703c0896301fdb67a82e24884636081e490e1ce656ea9d9df5f8d5dc"
+    },
+    {
+      "path": "assets/diagrams/interlocks/operations-lifecycle.drawio",
+      "sha256": "c0de43f3760b93215d9c6f235a12aa4ce7aa5f357100e0065f0ada600cf9bdd1"
+    },
+    {
+      "path": "assets/diagrams/interlocks/operations-lifecycle.excalidraw",
+      "sha256": "ff339ec9d1634cb956a9d3d08870a1d2e781d1edfe3ed8e6aa4c0dea39f85ee0"
+    },
+    {
+      "path": "assets/diagrams/interlocks/security.drawio",
+      "sha256": "be7b6f6997ea9de2197a1a75e3b9aeadf8400c36e29936f38fdda54aa1dca67f"
+    },
+    {
+      "path": "assets/diagrams/interlocks/security.excalidraw",
+      "sha256": "f62e74b0dd60809cc1f14860fb03ca42d8d86a7916345aae0a054b5c676e45bb"
+    },
+    {
+      "path": "assets/diagrams/oci-observability-service-interlocks-documented.drawio",
+      "sha256": "399136fb3e4b410a1b2daef46dcafdbd0dacff560fcf2f49e29d8f78577f178b"
+    },
+    {
+      "path": "assets/diagrams/oci-observability-service-interlocks-infographic.drawio",
+      "sha256": "1b7c104af1fcc3afa80600baad62d2025fdbc91f106b575d5d97136c7d233bbf"
+    },
+    {
+      "path": "assets/diagrams/oci-observability-service-interlocks.drawio",
+      "sha256": "8bfed0751ea9b63448e6129a35a5c727a5b09f2da41221a3a303759cfb1858df"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/capacity-to-experience.drawio",
+      "sha256": "a638818ade0522dde7fa808a28791fdda90f637b4ce3746b392fb9c9f542d451"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/capacity-to-experience.excalidraw",
+      "sha256": "b296f37da75ebac9a36937ab617700f5ad9e23c06eb6cb654f795b1c6bbf64d6"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/change-impact.drawio",
+      "sha256": "955c7a2ca718cc5cda32d80f3d52f4c6c5859251f8568a16447d3e242eb47767"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/change-impact.excalidraw",
+      "sha256": "da20dbaf7b6564e65f49c7bfcc6df9842b1d05f27bcf3218c8616d4639ce1d30"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/continuous-improvement.drawio",
+      "sha256": "c1dad574c6e3a1d8a112f69c102c23a86a17911c4eabd0a0d9cd2009d2975183"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/continuous-improvement.excalidraw",
+      "sha256": "da75edcf72e9c87fd15372f6f112da55d537b790dc5ddf2fb1708d4b19401df6"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/cost-to-service.drawio",
+      "sha256": "769ac90c4081fa4c23660bca9326985cd7b02a3b83d248f59dc111b73eb8032e"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/cost-to-service.excalidraw",
+      "sha256": "f735cb8d2a078432b31f46e1428239bc7a9eb3083073f1cae23a9b28654bad4c"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/customer-journey.drawio",
+      "sha256": "8086a6aac6f7ab00026b78e4e51909767ff3889f244ed50573cfcbe51909b6a3"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/customer-journey.excalidraw",
+      "sha256": "76f23e1149cd39d653ee2b9da36bf7f5fa2d56e9eb13ff130e894fdf1cfbe179"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/governance-to-delivery.drawio",
+      "sha256": "0169f04dfb83e9923282e9a3bc155f4b94fafc3c1ff3aafd410dc3b4ea43beea"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/governance-to-delivery.excalidraw",
+      "sha256": "f1ae4f33d3277441903b84d7216c9aedb2fb88bebbb7cc653227871c5a910003"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/release-validation.drawio",
+      "sha256": "9fd81394e22d2c865d74ae9a3af0114d976bb7791844b0732b3810b53d9b922e"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/release-validation.excalidraw",
+      "sha256": "98cd41d3a64ab8730f1a3b7fad670d22237b8e4531407ef9fd59f03928c7ff90"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/resilience-exercise.drawio",
+      "sha256": "04cd85fa396c1deadcfa72f8c2ac62297a4f390470d930b59f099761740e4665"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/resilience-exercise.excalidraw",
+      "sha256": "a956c49943311a31b9aebfde047410f94210d7f0a387a0d618631360142957f8"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/security-to-operations.drawio",
+      "sha256": "14ec6f88f9b56ac8b7cd6fc30aa04a253b46009caecb2a92359706df3be65891"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/security-to-operations.excalidraw",
+      "sha256": "8fc0b084414b8b71e809e9ba2c9ef792c916ce37cfe82f3f45198329a2cbcf16"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/service-degradation.drawio",
+      "sha256": "29444b2fcd17945dc757d024777df13d2892e794ac1ee808fa8420715f16be4d"
+    },
+    {
+      "path": "assets/diagrams/usecases/end-to-end/service-degradation.excalidraw",
+      "sha256": "227d4cde072ca585d14f0763b4c99c1f8e105c77e04cfad61df83d29ed709180"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/access-certification.drawio",
+      "sha256": "87c8bcddde567ad87e7cba152d7223c561dc4e373993f01ae584c117361c3741"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/access-certification.excalidraw",
+      "sha256": "725e780c1e2f32c92e8ab3662385f0ffc7a493d6a243fd9d993c50cd4215a964"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/api-credential.drawio",
+      "sha256": "339653facdd45a682bfd6ad0769914368f153f190d2351e0d0cc95937bd66e92"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/api-credential.excalidraw",
+      "sha256": "fa431d33f90f12590a6eb61f2603d1663e67762994b74069d03bbb4f7dd4967c"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/compartment-boundary.drawio",
+      "sha256": "f4cf9a0c97d5a31c3cb05821ee322a9f7f1c0ff618ac2e19398f49aab95e9143"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/compartment-boundary.excalidraw",
+      "sha256": "a958ac238fea15d32f5867e60560a4a82a2fa85e22335386a63667e5d651f8d7"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/dynamic-group.drawio",
+      "sha256": "d34375271a2edbf4ad5a24037989151743751e5b22204262ed93416cbdb44fac"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/dynamic-group.excalidraw",
+      "sha256": "4384c149e02a1902ef1b3f7a81d6341caad0e6f92dfe6baf6ea00ceff406e8ea"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/federation-health.drawio",
+      "sha256": "3c4a3cf8255b53c648cb41835a7eee1d5f7269da0adaf93f845ec90e425c2aba"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/federation-health.excalidraw",
+      "sha256": "a0facec1343e6d2dbd4ef778eda428d4bbff898904c2e90d5501eb114378fe40"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/organization-change.drawio",
+      "sha256": "d7dcde3743487ebbd69d08dcd1587553895edf5f06280d951c270e1eaaff780e"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/organization-change.excalidraw",
+      "sha256": "0be95118055ed5b9935247059534d217a3b52db12df24da56692a904a79bb3aa"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/policy-change.drawio",
+      "sha256": "d472d52a42e275c8496958f1490426b6f3be4b8b17a5b0af842428c1d522356f"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/policy-change.excalidraw",
+      "sha256": "c489a7a4914deb2d02e26a283dd4becf4b02a212b341431dfd3ed370be23db8d"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/privilege-review.drawio",
+      "sha256": "e416aa1f619226f7c965251193a4ba8763e7afc4170e8f29ebac88e3603ac0ad"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/privilege-review.excalidraw",
+      "sha256": "b9f4cd456f575f0cc7c9f61898db62c4291ae5b817b42afe37328f9bf124b48b"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/quota-control.drawio",
+      "sha256": "121af2e457eba70edbf9722c0a22639c29bc61038830bee5c968e9f3295ada2f"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/quota-control.excalidraw",
+      "sha256": "67b701848a600b326026b673baf191663e15df1d19087564ebf763e60e2da13a"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/tag-governance.drawio",
+      "sha256": "93dd4d62a547a08107a6f566e5e556b22579e562d73c41b522a3a22fa021a976"
+    },
+    {
+      "path": "assets/diagrams/usecases/iam-governance/tag-governance.excalidraw",
+      "sha256": "9416d1d7d6750a6b6bd0dbbd4af1e112478b0db57ac8774d77b971262b57d1c3"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/baseline-provisioning.drawio",
+      "sha256": "947934e6b918a267c7824050ac43f2ae7c8b09104069c31bbb9ff22fe68e9ca4"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/baseline-provisioning.excalidraw",
+      "sha256": "1dcdda665a5f2a2ed796bdd7b27d4553337af869d83d30ef849f981d98149069"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/cost-baseline.drawio",
+      "sha256": "4e5fb4dcb3e15da8d945d64637ffb08e40222fe848d88505871090bdbb8ebe4c"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/cost-baseline.excalidraw",
+      "sha256": "dd344481f10b64a4373e13a191b2f3d50e371e1db2c669a099715b7a9efa64da"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/deployment-validation.drawio",
+      "sha256": "2335d1cf178d05887c7f9c7edc6a3b12095d293dd20018a1ff52c0bc2a442469"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/deployment-validation.excalidraw",
+      "sha256": "a1fae7c83e82253d036f3fcaeff067e35a18c02d0411f2713d87f57f28a44c87"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/guardrail-drift.drawio",
+      "sha256": "4d76ba82c46f459d8c1a4fd44ff0dd33d23b00894a890aaa122cb0ca2bc85d35"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/guardrail-drift.excalidraw",
+      "sha256": "4c98e91c424fd01c38d3df8187e7774183841a5a5d6c1d4c1b8e0f1e28b18935"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/identity-foundation.drawio",
+      "sha256": "16278d8c316384388794dc0c09601afab1d81b7925429f19de9d03214d6abf8b"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/identity-foundation.excalidraw",
+      "sha256": "b4cc95ea5d8e290ab3e64e603ab2ee707f8118a08510944bfd97a55ffe239faf"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/logging-onboarding.drawio",
+      "sha256": "c2f7338168cae1946b1783e9775d628252a324bb221752e32ebe823a05d39c0b"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/logging-onboarding.excalidraw",
+      "sha256": "9caf13ae52c6e8df6da7d00a663a8fb435222ed6aed774362c2292d748197670"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/network-foundation.drawio",
+      "sha256": "f7dc4da294ad6622ae6c39431e9ff94b97f703fbb457d59b669508ba8181acc0"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/network-foundation.excalidraw",
+      "sha256": "df2eb96dcf4f2377046aa942be81b612b5f7f3ca0a21c996d59b84d1a5dac299"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/operational-readiness.drawio",
+      "sha256": "0ef4c466d94ae5b096c6a6117acbb161774d3ccf85eefe2405e1bc9f76ae1c72"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/operational-readiness.excalidraw",
+      "sha256": "9aefe648d215d989cdfacacbeaed15bda25c6dddd8f2ae029c8bf5be71d45b61"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/policy-exception.drawio",
+      "sha256": "596a29eef8b17d00197fad56b3413142cb9195b6ce6d3cb47e70ed97fd14712d"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/policy-exception.excalidraw",
+      "sha256": "03cb7ecc3ce3f9a52b136a251d6141d973c9773af7242da52646436d962bf10f"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/resource-hygiene.drawio",
+      "sha256": "65c315d3ec75e9819152dbfbb4fa488b8c6683ec587dab94a61621a2eb893cd7"
+    },
+    {
+      "path": "assets/diagrams/usecases/landing-zone/resource-hygiene.excalidraw",
+      "sha256": "da4383a94df708fed8475b7da1fb780fc5455a25d4426dcfd4cbb60332338d51"
+    },
+    {
+      "path": "assets/diagrams/usecases/manifest.json",
+      "sha256": "a4b8263ea5546fc3cad241cbea8fc08af89cf83d021af4cae51439e06396fca6"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/dns-path.drawio",
+      "sha256": "efe451541294351f9471edc82263f4b6ce6803df4e99d44fb72bd6884acd6564"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/dns-path.excalidraw",
+      "sha256": "592568845145c501f4b3d3f61fd047dd63875c03eaa80a7c1ed115afa5817d04"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/firewall-waf.drawio",
+      "sha256": "1e7788e0c993cae51cd1d4cc548bf3eb52b4a94d4d77a2bba4d89d3a574d0de6"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/firewall-waf.excalidraw",
+      "sha256": "d4d246adca8a322c47c6f03c47f8a7785a3538080e80095714b7ce81a6c72f78"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/flow-logs.drawio",
+      "sha256": "bcdc596ee43095a5f3d024fdec5d63775602ddb646eba8ac993145bfeb674232"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/flow-logs.excalidraw",
+      "sha256": "006ec1439f175ae1f5e83ebd5aaa4b367c468a4d5939b1eafb6dc58b7451b2c1"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/hybrid-connectivity.drawio",
+      "sha256": "9110b9b42ca1d5f04d5a403613573f29a48a3cf3a5c76c2315490dfced80afad"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/hybrid-connectivity.excalidraw",
+      "sha256": "05f364f5a2f6f77b780cca6ba716a2ac9f734567b094b20b0985ea578203a5e6"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/load-balancer.drawio",
+      "sha256": "b1d9b0350f76020fe4175c6a1e07f1dc30fedfcb7874081b447d8388e896a0a7"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/load-balancer.excalidraw",
+      "sha256": "4c07237bfe8f4f8cda088863f3ded415c0360ba8393396e7fb478bfc6938872c"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/nsg-change.drawio",
+      "sha256": "e2a8a55b3c71646b8e9dc493a7bcd0c4b2230b2e268068db78bd1e1f643bc390"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/nsg-change.excalidraw",
+      "sha256": "ba47862df729f7888a5ef7871470eaa8cf286104ac16eae58ad5fb71633b7c40"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/path-analyzer.drawio",
+      "sha256": "dd3dac823bb28066dc8a5133b630a9c0aabafeaec545d7536a7360ab909efebe"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/path-analyzer.excalidraw",
+      "sha256": "1fac2ab1229789de2c3d866388d46c906a97876687395ec17f4a26437dffbbe8"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/routing.drawio",
+      "sha256": "e9d4955fdb25e4b6e26732511a7dcaeb1d147087b584cbee001b2c1a120ed509"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/routing.excalidraw",
+      "sha256": "d43031feedd5e6508cb1aa24ff3973719dc16633212aa15f1778239a83289e7a"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/vtap.drawio",
+      "sha256": "6bd5bda6e104731885dedaf0c64dabade2abb0225565435ac34da2a9890934f1"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/vtap.excalidraw",
+      "sha256": "78b77a6e02086ac3a32b72d39f39fbfe65bdfd0254bdacf92de6672562d79b5f"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/zpr-log-analytics.drawio",
+      "sha256": "f841e584387cb9ca944803d2ca5bae6ba55922afa1e4ace11f3b070bed1a6d24"
+    },
+    {
+      "path": "assets/diagrams/usecases/network/zpr-log-analytics.excalidraw",
+      "sha256": "22e7f3169db7adcbb123da9a1738b166de54de25149d9755ec92fefa02fe75df"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/capacity-planning.drawio",
+      "sha256": "3c37f05fce39bf50a6311fb6712a06bc3ec43d920ccc502d6afd15087ba42561"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/capacity-planning.excalidraw",
+      "sha256": "ad95e4121f0bde001e29c6a37a9b048e2b5393767329dedfca4438b16b652392"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/database-insight.drawio",
+      "sha256": "0860923c2baec57b109d274d6f26e2c719b16fb14192b230ba87fe476b4c16d6"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/database-insight.excalidraw",
+      "sha256": "ceaf4b45652fdb36121ea2f0b29978c1cddc58186161fdcbd98b089d0915e7e4"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/fleet-health.drawio",
+      "sha256": "ba1ff94a52404c9fee40c8b4d6185033667f219537d551136fd0878b8d3be9b5"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/fleet-health.excalidraw",
+      "sha256": "190280e3abc1845ec5af55293180658e96ef161cefce24308313b7beee313a2c"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/incident-correlation.drawio",
+      "sha256": "c8fc3b63ff1361a0d2085fa99ff1297056bade2ab2fd8a43835fec93e9729bbd"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/incident-correlation.excalidraw",
+      "sha256": "f6a28baadb8dc4b7ce11e5a77825a204ad165a12f3be8e4dd7c13af0cebd2b6b"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/log-anomaly.drawio",
+      "sha256": "ec72e0f8d2a8f24f3daf4056f240755461f3e756f9cf7185481334bd331360f3"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/log-anomaly.excalidraw",
+      "sha256": "84ab7b0c9b3eb26b8a924841a27aaa55ecc28effa4c63a17aaf4441b452b63c3"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/maintenance-impact.drawio",
+      "sha256": "041dc465ce91631d87e4ac489d47bd4cb8871641a72126ebcfc71cbe38daf6b9"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/maintenance-impact.excalidraw",
+      "sha256": "3b344cd19b8cdb951724d2391515ffc8a183a3eae836c5276b69459979d71509"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/post-incident.drawio",
+      "sha256": "4a800085677ad85bd3061ebe95bb1b92b4052dc5c71366b0a109a20407494bfb"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/post-incident.excalidraw",
+      "sha256": "4b0167d3e99035f4facd5fe38aff3f6b3db94c29995a962835fedade36dfa174"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/resource-optimization.drawio",
+      "sha256": "31758f611e0aa1a3123006ae886bea2d3026037402c3cdaabf7860d682552663"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/resource-optimization.excalidraw",
+      "sha256": "a4361170b9e02c2c5d897cebdd2b90a1d9d2a41dd076a23a8ec49b97733a81ca"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/runbook-effectiveness.drawio",
+      "sha256": "d53933dd92910607797caced0d53b0664a35f6aa5efaecafb548295362e5d904"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/runbook-effectiveness.excalidraw",
+      "sha256": "12e564d4109cbd792b33e776cf02c236a05be2f15ba7cdffcef015c02a14569c"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/slo-review.drawio",
+      "sha256": "30400f39640348a6624264cb0fe57ab8b5e5c219aee5427cef8e7239d946213e"
+    },
+    {
+      "path": "assets/diagrams/usecases/operations-lifecycle/slo-review.excalidraw",
+      "sha256": "51a4d86fadb45f35c7fdb2e41a5921b8ec1d21ba4f98381aee8b218b0587c1a6"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/audit-change.drawio",
+      "sha256": "aa6f3f93e82376f10f51b85acd406d1d908d6dc48907097c919002fad7d36443"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/audit-change.excalidraw",
+      "sha256": "0faa43010e866d909f7705deb474bad41f85cd1bf07208e0d84758736d888a42"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/cloud-guard-triage.drawio",
+      "sha256": "90a703b96ff1c344d25a8ef70792ac494776cb5d89b76d33d4b02b6a246c0b75"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/cloud-guard-triage.excalidraw",
+      "sha256": "dcdd88a8c698c9f309b4cfbf7b912eba31593cf3dfa1a67ee8262a0bdd7592b9"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/compliance-evidence.drawio",
+      "sha256": "e58df614654745335039b9cf83f2858024193b1d7e8f809518b79d9edb3efef1"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/compliance-evidence.excalidraw",
+      "sha256": "525c8b94acd35ba15410b8a9962bbcd04aef72c1bb3b8ce3ee9e2320773fbbff"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/identity-anomaly.drawio",
+      "sha256": "c6ed0d31e04062c160787bb0fb4a05a3650064c52acb9fe3f82649a70afba31f"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/identity-anomaly.excalidraw",
+      "sha256": "9409b616009c53e9434ccd1e1c8f8576c0b8181d81e36d35c6bdec6b679e0589"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/incident-response.drawio",
+      "sha256": "3d96788b7d42e59ca3bf4fcf37dce5c1013e465fa66c81889387b369218e5d5b"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/incident-response.excalidraw",
+      "sha256": "babde6ce29f99480ff97b581a7a8239c1d7f2d2c7208c75f63424a5a66b2b3c3"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/key-usage.drawio",
+      "sha256": "7330e86b882333f18ccac0641a98f0799ea5501b58df0f505a6507804f1ca530"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/key-usage.excalidraw",
+      "sha256": "50582822a1b4dfe2c9e088799377110fb26931edc255f22a16a4b50bedd91bdf"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/network-firewall.drawio",
+      "sha256": "3493be1433217e8af86b1646fc8df7607c6bb037dbf20ef056bb0ec6f332e921"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/network-firewall.excalidraw",
+      "sha256": "799f9219790432d434cf05d6489e57a23930468df911e0406b3e9fb8d5a557ef"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/security-zone.drawio",
+      "sha256": "5bfaf0094eb878a04e05feb7810d99de0173c6bd79450fd20db1dad2c3cdd267"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/security-zone.excalidraw",
+      "sha256": "ef08ba623ce6201716062889dd45e100a8dcb6fb2f815dcf01658fb2548a2662"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/vulnerability-exposure.drawio",
+      "sha256": "cc3c29505b8ebdfb0c6e6ab7cdd4c6652e594c7382c7e3d6b54553f58a03f0b4"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/vulnerability-exposure.excalidraw",
+      "sha256": "b6852268f0cdd41a41d0d321527d73dc9a5ccae017e64a0d10116f867a83a9d2"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/waf-threat-pattern.drawio",
+      "sha256": "e65bd118aadd4d6dcf419d28c4104b99da5b2a705384ee29cb4c670a45ea2692"
+    },
+    {
+      "path": "assets/diagrams/usecases/security/waf-threat-pattern.excalidraw",
+      "sha256": "67ac01ef14b9c1eed9132c76ad133ee8f41b77fa7a41d6e49180b2b85cdadd5c"
+    },
+    {
+      "path": "assets/interlocks/catalog-data.js",
+      "sha256": "9740a3b6256cc1a7bbc5a2601e2b5b4cff7b7ee0ec0ba564e619e7226fb643a8"
+    },
+    {
+      "path": "assets/interlocks/documentation-sources.json",
+      "sha256": "59c161cc2033f2e109695dfa38c40f7c9c63448b29c9d614eac16415036b161e"
+    }
+  ]
+}

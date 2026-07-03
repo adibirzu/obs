@@ -42,18 +42,18 @@ window.OBS_RESOURCES = [
     ],
   },
   {
-    key: "logging-analytics", label: "OCI Logging Analytics", comp: "analyze", module: "module-loganalytics",
+    key: "logging-analytics", label: "Oracle Log Analytics", comp: "analyze", module: "module-loganalytics",
     items: [
       { title: "Mastering cloud cost control with OCI Log Analytics", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/finops", summary: "Import the FinOps FOCUS cost-and-usage report into Logging Analytics for custom spend dashboards." },
       { title: "Inject Oracle Fusion HCM logs into Logging Analytics", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/fusion-hcm-to-la", summary: "Use predefined parsers and sources to ingest Fusion HCM application logs via REST API." },
-      { title: "OCI Logging Analytics demo", url: "https://www.youtube.com/watch?v=1bJb92put4k", summary: "Index, search, analyse, and visualise log data with Oracle Logging Analytics." },
+      { title: "Oracle Log Analytics demo", url: "https://www.youtube.com/watch?v=1bJb92put4k", summary: "Index, search, analyse, and visualise log data with Oracle Log Analytics." },
     ],
     projects: [
-      { title: "logan-security-dashboard", url: "https://github.com/adibirzu/logan-security-dashboard", summary: "Prebuilt security dashboards for OCI Logging Analytics (Next.js monorepo)." },
-      { title: "oci-log-analytics-detections", url: "https://github.com/adibirzu/oci-log-analytics-detections", summary: "Detection rules and content for OCI Logging Analytics." },
-      { title: "OCILoggingAnalytics", url: "https://github.com/adibirzu/OCILoggingAnalytics", summary: "Reusable OCI Logging Analytics assets — sources, parsers, dashboards." },
-      { title: "LoggingAnalyticsFiles", url: "https://github.com/adibirzu/LoggingAnalyticsFiles", summary: "Sources and parsers created for security use cases in OCI Logging Analytics." },
-      { title: "mcp-oci-logan-server", url: "https://github.com/adibirzu/mcp-oci-logan-server", summary: "MCP server exposing OCI Logging Analytics to AI agents." },
+      { title: "logan-security-dashboard", url: "https://github.com/adibirzu/logan-security-dashboard", summary: "Prebuilt security dashboards for Oracle Log Analytics (Next.js monorepo)." },
+      { title: "oci-log-analytics-detections", url: "https://github.com/adibirzu/oci-log-analytics-detections", summary: "Detection rules and content for Oracle Log Analytics." },
+      { title: "OCILoggingAnalytics", url: "https://github.com/adibirzu/OCILoggingAnalytics", summary: "Reusable Oracle Log Analytics assets — sources, parsers, dashboards." },
+      { title: "LoggingAnalyticsFiles", url: "https://github.com/adibirzu/LoggingAnalyticsFiles", summary: "Sources and parsers created for security use cases in Oracle Log Analytics." },
+      { title: "mcp-oci-logan-server", url: "https://github.com/adibirzu/mcp-oci-logan-server", summary: "MCP server exposing Oracle Log Analytics to AI agents." },
       { title: "octo-observability-demo", url: "https://github.com/adibirzu/octo-observability-demo", summary: "End-to-end reference platform with source-controlled Log Analytics parsers, saved searches, and dashboards." },
     ],
   },
@@ -96,9 +96,7 @@ window.OBS_RESOURCES = [
   },
   {
     key: "shared", label: "Hybrid and shared assets", comp: "agent", module: "module-dbmgmt",
-    items: [
-      { title: "Enable O&M for external databases with Terraform", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/shared-assets/external-database-enablement", summary: "Terraform asset enabling Database Management, Ops Insights, and Stack Monitoring for many external databases from JSON input." },
-    ],
+    items: [],
     projects: [
       { title: "Multicloud", url: "https://github.com/adibirzu/Multicloud", summary: "Scripts for multi-cloud observability services." },
       { title: "ObservabilityKB", url: "https://github.com/adibirzu/ObservabilityKB", summary: "Knowledge base for OCI observability topics." },
@@ -106,9 +104,7 @@ window.OBS_RESOURCES = [
   },
   {
     key: "cost", label: "Cost and usage", comp: null, module: "module-home",
-    items: [
-      { title: "Tenancy usage and cost reports (Usage2ADW)", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/tenancy-usage-cost-reports", summary: "Load OCI usage and cost reports into Autonomous Data Warehouse for granular spend analysis and OAC visualisations." },
-    ],
+    items: [],
     projects: [
       { title: "oci-usage-to-adw-function", url: "https://github.com/adibirzu/oci-usage-to-adw-function", summary: "OCI Function that loads usage and cost data into Autonomous Data Warehouse." },
       { title: "oci-scheduled-report-automation", url: "https://github.com/adibirzu/oci-scheduled-report-automation", summary: "Email an OCI Scheduled Report as an attachment when it lands in Object Storage." },
@@ -122,7 +118,6 @@ window.OBS_RESOURCES = [
       { title: "oci-mcp-gateway", url: "https://github.com/adibirzu/oci-mcp-gateway", summary: "Centralized OKE gateway for OCI MCP servers (260+ tools) — JWT auth, health, audit logging." },
       { title: "multi-mcp-gateway", url: "https://github.com/adibirzu/multi-mcp-gateway", summary: "Unified HTTP gateway for orchestrating multiple Model Context Protocol servers." },
       { title: "oci-skills", url: "https://github.com/adibirzu/oci-skills", summary: "Tenancy-agnostic OCI admin skill pack — IAM, security, observability, and database." },
-      { title: "DevVisualization", url: "https://github.com/adibirzu/DevVisualization", summary: "Local-first project knowledge graph (KAG) — a read-only code knowledge surface for agents." },
     ],
   },
 ];

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore six editable OCI Observability service-interlock posters and a source-grounded service reference." />
+  <meta name="theme-color" content="#FBF9F8" />
+  <title>OCI Observability Service Interlocks — OCTO Observability Atlas</title>
+  <link rel="icon" type="image/png" href="assets/octo/octo-logo.png?v=4" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/redwood/styles.css" />
+  <link rel="stylesheet" href="assets/interlocks/interlocks.css" />
+</head>
+<body>
+  <div class="skip-links" aria-label="Skip links">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#services">Skip to service reference</a>
+    <a class="skip-link" href="#artifacts">Skip to editable files</a>
+  </div>
+  <header class="interlock-nav">
+    <div class="interlock-wrap interlock-nav__row">
+      <a class="interlock-brand" href="index.html" aria-label="Back to OCTO Observability Atlas">
+        <img src="assets/octo/octo-logo.png?v=4" alt="" width="38" height="38" />
+        <span>Observability Atlas</span>
+      </a>
+      <nav aria-label="Interlock page">
+        <a href="#logan-interlock">Logan</a>
+        <a href="#explorer">Explorer</a>
+        <a href="#services">Services</a>
+        <a href="#artifacts">Files</a>
+        <a class="interlock-button interlock-button--quiet" href="index.html">Back to atlas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="interlock-hero">
+      <div class="interlock-wrap interlock-hero__grid">
+        <div>
+          <p class="interlock-eyebrow">Editable architecture field guide · six interlocks · one operating model</p>
+          <h1>See how OCI services become <em>operational evidence.</em></h1>
+          <p class="interlock-hero__lede">Move from cloud-foundation signals to correlated observability, governed action, and measurable outcomes. Every poster is a fully editable vector sheet built for architecture reviews, workshops, and large-format export.</p>
+          <div class="interlock-actions">
+            <a class="interlock-button interlock-button--primary" href="assets/diagrams/oci-observability-service-interlocks-documented.drawio" download>Download documented Draw.io</a>
+            <a class="interlock-button interlock-button--secondary" href="#artifacts">All editable files</a>
+            <a class="interlock-button interlock-button--secondary" href="https://app.diagrams.net/" target="_blank" rel="noopener noreferrer">Open diagrams.net <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="interlock-hero__note">Open the downloaded file in diagrams.net. Each sheet is uncompressed XML on a 3000 × 4243 A-series 4K poster canvas. DOC badges open official Oracle sources, while labels, icons, lanes, groups, and colors remain editable at any export resolution.</p>
+        </div>
+        <aside class="poster-spec" aria-label="Artifact specification">
+          <span class="poster-spec__kicker">Poster system 01—06</span>
+          <strong>Vector first.</strong>
+          <div class="poster-spec__grid">
+            <span><b>6</b> sheets</span>
+            <span><b>35</b> services</span>
+            <span><b>A-series</b> ratio</span>
+            <span><b>∞</b> scalable</span>
+          </div>
+          <div class="poster-spec__flow" aria-hidden="true">
+            <i>signal</i><span>→</span><i>context</i><span>→</span><i>action</i>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="logan-interlock" id="logan-interlock" aria-labelledby="logan-interlock-title">
+      <div class="interlock-wrap logan-interlock__grid">
+        <div>
+          <p class="interlock-eyebrow">Cross-domain correlation layer</p>
+          <h2 id="logan-interlock-title">Logan across every interlock.</h2>
+          <p>Oracle Log Analytics, called Logan in this field guide, now appears throughout network, security, IAM, landing-zone, operations, and end-to-end workflows. It turns mixed operational records into searchable evidence, clusters recurring patterns, links related activity, and supports scheduled detections.</p>
+        </div>
+        <ol class="logan-interlock__signals" aria-label="Signal routing boundaries">
+          <li><b>Logs and events</b><span>Ingest file, syslog, database, Windows event, REST, OCI service, Streaming, Object Storage, and OpenTelemetry log records.</span></li>
+          <li><b>Metrics</b><span>Extract measures from log records or correlate them with OCI Monitoring using shared time, entity, and workload labels.</span></li>
+          <li><b>Prometheus</b><span>Prometheus exporter metrics remain in a metric backend. Pair them with Logan records rather than describing Logan as a Prometheus scraper.</span></li>
+          <li><b>APM</b><span>APM remains a linked service in current public documentation. Correlate traces and logs with trace context; treat any future consolidation as roadmap-dependent.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="interlock-section interlock-section--explorer" id="explorer" aria-labelledby="explorer-title">
+      <div class="interlock-wrap">
+        <div class="section-heading">
+          <div>
+            <p class="interlock-eyebrow">Interactive companion</p>
+            <h2 id="explorer-title">Explore the interlocks before opening the poster.</h2>
+          </div>
+          <p>Select a domain to inspect its sources, control-plane services, outcomes, and operating loop. The web view and Draw.io file share the same canonical catalog.</p>
+        </div>
+
+        <div class="diagram-tabs" id="diagram-tabs" role="tablist" aria-label="Interlock diagrams"></div>
+        <article class="architecture-board" id="architecture-board" role="tabpanel" tabindex="0" aria-labelledby="diagram-title">
+          <header class="architecture-board__head">
+            <span id="diagram-index"></span>
+            <div>
+              <h3 id="diagram-title">Loading interlock…</h3>
+              <p id="diagram-subtitle"></p>
+            </div>
+          </header>
+          <p class="architecture-board__purpose" id="diagram-purpose"></p>
+          <div class="architecture-board__legend" id="diagram-legend" aria-label="Signal legend"></div>
+          <div class="architecture-flow" id="architecture-flow"></div>
+          <div class="operating-loop" aria-label="Reference operating loop">
+            <span class="operating-loop__label">Reference loop</span>
+            <ol id="workflow-list"></ol>
+          </div>
+          <footer class="architecture-board__foot">
+            <div><span>Example interlocks</span><ul id="example-list"></ul></div>
+            <a href="#services" id="show-services-link">Inspect services in this sheet ↓</a>
+          </footer>
+        </article>
+        <aside class="community-scenarios" id="community-scenarios" aria-labelledby="community-scenarios-title" hidden>
+          <div>
+            <p class="interlock-eyebrow">Community operating profiles</p>
+            <h3 id="community-scenarios-title">Scenarios mapped to this interlock</h3>
+          </div>
+          <div class="community-scenarios__grid" id="community-scenario-list"></div>
+        </aside>
+        <div class="load-error" id="load-error" role="alert" hidden>
+          <strong>The interactive catalog could not load.</strong>
+          <p>You can still use the editable files below. If this page was copied separately, copy the complete <code>assets/interlocks/</code> directory with it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="interlock-section" id="services" aria-labelledby="services-title">
+      <div class="interlock-wrap">
+        <div class="section-heading section-heading--services">
+          <div>
+            <p class="interlock-eyebrow">Source-grounded reference</p>
+            <h2 id="services-title">Service details, signals, and official sources.</h2>
+          </div>
+          <p>Filter the catalog by the active diagram, service family, or keyword. Open any service for its role in the interlock and a direct Oracle documentation link.</p>
+        </div>
+
+        <div class="service-toolbar" aria-label="Service filters">
+          <label class="field">
+            <span>Search services</span>
+            <input id="service-search" type="search" placeholder="Try ‘audit’, ‘fleet’, or ‘path’" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>Diagram scope</span>
+            <select id="domain-filter"><option value="active">Active diagram</option><option value="all">All diagrams</option></select>
+          </label>
+          <label class="field">
+            <span>Service family</span>
+            <select id="category-filter"><option value="all">All families</option></select>
+          </label>
+          <button class="interlock-button interlock-button--quiet service-toolbar__print" id="print-catalog" type="button">Print reference</button>
+        </div>
+        <div class="service-status" id="service-status" role="status"></div>
+        <div class="service-grid" id="service-grid"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <strong>No matching services.</strong>
+          <p>Clear a filter or try a broader term.</p>
+          <button class="interlock-button interlock-button--secondary" id="clear-filters" type="button">Clear filters</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="interlock-section interlock-section--artifacts" id="artifacts" aria-labelledby="artifacts-title">
+      <div class="interlock-wrap">
+        <div class="section-heading">
+          <div>
+            <p class="interlock-eyebrow">Editable source library</p>
+            <h2 id="artifacts-title">Every diagram, in both editable formats.</h2>
+          </div>
+          <p>Use the combined six-sheet Draw.io workbook, or download an individual Draw.io, Excalidraw, or print-quality vector PDF poster. The documented edition includes clickable official sources and labels independent architecture inferences explicitly.</p>
+        </div>
+        <div class="artifact-feature">
+          <div>
+            <span>Complete workbook</span>
+            <strong>Six sheets · one Draw.io file</strong>
+          </div>
+          <div class="interlock-actions">
+            <a class="interlock-button interlock-button--primary" href="assets/diagrams/oci-observability-service-interlocks-documented.drawio" download>Download documented workbook</a>
+            <a class="interlock-button interlock-button--secondary" href="assets/interlocks/documentation-sources.json" download>Download source register</a>
+          </div>
+        </div>
+        <div class="artifact-grid" id="artifact-library" aria-live="off"></div>
+      </div>
+    </section>
+
+    <section class="maintainer-note">
+      <div class="interlock-wrap maintainer-note__grid">
+        <div>
+          <p class="interlock-eyebrow">Designed to evolve</p>
+          <h2>One data file. Three maintained surfaces.</h2>
+        </div>
+        <div>
+          <p>Edit <code>assets/interlocks/catalog.json</code>, run <code>npm run generate:interlocks:documented</code>, and the explorer, source register, Draw.io files, and Excalidraw files stay aligned.</p>
+          <p class="maintainer-note__disclaimer">Independent community reference—not an Oracle product. Verify architecture and service behavior against the linked official documentation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="interlock-footer">
+    <div class="interlock-wrap">
+      <span>OCTO Observability Atlas</span>
+      <span>OCI Observability Service Interlocks · community reference</span>
+    </div>
+  </footer>
+
+  <dialog class="service-dialog" id="service-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-summary">
+    <div class="service-dialog__bar">
+      <span id="dialog-category"></span>
+      <button id="dialog-close" type="button" aria-label="Close service details" autofocus>×</button>
+    </div>
+    <div class="service-dialog__body">
+      <h2 id="dialog-title"></h2>
+      <p class="service-dialog__summary" id="dialog-summary"></p>
+      <div class="service-dialog__section">
+        <h3>Role in the interlock</h3>
+        <p id="dialog-interlock"></p>
+      </div>
+      <div class="service-dialog__section">
+        <h3>Signals and context</h3>
+        <div class="signal-tags" id="dialog-signals"></div>
+      </div>
+      <div class="service-dialog__section">
+        <h3>Appears in</h3>
+        <div class="signal-tags signal-tags--domains" id="dialog-domains"></div>
+      </div>
+      <a class="interlock-button interlock-button--primary" id="dialog-docs" href="#" target="_blank" rel="noopener noreferrer">Read official Oracle documentation <span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>
+
+  <div class="visually-hidden" id="page-status" role="status" aria-live="polite" aria-atomic="true"></div>
+  <noscript><p class="noscript">JavaScript is unavailable, so the interactive filters are disabled. The combined editable Draw.io workbook remains available above.</p></noscript>
+  <script defer src="assets/scenarios.js"></script>
+  <script defer src="assets/interlocks/catalog-data.js"></script>
+  <script defer src="assets/interlocks/workflow-governance.js"></script>
+  <script defer src="assets/interlocks/network-drilldowns.js"></script>
+  <script defer src="assets/interlocks/domain-drilldowns.js"></script>
+  <script defer src="assets/interlocks/interlocks.js"></script>
+</body>
+</html>

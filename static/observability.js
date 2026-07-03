@@ -111,7 +111,7 @@
             target: 'integrations',
             section: 'prometheus',
             label: 'Prometheus ingestion lane',
-            description: 'Management Agent, Monitoring, and Log Analytics patterns for Prometheus telemetry.',
+            description: 'Management Agent and Monitoring patterns for Prometheus metrics, correlated with separate Logan evidence.',
             category: 'Deep dive',
             keywords: ['prometheus', 'ingestion', 'oke', 'slo', 'management agent']
         },
@@ -223,12 +223,17 @@
         mobileNavClose: null,
         mobileNavBackdrop: null,
         mobileDrawer: null,
-        mobileCurrentModule: null
+        mobileCurrentModule: null,
+        mobileMapItems: null
     };
     const runtime = {
         initializedFeatures: new Set(),
         revealObserver: null,
-        counterObserver: null
+        counterObserver: null,
+        mobileMapObserver: null,
+        pendingMobileMapSection: null,
+        mobileNavReturnFocus: null,
+        mobileNavBackgroundState: []
     };
     const REVEAL_SELECTOR = [
         '.service-card',
@@ -286,7 +291,9 @@
         initTheme();
         initTierToggle();
         initCloudGuardToggle();
+        initScalePatternState();
         initRouting();
+        initLaunchpadMobileMap();
         initMindmapConnections();
         initAnimations();
         initCounters();
@@ -367,12 +374,7 @@
     // ============================================
     function initTierToggle() {
         document.querySelectorAll('[data-toggle-kind="tier"]').forEach(toggle => {
-            toggle.querySelectorAll('.toggle-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    const tier = option.dataset.value;
-                    setTier(tier);
-                });
-            });
+            bindOptionCluster(toggle, '.toggle-option', option => setTier(option.dataset.value));
         });
 
         applyTier(state.tier);
@@ -416,12 +418,7 @@
 
     function initCloudGuardToggle() {
         document.querySelectorAll('[data-toggle-kind="cloud-guard"]').forEach(toggle => {
-            toggle.querySelectorAll('.toggle-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    const value = option.dataset.value;
-                    setCloudGuardMode(value);
-                });
-            });
+            bindOptionCluster(toggle, '.toggle-option', option => setCloudGuardMode(option.dataset.value));
         });
 
         applyCloudGuardMode(state.cloudGuardMode);
@@ -451,6 +448,33 @@
             toggle.dataset.value = value;
             toggle.querySelectorAll('.toggle-option').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.value === value);
+                opt.setAttribute('aria-pressed', String(opt.dataset.value === value));
+            });
+        });
+    }
+
+    function bindOptionCluster(container, selector, onSelect) {
+        const options = [...container.querySelectorAll(selector)];
+        container.setAttribute('role', 'group');
+        options.forEach(option => {
+            option.setAttribute('role', 'button');
+            option.tabIndex = 0;
+            option.addEventListener('click', () => onSelect(option));
+            option.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    onSelect(option);
+                    return;
+                }
+                if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+                event.preventDefault();
+                const currentIndex = options.indexOf(option);
+                const nextIndex = event.key === 'Home'
+                    ? 0
+                    : event.key === 'End'
+                        ? options.length - 1
+                        : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + options.length) % options.length;
+                options[nextIndex].focus();
             });
         });
     }
@@ -475,6 +499,7 @@
         elements.mobileNavBackdrop = document.getElementById('mobileNavBackdrop');
         elements.mobileDrawer = document.getElementById('mobileDrawer');
         elements.mobileCurrentModule = document.getElementById('mobileCurrentModule');
+        elements.mobileMapItems = document.querySelectorAll('[data-launchpad-section]');
     }
 
     // ============================================
@@ -501,9 +526,10 @@
             tab.addEventListener('click', handleUseCaseClick);
         });
 
-        // Pillar nodes click - navigate to module
-        document.querySelectorAll('.pillar-node').forEach(node => {
-            node.addEventListener('click', handlePillarClick);
+        // Pillar nodes navigate to their matching module.
+        document.querySelectorAll('.pillar-node .node-content').forEach(trigger => {
+            trigger.addEventListener('click', handlePillarClick);
+            bindKeyboardActivation(trigger);
         });
 
         // Cluster bubbles
@@ -515,6 +541,7 @@
         const brazilMarker = document.getElementById('brazilMarker');
         if (brazilMarker) {
             brazilMarker.addEventListener('click', handleBrazilClick);
+            bindKeyboardActivation(brazilMarker);
         }
 
         // Stuck job click
@@ -597,6 +624,19 @@
         }, 250));
     }
 
+    function bindKeyboardActivation(control) {
+        control.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                control.dispatchEvent(new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                }));
+            }
+        });
+    }
+
     // ============================================
     // Navigation Handlers
     // ============================================
@@ -649,7 +689,7 @@
     }
 
     function handlePillarClick(e) {
-        const pillar = e.currentTarget.dataset.pillar;
+        const pillar = e.currentTarget.closest('.pillar-node')?.dataset.pillar;
         const moduleMap = {
             'monitoring': 'monitoring',
             'stack': 'ebs',
@@ -693,7 +733,12 @@
     // Routing + Mobile Navigation
     // ============================================
     function initRouting() {
-        if (!window.location.hash) {
+        const restoredModule = window.OBS_STATE?.read?.().module;
+        if (MODULE_ORDER.includes(restoredModule)) {
+            const url = new URL(window.location.href);
+            url.hash = buildRouteHash(restoredModule, null);
+            history.replaceState(null, '', url);
+        } else if (!window.location.hash) {
             history.replaceState(null, '', '#home');
         }
 
@@ -781,6 +826,7 @@
             targetModule.classList.add('active');
             state.currentModule = module;
             state.currentSection = getActiveModuleSection(module, section);
+            window.OBS_STATE?.replace?.({ module });
             ensureModuleFeatures(module);
             registerModuleAnimations(module);
 
@@ -793,6 +839,12 @@
             window.scrollTo({ top: 0, behavior });
 
             syncModuleSectionState(module, section, behavior);
+
+            if (runtime.pendingMobileMapSection && module === 'home') {
+                const pendingSection = runtime.pendingMobileMapSection;
+                runtime.pendingMobileMapSection = null;
+                requestAnimationFrame(() => scrollToLaunchpadSection(pendingSection));
+            }
 
             if (module === 'home') {
                 setTimeout(initMindmapConnections, 100);
@@ -828,6 +880,73 @@
         document.title = module === 'home'
             ? SITE_TITLE
             : `${sectionLabel ? `${sectionLabel} • ` : ''}${moduleLabel} • ${SITE_TITLE}`;
+
+        if (module !== 'home') {
+            setLaunchpadMobileMapCurrent('active-module');
+        }
+    }
+
+    function setLaunchpadMobileMapCurrent(section) {
+        elements.mobileMapItems?.forEach(item => {
+            const active = item.dataset.launchpadSection === section;
+            if (active) item.setAttribute('aria-current', 'location');
+            else item.removeAttribute('aria-current');
+        });
+    }
+
+    function scrollToLaunchpadSection(section) {
+        const target = section === 'active-module'
+            ? getModuleElement(state.currentModule)
+            : document.getElementById(section);
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setLaunchpadMobileMapCurrent(section);
+    }
+
+    function initLaunchpadMobileMap() {
+        if (!elements.mobileMapItems?.length) return;
+
+        elements.mobileMapItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const section = item.dataset.launchpadSection;
+                if (section !== 'active-module' && state.currentModule !== 'home') {
+                    runtime.pendingMobileMapSection = section;
+                    routeToModule('home');
+                    return;
+                }
+                scrollToLaunchpadSection(section);
+            });
+        });
+
+        const sections = [...elements.mobileMapItems]
+            .map(item => document.getElementById(item.dataset.launchpadSection))
+            .filter(Boolean);
+        if (!sections.length || typeof IntersectionObserver !== 'function') return;
+
+        runtime.mobileMapObserver = new IntersectionObserver(entries => {
+            if (state.currentModule !== 'home') return;
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+            if (visible) setLaunchpadMobileMapCurrent(visible.target.id);
+        }, { rootMargin: '-112px 0px -60% 0px', threshold: [0.05, 0.35, 0.65] });
+        sections.forEach(section => runtime.mobileMapObserver.observe(section));
+        setLaunchpadMobileMapCurrent(state.currentModule === 'home' ? 'lp-start' : 'active-module');
+    }
+
+    function initScalePatternState() {
+        const control = document.querySelector('[data-scale-pattern]');
+        if (!control) return;
+        const apply = value => {
+            const active = value === control.dataset.scalePattern;
+            control.setAttribute('aria-pressed', String(active));
+            control.closest('.lp-step')?.classList.toggle('is-selected', active);
+        };
+        apply(window.OBS_STATE?.read?.()['scale-pattern']);
+        control.addEventListener('click', () => {
+            const value = control.dataset.scalePattern;
+            window.OBS_STATE?.replace?.({ 'scale-pattern': value });
+            apply(value);
+        });
     }
 
     function syncModuleSectionState(module, section, behavior) {
@@ -871,26 +990,101 @@
     }
 
     function openMobileNav() {
+        if (document.body.classList.contains('mobile-nav-open')) return;
+        runtime.mobileNavReturnFocus = elements.mobileNavToggle;
+        hideMobileNavBackground();
         document.body.classList.add('mobile-nav-open');
         if (elements.mobileNavToggle) {
             elements.mobileNavToggle.setAttribute('aria-expanded', 'true');
+            elements.mobileNavToggle.setAttribute('aria-label', 'Close navigation');
         }
         if (elements.mobileDrawer) {
             elements.mobileDrawer.setAttribute('aria-hidden', 'false');
         }
+        requestAnimationFrame(() => mobileDrawerFocusableElements()[0]?.focus({ preventScroll: true }));
     }
 
     function closeMobileNav() {
+        const wasOpen = document.body.classList.contains('mobile-nav-open');
         document.body.classList.remove('mobile-nav-open');
         if (elements.mobileNavToggle) {
             elements.mobileNavToggle.setAttribute('aria-expanded', 'false');
+            elements.mobileNavToggle.setAttribute('aria-label', 'Open navigation');
         }
         if (elements.mobileDrawer) {
             elements.mobileDrawer.setAttribute('aria-hidden', 'true');
         }
+        restoreMobileNavBackground();
+        if (wasOpen && runtime.mobileNavReturnFocus?.isConnected) {
+            runtime.mobileNavReturnFocus.focus({ preventScroll: true });
+        }
+        runtime.mobileNavReturnFocus = null;
+    }
+
+    function mobileNavBackgroundElements() {
+        return ['.sidebar', '.mobile-header', '.launchpad-mobile-map', '.main-content']
+            .map(selector => document.querySelector(selector))
+            .filter(Boolean);
+    }
+
+    function hideMobileNavBackground() {
+        runtime.mobileNavBackgroundState = mobileNavBackgroundElements().map(element => ({
+            element,
+            inert: element.inert,
+            ariaHidden: element.getAttribute('aria-hidden')
+        }));
+        runtime.mobileNavBackgroundState.forEach(({ element }) => {
+            element.inert = true;
+            element.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    function restoreMobileNavBackground() {
+        runtime.mobileNavBackgroundState.forEach(({ element, inert, ariaHidden }) => {
+            element.inert = inert;
+            if (ariaHidden === null) element.removeAttribute('aria-hidden');
+            else element.setAttribute('aria-hidden', ariaHidden);
+        });
+        runtime.mobileNavBackgroundState = [];
+    }
+
+    function mobileDrawerFocusableElements() {
+        if (!elements.mobileDrawer) return [];
+        const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        return [...elements.mobileDrawer.querySelectorAll(selector)].filter(element => {
+            const style = window.getComputedStyle(element);
+            return style.display !== 'none' && style.visibility !== 'hidden' && element.getClientRects().length > 0;
+        });
+    }
+
+    function trapMobileNavFocus(event) {
+        if (event.key !== 'Tab' || !document.body.classList.contains('mobile-nav-open')) return;
+        const focusable = mobileDrawerFocusableElements();
+        if (!focusable.length) {
+            event.preventDefault();
+            elements.mobileDrawer?.focus();
+            return;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (!elements.mobileDrawer.contains(active)) {
+            event.preventDefault();
+            (event.shiftKey ? last : first).focus();
+        } else if (event.shiftKey && active === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && active === last) {
+            event.preventDefault();
+            first.focus();
+        }
     }
 
     function handleGlobalKeydown(e) {
+        if (e.key === 'Tab' && document.body.classList.contains('mobile-nav-open')) {
+            trapMobileNavFocus(e);
+            return;
+        }
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
             e.preventDefault();
             openCommandPalette();
@@ -1158,7 +1352,8 @@
         }, 2000);
     }
 
-    function handleBrazilClick() {
+    function handleBrazilClick(event) {
+        event?.preventDefault();
         const regionDetail = document.getElementById('regionDetail');
         if (regionDetail) {
             regionDetail.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2115,12 +2310,22 @@
             if (!container) return;
 
             // Check if already exists
-            const existing = container.querySelector(`[data-value="${value}"]`);
+            const existing = [...container.querySelectorAll('.tag')]
+                .some(candidate => candidate.dataset.value === value);
             if (existing) return;
 
             const tag = document.createElement('span');
             tag.className = 'tag';
-            tag.innerHTML = `${value} <button class="tag-remove" data-value="${value}">&times;</button>`;
+            tag.dataset.value = value;
+            tag.appendChild(document.createTextNode(`${value} `));
+
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'tag-remove';
+            removeButton.dataset.value = value;
+            removeButton.setAttribute('aria-label', `Remove ${value}`);
+            removeButton.textContent = '×';
+            tag.appendChild(removeButton);
             container.appendChild(tag);
         }
 
@@ -2352,6 +2557,86 @@
             });
         }
 
+        function appendQuerySummary(container, prefix, namespace, metric) {
+            container.appendChild(document.createTextNode(prefix));
+            const namespaceValue = document.createElement('strong');
+            namespaceValue.textContent = namespace;
+            container.appendChild(namespaceValue);
+            container.appendChild(document.createTextNode(' / '));
+            const metricValue = document.createElement('strong');
+            metricValue.textContent = metric;
+            container.appendChild(metricValue);
+        }
+
+        function appendSparkline(container, points, height = 60) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('viewBox', `0 0 200 ${height}`);
+            svg.style.cssText = `width: ${height === 60 ? '100%; max-width: 300px' : '200px'}; height: ${height}px;${height === 60 ? ' margin-top: 8px;' : ''}`;
+            const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyline.setAttribute('points', points);
+            polyline.setAttribute('fill', 'none');
+            polyline.setAttribute('stroke', 'var(--monitoring-color)');
+            polyline.setAttribute('stroke-width', '2');
+            svg.appendChild(polyline);
+            container.appendChild(svg);
+        }
+
+        function renderEmptyQueryResults(results) {
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = 'padding: 40px; text-align: center;';
+            const message = document.createElement('div');
+            message.style.cssText = 'font-size: 14px; color: var(--text-muted);';
+            message.textContent = 'Please configure at least one query with a namespace';
+            wrapper.appendChild(message);
+            results.replaceChildren(wrapper);
+        }
+
+        function renderQueryResults(results, queries) {
+            const wrapper = document.createElement('div');
+            wrapper.style.padding = '24px';
+            const heading = document.createElement('h4');
+            heading.style.cssText = 'color: var(--text-primary); margin-bottom: 16px;';
+            heading.textContent = 'Query Results';
+            wrapper.appendChild(heading);
+
+            queries.forEach((query, index) => {
+                const card = document.createElement('div');
+                card.style.cssText = 'padding: 16px; background: var(--surface-2); border-radius: 8px; margin-bottom: 12px;';
+                const summary = document.createElement('div');
+                summary.style.cssText = 'font-size: 14px; color: var(--text-primary); margin-bottom: 4px;';
+                appendQuerySummary(summary, `Query ${index + 1}: `, query.namespace, query.metric);
+                card.appendChild(summary);
+
+                const note = document.createElement('div');
+                note.style.cssText = 'font-size: 12px; color: var(--text-muted);';
+                note.textContent = '(Demo - connect to OCI API for real data)';
+                card.appendChild(note);
+                appendSparkline(card, `0,${40 + Math.random() * 15} 40,${20 + Math.random() * 20} 80,${30 + Math.random() * 15} 120,${15 + Math.random() * 20} 160,${25 + Math.random() * 15} 200,${10 + Math.random() * 20}`);
+                wrapper.appendChild(card);
+            });
+            results.replaceChildren(wrapper);
+        }
+
+        function renderExecutedQuery(results, namespace, metric) {
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = 'padding: 40px; text-align: center;';
+            const summary = document.createElement('div');
+            summary.style.cssText = 'font-size: 16px; color: var(--text-primary); margin-bottom: 8px;';
+            appendQuerySummary(summary, 'Query executed for ', namespace, metric);
+            wrapper.appendChild(summary);
+
+            const note = document.createElement('div');
+            note.style.cssText = 'font-size: 13px; color: var(--text-muted);';
+            note.textContent = '(This is a demo - connect to OCI API for real metrics data)';
+            wrapper.appendChild(note);
+
+            const chart = document.createElement('div');
+            chart.style.cssText = 'margin-top: 24px; padding: 20px; background: var(--surface-2); border-radius: 8px; display: inline-block;';
+            appendSparkline(chart, '0,60 30,50 60,55 90,30 120,40 150,20 180,35 200,25', 80);
+            wrapper.appendChild(chart);
+            results.replaceChildren(wrapper);
+        }
+
         // Run All Queries button
         const runAllBtn = document.getElementById('runAllQueries');
         if (runAllBtn) {
@@ -2370,34 +2655,11 @@
                 });
 
                 if (queries.length === 0) {
-                    results.innerHTML = `
-                        <div style="padding: 40px; text-align: center;">
-                            <div style="font-size: 14px; color: var(--text-muted);">
-                                Please configure at least one query with a namespace
-                            </div>
-                        </div>
-                    `;
+                    renderEmptyQueryResults(results);
                     return;
                 }
 
-                let html = '<div style="padding: 24px;">';
-                html += '<h4 style="color: var(--text-primary); margin-bottom: 16px;">Query Results</h4>';
-                queries.forEach((q, i) => {
-                    html += `
-                        <div style="padding: 16px; background: var(--surface-2); border-radius: 8px; margin-bottom: 12px;">
-                            <div style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">
-                                Query ${i + 1}: <strong>${q.namespace}</strong> / <strong>${q.metric}</strong>
-                            </div>
-                            <div style="font-size: 12px; color: var(--text-muted);">(Demo - connect to OCI API for real data)</div>
-                            <svg viewBox="0 0 200 60" style="width: 100%; max-width: 300px; height: 60px; margin-top: 8px;">
-                                <polyline points="0,${40 + Math.random() * 15} 40,${20 + Math.random() * 20} 80,${30 + Math.random() * 15} 120,${15 + Math.random() * 20} 160,${25 + Math.random() * 15} 200,${10 + Math.random() * 20}"
-                                    fill="none" stroke="var(--monitoring-color)" stroke-width="2"/>
-                            </svg>
-                        </div>
-                    `;
-                });
-                html += '</div>';
-                results.innerHTML = html;
+                renderQueryResults(results, queries);
             });
         }
 
@@ -2437,28 +2699,76 @@
                 // Show placeholder result
                 const results = document.getElementById('queryResults');
                 if (results) {
-                    results.innerHTML = `
-                        <div style="padding: 40px; text-align: center;">
-                            <div style="font-size: 16px; color: var(--text-primary); margin-bottom: 8px;">
-                                Query executed for <strong>${namespace}</strong> / <strong>${metric}</strong>
-                            </div>
-                            <div style="font-size: 13px; color: var(--text-muted);">
-                                (This is a demo - connect to OCI API for real metrics data)
-                            </div>
-                            <div style="margin-top: 24px; padding: 20px; background: var(--surface-2); border-radius: 8px; display: inline-block;">
-                                <svg viewBox="0 0 200 80" style="width: 200px; height: 80px;">
-                                    <polyline points="0,60 30,50 60,55 90,30 120,40 150,20 180,35 200,25"
-                                        fill="none" stroke="var(--monitoring-color)" stroke-width="2"/>
-                                </svg>
-                            </div>
-                        </div>
-                    `;
+                    renderExecutedQuery(results, namespace, metric);
                 }
             });
         }
 
         moduleRoot.dataset.queryBuilderReady = 'true';
         return true;
+    }
+
+    let clipboardStatusTimer;
+
+    function announceClipboardStatus(message, { error = false } = {}) {
+        const status = document.getElementById('clipboardStatus');
+        if (!status) return;
+        clearTimeout(clipboardStatusTimer);
+        status.setAttribute('role', error ? 'alert' : 'status');
+        status.setAttribute('aria-live', error ? 'assertive' : 'polite');
+        status.textContent = message;
+        status.classList.add('has-message');
+        clipboardStatusTimer = setTimeout(() => {
+            status.classList.remove('has-message');
+            status.textContent = '';
+        }, 5000);
+    }
+
+    async function copyTextWithFallback(rawText) {
+        try {
+            if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable');
+            await navigator.clipboard.writeText(rawText);
+            announceClipboardStatus('Copied to clipboard.');
+            return true;
+        } catch (clipboardError) {
+            const previousFocus = document.activeElement;
+            const textarea = document.createElement('textarea');
+            textarea.value = rawText;
+            textarea.setAttribute('aria-hidden', 'true');
+            textarea.style.cssText = 'position:fixed; inset:auto auto 0 -9999px; opacity:0;';
+            document.body.appendChild(textarea);
+            try {
+                textarea.select();
+                if (typeof document.execCommand !== 'function' || !document.execCommand('copy')) {
+                    throw new Error('Legacy copy command unavailable');
+                }
+                announceClipboardStatus('Copied to clipboard.');
+                return true;
+            } catch (fallbackError) {
+                console.warn('Clipboard copy blocked', clipboardError, fallbackError);
+                announceClipboardStatus('Copy failed. Select the visible code and copy it manually.', { error: true });
+                return false;
+            } finally {
+                textarea.remove();
+                if (previousFocus instanceof HTMLElement) previousFocus.focus();
+            }
+        }
+    }
+
+    function showCopyFeedback(button, copied) {
+        const originalText = button.textContent;
+        button.textContent = copied ? 'Copied!' : 'Copy manually';
+        if (copied) {
+            button.style.background = '#2ea44f';
+            button.style.color = '#ffffff';
+            button.style.borderColor = '#2ea44f';
+        }
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '';
+            button.style.color = '';
+            button.style.borderColor = '';
+        }, 2000);
     }
 
     // ============================================
@@ -2513,46 +2823,11 @@
         // Copy code helper
         const copyBtns = document.querySelectorAll('.copy-code-btn');
         copyBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
                 const targetId = btn.dataset.copyTarget;
                 const codeElement = document.getElementById(targetId);
-
                 if (codeElement) {
-                    const rawText = codeElement.textContent;
-                    navigator.clipboard.writeText(rawText).then(() => {
-                        const originalText = btn.textContent;
-                        btn.textContent = 'Copied!';
-                        btn.style.background = '#2ea44f';
-                        btn.style.color = '#ffffff';
-                        btn.style.borderColor = '#2ea44f';
-
-                        setTimeout(() => {
-                            btn.textContent = originalText;
-                            btn.style.background = '';
-                            btn.style.color = '';
-                            btn.style.borderColor = '';
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Could not copy text: ', err);
-                        // Fallback implementation in case navigator.clipboard is unavailable
-                        const textarea = document.createElement('textarea');
-                        textarea.value = rawText;
-                        textarea.style.position = 'fixed';
-                        textarea.style.opacity = '0';
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        try {
-                            document.execCommand('copy');
-                            const originalText = btn.textContent;
-                            btn.textContent = 'Copied!';
-                            setTimeout(() => {
-                                btn.textContent = originalText;
-                            }, 2000);
-                        } catch (e) {
-                            console.error('Fallback copy failed', e);
-                        }
-                        document.body.removeChild(textarea);
-                    });
+                    showCopyFeedback(btn, await copyTextWithFallback(codeElement.textContent));
                 }
             });
         });
@@ -2562,49 +2837,74 @@
     // OCI Implementation Hub & Service Inspector Interactions
     // ==========================================================================
     function initImplementationHub() {
-        const timelineNodes = document.querySelectorAll('.timeline-node');
-        const levelTabs = document.querySelectorAll('.level-tab');
-        const phasePanels = document.querySelectorAll('.phase-panel');
+        const timelineNodes = [...document.querySelectorAll('.timeline-node')];
+        const levelTabs = [...document.querySelectorAll('.level-tab')];
+        const phasePanels = [...document.querySelectorAll('.phase-panel')];
+        const levelPanels = [...document.querySelectorAll('.level-content')];
 
         const phaseOrder = ['phase1', 'phase2', 'phase3', 'phase4'];
 
-        timelineNodes.forEach(node => {
-            node.addEventListener('click', () => {
-                const selectedPhase = node.dataset.phase;
-                const currentIndex = phaseOrder.indexOf(selectedPhase);
-
-                // Update timeline nodes
-                timelineNodes.forEach(n => {
-                    const nPhase = n.dataset.phase;
-                    const nIndex = phaseOrder.indexOf(nPhase);
-                    n.classList.toggle('active', nPhase === selectedPhase);
-                    n.classList.toggle('completed', nIndex < currentIndex);
-                    n.setAttribute('aria-selected', nPhase === selectedPhase ? 'true' : 'false');
-                });
-
-                // Update phase panels
-                phasePanels.forEach(panel => {
-                    panel.classList.toggle('active', panel.dataset.phase === selectedPhase);
+        function bindRovingTablist(tabs, activate) {
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => activate(tab));
+                tab.addEventListener('keydown', event => {
+                    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                    event.preventDefault();
+                    const currentIndex = tabs.indexOf(event.currentTarget);
+                    const nextIndex = event.key === 'Home'
+                        ? 0
+                        : event.key === 'End'
+                            ? tabs.length - 1
+                            : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+                    activate(tabs[nextIndex], { focus: true });
                 });
             });
-        });
+        }
 
-        levelTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const selectedLevel = tab.dataset.level;
+        function syncAudienceControls(phase) {
+            levelTabs.forEach(tab => tab.setAttribute('aria-controls', `${phase}-${tab.dataset.level}-panel`));
+        }
 
-                // Update level tab active states
-                levelTabs.forEach(t => {
-                    t.classList.toggle('active', t === tab);
-                    t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
-                });
-
-                // Update level contents inside the active phase panel
-                document.querySelectorAll('.level-content').forEach(content => {
-                    content.classList.toggle('active', content.dataset.level === selectedLevel);
-                });
+        function activatePhase(node, { focus = false } = {}) {
+            const selectedPhase = node.dataset.phase;
+            const currentIndex = phaseOrder.indexOf(selectedPhase);
+            timelineNodes.forEach(tab => {
+                const selected = tab === node;
+                tab.classList.toggle('active', selected);
+                tab.classList.toggle('completed', phaseOrder.indexOf(tab.dataset.phase) < currentIndex);
+                tab.setAttribute('aria-selected', String(selected));
+                tab.tabIndex = selected ? 0 : -1;
             });
-        });
+            phasePanels.forEach(panel => {
+                const selected = panel.dataset.phase === selectedPhase;
+                panel.classList.toggle('active', selected);
+                panel.hidden = !selected;
+            });
+            syncAudienceControls(selectedPhase);
+            if (focus) node.focus();
+        }
+
+        function activateAudience(tab, { focus = false } = {}) {
+            const selectedLevel = tab.dataset.level;
+            levelTabs.forEach(candidate => {
+                const selected = candidate === tab;
+                candidate.classList.toggle('active', selected);
+                candidate.setAttribute('aria-selected', String(selected));
+                candidate.tabIndex = selected ? 0 : -1;
+            });
+            levelPanels.forEach(panel => {
+                const selected = panel.dataset.level === selectedLevel;
+                panel.classList.toggle('active', selected);
+                panel.hidden = !selected;
+            });
+            if (focus) tab.focus();
+        }
+
+        if (!timelineNodes.length || !levelTabs.length) return;
+        bindRovingTablist(timelineNodes, activatePhase);
+        bindRovingTablist(levelTabs, activateAudience);
+        activatePhase(timelineNodes.find(tab => tab.getAttribute('aria-selected') === 'true') || timelineNodes[0]);
+        activateAudience(levelTabs.find(tab => tab.getAttribute('aria-selected') === 'true') || levelTabs[0]);
     }
 
     const SERVICE_DETAILS = {
@@ -2667,10 +2967,10 @@
                 },
                 level3: {
                     codeTitle: "OpenTelemetry Java Agent Configuration",
-                    code: "export OTEL_EXPORTER_OTLP_ENDPOINT=\"https://apm-gateway.eu-frankfurt-1.oci.oraclecloud.com\"\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer <APM_PRIVATE_KEY>\"\nexport OTEL_SERVICE_NAME=\"payment-service\"",
+                    code: "export OTEL_EXPORTER_OTLP_ENDPOINT=\"<APM_OTLP_ENDPOINT>\"\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer <APM_PRIVATE_KEY>\"\nexport OTEL_SERVICE_NAME=\"payment-service\"",
                     openSourceDesc: "Integrate Real User Monitoring (RUM) tracing on your frontend website by injecting the APM browser agent snippet.",
                     openSourceTitle: "Browser JavaScript Agent",
-                    openSourceCode: "window.apmrum = {\n  endpointUrl: 'https://apm-rum-collector.oci.oraclecloud.com/rum/v1',\n  username: '<APM_RUM_PUBLIC_KEY>'\n};"
+                    openSourceCode: "window.apmrum = {\n  endpointUrl: '<APM_RUM_COLLECTOR_ENDPOINT>',\n  username: '<APM_RUM_PUBLIC_KEY>'\n};"
                 }
             }
         },
@@ -2736,14 +3036,14 @@
                     code: "DECLARE\n  l_sql_tune_task VARCHAR2(30);\nBEGIN\n  l_sql_tune_task := DBMS_SQLTUNE.create_tuning_task(\n    sql_id => '8t721mxgq52sw',\n    task_name => 'tune_portal_orders'\n  );\nEND;",
                     openSourceDesc: "Run SQL workload metrics extraction programmatically via Oracle Database REST API interfaces.",
                     openSourceTitle: "REST Endpoint Call (cURL)",
-                    openSourceCode: "curl -u admin:password \\\n  -X GET https://database-endpoint:5001/ords/admin/performance/ash"
+                    openSourceCode: "curl --config <TMP_0600_CURL_CONFIG> \\\n  -X GET <DB_MANAGEMENT_ENDPOINT>/ords/<DB_API_PATH>/performance/ash"
                 }
             }
         }
     };
 
     function initServiceInspector() {
-        const serviceCards = document.querySelectorAll('.service-card');
+        const inspectorTriggers = document.querySelectorAll('.service-card__inspect');
         const inspector = document.getElementById('serviceInspector');
         const scrim = document.getElementById('inspectorScrim');
         const closeBtn = document.getElementById('closeInspector');
@@ -2752,38 +3052,83 @@
         const bodyEl = document.getElementById('inspectorBody');
 
         if (!inspector || !scrim || !closeBtn || !titleEl || !eyebrowEl || !bodyEl) return;
+        let previousFocus = null;
 
-        function openInspector(serviceId) {
+        function inspectorFocusableElements() {
+            return [...inspector.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+                .filter(element => !element.closest('[hidden]') && getComputedStyle(element).visibility !== 'hidden');
+        }
+
+        function closeInspector() {
+            if (!inspector.classList.contains('is-open')) return;
+            inspector.classList.remove('is-open');
+            inspector.setAttribute('aria-hidden', 'true');
+            inspector.inert = true;
+            if (previousFocus?.isConnected) previousFocus.focus();
+            previousFocus = null;
+        }
+
+        function trapInspectorFocus(event) {
+            if (!inspector.classList.contains('is-open')) return;
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeInspector();
+                return;
+            }
+            if (event.key !== 'Tab') return;
+
+            const focusable = inspectorFocusableElements();
+            if (!focusable.length) {
+                event.preventDefault();
+                inspector.focus();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable.at(-1);
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            } else if (!inspector.contains(document.activeElement)) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+
+        function openInspector(serviceId, trigger) {
             const data = SERVICE_DETAILS[serviceId];
             if (!data) return;
+            previousFocus = trigger ?? document.activeElement;
 
             titleEl.textContent = data.title;
             eyebrowEl.textContent = data.eyebrow;
 
             // Render Inspector body with custom tabs
             bodyEl.innerHTML = `
-                <div class="inspector-tab-header">
-                    <button type="button" class="inspector-tab-btn active" data-tab="level1">Level 1: Executive</button>
-                    <button type="button" class="inspector-tab-btn" data-tab="level2">Level 2: Management</button>
-                    <button type="button" class="inspector-tab-btn" data-tab="level3">Level 3: Practitioner</button>
+                <div class="inspector-tab-header" role="tablist" aria-label="Service detail lens">
+                    <button type="button" class="inspector-tab-btn" id="inspector-tab-level1" data-tab="level1" role="tab" aria-controls="inspector-panel-level1" aria-selected="false" tabindex="-1">Level 1: Executive</button>
+                    <button type="button" class="inspector-tab-btn" id="inspector-tab-level2" data-tab="level2" role="tab" aria-controls="inspector-panel-level2" aria-selected="false" tabindex="-1">Level 2: Management</button>
+                    <button type="button" class="inspector-tab-btn" id="inspector-tab-level3" data-tab="level3" role="tab" aria-controls="inspector-panel-level3" aria-selected="false" tabindex="-1">Level 3: Practitioner</button>
                 </div>
-                <div class="inspector-tab-content active" data-tab="level1">
+                <div class="inspector-tab-content" id="inspector-panel-level1" data-tab="level1" role="tabpanel" aria-labelledby="inspector-tab-level1" hidden>
                     <div style="margin-bottom: 20px;">
                         <h4 style="margin-top:0; color:var(--text-primary); font-size:16px;">Core Business Value</h4>
                         <p style="font-size:14px; line-height:1.6; color:var(--text-secondary);">${data.levels.level1.value}</p>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
                         <div style="background:var(--bg-secondary); padding:16px; border-radius:8px; border:1px solid var(--border-subtle);">
-                            <span style="font-size:11px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">ROI Indicator</span>
+                            <span style="font-size:12px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">ROI Indicator</span>
                             <p style="font-size:18px; font-weight:700; color:var(--blue-deep); margin:4px 0 0 0;">${data.levels.level1.roi}</p>
                         </div>
                         <div style="background:var(--bg-secondary); padding:16px; border-radius:8px; border:1px solid var(--border-subtle);">
-                            <span style="font-size:11px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">Compliance Mapping</span>
+                            <span style="font-size:12px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">Compliance Mapping</span>
                             <p style="font-size:14px; font-weight:600; color:var(--text-primary); margin:4px 0 0 0;">${data.levels.level1.compliance}</p>
                         </div>
                     </div>
                 </div>
-                <div class="inspector-tab-content" data-tab="level2">
+                <div class="inspector-tab-content" id="inspector-panel-level2" data-tab="level2" role="tabpanel" aria-labelledby="inspector-tab-level2" hidden>
                     <h4 style="margin-top:0; color:var(--text-primary); font-size:16px;">Operational Best Practices</h4>
                     <p style="font-size:14px; line-height:1.6; color:var(--text-secondary); margin-bottom:16px;">${data.levels.level2.practices}</p>
                     <div style="background:linear-gradient(135deg, rgba(4,83,111,0.05) 0%, rgba(199,70,52,0.02) 100%); padding:16px; border-radius:8px; border-left:4px solid var(--blue-deep);">
@@ -2791,7 +3136,7 @@
                         <p style="font-size:13px; line-height:1.5; color:var(--text-secondary); margin:0;">${data.levels.level2.migration}</p>
                     </div>
                 </div>
-                <div class="inspector-tab-content" data-tab="level3">
+                <div class="inspector-tab-content" id="inspector-panel-level3" data-tab="level3" role="tabpanel" aria-labelledby="inspector-tab-level3" hidden>
                     <h4 style="margin-top:0; color:var(--text-primary); font-size:16px;">Technical Configuration Sample</h4>
                     <div class="code-panel">
                         <div class="code-header">
@@ -2816,72 +3161,67 @@
             // Bind inspector tab switching
             const tabs = bodyEl.querySelectorAll('.inspector-tab-btn');
             const contents = bodyEl.querySelectorAll('.inspector-tab-content');
+            function activateInspectorTab(tab, { focus = false, persist = true } = {}) {
+                const targetTab = tab.dataset.tab;
+                tabs.forEach((item, index) => {
+                    const active = item === tab;
+                    item.classList.toggle('active', active);
+                    item.setAttribute('aria-selected', String(active));
+                    item.tabIndex = active ? 0 : -1;
+                    if (active && persist) window.OBS_STATE?.replace?.({ lens: String(index) });
+                });
+                contents.forEach(content => {
+                    const active = content.dataset.tab === targetTab;
+                    content.classList.toggle('active', active);
+                    content.hidden = !active;
+                });
+                if (focus) tab.focus();
+            }
+
             tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const targetTab = tab.dataset.tab;
-                    tabs.forEach(t => t.classList.toggle('active', t === tab));
-                    contents.forEach(c => c.classList.toggle('active', c.dataset.tab === targetTab));
+                tab.addEventListener('click', () => activateInspectorTab(tab));
+                tab.addEventListener('keydown', event => {
+                    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+                    event.preventDefault();
+                    const currentIndex = [...tabs].indexOf(tab);
+                    const nextIndex = event.key === 'Home'
+                        ? 0
+                        : event.key === 'End'
+                            ? tabs.length - 1
+                            : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+                    activateInspectorTab(tabs[nextIndex], { focus: true });
                 });
             });
 
+            const restoredLens = Number.parseInt(window.OBS_STATE?.read?.().lens ?? window.__obsLens ?? '0', 10);
+            activateInspectorTab(tabs[Number.isInteger(restoredLens) && restoredLens >= 0 && restoredLens < tabs.length ? restoredLens : 0], { persist: false });
+
             // Bind newly rendered copy buttons
             bodyEl.querySelectorAll('.copy-code-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', async () => {
                     const targetId = btn.dataset.copyTarget;
                     const codeElement = document.getElementById(targetId);
                     if (codeElement) {
-                        const rawText = codeElement.textContent;
-                        navigator.clipboard.writeText(rawText).then(() => {
-                            const originalText = btn.textContent;
-                            btn.textContent = 'Copied!';
-                            btn.style.background = '#2ea44f';
-                            btn.style.color = '#ffffff';
-                            btn.style.borderColor = '#2ea44f';
-
-                            setTimeout(() => {
-                                btn.textContent = originalText;
-                                btn.style.background = '';
-                                btn.style.color = '';
-                                btn.style.borderColor = '';
-                            }, 2000);
-                        });
+                        showCopyFeedback(btn, await copyTextWithFallback(codeElement.textContent));
                     }
                 });
             });
 
+            inspector.inert = false;
             inspector.classList.add('is-open');
             inspector.setAttribute('aria-hidden', 'false');
+            closeBtn.focus();
         }
 
-        function closeInspector() {
-            inspector.classList.remove('is-open');
-            inspector.setAttribute('aria-hidden', 'true');
-        }
-
-        // Bind click on service cards (intercept and open inspector)
-        serviceCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Determine service from class list
-                const classes = Array.from(card.classList);
-                const serviceId = classes.find(c => ['monitoring', 'logs', 'apm', 'stack', 'opsinsights', 'dbmgmt'].includes(c));
-                
-                if (serviceId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openInspector(serviceId);
-                }
+        inspectorTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                openInspector(trigger.dataset.serviceId, trigger);
             });
         });
 
         closeBtn.addEventListener('click', closeInspector);
         scrim.addEventListener('click', closeInspector);
-
-        // Escape key to close slideover
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && inspector.classList.contains('is-open')) {
-                closeInspector();
-            }
-        });
+        inspector.addEventListener('keydown', trapInspectorFocus);
     }
 
     // ============================================
@@ -2904,4 +3244,3 @@
     });
 
 })();
-

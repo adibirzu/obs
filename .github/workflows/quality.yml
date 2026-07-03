@@ -1,0 +1,115 @@
+name: Quality gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Verify, secure, and package
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Clean-checkout governance and filesystem drift
+        run: npm run governance:validate-clean-checkout
+
+      - name: Syntax lint and static analysis
+        run: npm run lint
+
+      - name: Security gate — repository redaction rules
+        run: npm run security:scan
+
+      - name: Security gate — Gitleaks commit scan
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Detect generated artifact drift
+        run: npm run artifacts:check
+
+      - name: Build release-only PDF assets
+        run: npm run artifacts:release
+
+      - name: Enforce complete test suite
+        run: npm run test:ci
+
+      - name: Enforce 80 percent Node line coverage
+        run: npm run test:coverage:node:ci
+
+      - name: Run managed E2E, browser coverage, and cross-surface smoke suite
+        run: npm run test:browser:ci
+
+      - name: Assemble release package
+        run: npm run release:build
+
+      - name: Upload verified release package
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: observability-atlas-site
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+
+  deploy:
+    name: Deploy verified site to GitHub Pages
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out deployment verifier
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Download verified release package
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: observability-atlas-site
+          path: dist
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Upload final site to GitHub Pages
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+        with:
+          path: dist/site
+
+      - name: Deploy GitHub Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+
+      - name: Verify public Interlocks and PDF surfaces
+        env:
+          PUBLIC_SITE_URL: ${{ steps.deployment.outputs.page_url }}
+          RELEASE_MANIFEST: dist/release-manifest.json
+        run: node scripts/verify-public-deployment.mjs

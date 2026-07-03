@@ -1,0 +1,19 @@
+{
+  "title": "VCN Flow Log Investigation",
+  "subtitle": "Network evidence → observability correlation → governed action",
+  "nodes": [
+    {"id":"vcn","label":"VCN Flow Logs","kind":"network","zone":"edge"},
+    {"id":"nsg","label":"Network Security Groups","kind":"network","zone":"edge"},
+    {"id":"logging","label":"OCI Logging","kind":"compute","zone":"public"},
+    {"id":"analytics","label":"Oracle Log Analytics","kind":"compute","zone":"private"},
+    {"id":"alarm","label":"Monitoring Alarms","kind":"compute","zone":"private"},
+    {"id":"owner","label":"Network owner response","kind":"actor","zone":"data"}
+  ],
+  "edges": [
+    {"from":"vcn","to":"logging","label":"flow records"},
+    {"from":"nsg","to":"analytics","label":"policy context"},
+    {"from":"logging","to":"analytics","label":"search and correlate"},
+    {"from":"analytics","to":"alarm","label":"actionable condition"},
+    {"from":"alarm","to":"owner","label":"evidence-based alert"}
+  ]
+}

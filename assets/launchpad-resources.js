@@ -29,11 +29,14 @@
     ".obs-disclaimer{margin:28px 24px 40px;padding:14px 18px;border:1px solid rgba(128,128,128,.3);border-left:3px solid #C58C52;border-radius:8px;font-family:'Figtree',system-ui,sans-serif;font-size:.76rem;line-height:1.55;opacity:.85}" +
     ".obs-disclaimer strong{color:#C74634}" +
     ".showcase-image{cursor:zoom-in}" +
+    ".showcase-image:focus-visible{outline:3px solid #C74634;outline-offset:4px}" +
     ".octo-lb{position:fixed;inset:0;z-index:9999;background:rgba(6,20,32,.88);display:flex;align-items:center;justify-content:center;padding:28px;opacity:0;visibility:hidden;transition:opacity .2s ease}" +
+    ".octo-lb[hidden]{display:none}" +
     ".octo-lb.open{opacity:1;visibility:visible}" +
-    ".octo-lb img{max-width:95vw;max-height:90vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.55);background:#fff;cursor:zoom-out}" +
+    ".octo-lb__image{max-width:95vw;max-height:90vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.55);background:#fff}" +
+    ".octo-lb__image:focus-visible,.octo-lb__x:focus-visible{outline:3px solid #fff;outline-offset:4px}" +
     ".octo-lb__cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:#e7eef0;font-family:'Figtree',system-ui,sans-serif;font-size:.9rem;font-weight:600}" +
-    ".octo-lb__x{position:absolute;top:18px;right:22px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:24px;line-height:1;cursor:pointer}" +
+    ".octo-lb__x{position:absolute;top:18px;right:22px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:24px;line-height:1;cursor:pointer}" +
     ".octo-lb__x:hover{background:rgba(255,255,255,.2)}";
   var st = document.createElement("style");
   st.textContent = css;
@@ -82,20 +85,86 @@
     lb.className = "octo-lb";
     lb.setAttribute("role", "dialog");
     lb.setAttribute("aria-modal", "true");
-    lb.innerHTML = '<button class="octo-lb__x" aria-label="Close">×</button><img alt=""><div class="octo-lb__cap"></div>';
+    lb.setAttribute("aria-labelledby", "octo-lightbox-caption");
+    lb.hidden = true;
+    var closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "octo-lb__x";
+    closeButton.setAttribute("aria-label", "Close expanded screenshot");
+    closeButton.textContent = "×";
+    var big = document.createElement("img");
+    big.className = "octo-lb__image";
+    big.tabIndex = 0;
+    var cap = document.createElement("div");
+    cap.className = "octo-lb__cap";
+    cap.id = "octo-lightbox-caption";
+    lb.append(closeButton, big, cap);
     document.body.appendChild(lb);
-    var big = lb.querySelector("img"), cap = lb.querySelector(".octo-lb__cap");
-    function close() { lb.classList.remove("open"); document.body.style.overflow = ""; }
-    lb.addEventListener("click", close);
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    var returnFocus = null;
+    var previousOverflow = "";
+
+    function close() {
+      if (lb.hidden) return;
+      lb.classList.remove("open");
+      lb.hidden = true;
+      document.body.style.overflow = previousOverflow;
+      if (returnFocus && returnFocus.isConnected) returnFocus.focus();
+      returnFocus = null;
+    }
+
+    function trapFocus(e) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      var focusable = [closeButton, big];
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (!focusable.includes(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    function open(box) {
+      var im = box.querySelector("img");
+      if (!im) return;
+      var card = box.closest(".showcase-card"), h = card && card.querySelector("h4");
+      var label = h ? h.textContent : (im.alt || "Expanded screenshot");
+      returnFocus = box;
+      previousOverflow = document.body.style.overflow;
+      big.src = im.currentSrc || im.src;
+      big.alt = "Expanded view of " + label;
+      cap.textContent = label;
+      lb.hidden = false;
+      lb.classList.add("open");
+      document.body.style.overflow = "hidden";
+      closeButton.focus();
+    }
+
+    closeButton.addEventListener("click", close);
+    lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+    lb.addEventListener("keydown", trapFocus);
     document.querySelectorAll(".showcase-image").forEach(function (box) {
-      box.addEventListener("click", function () {
-        var im = box.querySelector("img"); if (!im) return;
-        big.src = im.currentSrc || im.src;
-        var card = box.closest(".showcase-card"), h = card && card.querySelector("h4");
-        cap.textContent = h ? h.textContent : (im.alt || "");
-        lb.classList.add("open"); document.body.style.overflow = "hidden";
-      });
+      if (box.tagName !== "BUTTON") {
+        box.setAttribute("role", "button");
+        box.tabIndex = 0;
+        box.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open(box);
+          }
+        });
+      }
+      box.addEventListener("click", function () { open(box); });
     });
   }
   function init() { render(); disclaimer(); lightbox(); }
