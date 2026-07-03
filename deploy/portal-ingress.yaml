@@ -1,0 +1,47 @@
+# portal.octodemo.cloud → proxies GitHub Pages (obs.octodemo.cloud), mirroring the
+# published OCTO Observability Atlas. Replaces the decommissioned seven-kingdoms
+# vuln app. All paths (root → index.html/Atlas, plus /launchpad.html) proxy to GH
+# Pages over HTTPS with Host/SNI rewritten to obs.octodemo.cloud.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: obs-portal
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ghpages-obs
+  namespace: obs-portal
+spec:
+  type: ExternalName
+  externalName: obs.octodemo.cloud
+  ports:
+    - name: https
+      port: 443
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portal
+  namespace: obs-portal
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "obs.octodemo.cloud"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "obs.octodemo.cloud"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: ["portal.octodemo.cloud"]
+      secretName: octodemo-tls
+  rules:
+    - host: portal.octodemo.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ghpages-obs
+                port: { number: 443 }

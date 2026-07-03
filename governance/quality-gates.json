@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "tests": {
+    "minimum": 40,
+    "allowFailed": false,
+    "allowSkipped": false,
+    "allowCancelled": false,
+    "allowTodo": false
+  },
+  "coverage": {
+    "lines": 80,
+    "client": {
+      "lines": 80,
+      "include": [
+        "assets/guide.js",
+        "assets/personas.js",
+        "assets/state.js",
+        "assets/scenarios.js",
+        "assets/launchpad-resources.js",
+        "static/observability.js",
+        "assets/interlocks/interlocks.js",
+        "assets/interlocks/usecase-detail.js",
+        "assets/interlocks/workflow-governance.js"
+      ]
+    }
+  },
+  "smoke": {
+    "surfaces": 4,
+    "viewports": [
+      { "name": "desktop", "width": 1440, "height": 1000 },
+      { "name": "mobile", "width": 390, "height": 844 }
+    ]
+  }
+}

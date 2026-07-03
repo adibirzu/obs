@@ -1,0 +1,32 @@
+{
+  "name": "oci-observability-atlas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:interlocks": "node scripts/generate-interlocks-drawio.mjs",
+    "generate:interlocks:documented": "node scripts/generate-interlocks-drawio.mjs --edition=documented",
+    "generate:interlocks:pdf": "node scripts/generate-interlocks-pdf.mjs",
+    "generate:usecase-artifacts": "node scripts/generate-usecase-artifacts.mjs",
+    "generate:usecase-pdf": "node scripts/generate-usecase-pdf.mjs",
+    "artifacts:generate:vectors": "node scripts/generate-interlocks-drawio.mjs && node scripts/generate-interlocks-drawio.mjs --edition=documented && node scripts/generate-usecase-artifacts.mjs",
+    "artifacts:update-snapshot": "node scripts/update-artifact-snapshot.mjs",
+    "artifacts:check": "node scripts/check-artifact-drift.mjs",
+    "artifacts:release": "node scripts/generate-interlocks-pdf.mjs && node scripts/generate-usecase-pdf.mjs",
+    "release:build": "node scripts/build-release.mjs",
+    "governance:validate": "node scripts/validate-governance.mjs",
+    "governance:validate-clean-checkout": "node scripts/check-clean-governance.mjs",
+    "governance:refresh-links": "node scripts/validate-governance.mjs --refresh-links",
+    "lint": "node scripts/static-check.mjs",
+    "security:scan": "node scripts/redact-gate.mjs",
+    "build": "npm run governance:validate && npm run lint && npm run artifacts:check && npm run artifacts:release && npm run security:scan && npm run test:ci && npm run test:coverage:ci",
+    "test": "node --test tests/*.test.mjs",
+    "test:ci": "node scripts/run-test-gate.mjs",
+    "test:coverage": "npm run test:coverage:node && npm run test:coverage:browser",
+    "test:coverage:node": "node --experimental-test-coverage --test tests/*.test.mjs",
+    "test:coverage:node:ci": "node --experimental-test-coverage --test-coverage-lines=80 --test tests/*.test.mjs",
+    "test:coverage:browser": "node tests/e2e/browser-coverage.mjs",
+    "test:coverage:ci": "npm run test:coverage:node:ci && npm run test:coverage:browser",
+    "test:e2e": "node tests/e2e/launchpad.e2e.mjs",
+    "test:smoke": "node tests/e2e/surfaces.smoke.mjs"
+  }
+}
