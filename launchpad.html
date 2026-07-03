@@ -251,7 +251,7 @@
 
         <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
 
-        <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+        <aside class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Launchpad navigation" aria-hidden="true">
             <div class="mobile-drawer-header">
                 <div>
                     <span class="mobile-brand">OCI O&M</span>
@@ -424,6 +424,14 @@
         </aside>
     </div>
 
+    <nav class="launchpad-mobile-map" aria-label="Launchpad sections">
+        <button class="launchpad-mobile-map__item" type="button" data-launchpad-section="lp-start">Start</button>
+        <button class="launchpad-mobile-map__item" type="button" data-launchpad-section="lp-path-sec">Path</button>
+        <button class="launchpad-mobile-map__item" type="button" data-launchpad-section="lp-personas">Roles</button>
+        <button class="launchpad-mobile-map__item" type="button" data-launchpad-section="lp-security">Security</button>
+        <button class="launchpad-mobile-map__item" type="button" data-launchpad-section="active-module">Module</button>
+    </nav>
+
     <!-- Main Content Area -->
     <main class="main-content">
         <!-- Module: Home / Command Center -->
@@ -467,7 +475,7 @@
                     <span class="breadcrumb-separator">/</span>
                     <span class="breadcrumb-item current">Launchpad</span>
                 </div>
-                <h1 class="module-title">Start Here</h1>
+                <h2 class="module-title">Start Here</h2>
                 <p class="module-subtitle">A guided landing page for operators, developers, DBAs, security teams, and decision makers using OCI Observability.</p>
             </div>
 
@@ -509,26 +517,26 @@
                     <p>Pick who you are and where you work — we'll highlight the levels, services, and the lens to start from. Access to every view is governed by <strong>OCI IAM</strong>: each persona maps to an OCI Group with policies scoped to the right compartments.</p>
                 </div>
                 <div class="start__grid">
-                    <div class="start__col"><h3 class="start__label">I am a…</h3><div class="pickrow" id="personaPick"></div></div>
-                    <div class="start__col"><h3 class="start__label">In…</h3><div class="pickrow" id="industryPick"></div></div>
+                    <div class="start__col"><h3 class="start__label">Responsibility</h3><div class="pickrow" id="rolePick" aria-label="Choose a responsibility"></div></div>
+                    <div class="start__col"><label class="start__label" for="industryPick">Industry</label><select id="industryPick" class="industry-select"><option value="">No industry refinement</option></select></div>
                 </div>
                 <div class="start__result" id="startResult" role="region" aria-live="polite"></div>
             </section>
 
-            <!-- ===== Follow the path: L0 → L5 ===== -->
+            <!-- ===== Follow the path: L0 → L4 + operator scale ===== -->
             <section class="lp-section" id="lp-path-sec" aria-labelledby="lp-path-h">
                 <div class="lp-section__head">
                     <span class="lp-kicker">Follow the path</span>
-                    <h2 id="lp-path-h">From govern to multitenancy — in order</h2>
-                    <p>Each level builds on the last. Jump straight to the launchpad module that delivers it, or open the full ladder in the guide.</p>
+                    <h2 id="lp-path-h">Mature from L0 to L4, then extend at operator scale</h2>
+                    <p>The five maturity levels build on one another. The scale pattern applies that foundation across tenants and clouds; it is an architecture extension, not another maturity level.</p>
                 </div>
-                <ol class="lp-path" aria-label="L0 to L5 observability path">
+                <ol class="lp-path" aria-label="L0 to L4 maturity path and operator-scale extension">
                     <li class="lp-step" style="--lv:var(--l0)"><button type="button" class="lp-step__btn" data-href="index.html#lvl-L0"><span class="lp-step__lv">L0</span><span class="lp-step__t">Govern &amp; land</span><span class="lp-step__d">Compartments, IAM, tags, Vault, Audit</span><span class="lp-step__to">Open in guide ↗</span></button></li>
                     <li class="lp-step" style="--lv:var(--l1)"><button type="button" class="lp-step__btn" data-module="monitoring"><span class="lp-step__lv">L1</span><span class="lp-step__t">See &amp; alert</span><span class="lp-step__d">Monitoring, Logging, alarms, dashboards</span><span class="lp-step__to">Monitoring →</span></button></li>
                     <li class="lp-step" style="--lv:var(--l2)"><button type="button" class="lp-step__btn" data-module="loganalytics"><span class="lp-step__lv">L2</span><span class="lp-step__t">Diagnose deep</span><span class="lp-step__d">Log Analytics, DB Management, Ops Insights</span><span class="lp-step__to">Log Analytics →</span></button></li>
                     <li class="lp-step" style="--lv:var(--l3)"><button type="button" class="lp-step__btn" data-module="apm"><span class="lp-step__lv">L3</span><span class="lp-step__t">Correlate &amp; automate</span><span class="lp-step__d">APM + OpenTelemetry, Connector Hub</span><span class="lp-step__to">APM →</span></button></li>
                     <li class="lp-step" style="--lv:var(--l4)"><button type="button" class="lp-step__btn" data-module="ai"><span class="lp-step__lv">L4</span><span class="lp-step__t">Observe &amp; govern AI</span><span class="lp-step__d">APM GenAI, judge + guardrails, evaluation</span><span class="lp-step__to">AI observability →</span></button></li>
-                    <li class="lp-step" style="--lv:var(--l5)"><button type="button" class="lp-step__btn" data-href="index.html#multitenancy"><span class="lp-step__lv">L5</span><span class="lp-step__t">Operate multitenancy</span><span class="lp-step__d">Central Log Analytics aggregation, isolation</span><span class="lp-step__to">Open in guide ↗</span></button></li>
+                    <li class="lp-step lp-step--scale" style="--lv:var(--scale)"><button type="button" class="lp-step__btn" data-scale-pattern="operator" data-href="index.html#scale-pattern" aria-pressed="false"><span class="lp-step__kind">Architecture extension</span><span class="lp-step__lv">Scale pattern</span><span class="lp-step__t">Operate multitenancy</span><span class="lp-step__d">Central Logan aggregation, multicloud routing, and per-tenant isolation</span><span class="lp-step__to">Open in guide ↗</span></button></li>
                 </ol>
             </section>
 
@@ -645,22 +653,22 @@
                 <!-- Phase Selector Timeline -->
                 <div class="implementation-timeline-container">
                     <div class="implementation-timeline" role="tablist" aria-label="Implementation Phases">
-                        <button type="button" class="timeline-node active" data-phase="phase1" role="tab" aria-selected="true" aria-controls="phase-panel-1">
+                        <button type="button" class="timeline-node active" id="phase-tab-1" data-phase="phase1" role="tab" aria-selected="true" aria-controls="phase-panel-1" tabindex="0">
                             <span class="node-badge">Phase 1</span>
                             <span class="node-title">Agent & Logging</span>
                             <span class="node-dot"></span>
                         </button>
-                        <button type="button" class="timeline-node" data-phase="phase2" role="tab" aria-selected="false" aria-controls="phase-panel-2">
+                        <button type="button" class="timeline-node" id="phase-tab-2" data-phase="phase2" role="tab" aria-selected="false" aria-controls="phase-panel-2" tabindex="-1">
                             <span class="node-badge">Phase 2</span>
                             <span class="node-title">Telemetry & Alerts</span>
                             <span class="node-dot"></span>
                         </button>
-                        <button type="button" class="timeline-node" data-phase="phase3" role="tab" aria-selected="false" aria-controls="phase-panel-3">
+                        <button type="button" class="timeline-node" id="phase-tab-3" data-phase="phase3" role="tab" aria-selected="false" aria-controls="phase-panel-3" tabindex="-1">
                             <span class="node-badge">Phase 3</span>
                             <span class="node-title">App & DB Depth</span>
                             <span class="node-dot"></span>
                         </button>
-                        <button type="button" class="timeline-node" data-phase="phase4" role="tab" aria-selected="false" aria-controls="phase-panel-4">
+                        <button type="button" class="timeline-node" id="phase-tab-4" data-phase="phase4" role="tab" aria-selected="false" aria-controls="phase-panel-4" tabindex="-1">
                             <span class="node-badge">Phase 4</span>
                             <span class="node-title">Advanced AIOps</span>
                             <span class="node-dot"></span>
@@ -671,13 +679,13 @@
                 <!-- Level Selector (Tabs for each perspective) -->
                 <div class="level-tabs-container">
                     <div class="level-tabs" role="tablist" aria-label="Audience Perspectives">
-                        <button type="button" class="level-tab active" data-level="level1" role="tab" aria-selected="true">
+                        <button type="button" class="level-tab active" id="audience-tab-level1" data-level="level1" role="tab" aria-selected="true" aria-controls="phase1-level1-panel" tabindex="0">
                             <span>Level 1: Executive Overview</span>
                         </button>
-                        <button type="button" class="level-tab" data-level="level2" role="tab" aria-selected="false">
+                        <button type="button" class="level-tab" id="audience-tab-level2" data-level="level2" role="tab" aria-selected="false" aria-controls="phase1-level2-panel" tabindex="-1">
                             <span>Level 2: Technical Management</span>
                         </button>
-                        <button type="button" class="level-tab" data-level="level3" role="tab" aria-selected="false">
+                        <button type="button" class="level-tab" id="audience-tab-level3" data-level="level3" role="tab" aria-selected="false" aria-controls="phase1-level3-panel" tabindex="-1">
                             <span>Level 3: Technical Practitioner</span>
                         </button>
                     </div>
@@ -686,9 +694,9 @@
                 <!-- Content Panels -->
                 <div class="phase-content-panels">
                     <!-- CONTENT FOR PHASE 1: AGENT & LOGGING -->
-                    <div class="phase-panel active" id="phase-panel-1" data-phase="phase1">
+                    <div class="phase-panel active" id="phase-panel-1" data-phase="phase1" role="tabpanel" aria-labelledby="phase-tab-1">
                         <!-- Level 1 (Executive) -->
-                        <div class="level-content active" data-level="level1">
+                        <div class="level-content active" id="phase1-level1-panel" data-level="level1" role="tabpanel" aria-labelledby="audience-tab-level1">
                             <div class="c-level-grid">
                                 <div class="strategic-card highlight-glow">
                                     <span class="card-kicker">Strategic Core Objective</span>
@@ -723,7 +731,7 @@
                         </div>
 
                         <!-- Level 2 (Technical Management) -->
-                        <div class="level-content" data-level="level2">
+                        <div class="level-content" id="phase1-level2-panel" data-level="level2" role="tabpanel" aria-labelledby="audience-tab-level2" hidden>
                             <div class="mgmt-roadmap-container">
                                 <h3 class="roadmap-title">Onboarding Management Agents & Logging (Phase 1)</h3>
                                 <div class="roadmap-stepper">
@@ -760,7 +768,7 @@
                         </div>
 
                         <!-- Level 3 (Technical Practitioner) -->
-                        <div class="level-content" data-level="level3">
+                        <div class="level-content" id="phase1-level3-panel" data-level="level3" role="tabpanel" aria-labelledby="audience-tab-level3" hidden>
                             <div class="practitioner-grid">
                                 <div class="practitioner-copy">
                                     <h3>Fluentd Open-Source Log Shipping Integration</h3>
@@ -808,9 +816,9 @@
                     </div>
 
                     <!-- CONTENT FOR PHASE 2: TELEMETRY & ALERTS -->
-                    <div class="phase-panel" id="phase-panel-2" data-phase="phase2">
+                    <div class="phase-panel" id="phase-panel-2" data-phase="phase2" role="tabpanel" aria-labelledby="phase-tab-2" hidden>
                         <!-- Level 1 (Executive) -->
-                        <div class="level-content active" data-level="level1">
+                        <div class="level-content active" id="phase2-level1-panel" data-level="level1" role="tabpanel" aria-labelledby="audience-tab-level1">
                             <div class="c-level-grid">
                                 <div class="strategic-card highlight-glow">
                                     <span class="card-kicker">Strategic Core Objective</span>
@@ -845,7 +853,7 @@
                         </div>
 
                         <!-- Level 2 (Technical Management) -->
-                        <div class="level-content" data-level="level2">
+                        <div class="level-content" id="phase2-level2-panel" data-level="level2" role="tabpanel" aria-labelledby="audience-tab-level2" hidden>
                             <div class="mgmt-roadmap-container">
                                 <h3 class="roadmap-title">Alert Automation & SLO Design (Phase 2)</h3>
                                 <div class="roadmap-stepper">
@@ -882,7 +890,7 @@
                         </div>
 
                         <!-- Level 3 (Technical Practitioner) -->
-                        <div class="level-content" data-level="level3">
+                        <div class="level-content" id="phase2-level3-panel" data-level="level3" role="tabpanel" aria-labelledby="audience-tab-level3" hidden>
                             <div class="practitioner-grid">
                                 <div class="practitioner-copy">
                                     <h3>OCI Monitoring MQL & Prometheus Scraping</h3>
@@ -940,9 +948,9 @@ HttpRequests[1m]{resourceId = "ocid1.instance.oc1..."}.status_code != "200"
                     </div>
 
                     <!-- CONTENT FOR PHASE 3: APP & DB DEPTH -->
-                    <div class="phase-panel" id="phase-panel-3" data-phase="phase3">
+                    <div class="phase-panel" id="phase-panel-3" data-phase="phase3" role="tabpanel" aria-labelledby="phase-tab-3" hidden>
                         <!-- Level 1 (Executive) -->
-                        <div class="level-content active" data-level="level1">
+                        <div class="level-content active" id="phase3-level1-panel" data-level="level1" role="tabpanel" aria-labelledby="audience-tab-level1">
                             <div class="c-level-grid">
                                 <div class="strategic-card highlight-glow">
                                     <span class="card-kicker">Strategic Core Objective</span>
@@ -977,7 +985,7 @@ HttpRequests[1m]{resourceId = "ocid1.instance.oc1..."}.status_code != "200"
                         </div>
 
                         <!-- Level 2 (Technical Management) -->
-                        <div class="level-content" data-level="level2">
+                        <div class="level-content" id="phase3-level2-panel" data-level="level2" role="tabpanel" aria-labelledby="audience-tab-level2" hidden>
                             <div class="mgmt-roadmap-container">
                                 <div class="mgmt-alert-card">
                                     <div class="alert-icon">🔀</div>
@@ -1021,7 +1029,7 @@ HttpRequests[1m]{resourceId = "ocid1.instance.oc1..."}.status_code != "200"
                         </div>
 
                         <!-- Level 3 (Technical Practitioner) -->
-                        <div class="level-content" data-level="level3">
+                        <div class="level-content" id="phase3-level3-panel" data-level="level3" role="tabpanel" aria-labelledby="audience-tab-level3" hidden>
                             <div class="practitioner-grid">
                                 <div class="practitioner-copy">
                                     <h3>OpenTelemetry distributed tracing context propagation</h3>
@@ -1096,9 +1104,9 @@ def call_inventory_service():
                     </div>
 
                     <!-- CONTENT FOR PHASE 4: ADVANCED AIOPS -->
-                    <div class="phase-panel" id="phase-panel-4" data-phase="phase4">
+                    <div class="phase-panel" id="phase-panel-4" data-phase="phase4" role="tabpanel" aria-labelledby="phase-tab-4" hidden>
                         <!-- Level 1 (Executive) -->
-                        <div class="level-content active" data-level="level1">
+                        <div class="level-content active" id="phase4-level1-panel" data-level="level1" role="tabpanel" aria-labelledby="audience-tab-level1">
                             <div class="c-level-grid">
                                 <div class="strategic-card highlight-glow">
                                     <span class="card-kicker">Strategic Core Objective</span>
@@ -1133,7 +1141,7 @@ def call_inventory_service():
                         </div>
 
                         <!-- Level 2 (Technical Management) -->
-                        <div class="level-content" data-level="level2">
+                        <div class="level-content" id="phase4-level2-panel" data-level="level2" role="tabpanel" aria-labelledby="audience-tab-level2" hidden>
                             <div class="mgmt-roadmap-container">
                                 <h3 class="roadmap-title">Enabling Capacity Forecasting & AIOps (Phase 4)</h3>
                                 <div class="roadmap-stepper">
@@ -1170,7 +1178,7 @@ def call_inventory_service():
                         </div>
 
                         <!-- Level 3 (Technical Practitioner) -->
-                        <div class="level-content" data-level="level3">
+                        <div class="level-content" id="phase4-level3-panel" data-level="level3" role="tabpanel" aria-labelledby="audience-tab-level3" hidden>
                             <div class="practitioner-grid">
                                 <div class="practitioner-copy">
                                     <h3>AIOps Model Context Protocol & Custom OCL</h3>
@@ -1389,12 +1397,12 @@ def call_inventory_service():
                             <div class="drag-handle">⋮⋮</div>
                             <div class="node-connector"></div>
                             <div class="node-content">
-                                <div class="eol-badge merge-badge" onclick="window.open('https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm', '_blank')">
+                                <a class="eol-badge merge-badge" href="https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm" target="_blank" rel="noopener noreferrer">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                                         <path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M21 3l-7 7"/><path d="M3 3l7 7v11"/>
                                     </svg>
                                     Merging → OCI Monitoring
-                                </div>
+                                </a>
                                 <div class="pillar-icon stack">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -2258,7 +2266,7 @@ def call_inventory_service():
                             </div>
                         </div>
                         <h5>Log Analytics & Advanced Analytics</h5>
-                        <p>Create visualizations and identify log data patterns with OCI Logging Analytics. Use ML clustering and anomaly detection.</p>
+                        <p>Create visualizations and identify log data patterns with Oracle Log Analytics. Use ML clustering and anomaly detection.</p>
                         <div class="pillar-skills">
                             <span>Log Analytics</span>
                             <span>ML Clustering</span>
@@ -2467,7 +2475,7 @@ def call_inventory_service():
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
                                 Audit Logging
                             </a>
-                            <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3600" target="_blank" class="doc-link">
+                            <a href="https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&amp;search=security" target="_blank" class="doc-link">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                                 Security LiveLab
                             </a>
@@ -2669,7 +2677,7 @@ def call_inventory_service():
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
                                 K8s Log Analytics
                             </a>
-                            <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3143" target="_blank" class="doc-link">
+                            <a href="https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&amp;search=observability" target="_blank" class="doc-link">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                                 OKE Observability Lab
                             </a>
@@ -2803,7 +2811,7 @@ def call_inventory_service():
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
                                 EBS Discovery Guide
                             </a>
-                            <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3629" target="_blank" class="doc-link">
+                            <a href="https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&amp;search=E-Business%20Suite" target="_blank" class="doc-link">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                                 EBS Observability Lab
                             </a>
@@ -2986,7 +2994,7 @@ def call_inventory_service():
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
                                 Security Dashboards Blog
                             </a>
-                            <a href="https://github.com/oracle-quickstart/oci-o11y-solutions/tree/main/knowlege-content/MAP/security-fundamentals-dashboards" target="_blank" class="doc-link">
+                            <a href="https://github.com/oracle-quickstart/oci-o11y-solutions/tree/main/knowledge-content/MAP/security-fundamentals-dashboards" target="_blank" class="doc-link">
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                                 GitHub - Security Dashboards
                             </a>
@@ -3391,11 +3399,11 @@ def call_inventory_service():
                             <div class="workflow-icon logging">🔍</div>
                             <div>
                                 <h3 class="workflow-title">Log Analytics Enterprise Platform</h3>
-                                <span class="workflow-subtitle">OS Security, Prometheus, Data Safe, Network, Fusion HCM</span>
+                                <span class="workflow-subtitle">OS Security, Data Safe, network, and Fusion HCM logs; correlated metric and trace context</span>
                             </div>
                         </div>
                         <p class="workflow-description">
-                            Leverage OCI Log Analytics as a unified platform for OS security logs, Prometheus metrics ingestion, Data Safe audit events, network flow logs, and Oracle Fusion HCM application logs. Enhanced with LoganAI for intelligent analysis and Logan MCP server for 3rd party LLM integration.
+                            Use Oracle Log Analytics for OS security logs, Data Safe audit events, network flow logs, and Oracle Fusion HCM application logs. Keep Prometheus metrics in their metric backend and APM traces in APM, then correlate the three contracts through shared trace, service, tenant, label, and time context.
                         </p>
                         <div class="workflow-diagram">
                             <div class="diagram-node">Multi-Source</div>
@@ -3413,7 +3421,7 @@ def call_inventory_service():
                             </div>
                             <div class="workflow-step">
                                 <span class="step-number">2</span>
-                                <span>Set up Prometheus metric ingestion via remote write or Service Connector</span>
+                                <span>Route Prometheus scrape or remote-write data to the metric backend and preserve shared correlation labels</span>
                             </div>
                             <div class="workflow-step">
                                 <span class="step-number">3</span>
@@ -3444,7 +3452,7 @@ def call_inventory_service():
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
                                 Prometheus Ingestion
                             </a>
-                            <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3255" target="_blank" class="doc-link">
+                            <a href="https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&amp;search=log%20analytics" target="_blank" class="doc-link">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                                 Security Log Analytics Lab
                             </a>
@@ -4164,7 +4172,7 @@ def call_inventory_service():
                 <div class="reference-content">
                     <h4>Try the LiveLabs Workshop</h4>
                     <p>Hands-on experience with EBS Observability using OCI Stack Monitoring and Log Analytics</p>
-                    <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3629" target="_blank" class="reference-link">
+                    <a href="https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&amp;search=E-Business%20Suite" target="_blank" class="reference-link">
                         Launch Workshop
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -4544,14 +4552,15 @@ def call_inventory_service():
                 <article class="integration-lane-card integration-section-panel" id="integration-prometheus" data-integration-section="prometheus">
                     <div class="integration-lane-header">
                         <span class="integration-lane-kicker">Telemetry Ingestion</span>
-                        <h3>Prometheus → OCI Log Analytics</h3>
+                        <h3>Prometheus metrics ↔ Logan evidence</h3>
                     </div>
-                    <p>Use Management Agent collection or remote-write pipelines to get Prometheus data into the OCI observability plane, then enrich that data with LoganAI, clustering, and incident correlations.</p>
+                    <p>Use Management Agent collection or remote-write pipelines to place Prometheus data in the metric backend. Keep Logan records separate, then correlate both views through shared service, tenant, trace, label, and time context.</p>
                     <div class="integration-flow-strip">
                         <span>Prometheus</span>
                         <span>Management Agent</span>
-                        <span>Log Analytics</span>
                         <span>Monitoring</span>
+                        <span>Correlation keys</span>
+                        <span>Logan</span>
                     </div>
                     <div class="integration-list">
                         <div class="integration-list-item">Best for OKE, app runtimes, and custom service SLOs that need shared dashboards.</div>
@@ -4562,7 +4571,7 @@ def call_inventory_service():
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
                             Prometheus Ingestion
                         </a>
-                        <a href="https://livelabs.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3255" target="_blank" class="doc-link">
+                        <a href="https://livelabs.oracle.com/ords/r/dbpm/livelabs/livelabs-workshop-cards?clear=100&amp;search=log%20analytics" target="_blank" class="doc-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             Security & Log Analytics Lab
                         </a>
@@ -4671,7 +4680,7 @@ def call_inventory_service():
                     <div class="integration-blueprint-card">
                         <span class="integration-blueprint-label">Platform Team</span>
                         <h3>Central observability hub</h3>
-                        <p>Prometheus, service logs, Flow Logs, and Data Safe feed a shared Log Analytics tenancy. Monitoring drives alerts. MCP copilots read from curated observability APIs.</p>
+                        <p>Prometheus metrics stay in the metric backend. Service logs, Flow Logs, and Data Safe events feed Logan. APM retains traces, while shared correlation keys join the three operator views. Monitoring drives alerts and MCP copilots read curated observability APIs.</p>
                         <div class="integration-badges">
                             <span class="service-badge primary">Log Analytics</span>
                             <span class="service-badge">Monitoring</span>
@@ -5571,7 +5580,7 @@ def call_inventory_service():
                     <span class="breadcrumb-separator">/</span>
                     <span class="breadcrumb-item current">Operations Insights</span>
                 </div>
-                <h1 class="module-title">Operations Insights</h1>
+                <h2 class="module-title">Operations Insights</h2>
                 <p class="module-subtitle">Capacity planning and resource analytics for databases and hosts</p>
             </div>
 
@@ -5934,7 +5943,7 @@ def call_inventory_service():
                     <span class="breadcrumb-separator">/</span>
                     <span class="breadcrumb-item current">Database Management</span>
                 </div>
-                <h1 class="module-title">Database Management</h1>
+                <h2 class="module-title">Database Management</h2>
                 <p class="module-subtitle">Unified monitoring and management for your Oracle Database fleet</p>
             </div>
 
@@ -6645,6 +6654,7 @@ def call_inventory_service():
     </div>
 
     <!-- Persona + Industry selector / persona view (shared with the main guide) -->
+    <script src="assets/state.js" defer></script>
     <script src="assets/personas.js" defer></script>
     <script src="static/observability.js" defer></script>
     <!-- Further reading: curated OCI O&M articles + demos (shared catalog) -->

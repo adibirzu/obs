@@ -111,7 +111,7 @@
             target: 'integrations',
             section: 'prometheus',
             label: 'Prometheus ingestion lane',
-            description: 'Management Agent, Monitoring, and Log Analytics patterns for Prometheus telemetry.',
+            description: 'Management Agent and Monitoring patterns for Prometheus metrics, correlated with separate Logan evidence.',
             category: 'Deep dive',
             keywords: ['prometheus', 'ingestion', 'oke', 'slo', 'management agent']
         },
@@ -223,12 +223,17 @@
         mobileNavClose: null,
         mobileNavBackdrop: null,
         mobileDrawer: null,
-        mobileCurrentModule: null
+        mobileCurrentModule: null,
+        mobileMapItems: null
     };
     const runtime = {
         initializedFeatures: new Set(),
         revealObserver: null,
-        counterObserver: null
+        counterObserver: null,
+        mobileMapObserver: null,
+        pendingMobileMapSection: null,
+        mobileNavReturnFocus: null,
+        mobileNavBackgroundState: []
     };
     const REVEAL_SELECTOR = [
         '.service-card',
@@ -286,7 +291,9 @@
         initTheme();
         initTierToggle();
         initCloudGuardToggle();
+        initScalePatternState();
         initRouting();
+        initLaunchpadMobileMap();
         initMindmapConnections();
         initAnimations();
         initCounters();
@@ -367,12 +374,7 @@
     // ============================================
     function initTierToggle() {
         document.querySelectorAll('[data-toggle-kind="tier"]').forEach(toggle => {
-            toggle.querySelectorAll('.toggle-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    const tier = option.dataset.value;
-                    setTier(tier);
-                });
-            });
+            bindOptionCluster(toggle, '.toggle-option', option => setTier(option.dataset.value));
         });
 
         applyTier(state.tier);
@@ -416,12 +418,7 @@
 
     function initCloudGuardToggle() {
         document.querySelectorAll('[data-toggle-kind="cloud-guard"]').forEach(toggle => {
-            toggle.querySelectorAll('.toggle-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    const value = option.dataset.value;
-                    setCloudGuardMode(value);
-                });
-            });
+            bindOptionCluster(toggle, '.toggle-option', option => setCloudGuardMode(option.dataset.value));
         });
 
         applyCloudGuardMode(state.cloudGuardMode);
@@ -451,6 +448,33 @@
             toggle.dataset.value = value;
             toggle.querySelectorAll('.toggle-option').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.value === value);
+                opt.setAttribute('aria-pressed', String(opt.dataset.value === value));
+            });
+        });
+    }
+
+    function bindOptionCluster(container, selector, onSelect) {
+        const options = [...container.querySelectorAll(selector)];
+        container.setAttribute('role', 'group');
+        options.forEach(option => {
+            option.setAttribute('role', 'button');
+            option.tabIndex = 0;
+            option.addEventListener('click', () => onSelect(option));
+            option.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    onSelect(option);
+                    return;
+                }
+                if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+                event.preventDefault();
+                const currentIndex = options.indexOf(option);
+                const nextIndex = event.key === 'Home'
+                    ? 0
+                    : event.key === 'End'
+                        ? options.length - 1
+                        : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + options.length) % options.length;
+                options[nextIndex].focus();
             });
         });
     }
@@ -475,6 +499,7 @@
         elements.mobileNavBackdrop = document.getElementById('mobileNavBackdrop');
         elements.mobileDrawer = document.getElementById('mobileDrawer');
         elements.mobileCurrentModule = document.getElementById('mobileCurrentModule');
+        elements.mobileMapItems = document.querySelectorAll('[data-launchpad-section]');
     }
 
     // ============================================
@@ -693,7 +718,12 @@
     // Routing + Mobile Navigation
     // ============================================
     function initRouting() {
-        if (!window.location.hash) {
+        const restoredModule = window.OBS_STATE?.read?.().module;
+        if (MODULE_ORDER.includes(restoredModule)) {
+            const url = new URL(window.location.href);
+            url.hash = buildRouteHash(restoredModule, null);
+            history.replaceState(null, '', url);
+        } else if (!window.location.hash) {
             history.replaceState(null, '', '#home');
         }
 
@@ -781,6 +811,7 @@
             targetModule.classList.add('active');
             state.currentModule = module;
             state.currentSection = getActiveModuleSection(module, section);
+            window.OBS_STATE?.replace?.({ module });
             ensureModuleFeatures(module);
             registerModuleAnimations(module);
 
@@ -793,6 +824,12 @@
             window.scrollTo({ top: 0, behavior });
 
             syncModuleSectionState(module, section, behavior);
+
+            if (runtime.pendingMobileMapSection && module === 'home') {
+                const pendingSection = runtime.pendingMobileMapSection;
+                runtime.pendingMobileMapSection = null;
+                requestAnimationFrame(() => scrollToLaunchpadSection(pendingSection));
+            }
 
             if (module === 'home') {
                 setTimeout(initMindmapConnections, 100);
@@ -828,6 +865,73 @@
         document.title = module === 'home'
             ? SITE_TITLE
             : `${sectionLabel ? `${sectionLabel} • ` : ''}${moduleLabel} • ${SITE_TITLE}`;
+
+        if (module !== 'home') {
+            setLaunchpadMobileMapCurrent('active-module');
+        }
+    }
+
+    function setLaunchpadMobileMapCurrent(section) {
+        elements.mobileMapItems?.forEach(item => {
+            const active = item.dataset.launchpadSection === section;
+            if (active) item.setAttribute('aria-current', 'location');
+            else item.removeAttribute('aria-current');
+        });
+    }
+
+    function scrollToLaunchpadSection(section) {
+        const target = section === 'active-module'
+            ? getModuleElement(state.currentModule)
+            : document.getElementById(section);
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setLaunchpadMobileMapCurrent(section);
+    }
+
+    function initLaunchpadMobileMap() {
+        if (!elements.mobileMapItems?.length) return;
+
+        elements.mobileMapItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const section = item.dataset.launchpadSection;
+                if (section !== 'active-module' && state.currentModule !== 'home') {
+                    runtime.pendingMobileMapSection = section;
+                    routeToModule('home');
+                    return;
+                }
+                scrollToLaunchpadSection(section);
+            });
+        });
+
+        const sections = [...elements.mobileMapItems]
+            .map(item => document.getElementById(item.dataset.launchpadSection))
+            .filter(Boolean);
+        if (!sections.length || typeof IntersectionObserver !== 'function') return;
+
+        runtime.mobileMapObserver = new IntersectionObserver(entries => {
+            if (state.currentModule !== 'home') return;
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+            if (visible) setLaunchpadMobileMapCurrent(visible.target.id);
+        }, { rootMargin: '-112px 0px -60% 0px', threshold: [0.05, 0.35, 0.65] });
+        sections.forEach(section => runtime.mobileMapObserver.observe(section));
+        setLaunchpadMobileMapCurrent(state.currentModule === 'home' ? 'lp-start' : 'active-module');
+    }
+
+    function initScalePatternState() {
+        const control = document.querySelector('[data-scale-pattern]');
+        if (!control) return;
+        const apply = value => {
+            const active = value === control.dataset.scalePattern;
+            control.setAttribute('aria-pressed', String(active));
+            control.closest('.lp-step')?.classList.toggle('is-selected', active);
+        };
+        apply(window.OBS_STATE?.read?.()['scale-pattern']);
+        control.addEventListener('click', () => {
+            const value = control.dataset.scalePattern;
+            window.OBS_STATE?.replace?.({ 'scale-pattern': value });
+            apply(value);
+        });
     }
 
     function syncModuleSectionState(module, section, behavior) {
@@ -871,26 +975,101 @@
     }
 
     function openMobileNav() {
+        if (document.body.classList.contains('mobile-nav-open')) return;
+        runtime.mobileNavReturnFocus = elements.mobileNavToggle;
+        hideMobileNavBackground();
         document.body.classList.add('mobile-nav-open');
         if (elements.mobileNavToggle) {
             elements.mobileNavToggle.setAttribute('aria-expanded', 'true');
+            elements.mobileNavToggle.setAttribute('aria-label', 'Close navigation');
         }
         if (elements.mobileDrawer) {
             elements.mobileDrawer.setAttribute('aria-hidden', 'false');
         }
+        requestAnimationFrame(() => mobileDrawerFocusableElements()[0]?.focus({ preventScroll: true }));
     }
 
     function closeMobileNav() {
+        const wasOpen = document.body.classList.contains('mobile-nav-open');
         document.body.classList.remove('mobile-nav-open');
         if (elements.mobileNavToggle) {
             elements.mobileNavToggle.setAttribute('aria-expanded', 'false');
+            elements.mobileNavToggle.setAttribute('aria-label', 'Open navigation');
         }
         if (elements.mobileDrawer) {
             elements.mobileDrawer.setAttribute('aria-hidden', 'true');
         }
+        restoreMobileNavBackground();
+        if (wasOpen && runtime.mobileNavReturnFocus?.isConnected) {
+            runtime.mobileNavReturnFocus.focus({ preventScroll: true });
+        }
+        runtime.mobileNavReturnFocus = null;
+    }
+
+    function mobileNavBackgroundElements() {
+        return ['.sidebar', '.mobile-header', '.launchpad-mobile-map', '.main-content']
+            .map(selector => document.querySelector(selector))
+            .filter(Boolean);
+    }
+
+    function hideMobileNavBackground() {
+        runtime.mobileNavBackgroundState = mobileNavBackgroundElements().map(element => ({
+            element,
+            inert: element.inert,
+            ariaHidden: element.getAttribute('aria-hidden')
+        }));
+        runtime.mobileNavBackgroundState.forEach(({ element }) => {
+            element.inert = true;
+            element.setAttribute('aria-hidden', 'true');
+        });
+    }
+
+    function restoreMobileNavBackground() {
+        runtime.mobileNavBackgroundState.forEach(({ element, inert, ariaHidden }) => {
+            element.inert = inert;
+            if (ariaHidden === null) element.removeAttribute('aria-hidden');
+            else element.setAttribute('aria-hidden', ariaHidden);
+        });
+        runtime.mobileNavBackgroundState = [];
+    }
+
+    function mobileDrawerFocusableElements() {
+        if (!elements.mobileDrawer) return [];
+        const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        return [...elements.mobileDrawer.querySelectorAll(selector)].filter(element => {
+            const style = window.getComputedStyle(element);
+            return style.display !== 'none' && style.visibility !== 'hidden' && element.getClientRects().length > 0;
+        });
+    }
+
+    function trapMobileNavFocus(event) {
+        if (event.key !== 'Tab' || !document.body.classList.contains('mobile-nav-open')) return;
+        const focusable = mobileDrawerFocusableElements();
+        if (!focusable.length) {
+            event.preventDefault();
+            elements.mobileDrawer?.focus();
+            return;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (!elements.mobileDrawer.contains(active)) {
+            event.preventDefault();
+            (event.shiftKey ? last : first).focus();
+        } else if (event.shiftKey && active === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && active === last) {
+            event.preventDefault();
+            first.focus();
+        }
     }
 
     function handleGlobalKeydown(e) {
+        if (e.key === 'Tab' && document.body.classList.contains('mobile-nav-open')) {
+            trapMobileNavFocus(e);
+            return;
+        }
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
             e.preventDefault();
             openCommandPalette();
@@ -2562,49 +2741,74 @@
     // OCI Implementation Hub & Service Inspector Interactions
     // ==========================================================================
     function initImplementationHub() {
-        const timelineNodes = document.querySelectorAll('.timeline-node');
-        const levelTabs = document.querySelectorAll('.level-tab');
-        const phasePanels = document.querySelectorAll('.phase-panel');
+        const timelineNodes = [...document.querySelectorAll('.timeline-node')];
+        const levelTabs = [...document.querySelectorAll('.level-tab')];
+        const phasePanels = [...document.querySelectorAll('.phase-panel')];
+        const levelPanels = [...document.querySelectorAll('.level-content')];
 
         const phaseOrder = ['phase1', 'phase2', 'phase3', 'phase4'];
 
-        timelineNodes.forEach(node => {
-            node.addEventListener('click', () => {
-                const selectedPhase = node.dataset.phase;
-                const currentIndex = phaseOrder.indexOf(selectedPhase);
-
-                // Update timeline nodes
-                timelineNodes.forEach(n => {
-                    const nPhase = n.dataset.phase;
-                    const nIndex = phaseOrder.indexOf(nPhase);
-                    n.classList.toggle('active', nPhase === selectedPhase);
-                    n.classList.toggle('completed', nIndex < currentIndex);
-                    n.setAttribute('aria-selected', nPhase === selectedPhase ? 'true' : 'false');
-                });
-
-                // Update phase panels
-                phasePanels.forEach(panel => {
-                    panel.classList.toggle('active', panel.dataset.phase === selectedPhase);
+        function bindRovingTablist(tabs, activate) {
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => activate(tab));
+                tab.addEventListener('keydown', event => {
+                    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                    event.preventDefault();
+                    const currentIndex = tabs.indexOf(event.currentTarget);
+                    const nextIndex = event.key === 'Home'
+                        ? 0
+                        : event.key === 'End'
+                            ? tabs.length - 1
+                            : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+                    activate(tabs[nextIndex], { focus: true });
                 });
             });
-        });
+        }
 
-        levelTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const selectedLevel = tab.dataset.level;
+        function syncAudienceControls(phase) {
+            levelTabs.forEach(tab => tab.setAttribute('aria-controls', `${phase}-${tab.dataset.level}-panel`));
+        }
 
-                // Update level tab active states
-                levelTabs.forEach(t => {
-                    t.classList.toggle('active', t === tab);
-                    t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
-                });
-
-                // Update level contents inside the active phase panel
-                document.querySelectorAll('.level-content').forEach(content => {
-                    content.classList.toggle('active', content.dataset.level === selectedLevel);
-                });
+        function activatePhase(node, { focus = false } = {}) {
+            const selectedPhase = node.dataset.phase;
+            const currentIndex = phaseOrder.indexOf(selectedPhase);
+            timelineNodes.forEach(tab => {
+                const selected = tab === node;
+                tab.classList.toggle('active', selected);
+                tab.classList.toggle('completed', phaseOrder.indexOf(tab.dataset.phase) < currentIndex);
+                tab.setAttribute('aria-selected', String(selected));
+                tab.tabIndex = selected ? 0 : -1;
             });
-        });
+            phasePanels.forEach(panel => {
+                const selected = panel.dataset.phase === selectedPhase;
+                panel.classList.toggle('active', selected);
+                panel.hidden = !selected;
+            });
+            syncAudienceControls(selectedPhase);
+            if (focus) node.focus();
+        }
+
+        function activateAudience(tab, { focus = false } = {}) {
+            const selectedLevel = tab.dataset.level;
+            levelTabs.forEach(candidate => {
+                const selected = candidate === tab;
+                candidate.classList.toggle('active', selected);
+                candidate.setAttribute('aria-selected', String(selected));
+                candidate.tabIndex = selected ? 0 : -1;
+            });
+            levelPanels.forEach(panel => {
+                const selected = panel.dataset.level === selectedLevel;
+                panel.classList.toggle('active', selected);
+                panel.hidden = !selected;
+            });
+            if (focus) tab.focus();
+        }
+
+        if (!timelineNodes.length || !levelTabs.length) return;
+        bindRovingTablist(timelineNodes, activatePhase);
+        bindRovingTablist(levelTabs, activateAudience);
+        activatePhase(timelineNodes.find(tab => tab.getAttribute('aria-selected') === 'true') || timelineNodes[0]);
+        activateAudience(levelTabs.find(tab => tab.getAttribute('aria-selected') === 'true') || levelTabs[0]);
     }
 
     const SERVICE_DETAILS = {
@@ -2667,10 +2871,10 @@
                 },
                 level3: {
                     codeTitle: "OpenTelemetry Java Agent Configuration",
-                    code: "export OTEL_EXPORTER_OTLP_ENDPOINT=\"https://apm-gateway.eu-frankfurt-1.oci.oraclecloud.com\"\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer <APM_PRIVATE_KEY>\"\nexport OTEL_SERVICE_NAME=\"payment-service\"",
+                    code: "export OTEL_EXPORTER_OTLP_ENDPOINT=\"<APM_OTLP_ENDPOINT>\"\nexport OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Bearer <APM_PRIVATE_KEY>\"\nexport OTEL_SERVICE_NAME=\"payment-service\"",
                     openSourceDesc: "Integrate Real User Monitoring (RUM) tracing on your frontend website by injecting the APM browser agent snippet.",
                     openSourceTitle: "Browser JavaScript Agent",
-                    openSourceCode: "window.apmrum = {\n  endpointUrl: 'https://apm-rum-collector.oci.oraclecloud.com/rum/v1',\n  username: '<APM_RUM_PUBLIC_KEY>'\n};"
+                    openSourceCode: "window.apmrum = {\n  endpointUrl: '<APM_RUM_COLLECTOR_ENDPOINT>',\n  username: '<APM_RUM_PUBLIC_KEY>'\n};"
                 }
             }
         },
@@ -2762,28 +2966,28 @@
 
             // Render Inspector body with custom tabs
             bodyEl.innerHTML = `
-                <div class="inspector-tab-header">
-                    <button type="button" class="inspector-tab-btn active" data-tab="level1">Level 1: Executive</button>
-                    <button type="button" class="inspector-tab-btn" data-tab="level2">Level 2: Management</button>
-                    <button type="button" class="inspector-tab-btn" data-tab="level3">Level 3: Practitioner</button>
+                <div class="inspector-tab-header" role="tablist" aria-label="Service detail lens">
+                    <button type="button" class="inspector-tab-btn" id="inspector-tab-level1" data-tab="level1" role="tab" aria-controls="inspector-panel-level1" aria-selected="false" tabindex="-1">Level 1: Executive</button>
+                    <button type="button" class="inspector-tab-btn" id="inspector-tab-level2" data-tab="level2" role="tab" aria-controls="inspector-panel-level2" aria-selected="false" tabindex="-1">Level 2: Management</button>
+                    <button type="button" class="inspector-tab-btn" id="inspector-tab-level3" data-tab="level3" role="tab" aria-controls="inspector-panel-level3" aria-selected="false" tabindex="-1">Level 3: Practitioner</button>
                 </div>
-                <div class="inspector-tab-content active" data-tab="level1">
+                <div class="inspector-tab-content" id="inspector-panel-level1" data-tab="level1" role="tabpanel" aria-labelledby="inspector-tab-level1" hidden>
                     <div style="margin-bottom: 20px;">
                         <h4 style="margin-top:0; color:var(--text-primary); font-size:16px;">Core Business Value</h4>
                         <p style="font-size:14px; line-height:1.6; color:var(--text-secondary);">${data.levels.level1.value}</p>
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
                         <div style="background:var(--bg-secondary); padding:16px; border-radius:8px; border:1px solid var(--border-subtle);">
-                            <span style="font-size:11px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">ROI Indicator</span>
+                            <span style="font-size:12px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">ROI Indicator</span>
                             <p style="font-size:18px; font-weight:700; color:var(--blue-deep); margin:4px 0 0 0;">${data.levels.level1.roi}</p>
                         </div>
                         <div style="background:var(--bg-secondary); padding:16px; border-radius:8px; border:1px solid var(--border-subtle);">
-                            <span style="font-size:11px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">Compliance Mapping</span>
+                            <span style="font-size:12px; font-weight:700; color:var(--oci-red); text-transform:uppercase;">Compliance Mapping</span>
                             <p style="font-size:14px; font-weight:600; color:var(--text-primary); margin:4px 0 0 0;">${data.levels.level1.compliance}</p>
                         </div>
                     </div>
                 </div>
-                <div class="inspector-tab-content" data-tab="level2">
+                <div class="inspector-tab-content" id="inspector-panel-level2" data-tab="level2" role="tabpanel" aria-labelledby="inspector-tab-level2" hidden>
                     <h4 style="margin-top:0; color:var(--text-primary); font-size:16px;">Operational Best Practices</h4>
                     <p style="font-size:14px; line-height:1.6; color:var(--text-secondary); margin-bottom:16px;">${data.levels.level2.practices}</p>
                     <div style="background:linear-gradient(135deg, rgba(4,83,111,0.05) 0%, rgba(199,70,52,0.02) 100%); padding:16px; border-radius:8px; border-left:4px solid var(--blue-deep);">
@@ -2791,7 +2995,7 @@
                         <p style="font-size:13px; line-height:1.5; color:var(--text-secondary); margin:0;">${data.levels.level2.migration}</p>
                     </div>
                 </div>
-                <div class="inspector-tab-content" data-tab="level3">
+                <div class="inspector-tab-content" id="inspector-panel-level3" data-tab="level3" role="tabpanel" aria-labelledby="inspector-tab-level3" hidden>
                     <h4 style="margin-top:0; color:var(--text-primary); font-size:16px;">Technical Configuration Sample</h4>
                     <div class="code-panel">
                         <div class="code-header">
@@ -2816,13 +3020,40 @@
             // Bind inspector tab switching
             const tabs = bodyEl.querySelectorAll('.inspector-tab-btn');
             const contents = bodyEl.querySelectorAll('.inspector-tab-content');
+            function activateInspectorTab(tab, { focus = false, persist = true } = {}) {
+                const targetTab = tab.dataset.tab;
+                tabs.forEach((item, index) => {
+                    const active = item === tab;
+                    item.classList.toggle('active', active);
+                    item.setAttribute('aria-selected', String(active));
+                    item.tabIndex = active ? 0 : -1;
+                    if (active && persist) window.OBS_STATE?.replace?.({ lens: String(index) });
+                });
+                contents.forEach(content => {
+                    const active = content.dataset.tab === targetTab;
+                    content.classList.toggle('active', active);
+                    content.hidden = !active;
+                });
+                if (focus) tab.focus();
+            }
+
             tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const targetTab = tab.dataset.tab;
-                    tabs.forEach(t => t.classList.toggle('active', t === tab));
-                    contents.forEach(c => c.classList.toggle('active', c.dataset.tab === targetTab));
+                tab.addEventListener('click', () => activateInspectorTab(tab));
+                tab.addEventListener('keydown', event => {
+                    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+                    event.preventDefault();
+                    const currentIndex = [...tabs].indexOf(tab);
+                    const nextIndex = event.key === 'Home'
+                        ? 0
+                        : event.key === 'End'
+                            ? tabs.length - 1
+                            : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+                    activateInspectorTab(tabs[nextIndex], { focus: true });
                 });
             });
+
+            const restoredLens = Number.parseInt(window.OBS_STATE?.read?.().lens ?? window.__obsLens ?? '0', 10);
+            activateInspectorTab(tabs[Number.isInteger(restoredLens) && restoredLens >= 0 && restoredLens < tabs.length ? restoredLens : 0], { persist: false });
 
             // Bind newly rendered copy buttons
             bodyEl.querySelectorAll('.copy-code-btn').forEach(btn => {
@@ -2904,4 +3135,3 @@
     });
 
 })();
-
