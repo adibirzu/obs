@@ -2,7 +2,7 @@
 
 **An operating-goal-driven path from L0 to L4 for designing enterprise observability across OCI and multicloud estates, with an operator-scale architecture extension for multitenant platforms.**
 
-🔗 **Live:** [obs.octodemo.cloud](https://obs.octodemo.cloud) · mirror: [adibirzu.github.io/obs](https://adibirzu.github.io/obs/)
+🔗 **Live site:** [adibirzu.github.io/obs](https://adibirzu.github.io/obs/)
 
 Built with the Oracle Redwood design language (Georgia + Figtree, warm-stone palette, Lucide icons) for familiarity. Static, self-contained, no build step.
 
@@ -147,8 +147,8 @@ npm run lint               # JavaScript, JSON, shell, HTML, CSS, and YAML checks
 npm run security:scan      # secrets and proprietary-identifier redaction gate
 npm run artifacts:check    # deterministic generated-vector drift check
 npm run test:ci            # complete suite, at least 40 tests, no skips
-npm run test:coverage:ci   # fail below 80% line coverage
-npm run test:smoke         # four site surfaces at desktop and mobile widths
+npm run test:coverage:node:ci # enforce aggregate and critical-module coverage floors
+npm run test:browser:ci       # managed E2E, browser coverage, and dual-width smoke tests
 npm run release:build      # build the distributable site and hash manifest
 ```
 
@@ -179,7 +179,6 @@ static/                        launchpad assets (css/js/icons)
 docs/
   observability-design-guide.md   full enterprise design guide (reference)
   PROPOSE-A-SCENARIO.md           how to propose a monitoring scenario
-CNAME                          custom domain (obs.octodemo.cloud)
 ```
 
 ## Sources & credits

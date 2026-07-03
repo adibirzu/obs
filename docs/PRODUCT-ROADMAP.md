@@ -51,7 +51,8 @@ At the time of this update there are **No open GitHub issues** for this reposito
 - Added deterministic artifact regeneration and drift detection, with editable vectors retained in source control and compiled PDFs and release bundles produced on demand.
 - Locked generated vectors to an exact path-and-SHA-256 snapshot so missing, changed, unexpected, and obsolete artifacts fail the build.
 - Added release packaging filters for editor backups, local configuration, credentials, OS noise, and symbolic links, plus an exact 66-PDF public-surface assertion.
-- Connected the verified release package to GitHub Pages and added post-deployment checks for the Interlocks page and every architecture PDF.
+- Removed the obsolete repository `CNAME` input and switched the GitHub Pages setting from legacy branch publishing to workflow publishing at the repository URL.
+- Prepared the verified release package for GitHub Pages at the deployment root and added byte-size, SHA-256, redirect, and Interlocks DOM checks for every required public artifact. Production acceptance remains open until a successful `main` deployment is recorded.
 - Added real-browser smoke coverage for the Atlas, Launchpad, Interlocks explorer, and Interlock detail surface at desktop and mobile widths.
 
 ### PRD-08: Community scenario contributions
@@ -64,7 +65,7 @@ At the time of this update there are **No open GitHub issues** for this reposito
 
 ## Remaining tasks
 
-Five PRDs are complete. PRD-03, PRD-05, and PRD-07 remain partial until the following acceptance work is complete:
+Five of eight PRDs are complete (62.5%). PRD-03, PRD-05, and PRD-07 remain partial because their outstanding accessibility and production acceptance work cannot be inferred from automated implementation checks alone:
 
 ### PRD-03: Accessibility verification
 
@@ -78,8 +79,8 @@ Five PRDs are complete. PRD-03, PRD-05, and PRD-07 remain partial until the foll
 
 - [x] Instrument the critical browser application scripts and enforce the 80% client line-coverage gate.
 - [x] Execute the full Launchpad E2E suite in CI before release packaging.
-- [ ] Stabilize repeated owned-Chromium startup across supported local and CI environments without a platform-specific `SIGABRT` or startup timeout.
-- [ ] Record a successful production GitHub Pages deployment and verify the live `interlocks.html` route plus all 66 architecture PDF URLs.
+- [x] Stabilize repeated owned-Chromium startup through one managed browser lifecycle with bounded startup and deterministic shutdown.
+- [ ] Merge and run the workflow-based GitHub Pages deployment, then record cryptographic verification of the live `interlocks.html` route and all 66 architecture PDF URLs.
 
 ## Completion rule
 

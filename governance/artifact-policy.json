@@ -29,7 +29,6 @@
   "releasePackage": {
     "output": "dist/site",
     "include": [
-      "CNAME",
       "CONTRIBUTING.md",
       "LICENSE",
       "index.html",

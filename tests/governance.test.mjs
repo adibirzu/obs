@@ -6,6 +6,7 @@ import {
   discoverExternalLinks,
   loadWorkflowRegistry,
   validateLinkRegistry,
+  validateGovernance,
   validateRenameLedger,
   validateTelemetryContracts,
   validateWorkflows,
@@ -30,6 +31,31 @@ test('external links are discovered across source files and governed by dated HT
   assert.ok(discovered.every(link => link.sources.every(source => !source.startsWith('dist/'))), 'ignored release output never enters source governance');
   assert.ok(sourceRegister.sources.every(source => Number.isInteger(source.httpStatus)));
   assert.ok(sourceRegister.sources.every(source => source.lastChecked === registry.checkedAt));
+});
+
+test('external link registry rejects malformed, stale, drifting, and orphaned records', () => {
+  const discovered = [
+    { url: 'https://new.example.test/', sources: ['README.md'] },
+    { url: 'https://drift.example.test/', sources: ['index.html'] },
+  ];
+  const registry = {
+    schemaVersion: '0.0.0',
+    checkedAt: 'not-a-date',
+    policy: { maxAgeDays: 0, acceptedStatusCodes: 'invalid' },
+    links: [
+      { url: 'https://drift.example.test/', statusCode: 500, lastChecked: '2025-01-01', sources: ['old.html'] },
+      { url: 'https://drift.example.test/', statusCode: 200, lastChecked: '2027-01-01', sources: [] },
+      { url: 'https://orphan.example.test/', statusCode: 200, lastChecked: 'invalid', sources: ['README.md'] },
+    ],
+  };
+  const errors = validateLinkRegistry({ discovered, registry, today: '2026-07-03' });
+  for (const expected of [
+    'schemaVersion', 'checkedAt', 'maxAgeDays', 'acceptedStatusCodes', 'duplicate', 'stale check',
+    'future lastChecked', 'unacceptable or missing status', 'sources missing', 'unregistered',
+    'source list drift', 'orphaned registry entry',
+  ]) assert.ok(errors.some(error => error.includes(expected)), expected);
+  assert.ok(validateLinkRegistry({ discovered: [], registry: { ...registry, links: null }, today: '2026-07-03' })
+    .some(error => error.includes('links must be an array')));
 });
 
 test('Logan, Prometheus, and APM use segregated telemetry metadata contracts', async () => {
@@ -71,4 +97,11 @@ test('workflow detail UI renders governance prerequisites and empty-result cavea
   assert.match(detail, /item\.prerequisites/);
   assert.match(detail, /item\.correlationKeys/);
   assert.match(detail, /item\.emptyResult/);
+});
+
+test('complete governance compilation validates the checked-in contracts together', async () => {
+  const result = await validateGovernance({ today: '2026-07-03' });
+  assert.ok(result.links > 40);
+  assert.equal(result.workflows, 60);
+  assert.ok(result.claims > 0);
 });

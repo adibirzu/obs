@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
-import { spawnSync } from 'node:child_process';
 import { extname, relative, resolve, sep } from 'node:path';
 
 import { isReleasePathAllowed } from './release-path-policy.mjs';
@@ -23,12 +22,6 @@ export function classifyArtifact(path, artifactPolicy = policy) {
   return 'runtime';
 }
 
-function runGenerator(path) {
-  const result = spawnSync(process.execPath, [path], { cwd: root, encoding: 'utf8' });
-  if (result.status !== 0) throw new Error(`${path} failed:\n${result.stderr || result.stdout}`);
-  process.stdout.write(result.stdout);
-}
-
 async function listFiles(directory) {
   const files = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -40,8 +33,11 @@ async function listFiles(directory) {
   return files;
 }
 
-runGenerator('scripts/generate-interlocks-pdf.mjs');
-runGenerator('scripts/generate-usecase-pdf.mjs');
+const cachedPdfPaths = (await listFiles(resolve(root, 'assets/diagrams')))
+  .filter(path => extname(path).toLowerCase() === '.pdf');
+if (cachedPdfPaths.length !== policy.releasePackage.requiredPdfCount) {
+  throw new Error(`The pre-built release PDF cache must contain exactly ${policy.releasePackage.requiredPdfCount} files; found ${cachedPdfPaths.length}. Run npm run artifacts:release before npm run release:build.`);
+}
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 for (const entry of policy.releasePackage.include) {

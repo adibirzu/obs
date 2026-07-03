@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://obs.octodemo.cloud/schemas/community-scenario.schema.json",
+  "$id": "https://adibirzu.github.io/obs/schemas/community-scenario.schema.json",
   "title": "OCTO Observability Atlas community scenario",
   "type": "object",
   "required": ["schemaVersion", "id", "title", "summary", "status", "ownership", "discovery", "topology", "telemetry", "failurePoints", "workflow", "references"],

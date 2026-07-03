@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://obs.octodemo.cloud/schemas/external-links.schema.json",
+  "$id": "https://adibirzu.github.io/obs/schemas/external-links.schema.json",
   "title": "External link verification registry",
   "type": "object",
   "required": ["schemaVersion", "checkedAt", "policy", "links"],

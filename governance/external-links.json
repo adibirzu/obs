@@ -14,10 +14,10 @@
     {
       "url": "https://adibirzu.github.io/obs/",
       "sources": [
-        "README.md"
+        "README.md",
+        "deploy/portal-ingress.yaml"
       ],
       "statusCode": 200,
-      "redirectedTo": "https://obs.octodemo.cloud/",
       "lastChecked": "2026-07-03"
     },
     {
@@ -1572,14 +1572,6 @@
       ],
       "statusCode": 200,
       "redirectedTo": "https://modelcontextprotocol.io/docs/getting-started/intro",
-      "lastChecked": "2026-07-03"
-    },
-    {
-      "url": "https://obs.octodemo.cloud/",
-      "sources": [
-        "README.md"
-      ],
-      "statusCode": 200,
       "lastChecked": "2026-07-03"
     },
     {
