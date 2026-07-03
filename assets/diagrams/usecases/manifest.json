@@ -1,0 +1,245 @@
+{
+  "generatedAt": "2026-06-30T00:00:00.000Z",
+  "artifacts": [
+    {
+      "domain": "network",
+      "id": "flow-logs"
+    },
+    {
+      "domain": "network",
+      "id": "load-balancer"
+    },
+    {
+      "domain": "network",
+      "id": "dns-path"
+    },
+    {
+      "domain": "network",
+      "id": "firewall-waf"
+    },
+    {
+      "domain": "network",
+      "id": "nsg-change"
+    },
+    {
+      "domain": "network",
+      "id": "hybrid-connectivity"
+    },
+    {
+      "domain": "network",
+      "id": "routing"
+    },
+    {
+      "domain": "network",
+      "id": "vtap"
+    },
+    {
+      "domain": "network",
+      "id": "path-analyzer"
+    },
+    {
+      "domain": "network",
+      "id": "zpr-log-analytics"
+    },
+    {
+      "domain": "security",
+      "id": "cloud-guard-triage"
+    },
+    {
+      "domain": "security",
+      "id": "waf-threat-pattern"
+    },
+    {
+      "domain": "security",
+      "id": "vulnerability-exposure"
+    },
+    {
+      "domain": "security",
+      "id": "audit-change"
+    },
+    {
+      "domain": "security",
+      "id": "identity-anomaly"
+    },
+    {
+      "domain": "security",
+      "id": "key-usage"
+    },
+    {
+      "domain": "security",
+      "id": "security-zone"
+    },
+    {
+      "domain": "security",
+      "id": "network-firewall"
+    },
+    {
+      "domain": "security",
+      "id": "compliance-evidence"
+    },
+    {
+      "domain": "security",
+      "id": "incident-response"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "privilege-review"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "policy-change"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "federation-health"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "dynamic-group"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "compartment-boundary"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "api-credential"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "tag-governance"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "quota-control"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "access-certification"
+    },
+    {
+      "domain": "iam-governance",
+      "id": "organization-change"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "baseline-provisioning"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "guardrail-drift"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "network-foundation"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "identity-foundation"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "logging-onboarding"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "cost-baseline"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "policy-exception"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "resource-hygiene"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "deployment-validation"
+    },
+    {
+      "domain": "landing-zone",
+      "id": "operational-readiness"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "fleet-health"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "log-anomaly"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "database-insight"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "capacity-planning"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "maintenance-impact"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "incident-correlation"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "runbook-effectiveness"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "slo-review"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "resource-optimization"
+    },
+    {
+      "domain": "operations-lifecycle",
+      "id": "post-incident"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "service-degradation"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "release-validation"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "customer-journey"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "security-to-operations"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "change-impact"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "cost-to-service"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "resilience-exercise"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "capacity-to-experience"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "governance-to-delivery"
+    },
+    {
+      "domain": "end-to-end",
+      "id": "continuous-improvement"
+    }
+  ]
+}
