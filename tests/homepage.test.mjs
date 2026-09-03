@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 
 const root = new URL('../', import.meta.url);
-const [html, css, guide, personas] = await Promise.all([
+const [html, css, colors, fonts, guide, personas] = await Promise.all([
   readFile(new URL('index.html', root), 'utf8'),
   readFile(new URL('assets/guide.css', root), 'utf8'),
+  readFile(new URL('assets/redwood/tokens/colors.css', root), 'utf8'),
+  readFile(new URL('assets/redwood/tokens/fonts.css', root), 'utf8'),
   readFile(new URL('assets/guide.js', root), 'utf8'),
   readFile(new URL('assets/personas.js', root), 'utf8'),
 ]);
@@ -18,10 +20,114 @@ test('hero begins with an interactive peer-status telemetry route', () => {
     assert.match(html, new RegExp(`data-source="${source}"`));
   }
   assert.match(html, /id="telemetry-route-detail"[^>]*aria-live="polite"/);
+  assert.match(html, /id="route-decision"/);
   assert.match(guide, /function buildTelemetryRoute\(/);
   assert.match(guide, /vendor-neutral telemetry contract/i);
+  for (const stance of ['Native-first', 'Federated', 'Portable', 'Centralized']) {
+    assert.match(guide, new RegExp(`decision: "${stance}`, 'i'));
+  }
   assert.doesNotMatch(html, /class="hero__meta"/);
   assert.doesNotMatch(html, /class="hero__panel/);
+});
+
+test('homepage preserves the published Atlas identity and source-to-destination workflow', () => {
+  assert.match(html, /class="brand__logo" src="assets\/octo\/octo-logo\.png\?v=4" alt="OCTO"/);
+  assert.match(html, /class="hero__kicker">Independent multicloud observability field guide/);
+  assert.match(html, /Trace every environment to <span class="accent">one operating picture\.<\/span>/);
+  assert.match(html, /Follow its vendor-neutral contract, egress path, and control-plane handoff into the L0 to L4 maturity path\./);
+  assert.doesNotMatch(html, /class="route-progress"/);
+  assert.match(html, /id="telemetry-route"/);
+  assert.match(html, /id="route-destination"/);
+});
+
+test('launchpad and interlocks distinguish current OCI products from safe-harbor direction', async () => {
+  const [launchpad, interlocks] = await Promise.all([
+    readFile(new URL('launchpad.html', root), 'utf8'),
+    readFile(new URL('interlocks.html', root), 'utf8'),
+  ]);
+  assert.match(launchpad, /Current — public documentation/);
+  assert.match(launchpad, /Direction — safe harbor/);
+  assert.match(launchpad, /converged trace, log, metric, and topology investigation/i);
+  assert.match(launchpad, /Direction → OCI Monitoring/);
+  assert.doesNotMatch(launchpad, /Merging into OCI Monitoring/);
+  assert.doesNotMatch(launchpad, /capabilities are being merged into the OCI Monitoring service/);
+  assert.match(interlocks, /Operate with distinct, linked services/);
+  assert.match(interlocks, /planning direction, not a promise, date, or deployed customer capability/i);
+});
+
+test('Launchpad exposes selectable future-capability tiles with safe-harbor detail guidance', async () => {
+  const [launchpad, launchpadJs, launchpadCss] = await Promise.all([
+    readFile(new URL('launchpad.html', root), 'utf8'),
+    readFile(new URL('static/observability.js', root), 'utf8'),
+    readFile(new URL('static/observability.css', root), 'utf8'),
+  ]);
+  assert.match(launchpad, /id="future-capabilities-title">Future capability directions/);
+  assert.match(launchpad, /Planning topics only — not public product commitments, release dates, or available customer capabilities/);
+  for (const id of ['cross-signal', 'unified-logging', 'ai-investigation', 'packaged-solutions', 'open-instrumentation', 'guided-collection']) {
+    assert.match(launchpad, new RegExp(`data-future-id="${id}"`));
+    assert.match(launchpadJs, new RegExp(`'${id}'`));
+  }
+  assert.match(launchpadJs, /FUTURE_CAPABILITY_DETAILS/);
+  assert.match(launchpadJs, /document\.querySelectorAll\('\.future-capability'\)/);
+  assert.match(launchpadJs, /document\.querySelectorAll\('\.service-card'\)/);
+  assert.match(launchpadJs, /Future capability direction · safe harbor/);
+  assert.match(launchpadCss, /\.future-capabilities__grid/);
+  assert.match(launchpadCss, /\.future-capability:focus-visible/);
+});
+
+test('homepage provides bypass links and a persistent active-route summary', () => {
+  assert.match(html, /class="skip-link" href="#top">Skip to main content<\/a>/);
+  assert.match(html, /class="skip-link" href="#atlas-route-summary">Skip to active route<\/a>/);
+  assert.match(html, /<main id="top" tabindex="-1">/);
+  assert.match(html, /id="atlas-route-summary"[^>]*aria-label="Active atlas route"/);
+  for (const id of ['route-summary-source', 'route-summary-goal', 'route-summary-pattern']) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+  assert.match(html, /id="route-summary-reset"/);
+  assert.match(guide, /function initRouteSummary\(/);
+  assert.match(guide, /obs:statechange/);
+  assert.match(css, /\.route-summary\s*\{[^}]*position:\s*sticky/s);
+});
+
+test('deep reference chapters use native progressive disclosure and direct-link recovery', () => {
+  assert.match(html, /id="chapters"/);
+  assert.match(html, /id="atlas-library"[^>]*class="atlas-library"/);
+  assert.match(html, /<summary class="atlas-library__summary">/);
+  for (const target of ['agents', 'ai', 'personas', 'security', 'scale-pattern', 'maturity', 'resources', 'reference']) {
+    assert.match(html, new RegExp(`class="chapter-index__link" href="#${target}"`));
+  }
+  assert.match(guide, /function openAtlasLibraryForHash\(/);
+  assert.match(guide, /hashchange/);
+});
+
+test('homepage keeps a meaningful static route when JavaScript is unavailable', () => {
+  assert.match(html, /<noscript>[\s\S]*class="[^"]*enhancement-fallback[^"]*"/);
+  assert.match(html, /JavaScript adds personalization, not access/);
+  assert.match(html, /class="fallback-route"/);
+  for (const href of ['#lvl-L0', '#lvl-L1', '#lvl-L2', '#lvl-L3', '#lvl-L4', 'interlocks.html']) {
+    assert.match(html, new RegExp(`href="${href.replace('#', '\\#')}"`));
+  }
+  assert.match(html, /<noscript>[\s\S]*\.atlas-library\s*\{[^}]*display:\s*block/s);
+  assert.match(html, /<noscript>[\s\S]*\.atlas-library__summary\s*\{[^}]*display:\s*none/s);
+  assert.match(html, /<noscript>[\s\S]*\.js-only\s*\{[^}]*display:\s*none/s);
+  for (const target of ['#start', '#finder', '#personas', '#resources']) {
+    assert.match(html, new RegExp(`<noscript>[\\s\\S]*a\\[href="${target.replace('#', '\\#')}"\\][^}]*display:\\s*none`, 's'));
+  }
+  assert.match(html, /<noscript>[\s\S]*\.route-summary[^}]*display:\s*none/s);
+  assert.match(html, /<noscript>[\s\S]*\.skip-link\[href="#atlas-route-summary"\][^}]*display:\s*none/s);
+});
+
+test('homepage uses compliant inverse text tokens', () => {
+  assert.match(colors, /--text-inverse-muted:\s*var\(--stone-400\)/);
+  assert.match(css, /\.foot__legal\s*\{[^}]*color:\s*var\(--text-inverse-muted\)/s);
+  assert.doesNotMatch(css, /\.foot__legal\s*\{[^}]*color:\s*var\(--stone-500\)/s);
+});
+
+test('homepage avoids non-sequential pattern numbering and repeated eyebrow scaffolding', () => {
+  assert.doesNotMatch(html, /Pattern 0[1-6]/);
+  assert.doesNotMatch(html, /class="eyebrow"/);
+  assert.doesNotMatch(html, /A new modern diagram/i);
+  assert.doesNotMatch(css, /border-left:\s*4px solid var\(--action-secondary\)/);
 });
 
 test('interlock workflows are a primary destination from the hero, onboarding, and mobile map', () => {
@@ -220,8 +326,53 @@ test('finder result is focusable, announced, mobile-adjacent, and renders an ord
 });
 
 test('interactive mobile targets meet the 48px minimum', () => {
-  for (const selector of ['mobile-contents__link', 'pickchip', 'uc', 'pathchip']) {
+  for (const selector of ['btn', 'levelnav a', 'topnav__seg', 'mobile-contents__link', 'route-summary__step', 'pickchip', 'uc', 'pathchip', 'linkbtn', 'dchip', 'lvlchip']) {
     assert.match(css, new RegExp(`\\.${selector}[^\\{]*\\{[^}]*min-height:\\s*48px`, 's'));
+  }
+});
+
+test('scroll progress uses a composited, frame-throttled transform', () => {
+  const scrollbarRule = css.match(/\.scrollbar\s*\{([^}]*)\}/s)?.[1] ?? '';
+  assert.match(scrollbarRule, /transform:\s*scaleX\(0\)/);
+  assert.match(scrollbarRule, /transform-origin:\s*(?:left|inline-start)/);
+  assert.doesNotMatch(scrollbarRule, /transition:\s*width/);
+  assert.doesNotMatch(guide, /bar\.style\.width/);
+  assert.match(guide, /requestAnimationFrame/);
+  assert.match(guide, /bar\.style\.transform\s*=\s*`scaleX\(/);
+});
+
+test('above-fold brand assets are lightweight and dimensioned', () => {
+  assert.doesNotMatch(html, /brand-texture-corner\.svg/);
+  assert.match(html, /class="brand__logo"[^>]*src="assets\/octo\/octo-logo\.png\?v=4"[^>]*height="44"/);
+});
+
+test('Redwood fonts are self-hosted without a render-blocking third-party chain', async () => {
+  const interlocks = await readFile(new URL('interlocks.html', root), 'utf8');
+  assert.doesNotMatch(html, /fonts\.(?:googleapis|gstatic)\.com/);
+  assert.doesNotMatch(interlocks, /fonts\.(?:googleapis|gstatic)\.com/);
+  assert.doesNotMatch(fonts, /https?:\/\//);
+  assert.match(fonts, /font-family:\s*'Figtree'/);
+  assert.match(fonts, /font-weight:\s*300 900/);
+  assert.match(fonts, /font-family:\s*'Roboto Mono'/);
+  assert.match(fonts, /font-display:\s*swap/);
+
+  for (const filename of [
+    'figtree-latin.woff2',
+    'figtree-latin-ext.woff2',
+    'figtree-italic-latin.woff2',
+    'figtree-italic-latin-ext.woff2',
+    'roboto-mono-latin.woff2',
+    'roboto-mono-latin-ext.woff2',
+  ]) {
+    const url = new URL(`assets/redwood/fonts/${filename}`, root);
+    assert.ok((await stat(url)).size > 1_000, `${filename} should contain a real WOFF2 font`);
+    assert.equal((await readFile(url)).subarray(0, 4).toString('ascii'), 'wOF2');
+  }
+});
+
+test('homepage stylesheet contains no orphaned former-hero selectors', () => {
+  for (const selector of ['eyebrow', 'hero__panel', 'hero__meta']) {
+    assert.doesNotMatch(css, new RegExp(`\\.${selector}(?:[\\s:{_.-]|$)`));
   }
 });
 

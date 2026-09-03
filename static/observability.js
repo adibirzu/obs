@@ -3042,6 +3042,45 @@
         }
     };
 
+    const FUTURE_CAPABILITY_DETAILS = {
+        'cross-signal': {
+            title: 'Cross-signal investigation',
+            summary: 'A planning direction for a more connected investigation experience across observability signals.',
+            prepare: 'Preserve trace IDs, entity identifiers, workload labels, timestamps, and change references across the signals you collect today. Keep each signal in its documented system of record until a supported correlation path is available.',
+            validate: 'Confirm the supported services, data residency, retention, query semantics, access model, costs, and tenancy availability before changing an operational runbook.'
+        },
+        'unified-logging': {
+            title: 'Unified logging experience',
+            summary: 'A planning direction for a more consistent exploration path across logging experiences.',
+            prepare: 'Inventory saved searches, dashboards, log groups, parsers, and alert dependencies. Record their owner, input fields, retention, and the operational decision each supports.',
+            validate: 'Verify any supported navigation, query, dashboard, retention, and alert behavior in your target tenancy. Do not assume feature parity or automatic migration.'
+        },
+        'ai-investigation': {
+            title: 'AI-assisted investigation',
+            summary: 'A planning direction for governed assistance that connects operational evidence, hypotheses, and human decisions.',
+            prepare: 'Create redacted incident exemplars, trusted runbooks, approval boundaries, and a clear audit trail for evidence, recommendations, actions, and outcomes.',
+            validate: 'Require human approval for consequential actions. Evaluate evidence grounding, identity and data controls, latency, cost, error handling, and auditability in a bounded environment.'
+        },
+        'packaged-solutions': {
+            title: 'Packaged workload solutions',
+            summary: 'A planning direction for repeatable observability content for selected infrastructure and application workloads.',
+            prepare: 'Baseline workload ownership, version, topology, source telemetry, known failure modes, and the alerts or dashboards operators actually use.',
+            validate: 'Confirm workload and version coverage, prerequisites, collection scope, permissions, performance overhead, retention, and rollback before applying a packaged solution.'
+        },
+        'open-instrumentation': {
+            title: 'Open instrumentation adoption',
+            summary: 'A planning direction for simpler adoption of portable telemetry patterns.',
+            prepare: 'Standardize semantic conventions, resource attributes, sampling policy, cardinality limits, secret handling, and network egress controls across OpenTelemetry and Prometheus-oriented collectors.',
+            validate: 'Test supported receivers, exporters, authentication, rate limits, cost, and signal fidelity with a representative workload before replacing a production pipeline.'
+        },
+        'guided-collection': {
+            title: 'Guided collection setup',
+            summary: 'A planning direction for more repeatable collection setup and proof of what is connected.',
+            prepare: 'Define a target inventory, least-privilege access pattern, network path, collection owner, expected signals, and a success receipt for every onboarding path.',
+            validate: 'Verify exact resource coverage, data arrival, field quality, access separation, error states, and teardown or rollback behavior. Configuration alone is not ingestion proof.'
+        }
+    };
+
     function initServiceInspector() {
         const inspectorTriggers = document.querySelectorAll('.service-card__inspect');
         const inspector = document.getElementById('serviceInspector');
@@ -3099,8 +3138,26 @@
 
         function openInspector(serviceId, trigger) {
             const data = SERVICE_DETAILS[serviceId];
-            if (!data) return;
+            const future = FUTURE_CAPABILITY_DETAILS[serviceId];
+            if (!data && !future) return;
             previousFocus = trigger ?? document.activeElement;
+
+            if (future) {
+                titleEl.textContent = future.title;
+                eyebrowEl.textContent = 'Future capability direction · safe harbor';
+                bodyEl.innerHTML = `
+                    <div class="future-detail">
+                        <p class="future-detail__notice"><strong>Planning direction only.</strong> This is not public product documentation, a commitment, a release date, or evidence that the capability is available in a customer tenancy.</p>
+                        <section><h3>What it could improve</h3><p>${future.summary}</p></section>
+                        <section><h3>Prepare now</h3><p>${future.prepare}</p></section>
+                        <section><h3>Validate before adoption</h3><p>${future.validate}</p></section>
+                    </div>`;
+                inspector.inert = false;
+                inspector.classList.add('is-open');
+                inspector.setAttribute('aria-hidden', 'false');
+                closeBtn.focus();
+                return;
+            }
 
             titleEl.textContent = data.title;
             eyebrowEl.textContent = data.eyebrow;
@@ -3216,6 +3273,31 @@
         inspectorTriggers.forEach(trigger => {
             trigger.addEventListener('click', () => {
                 openInspector(trigger.dataset.serviceId, trigger);
+            });
+        });
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.tabIndex = 0;
+            card.addEventListener('click', event => {
+                if (event.target.closest('a, button, input, select, textarea')) return;
+                const trigger = card.querySelector('.service-card__inspect');
+                if (trigger) openInspector(trigger.dataset.serviceId, card);
+            });
+            card.addEventListener('keydown', event => {
+                if (event.target !== card || !['Enter', ' '].includes(event.key)) return;
+                event.preventDefault();
+                const trigger = card.querySelector('.service-card__inspect');
+                if (trigger) openInspector(trigger.dataset.serviceId, card);
+            });
+        });
+
+        document.querySelectorAll('.future-capability').forEach(tile => {
+            const showDetails = () => openInspector(tile.dataset.futureId, tile);
+            tile.addEventListener('click', showDetails);
+            tile.addEventListener('keydown', event => {
+                if (!['Enter', ' '].includes(event.key)) return;
+                event.preventDefault();
+                showDetails();
             });
         });
 

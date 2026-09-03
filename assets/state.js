@@ -34,6 +34,11 @@
     ));
   }
 
+  function notify(next) {
+    if (typeof window.CustomEvent !== "function" || typeof window.dispatchEvent !== "function") return;
+    window.dispatchEvent(new window.CustomEvent("obs:statechange", { detail: next }));
+  }
+
   function replace(patch) {
     const url = new URL(window.location.href);
     const next = Object.freeze({ ...read(), ...patch });
@@ -48,8 +53,23 @@
       // URL state remains authoritative when storage is unavailable.
     }
     window.history.replaceState({}, "", url);
+    notify(next);
     return next;
   }
 
-  window.OBS_STATE = Object.freeze({ keys: KEYS, read, replace, storageKey: STORAGE_KEY });
+  function reset() {
+    const url = new URL(window.location.href);
+    KEYS.forEach((key) => url.searchParams.delete(key));
+    try {
+      window.sessionStorage?.removeItem?.(STORAGE_KEY);
+    } catch (_error) {
+      // A clean URL remains authoritative when storage is unavailable.
+    }
+    const next = Object.freeze({});
+    window.history.replaceState({}, "", url);
+    notify(next);
+    return next;
+  }
+
+  window.OBS_STATE = Object.freeze({ keys: KEYS, read, replace, reset, storageKey: STORAGE_KEY });
 })();

@@ -152,6 +152,25 @@ export async function runLaunchpadE2E(harness) {
   await harness.press('Escape', 'Escape', 27);
   assert.equal(await harness.evaluate(`document.activeElement?.classList.contains('service-card__inspect')`), true);
 
+  console.log('Launchpad E2E: opening details from service and future-capability tiles');
+  await harness.evaluate(`document.querySelector('.service-card.logs .feature-tag')?.click()`);
+  await harness.waitFor(`document.querySelector('#serviceInspector')?.classList.contains('is-open')`);
+  assert.match(await harness.evaluate(`document.querySelector('#inspectorTitle')?.textContent || ''`), /Logging & Log Analytics/);
+  await harness.press('Escape', 'Escape', 27);
+  await harness.evaluate(`document.querySelector('.future-capability[data-future-id="ai-investigation"]')?.focus()`);
+  await harness.press('Enter', 'Enter', 13);
+  await harness.waitFor(`document.querySelector('#serviceInspector')?.classList.contains('is-open')`);
+  assert.deepEqual(await harness.evaluate(`({
+    title: document.querySelector('#inspectorTitle')?.textContent,
+    eyebrow: document.querySelector('#inspectorEyebrow')?.textContent,
+    notice: document.querySelector('.future-detail__notice')?.textContent
+  })`), {
+    title: 'AI-assisted investigation',
+    eyebrow: 'Future capability direction · safe harbor',
+    notice: 'Planning direction only. This is not public product documentation, a commitment, a release date, or evidence that the capability is available in a customer tenancy.'
+  });
+  await harness.press('Escape', 'Escape', 27);
+
   console.log('Launchpad E2E: exercising visual controls and screenshot lightbox');
   await harness.setViewport({ width: 1440, height: 1000 });
   await harness.evaluate(`document.querySelector('.pillar-node[data-pillar="monitoring"] .node-content').focus()`);

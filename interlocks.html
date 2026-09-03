@@ -7,8 +7,7 @@
   <meta name="theme-color" content="#FBF9F8" />
   <title>OCI Observability Service Interlocks — OCTO Observability Atlas</title>
   <link rel="icon" type="image/png" href="assets/octo/octo-logo.png?v=4" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/redwood/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/redwood/styles.css" />
   <link rel="stylesheet" href="assets/interlocks/interlocks.css" />
 </head>
@@ -72,11 +71,24 @@
           <p>Oracle Log Analytics, called Logan in this field guide, now appears throughout network, security, IAM, landing-zone, operations, and end-to-end workflows. It turns mixed operational records into searchable evidence, clusters recurring patterns, links related activity, and supports scheduled detections.</p>
         </div>
         <ol class="logan-interlock__signals" aria-label="Signal routing boundaries">
-          <li><b>Logs and events</b><span>Ingest file, syslog, database, Windows event, REST, OCI service, Streaming, Object Storage, and OpenTelemetry log records.</span></li>
+          <li><b>Logs and events</b><span>Ingest file, syslog, database, Windows event, REST, OCI service, Streaming, Object Storage, and OpenTelemetry log records. Validate current stream-based object collection requirements before changing an existing rule.</span></li>
           <li><b>Metrics</b><span>Extract measures from log records or correlate them with OCI Monitoring using shared time, entity, and workload labels.</span></li>
           <li><b>Prometheus</b><span>Prometheus exporter metrics remain in a metric backend. Pair them with Logan records rather than describing Logan as a Prometheus scraper.</span></li>
           <li><b>APM</b><span>APM remains a linked service in current public documentation. Correlate traces and logs with trace context; treat any future consolidation as roadmap-dependent.</span></li>
         </ol>
+        <aside class="convergence-boundary" aria-labelledby="convergence-boundary-title">
+          <div>
+            <span>Current — public documentation</span>
+            <h3 id="convergence-boundary-title">Operate with distinct, linked services; plan the documented Stack Monitoring transition.</h3>
+            <p>APM provides tracing, real-user, and availability monitoring; Log Analytics provides log analysis and documented AI features; Monitoring provides metrics, alarms, and notifications.</p>
+          </div>
+          <div>
+            <span>Direction — safe harbor</span>
+            <h3>Design for one investigation path.</h3>
+            <p>Stack Monitoring's documented SKU retirement is January 23, 2027, with capabilities integrating into OCI Monitoring. Any wider converged investigation experience remains a planning direction, not a promise, date, or deployed customer capability.</p>
+          </div>
+          <a href="https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/application-performance-monitoring.html" target="_blank" rel="noopener noreferrer">Read current APM documentation ↗</a>
+        </aside>
       </div>
     </section>
 

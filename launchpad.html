@@ -977,7 +977,7 @@ HttpRequests[1m]{resourceId = "ocid1.instance.oc1..."}.status_code != "200"
                                     <p>APM Browser RUM tracks actual user transaction latency, while DB Management provides DBA dashboards that replace archaic database maintenance CLI workflows.</p>
                                     <ul class="strategic-bullet-list">
                                         <li><strong>W3C Context Tracing:</strong> Follow span context headers from browser to application and database.</li>
-                                        <li><strong>EBS & Fusion Lane:</strong> Instrument with OCI APM; Stack Monitoring's capabilities are merging into OCI Monitoring.</li>
+                                        <li><strong>EBS & Fusion Lane:</strong> Instrument with OCI APM; keep Stack Monitoring topology linked to Monitoring and validate any future convergence for your tenancy.</li>
                                         <li><strong>DB Performance Hub:</strong> Real-time AWR charts, ASH diagnostics, and SQL tuning advisors.</li>
                                     </ul>
                                 </div>
@@ -987,11 +987,37 @@ HttpRequests[1m]{resourceId = "ocid1.instance.oc1..."}.status_code != "200"
                         <!-- Level 2 (Technical Management) -->
                         <div class="level-content" id="phase3-level2-panel" data-level="level2" role="tabpanel" aria-labelledby="audience-tab-level2" hidden>
                             <div class="mgmt-roadmap-container">
+                                <section class="product-state-sheet" aria-labelledby="product-state-title">
+                                    <div class="product-state-sheet__head">
+                                        <div>
+                                            <span class="product-state-sheet__label">Product state</span>
+                                            <h3 id="product-state-title">Use the current control plane. Design for a converged one.</h3>
+                                        </div>
+                                        <a href="https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/application-performance-monitoring.html" target="_blank" rel="noopener noreferrer">Verify current APM capability ↗</a>
+                                    </div>
+                                    <div class="product-state-sheet__grid">
+                                        <article class="product-state product-state--current">
+                                            <span>Current — public documentation</span>
+                                            <strong>APM, Log Analytics, Monitoring, and Stack Monitoring remain distinct operating surfaces.</strong>
+                                            <p>Use APM for traces, real-user and availability monitoring; use Log Analytics for log analysis and its documented AI features; use Monitoring for metrics, alarms, and notifications.</p>
+                                        </article>
+                                        <article class="product-state product-state--direction">
+                                            <span>Direction — safe harbor</span>
+                                            <strong>Converged trace, log, metric, and topology investigation is a design direction—not a current customer acceptance claim.</strong>
+                                            <p>Plan portable telemetry contracts and direct-source links so a future unified experience can be adopted without rewriting operational evidence.</p>
+                                        </article>
+                                        <article class="product-state product-state--action">
+                                            <span>Operator action</span>
+                                            <strong>Instrument once, correlate by trace, entity, workload, and time.</strong>
+                                            <p>Keep APM trace context, Log Analytics enrichment, Monitoring alarms, and Stack Monitoring topology explicitly linked; validate any migration path with your Oracle account team.</p>
+                                        </article>
+                                    </div>
+                                </section>
                                 <div class="mgmt-alert-card">
                                     <div class="alert-icon">🔀</div>
                                     <div class="alert-content">
-                                        <strong>Stack Monitoring is converging into OCI Monitoring</strong>
-                                        <p>OCI Stack Monitoring's capabilities — full-stack discovery, topology, and application-stack health — are being merged into the OCI Monitoring service. Existing investment carries forward; there is no need to replace it with separate services.</p>
+                                        <strong>Stack Monitoring convergence is a direction to validate</strong>
+                                        <p>Keep Stack Monitoring discovery, topology, and application-stack health in the operating model today. Treat a move into OCI Monitoring as direction until it is confirmed for your tenancy, region, service limits, and commercial agreement.</p>
                                     </div>
                                 </div>
                                 <h3 class="roadmap-title">APM & Database Management Migration Roadmap (Phase 3)</h3>
@@ -1393,14 +1419,14 @@ def call_inventory_service():
                             </div>
                         </div>
 
-                        <div class="node pillar-node draggable-node" data-pillar="stack" data-default-pos="top-right" title="Merging into OCI Monitoring">
+                        <div class="node pillar-node draggable-node" data-pillar="stack" data-default-pos="top-right" title="Direction to OCI Monitoring">
                             <div class="drag-handle">⋮⋮</div>
                             <div class="node-connector"></div>
                             <a class="eol-badge merge-badge" href="https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm" target="_blank" rel="noopener noreferrer">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                                         <path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M21 3l-7 7"/><path d="M3 3l7 7v11"/>
                                     </svg>
-                                    Merging → OCI Monitoring
+                                    Direction → OCI Monitoring
                             </a>
                             <div class="node-content" role="button" tabindex="0" aria-label="Open Stack Monitoring module: full stack discovery">
                                 <div class="pillar-icon stack">
@@ -1792,13 +1818,13 @@ def call_inventory_service():
                     <button type="button" class="service-card__inspect" data-service-id="apm" aria-haspopup="dialog" aria-controls="serviceInspector">View APM details</button>
                 </article>
 
-                <!-- Stack Monitoring (merging into OCI Monitoring) -->
+                <!-- Stack Monitoring: current service with a clearly labelled direction -->
                 <article class="service-card stack">
                     <div class="eol-banner merge-banner">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                             <path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M21 3l-7 7"/><path d="M3 3l7 7v11"/>
                         </svg>
-                        <span>Merging into OCI Monitoring</span>
+                        <span>Direction — OCI Monitoring</span>
                         <a href="https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm" target="_blank" class="eol-link">View Announcement →</a>
                     </div>
                     <div class="service-card-header">
@@ -1811,8 +1837,8 @@ def call_inventory_service():
                         </div>
                     </div>
                     <a href="https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm" target="_blank" style="text-decoration: none; color: inherit;">
-                        <h3>Stack Monitoring <span class="deprecated-badge merge-badge">Merging</span></h3>
-                        <p>Auto-discover and monitor your full application stack. <strong>Its capabilities are being merged into the OCI Monitoring service.</strong></p>
+                        <h3>Stack Monitoring <span class="deprecated-badge merge-badge">Direction</span></h3>
+                        <p>Auto-discover and monitor your full application stack. <strong>Keep its discovery and topology in the operating model; validate any evolution into OCI Monitoring for your environment.</strong></p>
                     </a>
                     <div class="tier-capabilities">
                         <div class="capability-row">
@@ -1921,6 +1947,39 @@ def call_inventory_service():
                 </article>
             </div>
 
+            <section class="future-capabilities" aria-labelledby="future-capabilities-title">
+                <div class="section-header">
+                    <div class="section-icon future-capabilities__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>
+                    </div>
+                    <div>
+                        <p class="future-capabilities__eyebrow">Direction — safe harbor</p>
+                        <h2 class="section-title" id="future-capabilities-title">Future capability directions</h2>
+                        <p class="section-subtitle">Planning topics only — not public product commitments, release dates, or available customer capabilities. Select a tile for operator guidance.</p>
+                    </div>
+                </div>
+                <div class="future-capabilities__grid">
+                    <article class="future-capability" tabindex="0" data-future-id="cross-signal" aria-label="View details: Cross-signal investigation">
+                        <span class="future-capability__status">Future direction</span><h3>Cross-signal investigation</h3><p>Bring traces, logs, synthetics, metrics, and topology into a more connected investigation flow.</p><span class="future-capability__action">Select for details <span aria-hidden="true">→</span></span>
+                    </article>
+                    <article class="future-capability" tabindex="0" data-future-id="unified-logging" aria-label="View details: Unified logging experience">
+                        <span class="future-capability__status">Future direction</span><h3>Unified logging experience</h3><p>Reduce context switching through a shared entry point for logging exploration, saved work, and dashboards.</p><span class="future-capability__action">Select for details <span aria-hidden="true">→</span></span>
+                    </article>
+                    <article class="future-capability" tabindex="0" data-future-id="ai-investigation" aria-label="View details: AI-assisted investigation">
+                        <span class="future-capability__status">Future direction</span><h3>AI-assisted investigation</h3><p>Use governed assistance to connect operational context, hypotheses, evidence, and remediation decisions.</p><span class="future-capability__action">Select for details <span aria-hidden="true">→</span></span>
+                    </article>
+                    <article class="future-capability" tabindex="0" data-future-id="packaged-solutions" aria-label="View details: Packaged workload solutions">
+                        <span class="future-capability__status">Future direction</span><h3>Packaged workload solutions</h3><p>Extend curated operational views and detections for important database, middleware, and Kubernetes workloads.</p><span class="future-capability__action">Select for details <span aria-hidden="true">→</span></span>
+                    </article>
+                    <article class="future-capability" tabindex="0" data-future-id="open-instrumentation" aria-label="View details: Open instrumentation adoption">
+                        <span class="future-capability__status">Future direction</span><h3>Open instrumentation adoption</h3><p>Improve adoption paths for portable telemetry, including Prometheus and OpenTelemetry-oriented collection.</p><span class="future-capability__action">Select for details <span aria-hidden="true">→</span></span>
+                    </article>
+                    <article class="future-capability" tabindex="0" data-future-id="guided-collection" aria-label="View details: Guided collection setup">
+                        <span class="future-capability__status">Future direction</span><h3>Guided collection setup</h3><p>Make telemetry setup more repeatable with guided collection, validation, and evidence of what is connected.</p><span class="future-capability__action">Select for details <span aria-hidden="true">→</span></span>
+                    </article>
+                </div>
+            </section>
+
             <!-- Tier Comparison Summary -->
             <div class="tier-comparison-section">
                 <div class="section-header">
@@ -2023,7 +2082,7 @@ def call_inventory_service():
                         <div class="service-col">
                             <img src="static/oci-icons/HealthCheck.png" alt="Stack Monitoring" class="service-mini-icon" width="24" height="24" loading="lazy" />
                             <span>Stack Monitoring</span>
-                            <span class="mini-eol-badge merge-badge">→ Monitoring</span>
+                            <span class="mini-eol-badge merge-badge">Direction → Monitoring</span>
                         </div>
                         <div class="free-col">
                             <span class="tier-check excluded">✗</span>
@@ -2031,7 +2090,7 @@ def call_inventory_service():
                         </div>
                         <div class="paid-col">
                             <span class="tier-check premium">★</span>
-                            <span>Auto Discovery &amp; Topology — merging into OCI Monitoring</span>
+                            <span>Auto Discovery &amp; Topology — current capability; direction to OCI Monitoring</span>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ const PAGE_LOAD_TIMEOUT_MS = 15_000;
 const mimeTypes = new Map([
   ['.css', 'text/css; charset=utf-8'], ['.drawio', 'application/xml'], ['.excalidraw', 'application/json'],
   ['.html', 'text/html; charset=utf-8'], ['.js', 'text/javascript; charset=utf-8'], ['.json', 'application/json; charset=utf-8'],
-  ['.png', 'image/png'], ['.svg', 'image/svg+xml'],
+  ['.png', 'image/png'], ['.svg', 'image/svg+xml'], ['.woff2', 'font/woff2'],
 ]);
 
 async function findChrome() {

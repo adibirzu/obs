@@ -10,8 +10,7 @@
   <link rel="icon" type="image/png" sizes="256x250" href="assets/octo/octo-logo.png?v=4" />
   <link rel="apple-touch-icon" href="assets/octo/octo-logo.png?v=4" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/redwood/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Oracle Redwood Design System tokens (vendored) -->
   <link rel="stylesheet" href="assets/redwood/styles.css" />
@@ -19,7 +18,8 @@
   <link rel="stylesheet" href="assets/guide.css" />
 </head>
 <body>
-  <img class="texture-corner" src="assets/redwood/brand-texture-corner.svg" alt="" aria-hidden="true" />
+  <a class="skip-link" href="#top">Skip to main content</a>
+  <a class="skip-link" href="#atlas-route-summary">Skip to active route</a>
   <div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
 
   <!-- ============ NAV ============ -->
@@ -54,7 +54,22 @@
     <a class="mobile-contents__link mobile-contents__link--launch" href="launchpad.html">Launchpad</a>
   </nav>
 
-  <main id="top">
+  <aside class="route-summary" id="atlas-route-summary" aria-label="Active atlas route" tabindex="-1">
+    <div class="wrap route-summary__inner">
+      <p class="route-summary__title">Your route</p>
+      <a class="route-summary__step" href="#telemetry-route"><span>Source</span><strong id="route-summary-source">Kubernetes</strong></a>
+      <span class="route-summary__arrow" aria-hidden="true">→</span>
+      <a class="route-summary__step" href="#start"><span>Goal</span><strong id="route-summary-goal">Diagnose</strong></a>
+      <span class="route-summary__arrow" aria-hidden="true">→</span>
+      <a class="route-summary__step" href="#finder"><span>Pattern</span><strong id="route-summary-pattern">Choose a pattern</strong></a>
+      <div class="route-summary__actions">
+        <a href="#ladder">Resume at the maturity path</a>
+        <button class="js-only" id="route-summary-reset" type="button">Reset</button>
+      </div>
+    </div>
+  </aside>
+
+  <main id="top" tabindex="-1">
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="wrap">
@@ -73,10 +88,10 @@
             </div>
             <div class="telemetry-route__actions">
               <a class="telemetry-route__primary" href="interlocks.html">Open interlock workflows</a>
-              <a class="telemetry-route__continue" href="#start">Continue to your operating goal</a>
+              <a class="telemetry-route__continue js-only" href="#start">Continue to your operating goal</a>
             </div>
           </div>
-          <div class="telemetry-route__sources" role="group" aria-label="Choose an environment to trace">
+          <div class="telemetry-route__sources js-only" role="group" aria-label="Choose an environment to trace">
             <button type="button" data-source="oci" aria-pressed="false"><span>OCI</span><small>Native services</small></button>
             <button type="button" data-source="aws" aria-pressed="false"><span>AWS</span><small>Accounts and EKS</small></button>
             <button type="button" data-source="azure" aria-pressed="false"><span>Azure</span><small>Subscriptions and AKS</small></button>
@@ -95,12 +110,46 @@
             <span class="route-connector" aria-hidden="true">→</span>
             <div class="route-stage route-stage--destination"><span>Destinations</span><strong id="route-destination">Metrics, logs, traces</strong><small id="route-destination-detail">Monitoring, Log Analytics, and APM</small></div>
           </div>
+          <p class="route-decision" id="route-decision"><strong id="route-decision-label">Portable:</strong> <span id="route-decision-detail">Keep the telemetry contract portable, then choose native, federated, or centralized backends from operating and residency requirements.</span></p>
         </section>
       </div>
     </section>
 
+    <noscript>
+      <style>
+        .js-only { display: none !important; }
+        .atlas-library { display: block; }
+        .atlas-library__summary { display: none; }
+        .atlas-library__chapters { display: block; }
+        #personas, #resources { display: none; }
+        a[href="#start"],
+        a[href="#finder"],
+        a[href="#personas"],
+        a[href="#resources"],
+        .route-summary,
+        .skip-link[href="#atlas-route-summary"] { display: none !important; }
+        .mobile-contents { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      </style>
+      <section class="section enhancement-fallback" aria-labelledby="fallback-title">
+        <div class="wrap enhancement-fallback__inner">
+          <div>
+            <h2 id="fallback-title">JavaScript adds personalization, not access</h2>
+            <p>The interactive planner is unavailable, so the Atlas is showing its complete static reference. Follow the maturity route below or open the source-grounded Interlock workflows.</p>
+          </div>
+          <ol class="fallback-route" aria-label="Static L0 to L4 route">
+            <li><a href="#lvl-L0">L0 · Govern</a></li>
+            <li><a href="#lvl-L1">L1 · Detect</a></li>
+            <li><a href="#lvl-L2">L2 · Diagnose</a></li>
+            <li><a href="#lvl-L3">L3 · Correlate</a></li>
+            <li><a href="#lvl-L4">L4 · Govern AI</a></li>
+          </ol>
+          <a class="enhancement-fallback__action" href="interlocks.html">Open interlock workflows</a>
+        </div>
+      </section>
+    </noscript>
+
     <!-- ============ START: OPERATING GOAL ============ -->
-    <section class="section" id="start">
+    <section class="section js-only" id="start">
       <div class="wrap">
         <div class="section__head reveal">
           <h2>What must your operating model accomplish?</h2>
@@ -128,7 +177,7 @@
     </section>
 
     <!-- ============ FINDER ============ -->
-    <section class="section section--sunken" id="finder">
+    <section class="section section--sunken js-only" id="finder">
       <div class="wrap">
         <div class="section__head reveal">
           <span class="steptag"><b>Step 1</b> · Orient</span>
@@ -144,43 +193,43 @@
 
         <div class="finder reveal">
           <button class="uc" type="button" data-uc="trad" aria-pressed="false">
-            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 01</span></div>
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Application estate</span></div>
             <h3>Traditional enterprise application</h3>
             <p>Load balancer, web and app tiers, middleware, Oracle Database, batch, and integrations.</p>
             <div class="uc__tags"><span class="tag">monitoring</span><span class="tag">database</span><span class="tag">apm</span></div>
           </button>
           <button class="uc" type="button" data-uc="dbc" aria-pressed="false">
-            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 02</span></div>
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Database estate</span></div>
             <h3>Oracle database-centric workload</h3>
             <p>Exadata, Autonomous AI Database, Base Database, Data Guard, and external databases.</p>
             <div class="uc__tags"><span class="tag">db-management</span><span class="tag">ops-insights</span></div>
           </button>
           <button class="uc" type="button" data-uc="oke" aria-pressed="false">
-            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 03</span></div>
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Cloud-native estate</span></div>
             <h3>Cloud-native on <abbr title="Oracle Kubernetes Engine">OKE</abbr></h3>
             <p>Kubernetes, microservices, API Gateway, Streaming, and Autonomous AI Database.</p>
             <div class="uc__tags"><span class="tag">opentelemetry</span><span class="tag">connector-hub</span></div>
           </button>
           <button class="uc" type="button" data-uc="apps" aria-pressed="false">
-            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 04</span></div>
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Oracle applications</span></div>
             <h3>Oracle applications and middleware</h3>
             <p>E-Business Suite, JD Edwards, PeopleSoft, WebLogic, SOA, and Fusion Middleware.</p>
             <div class="uc__tags"><span class="tag">log-analytics</span><span class="tag">apm</span></div>
           </button>
           <button class="uc" type="button" data-uc="hybrid" aria-pressed="false">
-            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 05</span></div>
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Hybrid estate</span></div>
             <h3>Hybrid enterprise estate</h3>
             <p>OCI alongside on-premises databases and applications, external tools, and existing ITSM.</p>
             <div class="uc__tags"><span class="tag">mgmt-agent</span><span class="tag">gateway</span></div>
           </button>
           <button class="uc" type="button" data-uc="agentic" aria-pressed="false">
-            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">Pattern 06</span></div>
+            <div class="uc__top"><span class="uc__ic"></span><span class="uc__k">AI estate</span></div>
             <h3>Agentic and generative-AI workload</h3>
             <p>Autonomous agents, <abbr title="retrieval-augmented generation">RAG</abbr>, <abbr title="large language model">LLM</abbr> calls, tool use, and multi-agent orchestration.</p>
             <div class="uc__tags"><span class="tag">opentelemetry-genai</span><span class="tag">llm-as-a-judge</span></div>
           </button>
           <div class="finder__result reveal" id="finderResult" role="region" aria-live="polite" tabindex="-1" aria-labelledby="fr-name">
-          <span class="eyebrow">Recommended path</span>
+          <span class="context-label">Recommended path</span>
           <h3 id="fr-name">Choose a pattern to see its route</h3>
           <p class="finder__detail" id="fr-detail"></p>
           <ul class="finder__outcomes" id="fr-outcomes"></ul>
@@ -265,11 +314,31 @@
       </div>
     </section>
 
+    <section class="section chapter-index" id="chapters" aria-labelledby="chapters-title">
+      <div class="wrap">
+        <div class="chapter-index__intro">
+          <h2 id="chapters-title">Go deeper only when your route calls for it</h2>
+          <p>The guided path ends here. Open a focused chapter for implementation detail, or expand the complete technical library below.</p>
+        </div>
+        <nav class="chapter-index__groups" aria-label="Technical chapters">
+          <div><strong>Collect</strong><a class="chapter-index__link" href="#agents">Choose an agent</a><a class="chapter-index__link" href="#maturity">Assess maturity</a></div>
+          <div><strong>Govern</strong><a class="chapter-index__link" href="#ai">Observe AI systems</a><a class="chapter-index__link" href="#security">Connect security</a></div>
+          <div><strong>Scale</strong><a class="chapter-index__link" href="#scale-pattern">Design operator scale</a><a class="chapter-index__link" href="#personas">Map responsibilities</a></div>
+          <div><strong>Prove</strong><a class="chapter-index__link" href="#resources">Use field guides</a><a class="chapter-index__link" href="#reference">Deploy the demo</a></div>
+        </nav>
+      </div>
+    </section>
+
+    <details id="atlas-library" class="atlas-library">
+      <summary class="atlas-library__summary">
+        <span class="atlas-library__summary-inner"><strong>Open the complete technical library</strong><span>Eight implementation chapters, kept out of the primary journey until you need them.</span></span>
+      </summary>
+      <div class="atlas-library__chapters">
     <!-- ============ AGENT COMPARISON ============ -->
     <section class="section" id="agents">
       <div class="wrap">
         <div class="section__head reveal">
-          <span class="eyebrow">The collection layer</span>
+          <span class="context-label">Collection choices</span>
           <h2>Choosing the right collection agent</h2>
           <p>Most telemetry reaches OCI through an agent. Three types cover the cases: pick by where the target runs and what it emits. Use the Oracle Cloud Agent whenever it fits; reach for the others for hybrid targets and custom logs.</p>
         </div>
@@ -361,7 +430,7 @@
         </div>
 
         <div class="section__head reveal" style="margin-top:var(--space-8)">
-          <span class="eyebrow">A new modern diagram</span>
+          <span class="context-label">Instrument, collect, evaluate, act</span>
           <h2 style="font-size:var(--text-2xl)">The OCI AI observability reference architecture</h2>
           <p>One OpenTelemetry instrumentation feeds OCI Observability and Management and an open-source stack, then evaluation and action. Select any service to inspect it.</p>
         </div>
@@ -418,7 +487,7 @@
     <section class="section" id="personas">
       <div class="wrap">
         <div class="section__head reveal">
-          <span class="eyebrow">Persona view</span>
+          <span class="context-label">Responsibility map</span>
           <h2>How each persona identifies and uses the data</h2>
           <p>The same observability estate looks different to each role. Here is what each persona recognises, what they do with it, and the levels they live in.</p>
         </div>
@@ -439,7 +508,7 @@
     <section class="section" id="security">
       <div class="wrap">
         <div class="section__head reveal">
-          <span class="eyebrow">Security + observability</span>
+          <span class="context-label">Shared operating context</span>
           <h2>Observability extends OCI Security</h2>
           <p>OCI Security tells you <em>something is wrong</em>; observability tells you <em>what, where, and why</em>. The Security portfolio: Cloud Guard and Cloud Guard Instance Security, IAM &amp; Identity Domains, Data Safe, Access Governance, Audit, and Zero Trust Packet Routing: detects and enforces. Observability turns those signals into correlated, explainable visibility, and forwards them to whatever security tooling you already run.</p>
         </div>
@@ -468,7 +537,7 @@
         </figure>
 
         <div class="section__head reveal" style="margin:var(--space-7) 0 var(--space-5)">
-          <span class="eyebrow">Ingest from anywhere</span>
+          <span class="context-label">Source and collection choices</span>
           <h3 style="font-size:var(--text-xl)">One platform, every source</h3>
         </div>
         <div class="l5scale reveal" style="gap:var(--space-2)">
@@ -483,7 +552,7 @@
         <p class="reveal" style="color:var(--text-muted);font-size:var(--text-sm);margin-top:var(--space-3)">Documented Oracle Log Analytics ingestion paths include the <b>Management Agent</b>, <b>on-demand or REST upload</b>, <b>Object Storage</b>, <b>OpenTelemetry logs</b>, and <b>Connector Hub</b>. Connector Hub can also bring in custom and cross-tenancy logs from OCI Streaming. Logan adds curated sources, active and archive storage, clustering, link analysis, detections, and dashboards. Use shared entity, workload, and trace identifiers to correlate those records with metrics and APM traces. The same routing paths can fan out to third-party SIEM and observability tools through approved shippers or OCI Functions.</p>
 
         <div class="section__head reveal" style="margin:var(--space-8) 0 var(--space-4)">
-          <span class="eyebrow">Ingestion recipes</span>
+          <span class="context-label">Working ingestion recipes</span>
           <h3 style="font-size:var(--text-xl)">Every arrow is real, open-source code</h3>
           <p>Each collection and export path maps to a working repository. Mix and match them to ingest multicloud records into Oracle Log Analytics or fan OCI telemetry out to a third-party SIEM.</p>
         </div>
@@ -539,7 +608,7 @@
         </div>
 
         <div class="section__head reveal" style="margin:var(--space-8) 0 var(--space-5)">
-          <span class="eyebrow">Isolation and RBAC</span>
+          <span class="context-label">Isolation and access boundaries</span>
           <h3 style="font-size:var(--text-xl)">Per-tenant boundaries, by compartment and IAM</h3>
           <p>Within each tenancy, access is scoped by compartment and IAM: Tenancy, Platform, and Environment / Project observability teams, each an admin and a reader OCI group. Adding a tenant, environment, or project is repetition: clone the compartment, group, and policy.</p>
         </div>
@@ -561,7 +630,7 @@
         </div>
 
         <div class="section__head reveal" style="margin:var(--space-8) 0 var(--space-5)">
-          <span class="eyebrow">Design considerations at scale</span>
+          <span class="context-label">Scale design decisions</span>
           <h3 style="font-size:var(--text-xl)">What a real multitenant design must pin down</h3>
         </div>
         <div class="pgrid pgrid--three reveal">
@@ -574,7 +643,7 @@
         </div>
 
         <div class="section__head reveal" style="margin:var(--space-8) 0 var(--space-5)">
-          <span class="eyebrow">Best practices at scale</span>
+          <span class="context-label">Scale practices</span>
           <h3 style="font-size:var(--text-xl)">Five steps that make it work</h3>
         </div>
         <ol class="bp5 reveal">
@@ -601,7 +670,7 @@
     <section class="section" id="maturity">
       <div class="wrap">
         <div class="section__head reveal">
-          <span class="eyebrow">Where are you today?</span>
+          <span class="context-label">Current-state assessment</span>
           <h2>Read your maturity, pick your next level</h2>
           <p>The ladder maps cleanly onto an observability maturity model. Find your current state, and the next column is your next move.</p>
         </div>
@@ -633,7 +702,7 @@
     <section class="section section--sunken" id="resources">
       <div class="wrap">
         <div class="section__head reveal">
-          <span class="eyebrow">Learn more</span>
+          <span class="context-label">Field guides and projects</span>
           <h2>Hands-on guides, demos, and articles</h2>
           <p>Curated from the Oracle DevRel technology-engineering observability library, the OCI Observability blog, and team publications. Open any service in the ladder to see the relevant links inline.</p>
         </div>
@@ -648,7 +717,7 @@
           <div class="refimpl__bg" style="background-image:url('assets/redwood/brand-mosaic-stone.jpg')"></div>
           <div class="refimpl__in">
             <div>
-              <span class="eyebrow">Reference implementation</span>
+              <span class="context-label">Reference implementation</span>
               <h2>See it working: the OCTO observability demo</h2>
               <p>The OCI AI Observability for Agents whitepaper cites this as its worked example. In this multi-service drone-retail stack, every browser click, FastAPI request, Spring Boot span, and Oracle ATP query shares one trace context. A GenAI multi-agent workflow is traced end to end into OCI APM and Langfuse. Deploy in 5–10 minutes with OCI Resource Manager.</p>
               <div class="refimpl__tags">
@@ -668,6 +737,8 @@
         </div>
       </div>
     </section>
+      </div>
+    </details>
   </main>
 
   <!-- ============ FOOTER ============ -->

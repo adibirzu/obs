@@ -5,55 +5,55 @@
   "files": [
     {
       "path": "assets/diagrams/interlocks-documented/end-to-end-documented.drawio",
-      "sha256": "db66a466493fdf93904808d09d5753266303e6414bcfc6fcbaf8c0574dc2ebb0"
+      "sha256": "a8f49e30c16aae4b5aecdc54c97b1a4bf2dbc77d1e0be99488d1d24a5efa1368"
     },
     {
       "path": "assets/diagrams/interlocks-documented/end-to-end-documented.excalidraw",
-      "sha256": "c6654930d7bb5aa53c8e53a5455c5a00eb655b9ff7296eae7be9bc7d47f3e05b"
+      "sha256": "fa9160cfd33fd253829f636bcb6626945ba3a08ac3b1cd2a3e617d1dbf6d798b"
     },
     {
       "path": "assets/diagrams/interlocks-documented/iam-governance-documented.drawio",
-      "sha256": "3a762e75f91ed0d9cdac5612cf5f69a63503ebaf7418d83aa05836b624973a3f"
+      "sha256": "1dad96850b538bc0c379912336af75b644c24bb79d272ee8edb071fe70a69136"
     },
     {
       "path": "assets/diagrams/interlocks-documented/iam-governance-documented.excalidraw",
-      "sha256": "ffe178368dd2c718c2445080355df829023b94063614d6b97d6c2b1cf5098e2b"
+      "sha256": "be2b8d3a8cd59d1355873fd81ec62a6d2eb0808cd5cb8ffb9132b718aea97473"
     },
     {
       "path": "assets/diagrams/interlocks-documented/landing-zone-documented.drawio",
-      "sha256": "e84f878769ff4e282b351a8779b3251da94b35e49f1711d48e55182f24912cfd"
+      "sha256": "d5de8d79ea3a1a7b413a5f13264daa67eeff6221ca4085feaba2a898b676a88b"
     },
     {
       "path": "assets/diagrams/interlocks-documented/landing-zone-documented.excalidraw",
-      "sha256": "0fa3cdec71b01163b98f492a2f043b5f2c859ace0064689d7de15e3861ff4189"
+      "sha256": "ab6d4cb6a5b8823b245c793da369151f4ba4ce5e1afb99505683d73e6cbd9aa0"
     },
     {
       "path": "assets/diagrams/interlocks-documented/network-documented.drawio",
-      "sha256": "849dc96fb2cda973c89818b58e1279269347ca1a91ad74a20dab270a81a446cd"
+      "sha256": "f0af3633958e882344bd29d0e7e884bd2db66433ec5b070dfda698c4b0158c6d"
     },
     {
       "path": "assets/diagrams/interlocks-documented/network-documented.excalidraw",
-      "sha256": "2b45bc0b6d71ca3d7786acbacd3398c77bcc5e96ad9abd0c37855116fb734aed"
+      "sha256": "f842287ff5303e932c68a7afb580fd3b539dc6121b98dc4fc29032a31fac38c5"
     },
     {
       "path": "assets/diagrams/interlocks-documented/operations-lifecycle-documented.drawio",
-      "sha256": "2eadabde9a97716c1ad2c12cb5cf93a568c1bf13b0f8f5eed5d4e396367d0c8b"
+      "sha256": "96d7af6931165e4562dcf7f56c4f5ba91d87d830e33e4c1caa6fa390506fa286"
     },
     {
       "path": "assets/diagrams/interlocks-documented/operations-lifecycle-documented.excalidraw",
-      "sha256": "eb98476488aa501056af82f88e4e70cb1ee9c4249617a41a244fc4c7a65bb53b"
+      "sha256": "2c1ef20c6c24c322100170c544d4b438f4ed8ca1b1c4cab4eff35b6827e85acd"
     },
     {
       "path": "assets/diagrams/interlocks-documented/security-documented.drawio",
-      "sha256": "f37212a1bae23636c1fe201f2d91f7605f4ff462af23ce27d21cdb1469554d70"
+      "sha256": "bfa3c6b7af71df11b6a5a6e49f5e241f06795515dc2ba1e01d370f2c717c51c4"
     },
     {
       "path": "assets/diagrams/interlocks-documented/security-documented.excalidraw",
-      "sha256": "08ff12e5731bc1c0f51a369a3fbddc443b421df86a34f01ea4abd952e00707cf"
+      "sha256": "aa2d1f86aa55e20448a2f7e61ee0611ee35f1a07cb02487553aa183025f9686e"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/end-to-end.drawio",
-      "sha256": "51c645048c1523aaa08974ec2f4c39791e54e31eadc6865de382d54349125af1"
+      "sha256": "6fbfe54367bf7004ce10f1a08097bba3f3c8cf1a18f465f3ec6dc045b470d396"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/end-to-end.excalidraw",
@@ -61,7 +61,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-infographic/iam-governance.drawio",
-      "sha256": "a8bca04e919addb558313bbf0b1ac6ec37f3c5371b2fe494d5d15af6b0976243"
+      "sha256": "6eb07c2038d066071c3b9088e23730a13c4e4ee9e7e9beaed5a91c413aaf63a5"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/iam-governance.excalidraw",
@@ -69,7 +69,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-infographic/landing-zone.drawio",
-      "sha256": "fa7aa1c0f00fdde0393f3465abf85964ec179df644e1407593a1757b2d6c7211"
+      "sha256": "7a406bb998dc9cab74a2c381c43eddf3d0cdd2c531330bc78f220bd1e19c11be"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/landing-zone.excalidraw",
@@ -77,7 +77,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-infographic/network.drawio",
-      "sha256": "36c0bb570b82fc3821350a4802df4a24ca314d2d3f1c9da45b4f00cd84e0ba6c"
+      "sha256": "af9e5484d33ac17a4b870ee07ad8d68d0a2617780508ec3520108ad50fed4b9c"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/network.excalidraw",
@@ -85,7 +85,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-infographic/operations-lifecycle.drawio",
-      "sha256": "fcf1d42643304561bef2e82e5b22cac094ccec6e98d3957691ecc74ba7d7c33b"
+      "sha256": "4724a6863dcd94362dc269731c1fb21937c988e26ce971e23027aef51205cede"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/operations-lifecycle.excalidraw",
@@ -93,7 +93,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-infographic/security.drawio",
-      "sha256": "66abe55c5d820e4a249033832f28db3ad2662e3b374eaa0a8ca61ab13c6a3d84"
+      "sha256": "486ff87da97384d0e0e001d9f5b6930f3186eedc1015d49a8bb3335d72ebc06e"
     },
     {
       "path": "assets/diagrams/interlocks-infographic/security.excalidraw",
@@ -149,11 +149,11 @@
     },
     {
       "path": "assets/diagrams/oci-observability-service-interlocks-documented.drawio",
-      "sha256": "399136fb3e4b410a1b2daef46dcafdbd0dacff560fcf2f49e29d8f78577f178b"
+      "sha256": "c7e505cbe22dc0bff650b4994849540962f12fc823649f954854a9938351c95a"
     },
     {
       "path": "assets/diagrams/oci-observability-service-interlocks-infographic.drawio",
-      "sha256": "1b7c104af1fcc3afa80600baad62d2025fdbc91f106b575d5d97136c7d233bbf"
+      "sha256": "68aa058e2632c1d506e06395ca931aaba15be507460d45b979f6d536cc1e1ec5"
     },
     {
       "path": "assets/diagrams/oci-observability-service-interlocks.drawio",
@@ -401,7 +401,7 @@
     },
     {
       "path": "assets/diagrams/usecases/manifest.json",
-      "sha256": "a4b8263ea5546fc3cad241cbea8fc08af89cf83d021af4cae51439e06396fca6"
+      "sha256": "99ac7351a1b5e4f6a9a42a148dcdf1026ec4faf77107bf0e527ee89ac216b4fc"
     },
     {
       "path": "assets/diagrams/usecases/network/dns-path.drawio",
@@ -645,11 +645,11 @@
     },
     {
       "path": "assets/interlocks/catalog-data.js",
-      "sha256": "9740a3b6256cc1a7bbc5a2601e2b5b4cff7b7ee0ec0ba564e619e7226fb643a8"
+      "sha256": "850d62a6ae0ce3ac3e50435bffb42b104c6900febf9a21e54198de3c10f5586f"
     },
     {
       "path": "assets/interlocks/documentation-sources.json",
-      "sha256": "59c161cc2033f2e109695dfa38c40f7c9c63448b29c9d614eac16415036b161e"
+      "sha256": "b37b9e45d7f05324191f0780c9d1433a2a9d24aeb5b9ec881774771d609b67cc"
     }
   ]
 }

@@ -38,9 +38,12 @@ async function exerciseAtlas(harness, snapshots) {
     search.value = 'retail'; search.dispatchEvent(new Event('input', { bubbles: true }));
     document.querySelector('#scenario-matches button')?.click();
     document.querySelector('#finderClear')?.click();
+    document.querySelector('.chapter-index__link[href="#security"]')?.click();
     for (const card of [...document.querySelectorAll('.card[data-id]')]) { card.click(); document.querySelector('#i-close')?.click(); }
     window.dispatchEvent(new Event('scroll'));
   })()`);
+  await harness.waitFor(`document.querySelector('#atlas-library')?.open === true`);
+  await harness.waitFor(`document.querySelector('#route-summary-pattern')?.textContent === 'Choose a pattern'`);
   await settle(harness);
   snapshots.push(...await harness.takeCoverage());
 }

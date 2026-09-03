@@ -481,12 +481,12 @@ graph.add_node("explain",   call_generative_ai_summary)
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   const TELEMETRY_ROUTES = Object.freeze({
-    oci: Object.freeze({ name: "OCI", source: "Native services, applications, databases, and OKE", contract: "OCI metrics, logs, events, and OpenTelemetry", egress: "Service Gateway or private endpoint", handoff: "OCI service identity and compartment policy", destination: "Monitoring, Logging, Log Analytics, APM" }),
-    aws: Object.freeze({ name: "AWS", source: "Accounts, workloads, databases, and EKS", contract: "OpenTelemetry, CloudWatch export, and structured logs", egress: "Collector, HTTPS, Streaming, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Log Analytics, APM, Monitoring, and external SIEM" }),
-    azure: Object.freeze({ name: "Azure", source: "Subscriptions, applications, databases, and AKS", contract: "OpenTelemetry, Azure Monitor export, and structured logs", egress: "Collector, HTTPS, Event Hub, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Log Analytics, APM, Monitoring, and external SIEM" }),
-    gcp: Object.freeze({ name: "GCP", source: "Projects, applications, databases, and GKE", contract: "OpenTelemetry, Cloud Logging export, and structured logs", egress: "Collector, HTTPS, Pub/Sub bridge, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Log Analytics, APM, Monitoring, and external SIEM" }),
-    kubernetes: Object.freeze({ name: "Kubernetes", source: "Workload, platform, and cluster signals", contract: "OpenTelemetry", egress: "Collector or Fluent Bit", handoff: "OCI ingestion boundary", destination: "Monitoring, Log Analytics, and APM" }),
-    onprem: Object.freeze({ name: "On-premises", source: "Hosts, applications, middleware, and databases", contract: "OpenTelemetry, syslog, JMX, database, and host telemetry", egress: "Management Gateway, collector, or controlled HTTPS", handoff: "Enterprise network, identity, and tenancy boundary", destination: "Database Management, Log Analytics, APM, Monitoring" }),
+    oci: Object.freeze({ name: "OCI", source: "Native services, applications, databases, and OKE", contract: "OCI metrics, logs, events, and OpenTelemetry", egress: "Service Gateway or private endpoint", handoff: "OCI service identity and compartment policy", destination: "Monitoring, Logging, Log Analytics, APM", decision: "Native-first: keep OCI telemetry on private service paths; export only when another platform owns the response workflow." }),
+    aws: Object.freeze({ name: "AWS", source: "Accounts, workloads, databases, and EKS", contract: "OpenTelemetry, CloudWatch export, and structured logs", egress: "Collector, HTTPS, Streaming, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "CloudWatch plus OCI or external analysis", decision: "Federated: retain CloudWatch as a native control plane and forward only the signals needed for cross-cloud correlation." }),
+    azure: Object.freeze({ name: "Azure", source: "Subscriptions, applications, databases, and AKS", contract: "OpenTelemetry, Azure Monitor export, and structured logs", egress: "Collector, HTTPS, Event Hub, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Azure Monitor plus OCI or external analysis", decision: "Federated: retain Azure Monitor as a native control plane and forward only the signals justified by shared operations." }),
+    gcp: Object.freeze({ name: "GCP", source: "Projects, applications, databases, and GKE", contract: "OpenTelemetry, Cloud Logging export, and structured logs", egress: "Collector, HTTPS, Pub/Sub bridge, or Object Storage", handoff: "Cross-cloud identity, encryption, and routing boundary", destination: "Cloud Monitoring plus OCI or external analysis", decision: "Federated: retain Google Cloud operations as a native control plane and centralize only when ownership, residency, and cost support it." }),
+    kubernetes: Object.freeze({ name: "Kubernetes", source: "Workload, platform, and cluster signals", contract: "OpenTelemetry", egress: "Collector or Fluent Bit", handoff: "Portable collector and policy boundary", destination: "Chosen native, OCI, and external backends", decision: "Portable: keep the telemetry contract backend-neutral so the platform team can route signals without reinstrumenting workloads." }),
+    onprem: Object.freeze({ name: "On-premises", source: "Hosts, applications, middleware, and databases", contract: "OpenTelemetry, syslog, JMX, database, and host telemetry", egress: "Management Gateway, collector, or controlled HTTPS", handoff: "Enterprise network, identity, and tenancy boundary", destination: "Central operations platform and existing SIEM", decision: "Centralized: aggregate when local tools cannot provide estate-wide correlation, while preserving local recovery and data-residency controls." }),
   });
 
   function buildTelemetryRoute() {
@@ -508,12 +508,57 @@ graph.add_node("explain",   call_generative_ai_summary)
       $("#route-handoff-detail").textContent = "Cross-cloud control-plane handoff";
       $("#route-destination").textContent = value.destination;
       $("#route-destination-detail").textContent = "Downstream analysis, alerting, and response";
+      const [decisionLabel, ...decisionDetail] = value.decision.split(": ");
+      $("#route-decision-label").textContent = `${decisionLabel}:`;
+      $("#route-decision-detail").textContent = decisionDetail.join(": ");
       $("#telemetry-route-detail").setAttribute("aria-label", `${value.name} vendor-neutral telemetry contract and destination route`);
       window.OBS_STATE?.replace?.({ source: key });
     };
 
     $$("[data-source]", route).forEach((button) => button.addEventListener("click", () => render(button.dataset.source)));
     render(initial);
+  }
+
+  const GOAL_LABELS = Object.freeze({
+    protect: "Protect",
+    diagnose: "Diagnose",
+    optimize: "Optimize",
+    govern: "Govern",
+  });
+
+  function updateRouteSummary(state = window.OBS_STATE?.read?.() || {}) {
+    const source = TELEMETRY_ROUTES[state.source] || TELEMETRY_ROUTES.kubernetes;
+    const goal = GOAL_LABELS[state.goal] || GOAL_LABELS.diagnose;
+    const pattern = PATTERNS[state.pattern]?.name || "Choose a pattern";
+    const sourceNode = $("#route-summary-source");
+    const goalNode = $("#route-summary-goal");
+    const patternNode = $("#route-summary-pattern");
+    if (sourceNode) sourceNode.textContent = source.name;
+    if (goalNode) goalNode.textContent = goal;
+    if (patternNode) patternNode.textContent = pattern;
+  }
+
+  function initRouteSummary() {
+    if (!$("#atlas-route-summary")) return;
+    updateRouteSummary();
+    window.addEventListener("obs:statechange", (event) => updateRouteSummary(event.detail));
+    $("#route-summary-reset")?.addEventListener("click", () => {
+      window.OBS_STATE?.reset?.();
+      window.location.reload();
+    });
+  }
+
+  function openAtlasLibraryForHash() {
+    const library = $("#atlas-library");
+    let target = null;
+    try {
+      target = window.location.hash ? document.getElementById(decodeURIComponent(window.location.hash.slice(1))) : null;
+    } catch (_error) {
+      return;
+    }
+    if (!library || !target || !library.contains(target)) return;
+    library.open = true;
+    requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
   }
 
   /* ---- Learn-more resources (from assets/resources.js) ---- */
@@ -824,12 +869,20 @@ graph.add_node("explain",   call_generative_ai_summary)
   /* ---- Scroll progress + reveal + level scroll-spy ---- */
   function scrollFx() {
     const bar = $("#scrollbar");
+    let scrollFrame = 0;
+    const updateProgress = () => {
+      scrollFrame = 0;
+      const root = document.documentElement;
+      const scrollable = root.scrollHeight - root.clientHeight;
+      const progress = scrollable > 0 ? Math.min(1, Math.max(0, root.scrollTop / scrollable)) : 0;
+      bar.style.transform = `scaleX(${progress})`;
+    };
     const onScroll = () => {
-      const h = document.documentElement;
-      bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(updateProgress);
     };
     document.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    updateProgress();
 
     if (!window.IntersectionObserver) { $$(".reveal").forEach((e) => e.classList.add("in")); return; }
     const io = new IntersectionObserver((ents) => {
@@ -866,6 +919,9 @@ graph.add_node("explain",   call_generative_ai_summary)
     buildFinder();
     buildCommunityScenarioFinder();
     buildTelemetryRoute();
+    initRouteSummary();
+    openAtlasLibraryForHash();
+    window.addEventListener("hashchange", openAtlasLibraryForHash);
     buildResources();
     scrollFx();
     $("#i-close").addEventListener("click", closeInspector);

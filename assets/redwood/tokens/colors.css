@@ -69,6 +69,7 @@
   --text-muted:    var(--stone-600);
   --text-subtle:   var(--stone-500);
   --text-inverse:  var(--stone-50);
+  --text-inverse-muted: var(--stone-400);
   --text-link:     var(--link-blue);
   --text-brand:    var(--red-redwood);
 
@@ -78,6 +79,7 @@
   --surface-sunken:  var(--stone-100);
   --surface-raised:  var(--white);
   --surface-inverse: var(--stone-900);
+  --surface-code-header: #20262B;
   --surface-brand:   var(--red-redwood);
 
   /* Borders & dividers */
@@ -85,6 +87,7 @@
   --border-default: var(--stone-300);
   --border-strong:  var(--stone-400);
   --border-focus:   var(--blue-deep);
+  --border-code:    #3A4248;
 
   /* Interactive (primary = Redwood red) */
   --action-primary:        var(--red-redwood);

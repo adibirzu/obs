@@ -113,6 +113,7 @@
         "assets/interlocks/catalog-data.js",
         "assets/interlocks/catalog.json",
         "assets/interlocks/documentation-sources.json",
+        "interlocks.html",
         "launchpad.html"
       ],
       "statusCode": 200,
@@ -892,16 +893,6 @@
       "lastChecked": "2026-07-03"
     },
     {
-      "url": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/introduction.html",
-      "sources": [
-        "assets/interlocks/catalog-data.js",
-        "assets/interlocks/catalog.json",
-        "assets/interlocks/documentation-sources.json"
-      ],
-      "statusCode": 200,
-      "lastChecked": "2026-07-03"
-    },
-    {
       "url": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/promotion-and-discovery.html",
       "sources": [
         "launchpad.html"
@@ -913,6 +904,9 @@
       "url": "https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm",
       "sources": [
         "assets/guide.js",
+        "assets/interlocks/catalog-data.js",
+        "assets/interlocks/catalog.json",
+        "assets/interlocks/documentation-sources.json",
         "docs/observability-design-guide.md",
         "launchpad.html"
       ],
@@ -1025,8 +1019,6 @@
     {
       "url": "https://fonts.googleapis.com/",
       "sources": [
-        "index.html",
-        "interlocks.html",
         "launchpad.html",
         "scripts/validate-governance.mjs"
       ],
@@ -1045,8 +1037,6 @@
     {
       "url": "https://fonts.gstatic.com/",
       "sources": [
-        "index.html",
-        "interlocks.html",
         "launchpad.html",
         "scripts/validate-governance.mjs"
       ],
