@@ -857,9 +857,15 @@
 
         const shouldAnimate = useTransition && typeof document.startViewTransition === 'function' && state.currentModule !== module;
         if (shouldAnimate) {
-            document.startViewTransition(() => {
+            const transition = document.startViewTransition(() => {
                 commitNavigation();
             });
+            // Rapid keyboard or navigation actions can supersede a transition.
+            // The navigation has already committed, so cancellation is expected
+            // and must not surface as an unhandled browser rejection.
+            for (const completion of [transition.ready, transition.finished, transition.updateCallbackDone]) {
+                completion?.catch(() => {});
+            }
             return;
         }
 
