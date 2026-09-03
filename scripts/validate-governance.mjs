@@ -193,7 +193,12 @@ async function probeLink(url) {
   if ([400, 405, 501].includes(response.status)) {
     response = await fetch(url, { method: 'GET', redirect: 'follow', headers: { ...headers, range: 'bytes=0-1023' }, signal: AbortSignal.timeout(15_000) });
   }
-  return { statusCode: response.status, redirectedTo: response.url !== url ? response.url : undefined };
+  const source = new URL(url);
+  const preserveRedirect = source.hostname !== 'adibirzu.github.io';
+  return {
+    statusCode: response.status,
+    redirectedTo: preserveRedirect && response.url !== url ? response.url : undefined,
+  };
 }
 
 async function refreshLinks({ discovered, previous, today }) {

@@ -15,7 +15,7 @@ Built with the Oracle Redwood design language (Georgia + Figtree, warm-stone pal
 
 A guided Atlas that helps users find the right observability capabilities for an operating goal, optionally refine the route by role or industry, and adopt them in a clear order:
 
-- **Start with an operating goal** — choose protect, diagnose, optimize, or govern; role and industry are optional refinements.
+- **Start with an operating goal** — choose protect, diagnose, optimize, or govern; role and industry are optional refinements, and a persistent route summary keeps source, goal, and estate pattern visible as you continue.
 - **Use-case finder** — pick your estate pattern (traditional app, database-centric, OKE, Oracle apps, hybrid, agentic) and get a recommended path with concrete outcomes.
 - **The L0 to L4 maturity path** — services open an inspector with Executive, Architect, and Practitioner lenses, copy-ready MQL/OCL/OTel snippets, and curated guides and projects.
 - **Collection-agent comparison** — Oracle Cloud Agent vs. Management Agent vs. Unified Monitoring Agent.
@@ -25,6 +25,7 @@ A guided Atlas that helps users find the right observability capabilities for an
 - **Resources** — curated DevRel guides, demos, and the maintainer's public observability projects, mapped per service.
 - **[OCI Observability Service Interlocks](interlocks.html)** — six accessible, interactive interlock views plus poster-grade editable Draw.io and Excalidraw sources covering Network, Security, IAM & Governance, Landing Zones, Operations & Lifecycle, and the end-to-end Cloud Foundation operating model.
 - **[Interactive launchpad](launchpad.html)** — the companion operations console.
+- **Progressive technical library** — collection, AI, security, operator-scale, maturity, resource, and reference chapters stay available through a grouped index without overwhelming the primary route.
 
 Product status and remaining work are tracked in [`docs/PRODUCT-ROADMAP.md`](docs/PRODUCT-ROADMAP.md).
 
@@ -94,7 +95,7 @@ The multitenant approach is **not just access scoping**. The real model is **cen
 3. **Aggregate & analyse** — a central **OCI Log Analytics**: 250+ out-of-the-box sources, clustering, link analysis, detection rules, tiered (active + archive) storage, and GenAI-assisted analytics. The same **Service Connector → Streaming / REST API** paths can also fan out to **3rd-party SIEM & observability tools** (Splunk, Elastic, Datadog, Microsoft Sentinel) via [log shippers](https://docs.oracle.com/en/learn/ocilogs-log-shipper/index.html) or [OCI Functions](https://docs.oracle.com/en/learn/oci-logs-ms-azure-sentinel/).
 4. **Operate** — an operator cross-tenant fleet view (SLOs, capacity, chargeback) plus per-tenant views.
 
-**Cross-tenancy aggregation is not automatic** — it relies on per-source forwarding (Service Connector Hub / Streaming / Object Storage) plus IAM cross-tenancy `Define` / `Endorse` / `Admit` policies, and Log Analytics is regional. **Isolation** stays per-tenant, by **log group + compartment** and IAM — Tenancy / Platform / Environment(Project) observability teams, each an admin and a reader OCI group — grounded in the official [OCI Database Observability LZ add-on (`obs_v2`)](https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/obs_v2/addons/oci-db-observability). Adding a tenant, environment, or project is repetition: clone the compartment, group, and policy.
+**Cross-tenancy aggregation is not automatic** — it relies on per-source forwarding (Service Connector Hub / Streaming / Object Storage) plus IAM cross-tenancy `Define` / `Endorse` / `Admit` policies, and Log Analytics is regional. **Isolation** stays per-tenant, by **log group + compartment** and IAM — Tenancy / Platform / Environment(Project) observability teams, each an admin and a reader OCI group — grounded in the official [OCI Database Observability LZ add-on](https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/master/addons/oci-db-observability). Adding a tenant, environment, or project is repetition: clone the compartment, group, and policy.
 
 A real design also pins down: **agent trust** (Management Agent install keys per tenancy/namespace, Vault secrets, rotation, Management Gateway/private egress), **network & security** (private endpoints / Service Gateway, Zero Trust Packet Routing, operator-access audit), **region/data residency**, and **capacity & cost** (ingest volume, retention, recall cost, delivery semantics, service limits).
 
@@ -185,7 +186,7 @@ docs/
 
 - **[docs/observability-design-guide.md](docs/observability-design-guide.md)** — the full enterprise OCI observability design guide.
 - OCI Secure AI Framework (SAIF), Zero Trust for AI Agents, and AI Observability for Agents whitepapers (the L4 layer).
-- [oracle-devrel/technology-engineering — observability-and-management](https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management) and the [OCI Observability blog](https://blogs.oracle.com/observability/).
+- [Oracle DevRel technology-engineering repository](https://github.com/oracle-devrel/technology-engineering) and the [OCI Observability blog](https://blogs.oracle.com/observability/).
 - Reference implementation: [octo-observability-demo](https://github.com/adibirzu/octo-observability-demo).
 - Project references curated from the maintainer's **public** OCI observability repositories.
 

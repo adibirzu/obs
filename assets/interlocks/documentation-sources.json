@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "edition": "documented",
-  "verifiedOn": "2026-07-03",
+  "verifiedOn": "2026-09-03",
   "authority": "Oracle Cloud Infrastructure documentation on docs.oracle.com and oracle.com",
   "methodology": {
     "documentedFacts": "Service names and capability summaries are paraphrased from the linked official Oracle documentation.",
@@ -18,8 +18,8 @@
       "documentedCapability": "Collects service and custom metrics, evaluates MQL queries, and provides the metric foundation for health and capacity views.",
       "architecturalInference": "Turns network, security, IAM, workload, quota, and lifecycle measurements into shared health indicators and alarm inputs.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-02",
@@ -30,8 +30,8 @@
       "documentedCapability": "Stores and searches enabled OCI service logs and custom logs in log groups; custom sources can use the Logging API or Unified Monitoring Agent.",
       "architecturalInference": "Provides a shared record of network, security, workload, and operational activity when the relevant service or custom logs are explicitly enabled and routed.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-03",
@@ -42,8 +42,8 @@
       "documentedCapability": "Detects resource lifecycle and state changes and routes matching events to notification or automation targets.",
       "architecturalInference": "Converts infrastructure, policy, security, onboarding, and lifecycle changes into event-driven operational workflows.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-04",
@@ -54,8 +54,8 @@
       "documentedCapability": "The Monitoring service evaluates metric queries and publishes alarm messages when configured trigger rules and state transitions are met.",
       "architecturalInference": "Makes measured conditions actionable by connecting Monitoring alarm messages to Notifications topics and approved downstream incident or automation workflows.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-05",
@@ -66,8 +66,8 @@
       "documentedCapability": "Publishes messages through topics and subscriptions to people, HTTPS endpoints, functions, and supported delivery channels.",
       "architecturalInference": "Routes alarm, event, risk, budget, and lifecycle messages to the accountable team or downstream automation platform.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-06",
@@ -78,8 +78,8 @@
       "documentedCapability": "Provides tenancy-relevant notices about service events, planned maintenance, advisories, and other operational information in the OCI Console.",
       "architecturalInference": "Adds provider-originated context to incident triage, readiness planning, maintenance windows, and service reporting when teams actively consume the notices.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-07",
@@ -90,8 +90,8 @@
       "documentedCapability": "Indexes, enriches, aggregates, explores, correlates, visualizes, and monitors log and event records. Current documented ingestion paths include Management Agent, on-demand upload, Object Storage, and Service Connector; object collection rules use stream-based collection.",
       "architecturalInference": "Correlates logs and events with adjacent signals by shared time, entity, and trace context. Prometheus exporter metrics stay in a metric backend and can be paired with Logan evidence; APM traces remain a linked service under the current published service boundary.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-08",
@@ -102,8 +102,8 @@
       "documentedCapability": "Provides distributed tracing, Availability Monitoring, real-user monitoring, server monitoring, and dashboards for application performance analysis.",
       "architecturalInference": "Connects customer-experience and transaction evidence with application components, downstream services, and operational changes when instrumentation is deployed.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-09",
@@ -114,8 +114,8 @@
       "documentedCapability": "Provides application-stack and underlying-infrastructure monitoring and alarm management. Oracle documents Stack Monitoring as deprecated and states that its SKUs retire January 23, 2027, with capabilities integrating into OCI Monitoring.",
       "architecturalInference": "Supplies topology and health context for incident triage and connects supported application-layer symptoms with underlying servers and databases. For existing estates, maintain and validate a transition plan against the published service change.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-10",
@@ -126,8 +126,8 @@
       "documentedCapability": "Provides database and host resource-utilization and capacity insight, including GenAI & Compute Insights, Capacity Planning, Exadata Insights, and SQL Insights. Current public updates include cross-region SQL fleet analysis and Database Management reports in News Reports.",
       "architecturalInference": "Adds forecasting and trend evidence to capacity, lifecycle, database, FinOps, and operational-readiness decisions.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-11",
@@ -138,8 +138,8 @@
       "documentedCapability": "Provides near-real-time inventory, relationship, and configuration metadata through SQL, property graphs, and analytics dashboards.",
       "architecturalInference": "Adds multiregion resource ownership and dependency context to compliance monitoring, troubleshooting, dashboards, and impact analysis.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-12",
@@ -150,8 +150,8 @@
       "documentedCapability": "Provides fleet health, performance diagnostics, SQL monitoring, configuration visibility, and management for Oracle databases.",
       "architecturalInference": "Connects database-specific evidence with application incidents, lifecycle operations, fleet readiness, and executive capacity reporting.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-13",
@@ -162,8 +162,8 @@
       "documentedCapability": "Produces prioritized recommendations for cost, security, availability, performance, and operational improvement across OCI resources.",
       "architecturalInference": "Turns observed configuration and usage into governed recommendations that can be assigned, tracked, validated, and reported.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-14",
@@ -174,8 +174,8 @@
       "documentedCapability": "Provides predefined and customizable reports for analyzing OCI cost and usage with filters, grouping, saved reports, and scheduled reports.",
       "architecturalInference": "Combines cost-and-usage reports with organization-approved ownership and utilization context for allocation, showback, chargeback, and optimization review.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-15",
@@ -186,8 +186,8 @@
       "documentedCapability": "Service limits define allowed capacity, compartment quotas constrain resource consumption, and budgets provide soft spending thresholds with periodic alerts.",
       "architecturalInference": "Connects separately governed capacity and spending controls to planning, owner notification, escalation, and evidence without treating budgets as hard enforcement.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-16",
@@ -198,8 +198,8 @@
       "documentedCapability": "Shows a cross-region list of resources in a selected compartment and, when requested, its subcompartments, subject to permissions and supported resource types.",
       "architecturalInference": "Adds operator-selected resource scope and regional inventory context to dashboards and investigations; it is a Console discovery capability, not a telemetry service.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-17",
@@ -210,8 +210,8 @@
       "documentedCapability": "Governs parent and child tenancies, subscription mapping, organization-wide visibility, and supported cross-tenancy administration models.",
       "architecturalInference": "Extends observability ownership, reporting, budgets, and policy evidence across enterprise tenancy and subscription boundaries.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-18",
@@ -222,8 +222,8 @@
       "documentedCapability": "Provides the software-defined network boundary for subnets, routing, gateways, security controls, DNS, and private connectivity.",
       "architecturalInference": "Emits metrics, flow records, configuration events, and path context used to assess reachability, availability, and change impact.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-19",
@@ -234,8 +234,8 @@
       "documentedCapability": "Distributes traffic across healthy backends and publishes listener, backend, latency, connection, and error metrics for service health.",
       "architecturalInference": "Links customer-facing availability and latency to backend health, alarms, notifications, topology, and incident workflows.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-20",
@@ -246,8 +246,8 @@
       "documentedCapability": "Applies managed network security policy and produces traffic, threat, and rule evidence for controlled VCN boundaries.",
       "architecturalInference": "Feeds allowed and denied traffic context into security analytics, network diagnosis, policy review, and incident investigation.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-21",
@@ -258,8 +258,8 @@
       "documentedCapability": "Performs configuration-based reachability analysis across OCI network paths without sending traffic through the production environment.",
       "architecturalInference": "Supplies path validation and likely failure-point context to troubleshooting dashboards, change validation, and remediation workflows.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-22",
@@ -270,8 +270,8 @@
       "documentedCapability": "Detects risky resource configurations and suspicious activities through detector recipes and tracks them as prioritized problems.",
       "architecturalInference": "Contributes security findings and posture signals that observability correlates with logs, identities, changes, workloads, and ownership.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-23",
@@ -282,8 +282,8 @@
       "documentedCapability": "Enforces preventive security policies on compartments so resource operations comply with an approved security-zone recipe.",
       "architecturalInference": "Produces policy-violation and control context for posture monitoring, onboarding validation, audit evidence, and remediation.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-24",
@@ -294,8 +294,8 @@
       "documentedCapability": "Manages encryption keys and secrets with controlled access, lifecycle operations, protection modes, and audit visibility.",
       "architecturalInference": "Adds key usage, secret access, rotation, and cryptographic lifecycle evidence to security and compliance investigations.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-25",
@@ -306,8 +306,8 @@
       "documentedCapability": "Creates, imports, deploys, and renews certificates and certificate authorities for supported OCI services and workloads.",
       "architecturalInference": "Provides expiry and lifecycle events that drive alerts, readiness checks, change workflows, and cryptographic compliance evidence.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-26",
@@ -318,8 +318,8 @@
       "documentedCapability": "Controls tenancy resources through users, groups, dynamic groups, compartments, policies, authentication, and authorization decisions.",
       "architecturalInference": "Provides actor, policy, compartment, and access-boundary context needed to explain who changed what and whether it was allowed.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-27",
@@ -330,8 +330,8 @@
       "documentedCapability": "Provides identity lifecycle, federation, single sign-on, multifactor authentication, and application integration within OCI IAM.",
       "architecturalInference": "Emits identity and federation activity that supports login monitoring, access investigations, governance evidence, and risk response.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-28",
@@ -342,8 +342,8 @@
       "documentedCapability": "Supports access review, certification, entitlement insight, identity lifecycle governance, and risk-aware access decisions.",
       "architecturalInference": "Adds review status, entitlement, dormant-account, and privilege evidence to IAM dashboards, compliance reports, and remediation.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-29",
@@ -354,8 +354,8 @@
       "documentedCapability": "Automatically records calls to supported OCI public API endpoints, including caller, time, source, target, action, and response information.",
       "architecturalInference": "Provides API-activity evidence for identity, policy, network, security, resource, and tenancy investigations within documented retention and permission boundaries.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-30",
@@ -366,8 +366,8 @@
       "documentedCapability": "Provides standardized architecture and automation patterns for tenancy, IAM, network, security, governance, and workload foundations.",
       "architecturalInference": "Embeds telemetry, logs, alarms, ownership, retention, and readiness checks into repeatable cloud-foundation blueprints.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-31",
@@ -378,8 +378,8 @@
       "documentedCapability": "Moves data between supported OCI source and target services, optionally invoking Functions for transformation during delivery.",
       "architecturalInference": "Connects Logging with analytics, archive, streaming, SIEM, functions, and other operational destinations through managed pipelines.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-32",
@@ -390,8 +390,8 @@
       "documentedCapability": "Centralizes operating-system update, software-source, lifecycle-environment, compliance, and fleet management across supported environments.",
       "architecturalInference": "Contributes patch status, errata, job results, and compliance signals to readiness dashboards, tickets, and lifecycle reports.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-33",
@@ -402,8 +402,8 @@
       "documentedCapability": "Groups application resources into fleets to automate maintenance tasks, validate compliance, and coordinate enterprise lifecycle operations.",
       "architecturalInference": "Provides fleet membership, maintenance execution, patch compliance, and workflow evidence to operations and executive reporting.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-34",
@@ -414,8 +414,8 @@
       "documentedCapability": "Groups supported application-stack resources into DR Protection Groups and runs customizable, pretested plans for planned or unplanned DR operations.",
       "architecturalInference": "Adds supported DR-plan execution and validation evidence to reporting; RPO, RTO, replication, and backup health require workload-specific sources and controls.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "DOC-35",
@@ -426,8 +426,8 @@
       "documentedCapability": "Provides managed, scalable email delivery with operational metrics for accepted, relayed, bounced, complained, and suppressed messages.",
       "architecturalInference": "Adds delivery health and failure signals to customer operations, service-management reporting, and alert-delivery assurance.",
       "httpStatus": 200,
-      "lastChecked": "2026-07-03",
-      "verifiedOn": "2026-07-03"
+      "lastChecked": "2026-09-03",
+      "verifiedOn": "2026-09-03"
     }
   ],
   "supplementalSources": [
@@ -435,49 +435,49 @@
       "id": "REF-01",
       "title": "Monitoring Overview",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-02",
       "title": "Custom Logs",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/Logging/Concepts/custom_logs.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-03",
       "title": "Connector Hub Overview",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/connector-hub/overview.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-04",
       "title": "VCN Flow Logs",
       "officialUrl": "https://docs.oracle.com/iaas/Content/Network/Concepts/vcn-flow-logs.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-05",
       "title": "Security Zones Overview",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/security-zone/using/security-zones.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-06",
       "title": "OCI Landing Zones Overview",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/oci-landing-zones-overview.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-07",
       "title": "Budgets",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/budgetsoverview.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     },
     {
       "id": "REF-08",
       "title": "Available Compartment Quotas",
       "officialUrl": "https://docs.oracle.com/en-us/iaas/Content/Quotas/Concepts/resourcequotas_topic-Available_Quotas_by_Service.htm",
-      "verifiedOn": "2026-07-03"
+      "verifiedOn": "2026-09-03"
     }
   ],
   "diagramPatterns": [

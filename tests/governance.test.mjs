@@ -24,7 +24,7 @@ test('external links are discovered across source files and governed by dated HT
   ]);
 
   assert.equal(schema.$schema, 'https://json-schema.org/draft/2020-12/schema');
-  assert.deepEqual(validateLinkRegistry({ discovered, registry, today: '2026-07-03' }), []);
+  assert.deepEqual(validateLinkRegistry({ discovered, registry, today: registry.checkedAt }), []);
   assert.ok(registry.links.length > 40);
   assert.ok(registry.links.every(link => Number.isInteger(link.statusCode) || link.exemption));
   assert.ok(registry.links.every(link => /^\d{4}-\d{2}-\d{2}$/.test(link.lastChecked)));
@@ -100,7 +100,8 @@ test('workflow detail UI renders governance prerequisites and empty-result cavea
 });
 
 test('complete governance compilation validates the checked-in contracts together', async () => {
-  const result = await validateGovernance({ today: '2026-07-03' });
+  const registry = await readJson('governance/external-links.json');
+  const result = await validateGovernance({ today: registry.checkedAt });
   assert.ok(result.links > 40);
   assert.equal(result.workflows, 60);
   assert.ok(result.claims > 0);

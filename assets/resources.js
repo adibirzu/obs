@@ -1,7 +1,7 @@
 /* =========================================================================
    Shared "Learn more" resource catalog.
-   Sourced from oracle-devrel/technology-engineering/observability-and-management
-   plus the OCI Observability blog and team Medium publications.
+   Sourced from current Oracle documentation, Oracle DevRel, the OCI
+   Observability blog, and community publications.
    Consumed by both the guide (assets/guide.js) and the launchpad
    (assets/launchpad-resources.js).
    ========================================================================= */
@@ -9,7 +9,7 @@ window.OBS_RESOURCES = [
   {
     key: "library", label: "Observability library", comp: null, module: "module-home",
     items: [
-      { title: "Oracle DevRel — Observability & Management library", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management", summary: "The full oracle-devrel/technology-engineering observability collection: APM, Logging, Log Analytics, Monitoring, Database Management, Ops Insights, cost, and shared assets." },
+      { title: "Oracle DevRel — technology engineering", url: "https://github.com/oracle-devrel/technology-engineering", summary: "Oracle DevRel's current public technology-engineering repository." },
       { title: "OCI Observability & Management — product overview", url: "https://www.oracle.com/manageability/", summary: "The canonical list of OCI Observability and Management services." },
       { title: "OCI Observability blog", url: "https://blogs.oracle.com/observability/", summary: "Latest insights, trends, and updates on multicloud observability and management." },
     ],
@@ -17,8 +17,8 @@ window.OBS_RESOURCES = [
   {
     key: "monitoring", label: "OCI Monitoring", comp: "metric", module: "module-monitoring",
     items: [
-      { title: "Custom metrics with the Python SDK — service-limit monitoring", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/oci-monitoring/custom-metrics/custom-metric-python-SDK-services-limit-monitoring", summary: "A custom metric namespace that tracks OCI service limits so alarms fire before a limit is reached." },
-      { title: "Custom metrics with OCI Functions — service-limit monitoring", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/oci-monitoring/custom-metrics/custom-metric-FN-services-limit-monitoring", summary: "An OCI Function publishes service-limit usage as a custom metric for proactive alarms and notifications." },
+      { title: "OCI custom metrics", url: "https://docs.oracle.com/en-us/iaas/Content/Monitoring/Tasks/publishingcustommetrics.htm", summary: "Publish application and infrastructure measurements into OCI Monitoring for MQL queries and alarms." },
+      { title: "OCI service limits", url: "https://docs.oracle.com/en-us/iaas/Content/General/Concepts/servicelimits.htm", summary: "Use service limits, quotas, and alerts as governed capacity controls." },
       { title: "Customised alarm notification in OCI", url: "https://karthicin.medium.com/customised-alarm-notification-in-oci-e5b367ca20bc", summary: "Shape OCI Monitoring alarm notifications into clearer, more actionable alerts." },
     ],
     projects: [
@@ -44,8 +44,8 @@ window.OBS_RESOURCES = [
   {
     key: "logging-analytics", label: "Oracle Log Analytics", comp: "analyze", module: "module-loganalytics",
     items: [
-      { title: "Mastering cloud cost control with OCI Log Analytics", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/finops", summary: "Import the FinOps FOCUS cost-and-usage report into Logging Analytics for custom spend dashboards." },
-      { title: "Inject Oracle Fusion HCM logs into Logging Analytics", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/logging-analytics/fusion-hcm-to-la", summary: "Use predefined parsers and sources to ingest Fusion HCM application logs via REST API." },
+      { title: "Oracle Log Analytics", url: "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm", summary: "Search, analyze, and correlate operational log data using current Oracle Log Analytics documentation." },
+      { title: "Fusion application log ingestion", url: "https://www.ateam-oracle.com/configure-fusion-applications-audit-and-security-logs-ingestion-in-oci-log-analytics-part-1", summary: "Configure Fusion application audit and security-log ingestion into Oracle Log Analytics." },
       { title: "Oracle Log Analytics demo", url: "https://www.youtube.com/watch?v=1bJb92put4k", summary: "Index, search, analyse, and visualise log data with Oracle Log Analytics." },
     ],
     projects: [
@@ -60,7 +60,7 @@ window.OBS_RESOURCES = [
   {
     key: "apm", label: "OCI Application Performance Monitoring", comp: "apm", module: "module-apm",
     items: [
-      { title: "How to get started with OCI APM", url: "https://github.com/oracle-devrel/technology-engineering/tree/main/observability-and-management/application-performance-monitoring/How%20to%20Use%20APM", summary: "A three-part series on dashboards, alarms, availability monitors, and the Trace Explorer." },
+      { title: "OCI Application Performance Monitoring", url: "https://docs.oracle.com/en-us/iaas/application-performance-monitoring/doc/application-performance-monitoring.html", summary: "Current documentation for APM tracing, availability, real-user, server monitoring, and dashboards." },
       { title: "Connect OCI APM with Logging Analytics", url: "https://blogs.oracle.com/observability/post/connect-apm-with-log-analytics-and-more", summary: "Link APM traces with Logging Analytics and create dynamic links for faster troubleshooting." },
       { title: "Use OCI APM in Kubernetes for a Java application", url: "https://karthicin.medium.com/how-to-use-oci-apm-in-kubernetes-environment-for-java-application-56de2c770a69", summary: "Instrument and trace a Java application running on Kubernetes with OCI APM." },
       { title: "Store APM synthetic monitor error logs in OCI Logging", url: "https://karthicin.medium.com/storing-apm-synthetic-monitor-error-logs-in-oci-logging-c2296ce6072f", summary: "Capture and store error logs from APM synthetic availability monitors in OCI Logging." },
@@ -74,7 +74,7 @@ window.OBS_RESOURCES = [
     key: "database-management", label: "OCI Database Management", comp: "db", module: "module-dbmgmt",
     items: [
       { title: "OCI Database Management demo", url: "https://www.youtube.com/watch?v=3k9jrkOlBkc", summary: "Performance diagnostics and fleet monitoring for Oracle Databases." },
-      { title: "OCI Database Observability at Scale — official LZ add-on (obs_v2)", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/obs_v2/addons/oci-db-observability", summary: "Enable Database Management, Ops Insights, and Logging Analytics as an add-on to the official OCI Operating Entities Landing Zone, with observability compartments, groups, policies, and a vault." },
+      { title: "OCI Database Observability at Scale — official LZ add-on", url: "https://github.com/oci-landing-zones/oci-landing-zone-operating-entities/tree/master/addons/oci-db-observability", summary: "Enable Database Management, Ops Insights, and Logging Analytics as an add-on to the official OCI Operating Entities Landing Zone, with observability compartments, groups, policies, and a vault." },
       { title: "Enable observability for an OCI-native database deployment", url: "https://medium.com/@erikasciunzi/enable-observability-for-oci-native-database-deploy-235484953e46", summary: "Turn on OCI Observability and Management for natively deployed OCI databases." },
       { title: "OCI Database Management — PDB support and new features", url: "https://learnoci.cloud/oci-database-management-new-features-announced-f9991cba2cc2", summary: "Review newly announced features, including monitoring for pluggable databases (PDBs)." },
     ],
