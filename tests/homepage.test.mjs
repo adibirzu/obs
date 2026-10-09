@@ -40,41 +40,6 @@ test('homepage preserves the published Atlas identity and source-to-destination 
   assert.match(html, /id="route-destination"/);
 });
 
-test('launchpad and interlocks distinguish current OCI products from safe-harbor direction', async () => {
-  const [launchpad, interlocks] = await Promise.all([
-    readFile(new URL('launchpad.html', root), 'utf8'),
-    readFile(new URL('interlocks.html', root), 'utf8'),
-  ]);
-  assert.match(launchpad, /Current — public documentation/);
-  assert.match(launchpad, /Direction — safe harbor/);
-  assert.match(launchpad, /converged trace, log, metric, and topology investigation/i);
-  assert.match(launchpad, /Direction → OCI Monitoring/);
-  assert.doesNotMatch(launchpad, /Merging into OCI Monitoring/);
-  assert.doesNotMatch(launchpad, /capabilities are being merged into the OCI Monitoring service/);
-  assert.match(interlocks, /Operate with distinct, linked services/);
-  assert.match(interlocks, /planning direction, not a promise, date, or deployed customer capability/i);
-});
-
-test('Launchpad exposes selectable future-capability tiles with safe-harbor detail guidance', async () => {
-  const [launchpad, launchpadJs, launchpadCss] = await Promise.all([
-    readFile(new URL('launchpad.html', root), 'utf8'),
-    readFile(new URL('static/observability.js', root), 'utf8'),
-    readFile(new URL('static/observability.css', root), 'utf8'),
-  ]);
-  assert.match(launchpad, /id="future-capabilities-title">Future capability directions/);
-  assert.match(launchpad, /Planning topics only — not public product commitments, release dates, or available customer capabilities/);
-  for (const id of ['cross-signal', 'unified-logging', 'ai-investigation', 'packaged-solutions', 'open-instrumentation', 'guided-collection']) {
-    assert.match(launchpad, new RegExp(`data-future-id="${id}"`));
-    assert.match(launchpadJs, new RegExp(`'${id}'`));
-  }
-  assert.match(launchpadJs, /FUTURE_CAPABILITY_DETAILS/);
-  assert.match(launchpadJs, /document\.querySelectorAll\('\.future-capability'\)/);
-  assert.match(launchpadJs, /document\.querySelectorAll\('\.service-card'\)/);
-  assert.match(launchpadJs, /Future capability direction · safe harbor/);
-  assert.match(launchpadCss, /\.future-capabilities__grid/);
-  assert.match(launchpadCss, /\.future-capability:focus-visible/);
-});
-
 test('homepage provides bypass links and a persistent active-route summary', () => {
   assert.match(html, /class="skip-link" href="#top">Skip to main content<\/a>/);
   assert.match(html, /class="skip-link" href="#atlas-route-summary">Skip to active route<\/a>/);

@@ -21,6 +21,14 @@ At the time of this update there are **No open GitHub issues** for this reposito
 
 ## Implemented scope to date
 
+### PRD-02: Guided homepage journey
+
+- Unified source, operating goal, and estate pattern into a persistent active-route summary so users keep their context while moving through the maturity path.
+- Made the source route explicit about native-first, federated, portable, and centralized operating choices instead of implying that every multicloud signal should terminate in OCI.
+- Added keyboard bypass links and direct resume/reset controls for the long interactive homepage.
+- Replaced the permanently expanded technical encyclopedia with a grouped chapter index and native progressive disclosure; direct chapter links open and focus the relevant content automatically.
+- Removed non-sequential pattern numbering, repeated eyebrow scaffolding, and the prohibited colored side stripe from the primary journey.
+
 ### PRD-03: Accessibility baseline
 
 - Corrected functional metadata contrast and removed undersized sequence and state labels.

@@ -348,10 +348,8 @@
     }
 
     function applyTheme(theme) {
-        if (theme === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
-        } else if (theme === 'redwood') {
-            document.documentElement.setAttribute('data-theme', 'redwood');
+        if (theme === 'light' || theme === 'redwood' || theme === 'palantir-slate' || theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', theme);
         } else {
             document.documentElement.removeAttribute('data-theme');
         }

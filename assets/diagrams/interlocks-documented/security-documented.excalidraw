@@ -4901,13 +4901,13 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "Indexes, enriches, aggregates, explores, correlates, visualizes, and monitors log and event records. Current do…",
+      "text": "Indexes and enriches log and event records for interactive search, clustering, link analysis, anomaly detection…",
       "fontSize": 11.5,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "middle",
       "containerId": null,
-      "originalText": "Indexes, enriches, aggregates, explores, correlates, visualizes, and monitors log and event records. Current do…",
+      "originalText": "Indexes and enriches log and event records for interactive search, clustering, link analysis, anomaly detection…",
       "autoResize": false,
       "lineHeight": 1.25,
       "baseline": 9
@@ -5239,7 +5239,7 @@
       "isDeleted": false,
       "boundElements": null,
       "updated": 1,
-      "link": "https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm",
+      "link": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/introduction.html",
       "locked": false
     },
     {
@@ -5268,7 +5268,7 @@
       "isDeleted": false,
       "boundElements": null,
       "updated": 1,
-      "link": "https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm",
+      "link": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/introduction.html",
       "locked": false
     },
     {
@@ -5371,13 +5371,13 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "Provides application-stack and underlying-infrastructure monitoring and alarm management. Oracle documents Stac…",
+      "text": "Discovers supported application-stack resources and topology, then collects status, load, response, error, and…",
       "fontSize": 11.5,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "middle",
       "containerId": null,
-      "originalText": "Provides application-stack and underlying-infrastructure monitoring and alarm management. Oracle documents Stac…",
+      "originalText": "Discovers supported application-stack resources and topology, then collects status, load, response, error, and…",
       "autoResize": false,
       "lineHeight": 1.25,
       "baseline": 9
@@ -5408,7 +5408,7 @@
       "isDeleted": false,
       "boundElements": null,
       "updated": 1,
-      "link": "https://docs.oracle.com/en-us/iaas/stack-monitoring/home.htm",
+      "link": "https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/introduction.html",
       "locked": false
     },
     {
@@ -5606,13 +5606,13 @@
       "updated": 1,
       "link": null,
       "locked": false,
-      "text": "Provides database and host resource-utilization and capacity insight, including GenAI & Compute Insights, Capac…",
+      "text": "Analyzes long-term database and host utilization, SQL behavior, capacity trends, and enterprise-wide performanc…",
       "fontSize": 11.5,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "middle",
       "containerId": null,
-      "originalText": "Provides database and host resource-utilization and capacity insight, including GenAI & Compute Insights, Capac…",
+      "originalText": "Analyzes long-term database and host utilization, SQL behavior, capacity trends, and enterprise-wide performanc…",
       "autoResize": false,
       "lineHeight": 1.25,
       "baseline": 9

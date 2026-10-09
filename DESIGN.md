@@ -1,6 +1,6 @@
 ---
 name: OCI Observability Atlas
-description: A living visual atlas for understanding OCI and multicloud observability systems.
+description: A guided, source-grounded visual atlas for understanding OCI and multicloud observability systems.
 colors:
   redwood-signal: "#C74634"
   redwood-signal-hover: "#B23C2B"
@@ -113,7 +113,7 @@ components:
     typography: "{typography.body}"
     rounded: "{rounded.md}"
     padding: "10px 12px"
-    height: "44px"
+    height: "48px"
   navigation:
     backgroundColor: "{colors.atlas-ground}"
     textColor: "{colors.muted-stone}"
@@ -127,6 +127,26 @@ components:
     typography: "{typography.title}"
     rounded: "{rounded.md}"
     padding: "14px 16px"
+  route-summary:
+    backgroundColor: "{colors.atlas-ground}"
+    textColor: "{colors.infrastructure-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.xs}"
+    padding: "8px 12px"
+    height: "58px"
+  chapter-index:
+    backgroundColor: "{colors.deep-telemetry-blue}"
+    textColor: "{colors.white}"
+    typography: "{typography.title}"
+    rounded: "{rounded.xs}"
+    padding: "48px 24px"
+  library-summary:
+    backgroundColor: "{colors.infrastructure-ink}"
+    textColor: "{colors.white}"
+    typography: "{typography.title}"
+    rounded: "{rounded.xs}"
+    padding: "16px 20px"
+    height: "76px"
 ---
 
 # Design System: OCI Observability Atlas
@@ -135,25 +155,27 @@ components:
 
 **Creative North Star: "The Living Signal Atlas"**
 
-The interface behaves like a working systems map: calm enough for careful architecture review, structured enough for rapid scanning, and alive where movement explains a path. Its physical character is a field atlas laid across an operations table—authoritative source material, precise annotations, and visible routes connecting signals to decisions.
+The interface behaves like a working systems map: calm enough for careful architecture review, structured enough for rapid scanning, and alive where movement explains a path. Its physical character is a field atlas laid across an operations table—authoritative source material, precise annotations, and visible routes connecting signals to decisions. A persistent route spine keeps source, goal, and estate pattern in view while the reader moves between orientation and detail.
 
-The visual language is authoritative, practical, and approachable. Oracle Redwood provides familiarity without turning the experience into an Oracle campaign. Multicloud sources receive meaningful visual weight, while OCI services remain specific and technically legible. Motion is explanatory: it shows telemetry movement, workflow sequence, state change, and control-plane handoff. It is never ambient decoration.
+The visual language is authoritative, practical, and approachable. Oracle Redwood provides familiarity without turning the experience into an Oracle campaign. Multicloud sources receive meaningful visual weight, and each route states whether the operating model is native-first, federated, portable, or centralized. Motion is explanatory: it shows telemetry movement, workflow sequence, state change, and control-plane handoff. It is never ambient decoration.
 
 The system explicitly rejects generic SaaS styling, sales-heavy Oracle imitation, ornamental cloud imagery, dense product catalogs without guidance, and multicloud diagrams that reduce non-OCI environments to decorative inputs.
 
 **Key Characteristics:**
 
-- Cartographic hierarchy: routes, levels, and relationships lead; product lists follow.
+- Cartographic hierarchy: the active route and system relationships lead; product lists follow.
 - Quiet Redwood foundations with a functional multicolor vocabulary for service families and system states.
 - Serif-led editorial authority balanced by a humanist sans for dense technical reading.
 - Layered-by-state surfaces: flat by default, raised only when hierarchy or interaction requires it.
 - Purposeful motion with equivalent static and reduced-motion meaning.
+- Progressive technical depth: the guided route ends cleanly, while implementation chapters remain directly addressable behind native disclosure.
+- Resilient enhancement: JavaScript personalizes the route but never owns access to the core reference.
 
 **The Meaningful Motion Rule.** Animate a route, handoff, progression, or state—not the existence of a section. Content remains visible before animation runs, and reduced-motion users receive the same information without spatial travel.
 
 ## 2. Colors
 
-The palette combines Redwood recognition with a restrained systems vocabulary: one signal red, one telemetry blue, role-specific diagnostic colors, and a warm stone neutral ramp.
+The palette combines Redwood recognition with a restrained systems vocabulary: one signal red, one telemetry blue, role-specific diagnostic colors, and a warm stone neutral ramp. Deep Telemetry Blue may carry a full chapter-index surface when it is doing real orientation work; this is a committed functional field, not decoration.
 
 ### Primary
 
@@ -261,7 +283,7 @@ Components feel tactile, restrained, and confident. Their geometry is compact an
 
 ### Inputs / Fields
 
-- **Style:** White surface, one-pixel Divider Stone border, `10px` radius, and at least `44px` height.
+- **Style:** White surface, one-pixel Divider Stone border, `10px` radius, and at least `48px` height.
 - **Focus:** Deep Telemetry Blue border plus a three-pixel translucent focus halo.
 - **Error / Disabled:** Error uses Redwood Signal with an explicit message; disabled fields use Sunken Stone and remain legible, never merely faded.
 
@@ -276,6 +298,19 @@ Components feel tactile, restrained, and confident. Their geometry is compact an
 - **Motion:** Animate along an already-visible connector using the `120ms`, `200ms`, and `320ms` duration vocabulary with standard, emphasized, or ease-out curves. No bounce or elastic easing.
 - **Reduced motion:** Replace traveling particles and path drawing with an immediate highlighted path, crossfade, or discrete step change.
 
+### Active Route Summary
+
+- **Purpose:** Keep source, operating goal, and estate pattern visible after the user leaves the planner.
+- **Style:** A flat Atlas Ground strip with quiet block borders, compact Figtree labels, and no broad shadow.
+- **Responsive behavior:** Sticky below desktop navigation, stacked into a static two-row summary on compact screens.
+- **State:** Update from immutable URL-backed state; reset must clear both URL and session state.
+
+### Chapter Index and Technical Library
+
+- **Index:** A committed Deep Telemetry Blue field groups implementation chapters into Collect, Govern, Scale, and Prove.
+- **Disclosure:** The complete library uses native `details`/`summary`, Infrastructure Ink, a visible focus outline, and direct-hash recovery.
+- **Fallback:** Without JavaScript, hide nonfunctional planner controls, expand the library, and expose the static L0 to L4 route plus Interlocks handoff.
+
 ## 6. Do's and Don'ts
 
 ### Do:
@@ -284,6 +319,10 @@ Components feel tactile, restrained, and confident. Their geometry is compact an
 - **Do** use Redwood Signal sparingly and Deep Telemetry Blue consistently for system orientation and focus.
 - **Do** show telemetry paths, workflow progression, aggregation, and control-plane handoffs with purposeful motion and an equivalent static explanation.
 - **Do** give OCI, other clouds, Kubernetes, and on-premises sources meaningful labels and visual weight.
+- **Do** state whether each route is native-first, federated, portable, or centralized, including the ownership and residency tradeoff.
+- **Do** keep the active source, goal, and estate pattern visible after the first decision.
+- **Do** use native progressive disclosure for deep technical chapters and preserve direct links into every chapter.
+- **Do** preserve a useful static route when JavaScript is blocked.
 - **Do** preserve keyboard access, visible focus, semantic controls, WCAG 2.2 AA contrast, and `prefers-reduced-motion` alternatives.
 - **Do** distinguish documented capabilities from independent architecture guidance and keep source links close to the claim they support.
 
@@ -294,5 +333,7 @@ Components feel tactile, restrained, and confident. Their geometry is compact an
 - **Don't** use decorative cloud imagery, motion, or jargon that does not explain a real system relationship.
 - **Don't** build dense product catalogs that expose service names without helping users understand sequence, ownership, or outcomes.
 - **Don't** make multicloud comparisons that treat non-OCI environments as secondary or merely decorative inputs.
+- **Don't** imply that every external-cloud signal should terminate in OCI; preserve native control planes when they own the operating response.
+- **Don't** expose the entire technical library before the guided route has delivered a useful recommendation.
 - **Don't** add colored side-stripe borders, gradient text, decorative grid backgrounds, glassmorphism, or repeated tiny uppercase section eyebrows.
 - **Don't** pair a one-pixel border with a wide soft shadow, round ordinary cards beyond `16px`, or hide essential content until an animation fires.

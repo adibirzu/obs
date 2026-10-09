@@ -10,7 +10,7 @@ OCI and multicloud practitioners who need to understand, design, adopt, and oper
 
 ## Product Purpose
 
-OCI Observability Atlas is an independent educational and reference experience that helps users discover the right observability capabilities, understand how services and control planes interlock, and choose an adoption path appropriate to their role, industry, and estate. It should shorten service discovery, make complex architectures easier to learn, and earn trust through practical, source-grounded guidance. Success means users can move from a question or operational need to a credible architecture, workflow, or next action without navigating a product catalog blindly.
+OCI Observability Atlas is an independent educational and reference experience that helps users discover the right observability capabilities, understand how services and control planes interlock, and choose an adoption path appropriate to their role, industry, and estate. It should shorten service discovery, make complex architectures easier to learn, and earn trust through practical, source-grounded guidance. It must also make the operating stance explicit: what stays native, what federates, and what is intentionally centralized. Success means users can move from an operating question to a credible architecture, workflow, or next action without navigating a product catalog blindly or flattening a multicloud estate into one vendor's control plane.
 
 ## Brand Personality
 
@@ -29,9 +29,9 @@ Authoritative, practical, approachable. The voice should communicate expert conf
 1. Start with the user's operating question, then reveal the relevant services and architecture.
 2. Show relationships and movement so workflows, telemetry paths, control-plane handoffs, and outcomes become understandable at a glance.
 3. Earn authority through precise language, traceable sources, and explicit separation between documented capability and independent guidance.
-4. Make OCI depth useful in a genuinely multicloud context, giving each environment and operator perspective meaningful representation.
-5. Prefer progressive disclosure: provide a clear path for newcomers while preserving the technical depth practitioners need.
+4. Make OCI depth useful in a genuinely multicloud context. Treat native-first, federated, portable, and centralized models as legitimate choices, and explain the ownership and handoff boundaries between them.
+5. Keep the user's active source, goal, and estate pattern visible, and use progressive disclosure to preserve technical depth in focused, directly addressable chapters.
 
 ## Accessibility & Inclusion
 
-Target WCAG 2.2 AA. Support keyboard navigation, visible focus, semantic structure, sufficient contrast, screen-reader-friendly diagrams and controls, and layouts that remain usable under text zoom and narrow viewports. Motion should clarify workflows, data movement, sequencing, and state changes rather than decorate the page. Every animated example must preserve the same meaning when motion is reduced or disabled, with a clear static or low-motion alternative for `prefers-reduced-motion` users.
+Target WCAG 2.2 AA. Support keyboard navigation, visible focus, semantic structure, sufficient contrast, screen-reader-friendly diagrams and controls, and layouts that remain usable under text zoom and narrow viewports. Motion should clarify workflows, data movement, sequencing, and state changes rather than decorate the page. Every animated example must preserve the same meaning when motion is reduced or disabled. Personalized interactions must retain a meaningful static route when JavaScript is unavailable.
