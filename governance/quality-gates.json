@@ -12,7 +12,8 @@
     "perFileLines": {
       "static/observability.js": 75,
       "scripts/redact-gate.mjs": 70,
-      "scripts/validate-governance.mjs": 75
+      "scripts/validate-governance.mjs": 75,
+      "assets/ai-starter-kit.js": 85
     },
     "client": {
       "lines": 80,
@@ -25,7 +26,8 @@
         "static/observability.js",
         "assets/interlocks/interlocks.js",
         "assets/interlocks/usecase-detail.js",
-        "assets/interlocks/workflow-governance.js"
+        "assets/interlocks/workflow-governance.js",
+        "assets/ai-starter-kit.js"
       ]
     }
   },

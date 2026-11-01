@@ -6,7 +6,7 @@ import vm from 'node:vm';
 const projectRootUrl = new URL('../', import.meta.url);
 const DEFAULT_EXTENSIONS = new Set(['.css', '.html', '.js', '.json', '.md', '.mjs', '.yaml', '.yml']);
 const DEFAULT_EXCLUDED_DIRECTORIES = new Set([
-  '.git', '.impeccable', '.playwright-cli', 'assets/diagrams', 'assets/redwood',
+  '.git', '.impeccable', '.playwright-cli', 'assets/diagrams', 'assets/redwood', 'assets/vendor',
   'dist', 'governance', 'node_modules', 'static/oci-icons', 'tests',
 ]);
 const NON_REFERENCE_HOSTS = new Set([

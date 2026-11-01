@@ -430,6 +430,11 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
     await send('Page.enable');
     await send('Runtime.enable');
     await send('Network.enable');
+    await send('Network.setBlockedURLs', { urlPatterns: [
+      { urlPattern: `http://${host}:${serverPort}/*`, block: false },
+      { urlPattern: 'http://*/*', block: true },
+      { urlPattern: 'https://*/*', block: true },
+    ] });
   };
   try {
     await initializeDevTools();

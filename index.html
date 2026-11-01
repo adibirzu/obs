@@ -481,6 +481,68 @@
           </div>
         </div>
         <p class="aicap reveal"><svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M16 12h2"/><path d="M16 8h2"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg> The pipeline ends in action, not a dashboard: evaluation results and detected drift flow into the controlled-evolution loop and back into Zero Trust policy. Based on the OCI AI Observability for Agents whitepaper.</p>
+
+        <section class="ai-kit" id="ai-starter-kit" aria-labelledby="ai-kit-title">
+          <div class="section__head">
+            <span class="context-label">OCI + open source</span>
+            <h2 id="ai-kit-title">AI Observability Starter Kit</h2>
+            <p>Tracing · Monitoring · Evaluation · Governance; OCI + open source.</p>
+          </div>
+          <p>OCI Generative AI Agents: an independent architecture guide. Integrations require instrumentation and configuration; badges describe design goals, not product guarantees.</p>
+          <p id="ai-kit-help">Explore inputs, the agent and its observability layer, then analysis and operations. Tab moves between nodes; Enter or Space selects; Escape clears. On small screens, scroll the diagram horizontally.</p>
+          <div id="ai-kit-interactive" hidden>
+            <div class="ai-kit__scroll" id="ai-kit-chart" role="region" aria-label="Scrollable starter kit diagram" tabindex="0"></div>
+            <div class="ai-kit__bottom" id="ai-kit-bottom"></div>
+            <ul class="ai-kit__badges" id="ai-kit-badges" aria-label="Architecture design goals"></ul>
+            <div id="ai-kit-detail" class="ai-kit__detail" aria-live="polite" aria-atomic="true"></div>
+          </div>
+          <div id="ai-kit-fallback">
+            <h3>Architecture nodes</h3>
+            <ul>
+              <li>Knowledge Retrieval · Object Storage</li>
+              <li>MCP Tools · Object Storage · Autonomous DB · Functions</li>
+              <li>APIs · API Gateway</li>
+              <li>Databases · Autonomous Database</li>
+              <li>OCI Services</li>
+              <li>OCI Generative AI Agent</li>
+              <li>Distributed Tracing</li>
+              <li>Tool Call Monitoring</li>
+              <li>Latency Metrics</li>
+              <li>Token Consumption</li>
+              <li>Success/Error Rates</li>
+              <li>Agent Evaluations</li>
+              <li>Safety Signals</li>
+              <li>Telemetry Collection</li>
+              <li>Trace Viewer · Grafana Tempo / Jaeger</li>
+              <li>Agent Evaluation · Langfuse / Arize Phoenix</li>
+              <li>Quality Metrics · Prometheus + Grafana</li>
+              <li>OCI Observability · Logging · Monitoring · APM</li>
+              <li>Alerting & Monitoring · OCI Notifications + Alertmanager</li>
+              <li>Trace Timeline · OpenTelemetry spans</li>
+              <li>Governance & Compliance · Cloud Guard · Data Safe · IAM</li>
+              <li>Audit Trail · OCI Audit</li>
+              <li>Health Overview · Operational signals</li>
+            </ul>
+            <div class="ai-kit__scroll" role="region" aria-label="OCI and open source mapping" tabindex="0">
+              <table>
+                <caption>Starter kit service mapping</caption>
+                <thead><tr><th scope="col">Role</th><th scope="col">OCI</th><th scope="col">Open source</th><th scope="col">What it observes</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Agent hub</th><td>OCI Generative AI Agents</td><td>None specified</td><td>Agent orchestration and telemetry boundaries.</td></tr>
+                  <tr><th scope="row">Traces</th><td>OCI APM</td><td>OpenTelemetry → Grafana Tempo / Jaeger</td><td>Distributed spans, tool calls and end-to-end latency.</td></tr>
+                  <tr><th scope="row">Evaluation</th><td>None specified</td><td>Langfuse / Arize Phoenix</td><td>Groundedness, relevance, coherence and safety evaluations.</td></tr>
+                  <tr><th scope="row">Metrics</th><td>OCI Monitoring</td><td>Prometheus + Grafana</td><td>Latency, token consumption and success/error rates.</td></tr>
+                  <tr><th scope="row">Platform</th><td>OCI Logging, Monitoring, APM</td><td>None specified</td><td>Logs, metrics and traces across the operating platform.</td></tr>
+                  <tr><th scope="row">Alerting</th><td>OCI Notifications</td><td>Alertmanager</td><td>Threshold breaches, evaluation drift and response routing.</td></tr>
+                  <tr><th scope="row">Governance</th><td>OCI Cloud Guard, Data Safe, IAM</td><td>None specified</td><td>Security posture, data protection and access policies.</td></tr>
+                  <tr><th scope="row">Audit</th><td>OCI Audit</td><td>None specified</td><td>Service API activity and administrative changes.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Design goals: OpenTelemetry Compatible · OCI APM Integration · Prometheus & Grafana · Real-time Telemetry · Production Ready · Secure by Design.</p>
+          </div>
+        </section>
+
       </div>
     </section>
 
@@ -828,5 +890,7 @@
   <script src="assets/scenarios.js"></script>
   <script src="assets/personas.js"></script>
   <script src="assets/guide.js"></script>
+  <script src="assets/vendor/d3/d3.min.js"></script>
+  <script src="assets/ai-starter-kit.js"></script>
 </body>
 </html>

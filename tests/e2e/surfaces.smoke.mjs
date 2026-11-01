@@ -10,8 +10,8 @@ const viewports = Object.freeze([
 ]);
 const surfaces = Object.freeze([
   {
-    name: 'Atlas', path: 'index.html', ready: `document.querySelectorAll('#telemetry-route [data-source]').length === 6 && Boolean(document.querySelector('#scenario-matches .scenario-card'))`,
-    interact: `(async () => { const source = document.querySelector('#telemetry-route [data-source="aws"]'); source.click(); document.querySelector('#rolePick [data-persona="operate"]')?.click(); const search = document.querySelector('#scenario-search'); search.value = 'retail checkout eks latency'; search.dispatchEvent(new Event('input', { bubbles: true })); const pattern = document.querySelector('.uc[data-uc]'); pattern.click(); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); const result = document.querySelector('#finderResult'); const resultFocused = document.activeElement === result; const lens = document.querySelector('.lens [role="tab"][aria-selected="true"]'); lens.focus(); return { sourceSelected: source.getAttribute('aria-pressed') === 'true', scenarioMatched: document.querySelector('#scenario-matches .scenario-card')?.textContent.includes('Retail checkout'), resultFocused, patternSelected: pattern.getAttribute('aria-pressed') === 'true', tabControlsPanel: Boolean(document.getElementById(lens.getAttribute('aria-controls'))) }; })()`,
+    name: 'Atlas', path: 'index.html', ready: `document.querySelectorAll('#telemetry-route [data-source]').length === 6 && Boolean(document.querySelector('#scenario-matches .scenario-card')) && document.querySelectorAll('#ai-kit-chart svg [data-kit-node]').length === 18`,
+    interact: `(async () => { const source = document.querySelector('#telemetry-route [data-source="aws"]'); source.click(); document.querySelector('#rolePick [data-persona="operate"]')?.click(); const search = document.querySelector('#scenario-search'); search.value = 'retail checkout eks latency'; search.dispatchEvent(new Event('input', { bubbles: true })); const pattern = document.querySelector('.uc[data-uc]'); pattern.click(); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); const result = document.querySelector('#finderResult'); const resultFocused = document.activeElement === result; document.querySelector('#atlas-library').open = true; const kit = document.querySelector('[data-kit-node="tracing"]'); kit.focus(); kit.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); const kitDetail = document.querySelector('#ai-kit-detail'); const kitMapping = kitDetail.textContent.includes('OCI APM') && kitDetail.textContent.includes('OpenTelemetry → Grafana Tempo / Jaeger'); const lens = document.querySelector('.lens [role="tab"][aria-selected="true"]'); lens.focus(); return { kitMapping, sourceSelected: source.getAttribute('aria-pressed') === 'true', scenarioMatched: document.querySelector('#scenario-matches .scenario-card')?.textContent.includes('Retail checkout'), resultFocused, patternSelected: pattern.getAttribute('aria-pressed') === 'true', tabControlsPanel: Boolean(document.getElementById(lens.getAttribute('aria-controls'))) }; })()`,
   },
   {
     name: 'Launchpad', path: 'launchpad.html', ready: `document.querySelectorAll('#rolePick [data-persona]').length === 4`,
@@ -46,7 +46,7 @@ export async function runSurfaceSmoke(harness) {
         oneHeading: [...document.querySelectorAll('h1')].filter(node => node.offsetParent !== null).length === 1,
         duplicateIds: [...document.querySelectorAll('[id]')].filter((node, index, nodes) => nodes.findIndex(other => other.id === node.id) !== index).map(node => node.id),
         ariaControlsValid: [...document.querySelectorAll('[aria-controls]')].every(node => Boolean(document.getElementById(node.getAttribute('aria-controls')))),
-        undersizedTouchTargets: [...document.querySelectorAll('.uc, .diagram-tab, .service-card__button, .launchpad-mobile-map__item')]
+        undersizedTouchTargets: [...document.querySelectorAll('.uc, .diagram-tab, .service-card__button, .launchpad-mobile-map__item, .ai-kit__node, .ai-kit__card')]
           .filter(node => { const style = getComputedStyle(node); const rect = node.getBoundingClientRect(); return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0; })
           .filter(node => { const rect = node.getBoundingClientRect(); return rect.width < 48 || rect.height < 48; })
           .map(node => { const rect = node.getBoundingClientRect(); return { label: node.textContent.trim().slice(0, 32), width: Math.round(rect.width), height: Math.round(rect.height) }; }),
@@ -61,6 +61,17 @@ export async function runSurfaceSmoke(harness) {
       assert.equal(layout.ariaControlsValid, true, `${surface.name}/${viewport.name}: aria-controls targets`);
       assert.deepEqual(layout.undersizedTouchTargets, [], `${surface.name}/${viewport.name}: minimum ${layout.minTouchTarget}px touch targets`);
       const interaction = await harness.evaluate(surface.interact);
+      if (surface.name === 'Atlas') {
+        await harness.setReducedMotion('reduce');
+        await harness.waitFor(`document.querySelector('#ai-starter-kit').dataset.reducedMotion === 'true'`);
+        assert.equal(await harness.evaluate(`(() => { const node = document.querySelector('[data-kit-node="tracing"]'); node.focus(); return document.activeElement === node; })()`), true);
+        await harness.press('Enter', 'Enter', 13);
+        assert.equal(await harness.evaluate(`document.querySelector('#ai-kit-detail').textContent.includes('OCI APM')`), true);
+        assert.equal(await harness.evaluate(`getComputedStyle(document.querySelector('.ai-kit__link')).animationName === 'none'`), true);
+        await harness.press('Escape', 'Escape', 27);
+        assert.equal(await harness.evaluate(`document.querySelectorAll('#ai-starter-kit [aria-pressed="true"]').length === 0`), true);
+        await harness.setReducedMotion('no-preference');
+      }
       for (const [name, passed] of Object.entries(interaction)) assert.equal(passed, true, `${surface.name}/${viewport.name}: ${name}`);
     }
   }
