@@ -430,6 +430,7 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
     await send('Page.enable');
     await send('Runtime.enable');
     await send('Network.enable');
+    // CDP uses the first matching pattern: allow this local server before denying all external HTTP(S).
     await send('Network.setBlockedURLs', { urlPatterns: [
       { urlPattern: `http://${host}:${serverPort}/*`, block: false },
       { urlPattern: 'http://*/*', block: true },

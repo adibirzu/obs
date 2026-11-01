@@ -1,5 +1,5 @@
 /* Independent architecture guidance; integrations require configuration. */
-(function () {
+(async function () {
   'use strict';
   function freeze(value) {
     Object.values(value).forEach(child => { if (child && typeof child === 'object') freeze(child); });
@@ -41,7 +41,7 @@
       "role": "Alerting",
       "oci": "OCI Notifications",
       "oss": "Alertmanager",
-      "observes": "Threshold breaches, evaluation drift and response routing."
+      "observes": "Routes alarm and alert notifications (thresholds defined in Monitoring/Alertmanager)."
     },
     "governance": {
       "role": "Governance",
@@ -69,7 +69,7 @@
       "label": "MCP Tools",
       "mapping": "traces",
       "observes": "MCP tool calls and dependencies.",
-      "sub": "Object Storage · Autonomous DB · Functions"
+      "sub": "Object Storage · ADB · Functions"
     },
     {
       "id": "apis",
@@ -214,7 +214,7 @@
       "id": "audit-trail",
       "label": "Audit Trail",
       "mapping": "audit",
-      "observes": "Service API audit events.",
+      "observes": "Service API activity and administrative changes.",
       "sub": "OCI Audit"
     },
     {
@@ -234,28 +234,32 @@
     "Secure by Design"
   ]
 });
+  // Reuse canonical mapping wording for operational cards.
+  const operationalNodes = data.bottom.map(node => node.id === 'audit-trail' || node.id === 'alerts'
+    ? { ...node, observes: data.mappings[node.mapping].observes } : node);
   const panel = document.getElementById('ai-starter-kit');
   if (!panel || !window.d3) return;
+  await document.fonts.ready;
   const d3 = window.d3;
   const detail = document.getElementById('ai-kit-detail');
   const chart = d3.select('#ai-kit-chart');
-  const svg = chart.append('svg').attr('viewBox', '0 0 1200 600')
+  const svg = chart.append('svg').attr('viewBox', '0 0 1400 680')
     .attr('aria-label', 'Agent inputs flow into an OCI agent, through its observability layer to analysis tools');
   svg.append('text').attr('x', 20).attr('y', 34).attr('class', 'ai-kit__heading').text('Agent Inputs & Tools');
-  svg.append('text').attr('x', 600).attr('y', 34).attr('text-anchor', 'middle').attr('class', 'ai-kit__heading').text('Observability Layer');
-  svg.append('text').attr('x', 970).attr('y', 34).attr('class', 'ai-kit__heading').text('Inspect & understand');
-  svg.append('circle').attr('cx', 600).attr('cy', 304).attr('r', 204).attr('class', 'ai-kit__orbit');
+  svg.append('text').attr('x', 700).attr('y', 34).attr('text-anchor', 'middle').attr('class', 'ai-kit__heading').text('Observability Layer');
+  svg.append('text').attr('x', 1150).attr('y', 34).attr('class', 'ai-kit__heading').text('Inspect & understand');
+  svg.append('ellipse').attr('cx', 700).attr('cy', 340).attr('rx', 270).attr('ry', 230).attr('class', 'ai-kit__orbit');
   svg.append('defs').append('marker').attr('id', 'ai-kit-arrow').attr('viewBox', '0 0 8 8')
     .attr('refX', 8).attr('refY', 4).attr('markerWidth', 5).attr('markerHeight', 5).attr('orient', 'auto')
     .append('path').attr('d', 'M0,0 L8,4 L0,8 Z').attr('class', 'ai-kit__arrow');
   const positions = new Map();
-  data.inputs.forEach((node, i) => positions.set(node.id, { x: 140, y: 115 + i * 96, w: 252, h: 80 }));
-  positions.set(data.hub.id, { x: 600, y: 304, w: 210, h: 100 });
+  data.inputs.forEach((node, i) => positions.set(node.id, { x: 140, y: 130 + i * 105, w: 240, h: 90 }));
+  positions.set(data.hub.id, { x: 700, y: 340, w: 240, h: 140 });
   data.ring.forEach((node, i) => {
     const angle = -Math.PI / 2 + i * Math.PI / 4;
-    positions.set(node.id, { x: 600 + Math.cos(angle) * 220, y: 304 + Math.sin(angle) * 204, w: 164, h: 64 });
+    positions.set(node.id, { x: 700 + Math.cos(angle) * 270, y: 340 + Math.sin(angle) * 230, w: 148, h: 80 });
   });
-  data.tools.forEach((node, i) => positions.set(node.id, { x: 1060, y: 142 + i * 112, w: 252, h: 90 }));
+  data.tools.forEach((node, i) => positions.set(node.id, { x: 1260, y: 160 + i * 120, w: 240, h: 96 }));
   const nodes = [...data.inputs, data.hub, ...data.ring, ...data.tools];
   const links = nodes.filter(node => node !== data.hub).map(node => ({
     source: data.inputs.includes(node) ? node.id : data.hub.id,
@@ -264,6 +268,20 @@
   }));
   const paths = svg.append('g').attr('aria-hidden', 'true').selectAll('path').data(links).join('path')
     .attr('class', 'ai-kit__link').attr('marker-end', 'url(#ai-kit-arrow)').attr('d', link => {
+      // External paths end at gaps in the ring, never cross its nodes.
+      const inputIndex = data.inputs.findIndex(node => node.id === link.source);
+      const toolIndex = data.tools.findIndex(node => node.id === link.target);
+      if (inputIndex >= 0 || toolIndex >= 0) {
+        const isInput = inputIndex >= 0;
+        const outer = positions.get(isInput ? link.source : link.target);
+        const upper = isInput ? inputIndex < 3 : toolIndex < 2;
+        const angle = (isInput ? (upper ? 202.5 : 157.5) : (upper ? -22.5 : 22.5)) * Math.PI / 180;
+        const boundary = { x: 700 + 270 * Math.cos(angle), y: 340 + 230 * Math.sin(angle) };
+        const edge = { x: outer.x + (isInput ? outer.w / 2 : -outer.w / 2), y: outer.y };
+        const a = isInput ? edge : boundary, b = isInput ? boundary : edge;
+        const mid = edge.x + (isInput ? 40 : -40);
+        return `M${a.x},${a.y} C${mid},${a.y} ${mid},${b.y} ${b.x},${b.y}`;
+      }
       const a = positions.get(link.source), b = positions.get(link.target);
       const dx = b.x - a.x, dy = b.y - a.y;
       const start = Math.min(a.w / 2 / Math.abs(dx), a.h / 2 / Math.abs(dy));
@@ -272,8 +290,11 @@
       const x2 = b.x - dx * end, y2 = b.y - dy * end;
       return `M${x1},${y1} C${(x1 + x2) / 2},${y1} ${(x1 + x2) / 2},${y2} ${x2},${y2}`;
     });
-  function select(node) {
-    panel.querySelectorAll('[data-kit-node]').forEach(element => element.setAttribute('aria-pressed', String(element.dataset.kitNode === node?.id)));
+  let selected = null;
+  function select(node, activate = false) {
+    if (activate) selected = node;
+    panel.querySelectorAll('[data-kit-node]').forEach(element => element.setAttribute('aria-pressed', String(element.dataset.kitNode === selected?.id)));
+    detail.setAttribute('aria-live', activate ? 'polite' : 'off');
     paths.classed('is-connected', link => Boolean(node && (node.id === data.hub.id || link.source === node.id || link.target === node.id || link.mapping === node.mapping)));
     detail.replaceChildren();
     const heading = document.createElement('h3');
@@ -307,36 +328,58 @@
       .attr('aria-label', node => `Explore ${node.label}`).attr('aria-controls', 'ai-kit-detail')
       .attr('aria-describedby', 'ai-kit-help').attr('aria-pressed', 'false')
       .on('mouseenter', (_event, node) => select(node)).on('focus', (_event, node) => select(node))
-      .on('click', (_event, node) => select(node)).on('keydown', (event, node) => {
-        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(node); }
+      .on('mouseleave', () => select(selected)).on('blur', () => select(selected))
+      .on('click', (_event, node) => select(node, true)).on('keydown', (event, node) => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(node, true); }
       });
   }
   const groups = bind(svg.append('g').selectAll('g').data(nodes).join('g').attr('class', node => `ai-kit__node${node === data.hub ? ' ai-kit__hub' : ''}`)
     .attr('transform', node => { const p = positions.get(node.id); return `translate(${p.x},${p.y})`; }));
   groups.append('rect').attr('x', node => -positions.get(node.id).w / 2).attr('y', node => -positions.get(node.id).h / 2)
     .attr('width', node => positions.get(node.id).w).attr('height', node => positions.get(node.id).h).attr('rx', 10);
+  const measure = document.createElement('canvas').getContext('2d');
   groups.each(function (node) {
     const group = d3.select(this);
-    const words = node.label.split(' ');
-    const split = Math.ceil(words.length / 2);
-    [words.slice(0, split).join(' '), words.slice(split).join(' ')].forEach((line, index) => {
-      group.append('text').attr('text-anchor', 'middle').attr('y', index * 19 - 7).text(line);
-    });
-    if (node.sub) {
-      const lines = node.sub.length > 32 ? [node.sub.slice(0, node.sub.indexOf(' · ')), node.sub.slice(node.sub.indexOf(' · ') + 3)] : [node.sub];
-      lines.forEach((line, index) => group.append('text').attr('class', 'ai-kit__subtitle')
-        .attr('text-anchor', 'middle').attr('y', 25 + index * 14).text(line));
+    // Canvas measurement works even while the surrounding library is collapsed.
+    const width = positions.get(node.id).w - 24;
+    const lines = [];
+    for (const [text, subtitle] of [[node.label, false], [node.sub, true]]) {
+      if (!text) continue;
+      const probe = group.append('text').attr('class', subtitle ? 'ai-kit__subtitle' : null);
+      const style = getComputedStyle(probe.node());
+      measure.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+      let line = '';
+      for (const word of text.split(' ')) {
+        const candidate = line ? `${line} ${word}` : word;
+        if (line && measure.measureText(candidate).width > width) {
+          lines.push({ text: line, subtitle });
+          line = word;
+        } else line = candidate;
+      }
+      lines.push({ text: line, subtitle });
+      probe.remove();
     }
+    const lineHeight = 19;
+    const height = Math.max(positions.get(node.id).h, lines.length * lineHeight + 28);
+    group.select('rect').attr('height', height).attr('y', -height / 2);
+    lines.forEach((line, index) => group.append('text')
+      .attr('class', line.subtitle ? 'ai-kit__subtitle' : null)
+      .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('y', (index - (lines.length - 1) / 2) * lineHeight).text(line.text));
   });
-  bind(d3.select('#ai-kit-bottom').selectAll('button').data(data.bottom).join('button').attr('type', 'button').attr('class', 'ai-kit__card'))
+  bind(d3.select('#ai-kit-bottom').selectAll('button').data(operationalNodes).join('button').attr('type', 'button').attr('class', 'ai-kit__card'))
     .each(function (node) {
       d3.select(this).append('strong').text(node.label);
       d3.select(this).append('span').text(node.sub);
     });
   d3.select('#ai-kit-badges').selectAll('li').data(data.badges).join('li').text(badge => badge);
-  panel.addEventListener('keydown', event => { if (event.key === 'Escape') select(null); });
+  panel.addEventListener('keydown', event => { if (event.key === 'Escape') select(null, true); });
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  function syncMotion() { panel.dataset.reducedMotion = String(motion.matches); }
+  function syncMotion() {
+    panel.dataset.reducedMotion = String(motion.matches);
+    // JS gates motion as well as the CSS media-query fallback (including live changes).
+    paths.classed('can-animate', !motion.matches);
+  }
   syncMotion();
   motion.addEventListener('change', syncMotion);
   select(null);

@@ -489,12 +489,16 @@
             <p>Tracing · Monitoring · Evaluation · Governance; OCI + open source.</p>
           </div>
           <p>OCI Generative AI Agents: an independent architecture guide. Integrations require instrumentation and configuration; badges describe design goals, not product guarantees.</p>
-          <p id="ai-kit-help">Explore inputs, the agent and its observability layer, then analysis and operations. Tab moves between nodes; Enter or Space selects; Escape clears. On small screens, scroll the diagram horizontally.</p>
           <div id="ai-kit-interactive" hidden>
-            <div class="ai-kit__scroll" id="ai-kit-chart" role="region" aria-label="Scrollable starter kit diagram" tabindex="0"></div>
+            <p id="ai-kit-help">Explore inputs, the agent and its observability layer, then analysis and operations. Tab moves between nodes; Enter or Space selects; Escape clears. On small screens, scroll the diagram horizontally.</p>
+            <div class="ai-kit__workspace">
+              <div class="ai-kit__scroll" id="ai-kit-chart" role="region" aria-label="Scrollable starter kit diagram" tabindex="0"></div>
+              <div id="ai-kit-detail" class="ai-kit__detail" aria-live="polite" aria-atomic="true"></div>
+            </div>
+            <h3>Operations &amp; governance</h3>
             <div class="ai-kit__bottom" id="ai-kit-bottom"></div>
+            <h3>Design goals</h3>
             <ul class="ai-kit__badges" id="ai-kit-badges" aria-label="Architecture design goals"></ul>
-            <div id="ai-kit-detail" class="ai-kit__detail" aria-live="polite" aria-atomic="true"></div>
           </div>
           <div id="ai-kit-fallback">
             <h3>Architecture nodes</h3>
@@ -533,7 +537,7 @@
                   <tr><th scope="row">Evaluation</th><td>None specified</td><td>Langfuse / Arize Phoenix</td><td>Groundedness, relevance, coherence and safety evaluations.</td></tr>
                   <tr><th scope="row">Metrics</th><td>OCI Monitoring</td><td>Prometheus + Grafana</td><td>Latency, token consumption and success/error rates.</td></tr>
                   <tr><th scope="row">Platform</th><td>OCI Logging, Monitoring, APM</td><td>None specified</td><td>Logs, metrics and traces across the operating platform.</td></tr>
-                  <tr><th scope="row">Alerting</th><td>OCI Notifications</td><td>Alertmanager</td><td>Threshold breaches, evaluation drift and response routing.</td></tr>
+                  <tr><th scope="row">Alerting</th><td>OCI Notifications</td><td>Alertmanager</td><td>Routes alarm and alert notifications (thresholds defined in Monitoring/Alertmanager).</td></tr>
                   <tr><th scope="row">Governance</th><td>OCI Cloud Guard, Data Safe, IAM</td><td>None specified</td><td>Security posture, data protection and access policies.</td></tr>
                   <tr><th scope="row">Audit</th><td>OCI Audit</td><td>None specified</td><td>Service API activity and administrative changes.</td></tr>
                 </tbody>

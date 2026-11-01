@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
 import vm from 'node:vm';
@@ -66,4 +66,32 @@ test('enhancement guards unavailable D3 and provides keyboard, live detail and r
   for (const key of ['Enter', ' ', 'Escape']) assert.ok(source.includes(`event.key === '${key}'`));
   assert.match(source, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.ai-kit/);
+});
+
+
+test('every vendored payload has a license, pinned version and verified SHA-256', async () => {
+  async function visit(directory) {
+    for (const entry of await readdir(new URL(`../${directory}`, import.meta.url), { withFileTypes: true })) {
+      const path = `${directory}/${entry.name}`;
+      if (entry.isDirectory()) { await visit(path); continue; }
+      // LICENSE and README are provenance metadata, not vendored payloads.
+      if (['LICENSE', 'README.md'].includes(entry.name)) continue;
+      const [notice, manifest, bytes] = await Promise.all([
+        read(`${directory}/LICENSE`), read(`${directory}/README.md`),
+        readFile(new URL(`../${path}`, import.meta.url)),
+      ]);
+      assert.ok(notice.trim(), `${path}: license required`);
+      assert.match(manifest, /\bv?\d+\.\d+\.\d+\b/, `${path}: pinned version required`);
+      const hash = createHash('sha256').update(bytes).digest('hex');
+      assert.ok(manifest.split('\n').some(line => line.includes(entry.name) && line.includes(hash)), `${path}: matching named SHA-256 required`);
+    }
+  }
+  await visit('assets/vendor');
+});
+
+test('operational cards reuse canonical mapping descriptions and fallback help stays interactive', () => {
+  assert.match(source, /observes: data.mappings\[node.mapping\].observes/);
+  assert.ok(html.indexOf('id="ai-kit-help"') > html.indexOf('id="ai-kit-interactive" hidden'));
+  assert.ok(html.indexOf('id="ai-kit-help"') < html.indexOf('id="ai-kit-fallback"'));
+  assert.match(html, /<h3>Design goals<\/h3>/);
 });

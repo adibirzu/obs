@@ -28,6 +28,7 @@ const surfaces = Object.freeze([
 ]);
 
 export async function runSurfaceSmoke(harness) {
+  await harness.setReducedMotion('no-preference');
   for (const viewport of viewports) {
     await harness.setViewport(viewport);
     for (const surface of surfaces) {
@@ -62,15 +63,65 @@ export async function runSurfaceSmoke(harness) {
       assert.deepEqual(layout.undersizedTouchTargets, [], `${surface.name}/${viewport.name}: minimum ${layout.minTouchTarget}px touch targets`);
       const interaction = await harness.evaluate(surface.interact);
       if (surface.name === 'Atlas') {
+        if (viewport.width === 390) assert.equal(await harness.evaluate('document.documentElement.scrollWidth <= innerWidth'), true, 'Atlas at 390px: no document overflow');
+        assert.equal(await harness.evaluate(`fetch('https://offline-check.invalid/no-network').then(() => false, () => true)`), true, 'external fetch blocked');
+        await harness.evaluate(`document.querySelector('[data-kit-node="tracing"]').focus()`);
+        await harness.press('Escape', 'Escape', 27);
+        assert.equal(await harness.evaluate(`(() => {
+          document.activeElement.blur();
+          const node = document.querySelector('[data-kit-node="mcp"]');
+          node.dispatchEvent(new MouseEvent('mouseenter'));
+          const preview = document.querySelector('#ai-kit-detail').textContent.includes('MCP Tools');
+          const unpressed = node.getAttribute('aria-pressed') === 'false';
+          const quiet = document.querySelector('#ai-kit-detail').getAttribute('aria-live') === 'off';
+          node.dispatchEvent(new MouseEvent('mouseleave'));
+          return preview && unpressed && quiet && document.querySelector('#ai-kit-detail').textContent.includes('Explore the observability path');
+        })()`), true, 'hover previews and mouseleave restores without pressing or live announcements');
+        assert.equal(await harness.evaluate(`(() => {
+          const node = document.querySelector('[data-kit-node="tracing"]'); node.focus();
+          return node.getAttribute('aria-pressed') === 'false' && document.querySelector('#ai-kit-detail').textContent.includes('Distributed Tracing');
+        })()`), true, 'focus previews without activation');
+        await harness.press(' ', 'Space', 32);
+        assert.equal(await harness.evaluate(`document.querySelector('[data-kit-node="tracing"]').getAttribute('aria-pressed') === 'true'`), true, 'Space activates');
+        assert.equal(await harness.evaluate(`getComputedStyle(document.querySelector('.ai-kit__link.is-connected')).animationName === 'ai-kit-flow'`), true, 'selected path really animates with full motion');
+        assert.equal(await harness.evaluate(`getComputedStyle(document.querySelector('.ai-kit__link.can-animate')).transitionDuration !== '0s'`), true, 'highlight really transitions');
+        assert.equal(await harness.evaluate(` [...document.querySelectorAll('.ai-kit__node')].every(node => {
+          const box = node.querySelector('rect').getBBox();
+          return [...node.querySelectorAll('text')].every(text => { const t = text.getBBox(); return t.x >= box.x + 8 && t.x + t.width <= box.x + box.width - 8 && t.y >= box.y + 8 && t.y + t.height <= box.y + box.height - 8; });
+        })`), true, 'all rendered SVG text fits inside node padding');
+        assert.equal(await harness.evaluate(`(() => {
+          const ring = new Set(['tracing', 'tool-calls', 'latency', 'tokens', 'rates', 'evaluations', 'safety', 'telemetry']);
+          const boxes = [...document.querySelectorAll('.ai-kit__node')].filter(node => ring.has(node.dataset.kitNode)).map(node => {
+            const rect = node.querySelector('rect').getBBox(), transform = node.transform.baseVal.consolidate().matrix;
+            return { x: rect.x + transform.e, y: rect.y + transform.f, width: rect.width, height: rect.height };
+          });
+          return [...document.querySelectorAll('.ai-kit__link')].filter(path => !ring.has(path.__data__.target)).every(path => {
+            const length = path.getTotalLength();
+            for (let distance = 0; distance <= length; distance += 2) {
+              const point = path.getPointAtLength(distance);
+              if (boxes.some(box => point.x > box.x - 3 && point.x < box.x + box.width + 3 && point.y > box.y - 3 && point.y < box.y + box.height + 3)) return false;
+            }
+            return true;
+          });
+        })()`), true, 'external links avoid every ring node');
         await harness.setReducedMotion('reduce');
         await harness.waitFor(`document.querySelector('#ai-starter-kit').dataset.reducedMotion === 'true'`);
         assert.equal(await harness.evaluate(`(() => { const node = document.querySelector('[data-kit-node="tracing"]'); node.focus(); return document.activeElement === node; })()`), true);
         await harness.press('Enter', 'Enter', 13);
         assert.equal(await harness.evaluate(`document.querySelector('#ai-kit-detail').textContent.includes('OCI APM')`), true);
-        assert.equal(await harness.evaluate(`getComputedStyle(document.querySelector('.ai-kit__link')).animationName === 'none'`), true);
+        assert.equal(await harness.evaluate(`[...document.querySelectorAll('.ai-kit__link')].every(path => !path.classList.contains('can-animate') && getComputedStyle(path).animationName === 'none' && getComputedStyle(path).transitionDuration === '0s')`), true);
         await harness.press('Escape', 'Escape', 27);
         assert.equal(await harness.evaluate(`document.querySelectorAll('#ai-starter-kit [aria-pressed="true"]').length === 0`), true);
         await harness.setReducedMotion('no-preference');
+        await harness.waitFor(`document.querySelector('.ai-kit__link.can-animate') !== null`);
+        // Reload without D3, using interception rather than any external request.
+        await harness.send('Page.addScriptToEvaluateOnNewDocument', { source: `Object.defineProperty(window, 'd3', { get: () => undefined, set: () => {}, configurable: true });` }).then(async ({ identifier }) => {
+          try {
+            await harness.reload();
+            await harness.waitFor(`document.readyState === 'complete'`);
+            assert.equal(await harness.evaluate(`(() => { document.querySelector('#atlas-library').open = true; return window.d3 === undefined && !document.querySelector('#ai-kit-fallback').hidden && document.querySelector('#ai-kit-fallback').getBoundingClientRect().height > 0 && document.querySelector('#ai-kit-interactive').hidden && document.querySelector('#ai-kit-help').closest('[hidden]') !== null; })()`), true, 'D3 unavailable: static fallback visible and interaction help hidden');
+          } finally { await harness.send('Page.removeScriptToEvaluateOnNewDocument', { identifier }); }
+        });
       }
       for (const [name, passed] of Object.entries(interaction)) assert.equal(passed, true, `${surface.name}/${viewport.name}: ${name}`);
     }
