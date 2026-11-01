@@ -53,8 +53,10 @@ export async function runStaticLibrarySmoke(harness) {
   }
   await harness.navigate('index.html');
   assert.equal(await harness.evaluate(`document.querySelector('#atlas-library').open`), false, 'enhanced library starts collapsed');
+  await harness.navigate('launchpad.html');
   await harness.navigate('index.html#ai-starter-kit');
   assert.equal(await harness.evaluate(`document.querySelector('#atlas-library').open`), true, 'enhanced library opens for chapter deep links');
+  await harness.navigate('launchpad.html');
 }
 
 export async function runSurfaceSmoke(harness) {
