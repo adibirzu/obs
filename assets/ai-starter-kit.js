@@ -294,7 +294,7 @@
   function select(node, activate = false) {
     if (activate) selected = node;
     panel.querySelectorAll('[data-kit-node]').forEach(element => element.setAttribute('aria-pressed', String(element.dataset.kitNode === selected?.id)));
-    detail.setAttribute('aria-live', activate ? 'polite' : 'off');
+    detail.setAttribute('aria-live', activate && node ? 'polite' : 'off');
     paths.classed('is-connected', link => Boolean(node && (node.id === data.hub.id || link.source === node.id || link.target === node.id || link.mapping === node.mapping)));
     detail.replaceChildren();
     const heading = document.createElement('h3');

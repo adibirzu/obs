@@ -83,8 +83,17 @@ export async function runSurfaceSmoke(harness) {
         })()`), true, 'focus previews without activation');
         await harness.press(' ', 'Space', 32);
         assert.equal(await harness.evaluate(`document.querySelector('[data-kit-node="tracing"]').getAttribute('aria-pressed') === 'true'`), true, 'Space activates');
+        assert.equal(await harness.evaluate(`document.querySelector('#ai-kit-detail').getAttribute('aria-live')`), 'polite', 'real selection announces details');
         assert.equal(await harness.evaluate(`getComputedStyle(document.querySelector('.ai-kit__link.is-connected')).animationName === 'ai-kit-flow'`), true, 'selected path really animates with full motion');
         assert.equal(await harness.evaluate(`getComputedStyle(document.querySelector('.ai-kit__link.can-animate')).transitionDuration !== '0s'`), true, 'highlight really transitions');
+        if (viewport.width === 1440) {
+          const sizes = await harness.evaluate(`(() => {
+            const svg = document.querySelector('#ai-kit-chart svg');
+            const scale = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+            return [...svg.querySelectorAll('.ai-kit__subtitle')].map(text => parseFloat(getComputedStyle(text).fontSize) * scale);
+          })()`);
+          assert.ok(sizes.length > 0 && sizes.every(size => size >= 11), '1440px: rendered node subtitles are at least 11px');
+        }
         assert.equal(await harness.evaluate(` [...document.querySelectorAll('.ai-kit__node')].every(node => {
           const box = node.querySelector('rect').getBBox();
           return [...node.querySelectorAll('text')].every(text => { const t = text.getBBox(); return t.x >= box.x + 8 && t.x + t.width <= box.x + box.width - 8 && t.y >= box.y + 8 && t.y + t.height <= box.y + box.height - 8; });
@@ -112,6 +121,8 @@ export async function runSurfaceSmoke(harness) {
         assert.equal(await harness.evaluate(`[...document.querySelectorAll('.ai-kit__link')].every(path => !path.classList.contains('can-animate') && getComputedStyle(path).animationName === 'none' && getComputedStyle(path).transitionDuration === '0s')`), true);
         await harness.press('Escape', 'Escape', 27);
         assert.equal(await harness.evaluate(`document.querySelectorAll('#ai-starter-kit [aria-pressed="true"]').length === 0`), true);
+        assert.equal(await harness.evaluate(`document.querySelector('#ai-kit-detail').getAttribute('aria-live')`), 'off', 'Escape clears silently');
+        assert.equal(await harness.evaluate(`document.querySelector('#ai-kit-detail').textContent.includes('Explore the observability path')`), true, 'Escape restores default details');
         await harness.setReducedMotion('no-preference');
         await harness.waitFor(`document.querySelector('.ai-kit__link.can-animate') !== null`);
         // Reload without D3, using interception rather than any external request.

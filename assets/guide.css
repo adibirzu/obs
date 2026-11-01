@@ -737,7 +737,7 @@ button.dchip:hover { border-color: var(--l4); background: var(--surface-card); b
   .ai-kit *, .ai-kit *::before, .ai-kit *::after { animation: none !important; transition: none !important; scroll-behavior: auto; }
 }
 
-.ai-kit__node text.ai-kit__subtitle { font-size: 13px; font-weight: 400; }
+.ai-kit__node text.ai-kit__subtitle { font-size: 14px; font-weight: 400; }
 
 .ai-kit__arrow { fill: var(--blue-deep); }
 
@@ -746,9 +746,13 @@ button.dchip:hover { border-color: var(--l4); background: var(--surface-card); b
 .ai-kit__link.can-animate { transition: opacity 180ms ease-out, stroke-width 180ms ease-out; }
 .ai-kit__link.can-animate.is-connected { stroke-dasharray: 9 5; animation: ai-kit-flow 2s linear infinite; }
 @keyframes ai-kit-flow { to { stroke-dashoffset: -28; } }
+/* Preserve a 12px subtitle / ~14px label floor at desktop scale. */
 @media (min-width: 1280px) {
-  .ai-kit__workspace { grid-template-columns: minmax(0, 1fr) 260px; }
-  .ai-kit__workspace svg { min-width: 840px; }
+  .ai-kit__workspace svg { min-width: 1200px; }
+}
+@media (min-width: 1600px) {
+  /* Let this workspace use the wider viewport beyond the 1200px prose column. */
+  .ai-kit__workspace { width: min(calc(100vw - 2.5rem), 1680px); position: relative; left: 50%; transform: translateX(-50%); grid-template-columns: minmax(0, 1fr) 260px; }
   .ai-kit__detail { position: sticky; top: 144px; }
   .ai-kit__mapping { grid-template-columns: minmax(0, 1fr); }
 }
