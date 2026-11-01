@@ -379,7 +379,7 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
   const press = async (key, code, keyCode) => {
     const text = key === 'Enter' ? '\r' : key === ' ' ? ' ' : undefined;
     await send('Input.dispatchKeyEvent', {
-      type: 'keyDown', key, code, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode,
+      type: 'keyDown', key, code, windowsVirtualKeyCode: keyCode,
       ...(text ? { text, unmodifiedText: text } : {}),
     });
     await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code, windowsVirtualKeyCode: keyCode });
