@@ -5,32 +5,21 @@ import test from 'node:test';
 import vm from 'node:vm';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
-const [html, source, css, vendor, license, readme] = await Promise.all([
-  read('index.html'), read('assets/ai-starter-kit.js'), read('assets/guide.css'),
-  read('assets/vendor/d3/d3.min.js'), read('assets/vendor/d3/LICENSE'), read('assets/vendor/d3/README.md'),
+const [html, source] = await Promise.all([
+  read('index.html'), read('assets/ai-starter-kit.js'),
 ]);
-const context = vm.createContext({ document: { getElementById: () => null } });
-vm.runInContext(source.replace("  const panel =", "  globalThis.kitData = data;\n  const panel ="), context);
-const data = context.kitData;
+const context = vm.createContext({ module: { exports: {} }, document: { getElementById: () => null } });
+await vm.runInContext(source, context);
+const data = context.module.exports;
 
-test('starter kit extends L4 after the preserved pipeline with local scripts and disclaimer', () => {
-  const section = html.slice(html.indexOf('id="ai"'), html.indexOf('id="personas"'));
-  assert.ok(section.indexOf('id="ai-starter-kit"') > section.indexOf('The pipeline ends in action'));
-  assert.match(section, /<h2 id="ai-kit-title">AI Observability Starter Kit<\/h2>/);
-  assert.match(section, /Tracing · Monitoring · Evaluation · Governance; OCI \+ open source/);
+test('independent architecture disclaimer remains present', () => {
   assert.match(html, /not an Oracle product/);
-  assert.match(html, /<script src="assets\/vendor\/d3\/d3.min.js"><\/script>\s*<script src="assets\/ai-starter-kit.js"><\/script>/);
-  assert.doesNotMatch(section + source, /https?:\/\/|innerHTML|Foundry|Microsoft/);
-  assert.match(vendor, /v7\.9\.0/);
-  assert.match(license, /ISC|Permission to use/);
-  assert.ok(readme.includes(createHash('sha256').update(vendor).digest('hex')));
 });
 
-test('frozen architecture contains every required node and equivalent static service mapping', () => {
+test('executable architecture exposes frozen nodes and complete canonical service mappings', () => {
   for (const [key, length] of [['inputs', 5], ['ring', 8], ['tools', 4], ['bottom', 5], ['badges', 6]]) {
     assert.equal(data[key].length, length);
     assert.ok(Object.isFrozen(data[key]));
-    data[key].forEach(value => assert.ok(html.includes(typeof value === 'string' ? value : value.label)));
   }
   assert.equal(Object.keys(data.mappings).length, 8);
   assert.ok(Object.isFrozen(data));
@@ -47,27 +36,19 @@ test('frozen architecture contains every required node and equivalent static ser
     const mapping = data.mappings[key];
     assert.equal(mapping.oci, oci);
     assert.equal(mapping.oss, oss);
-    assert.ok(html.includes(`<th scope="row">${mapping.role}</th><td>${oci}</td><td>${oss}</td><td>${mapping.observes}</td>`));
+    assert.ok(Object.isFrozen(mapping));
+    assert.ok(mapping.role.trim());
+    assert.ok(mapping.observes.trim());
   }
-  for (const node of [...data.inputs, data.hub, ...data.ring, ...data.tools, ...data.bottom]) {
+  const nodes = [...data.inputs, data.hub, ...data.ring, ...data.tools, ...data.bottom];
+  assert.equal(new Set(nodes.map(node => node.id)).size, 23);
+  assert.deepEqual([...new Set(nodes.map(node => node.mapping))].sort(), Object.keys(expected).sort());
+  for (const node of nodes) {
     assert.ok(data.mappings[node.mapping]);
     assert.ok(node.observes);
     assert.ok(Object.isFrozen(node));
   }
 });
-
-test('enhancement guards unavailable D3 and provides keyboard, live detail and reduced motion', () => {
-  vm.runInNewContext(source, { document: { getElementById: () => ({}) }, window: {} });
-  assert.match(source, /if \(!panel \|\| !window.d3\) return/);
-  assert.match(html, /id="ai-kit-detail"[^>]*aria-live="polite"/);
-  assert.match(html, /id="ai-kit-interactive" hidden/);
-  assert.match(html, /id="ai-kit-fallback"/);
-  for (const attribute of ['tabindex', 'role', 'aria-label', 'aria-controls', 'aria-describedby']) assert.ok(source.includes(`.attr('${attribute}'`));
-  for (const key of ['Enter', ' ', 'Escape']) assert.ok(source.includes(`event.key === '${key}'`));
-  assert.match(source, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)/);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.ai-kit/);
-});
-
 
 test('every vendored payload has a license, pinned version and verified SHA-256', async () => {
   async function visit(directory) {
@@ -87,11 +68,4 @@ test('every vendored payload has a license, pinned version and verified SHA-256'
     }
   }
   await visit('assets/vendor');
-});
-
-test('operational cards reuse canonical mapping descriptions and fallback help stays interactive', () => {
-  assert.match(source, /observes: data.mappings\[node.mapping\].observes/);
-  assert.ok(html.indexOf('id="ai-kit-help"') > html.indexOf('id="ai-kit-interactive" hidden'));
-  assert.ok(html.indexOf('id="ai-kit-help"') < html.indexOf('id="ai-kit-fallback"'));
-  assert.match(html, /<h3>Design goals<\/h3>/);
 });

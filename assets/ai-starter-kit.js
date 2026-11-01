@@ -234,6 +234,8 @@
     "Secure by Design"
   ]
 });
+  // Optional Node/VM interface; browsers keep the same private data and rendering path.
+  if (typeof module === 'object' && module.exports) module.exports = data;
   // Reuse canonical mapping wording for operational cards.
   const operationalNodes = data.bottom.map(node => node.id === 'audit-trail' || node.id === 'alerts'
     ? { ...node, observes: data.mappings[node.mapping].observes } : node);

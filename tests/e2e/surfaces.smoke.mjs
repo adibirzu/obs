@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import vm from 'node:vm';
 
 import { startBrowserHarness } from './browser-harness.mjs';
 
 const root = resolve(new URL('../../', import.meta.url).pathname);
+const kitContext = vm.createContext({ module: { exports: {} }, document: { getElementById: () => null } });
+await vm.runInContext(await readFile(resolve(root, 'assets/ai-starter-kit.js'), 'utf8'), kitContext);
+const kitData = kitContext.module.exports;
+const mappingRows = Object.values(kitData.mappings).map(({ role, oci, oss, observes }) => [role, oci, oss, observes]);
+
 const viewports = Object.freeze([
   { name: 'desktop', width: 1440, height: 1000 },
   { name: 'mobile', width: 390, height: 844 },
@@ -63,6 +70,42 @@ export async function runSurfaceSmoke(harness) {
       assert.deepEqual(layout.undersizedTouchTargets, [], `${surface.name}/${viewport.name}: minimum ${layout.minTouchTarget}px touch targets`);
       const interaction = await harness.evaluate(surface.interact);
       if (surface.name === 'Atlas') {
+        const integration = await harness.evaluate(`(() => {
+          const kit = document.querySelector('#ai-starter-kit');
+          const scripts = [...document.scripts];
+          const vendor = scripts.findIndex(script => script.src.endsWith('/assets/vendor/d3/d3.min.js'));
+          const enhancement = scripts.findIndex(script => script.src.endsWith('/assets/ai-starter-kit.js'));
+          const pipeline = document.querySelector('#ai .aicap');
+          return {
+            localScriptOrder: vendor >= 0 && enhancement === vendor + 1,
+            d3Version: window.d3.version,
+            inL4AfterPipeline: kit.closest('#ai') !== null && Boolean(pipeline.compareDocumentPosition(kit) & Node.DOCUMENT_POSITION_FOLLOWING),
+            title: document.querySelector('#ai-kit-title').textContent.trim(),
+            enhanced: !document.querySelector('#ai-kit-interactive').hidden && document.querySelector('#ai-kit-fallback').hidden,
+            nodes: [...kit.querySelectorAll('[data-kit-node]')].map(node => node.dataset.kitNode),
+            goals: [...document.querySelectorAll('#ai-kit-badges li')].map(node => node.textContent),
+            rows: [...document.querySelector('#ai-kit-fallback table').tBodies[0].rows].map(row => [...row.cells].map(cell => cell.textContent.trim())),
+            accessibleNodes: [...kit.querySelectorAll('[data-kit-node]')].every(node => node.tabIndex === 0 && node.getAttribute('role') === 'button' && node.getAttribute('aria-label') === 'Explore ' + node.__data__.label && node.getAttribute('aria-controls') === 'ai-kit-detail' && node.getAttribute('aria-describedby') === 'ai-kit-help'),
+          };
+        })()`);
+        assert.equal(integration.localScriptOrder, true, 'local D3 loads immediately before enhancement');
+        assert.equal(integration.d3Version, '7.9.0');
+        assert.equal(integration.inL4AfterPipeline, true, 'starter kit follows the preserved L4 pipeline');
+        assert.equal(integration.title, 'AI Observability Starter Kit');
+        assert.equal(integration.enhanced, true, 'D3 render replaces fallback');
+        assert.equal(integration.accessibleNodes, true, 'rendered nodes expose keyboard and detail semantics');
+        assert.deepEqual(integration.nodes, [...kitData.inputs, kitData.hub, ...kitData.ring, ...kitData.tools, ...kitData.bottom].map(node => node.id));
+        assert.deepEqual(integration.goals, Array.from(kitData.badges));
+        assert.deepEqual(integration.rows, mappingRows, 'parsed fallback table cells exactly match every executable mapping');
+        for (const id of ['alerts', 'audit-trail']) {
+          const observes = await harness.evaluate(`(() => {
+            document.querySelector('[data-kit-node="${id}"]').click();
+            return document.querySelector('#ai-kit-detail p').textContent;
+          })()`);
+          const node = kitData.bottom.find(node => node.id === id);
+          assert.ok(observes.endsWith('Observes: ' + kitData.mappings[node.mapping].observes), id + ': selected operational card uses canonical description');
+        }
+
         if (viewport.width === 390) assert.equal(await harness.evaluate('document.documentElement.scrollWidth <= innerWidth'), true, 'Atlas at 390px: no document overflow');
         assert.equal(await harness.evaluate(`fetch('https://offline-check.invalid/no-network').then(() => false, () => true)`), true, 'external fetch blocked');
         await harness.evaluate(`document.querySelector('[data-kit-node="tracing"]').focus()`);
@@ -131,6 +174,7 @@ export async function runSurfaceSmoke(harness) {
             await harness.reload();
             await harness.waitFor(`document.readyState === 'complete'`);
             assert.equal(await harness.evaluate(`(() => { document.querySelector('#atlas-library').open = true; return window.d3 === undefined && !document.querySelector('#ai-kit-fallback').hidden && document.querySelector('#ai-kit-fallback').getBoundingClientRect().height > 0 && document.querySelector('#ai-kit-interactive').hidden && document.querySelector('#ai-kit-help').closest('[hidden]') !== null; })()`), true, 'D3 unavailable: static fallback visible and interaction help hidden');
+            assert.deepEqual(await harness.evaluate(`Array.from(document.querySelector('#ai-kit-fallback table').tBodies[0].rows, row => Array.from(row.cells, cell => cell.textContent.trim()))`), mappingRows, 'unavailable D3 preserves complete mapping table');
           } finally { await harness.send('Page.removeScriptToEvaluateOnNewDocument', { identifier }); }
         });
       }
