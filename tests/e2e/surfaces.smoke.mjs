@@ -34,7 +34,31 @@ const surfaces = Object.freeze([
   },
 ]);
 
+export async function runStaticLibrarySmoke(harness) {
+  await harness.send('Emulation.setScriptExecutionDisabled', { value: true });
+  try {
+    for (const viewport of viewports) {
+      await harness.setViewport(viewport);
+      await harness.navigate('index.html');
+      assert.equal(await harness.evaluate(`(() => {
+        const library = document.querySelector('#atlas-library');
+        const fallback = document.querySelector('#ai-kit-fallback');
+        const visible = element => element.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }) && element.getBoundingClientRect().height > 0;
+        return library.open && visible(fallback) && [...library.querySelectorAll('.atlas-library__chapters > section:not(#personas):not(#resources)')].every(visible) && [...fallback.querySelectorAll('tr')].every(visible) && document.querySelector('#ai-kit-interactive').hidden;
+      })()`), true, `${viewport.name}: static chapters and AI mappings visible without JavaScript`);
+      assert.deepEqual(await harness.evaluate(`Array.from(document.querySelector('#ai-kit-fallback table').tBodies[0].rows, row => Array.from(row.cells, cell => cell.textContent.trim()))`), mappingRows, `${viewport.name}: no-JavaScript mappings complete`);
+    }
+  } finally {
+    await harness.send('Emulation.setScriptExecutionDisabled', { value: false });
+  }
+  await harness.navigate('index.html');
+  assert.equal(await harness.evaluate(`document.querySelector('#atlas-library').open`), false, 'enhanced library starts collapsed');
+  await harness.navigate('index.html#ai-starter-kit');
+  assert.equal(await harness.evaluate(`document.querySelector('#atlas-library').open`), true, 'enhanced library opens for chapter deep links');
+}
+
 export async function runSurfaceSmoke(harness) {
+  await runStaticLibrarySmoke(harness);
   await harness.setReducedMotion('no-preference');
   for (const viewport of viewports) {
     await harness.setViewport(viewport);
