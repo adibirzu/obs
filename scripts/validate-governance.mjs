@@ -187,16 +187,24 @@ export function validateWorkflows(workflows, telemetryRegistry) {
   return errors;
 }
 
-async function probeLink(url) {
+async function probeLink(url, fetchImpl = fetch) {
   const headers = { 'user-agent': 'OCI-Observability-Atlas-Link-Validator/1.0' };
-  let response = await fetch(url, { method: 'HEAD', redirect: 'follow', headers, signal: AbortSignal.timeout(15_000) });
+  let response = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', headers, signal: AbortSignal.timeout(15_000) });
   if ([400, 405, 501].includes(response.status)) {
-    response = await fetch(url, { method: 'GET', redirect: 'follow', headers: { ...headers, range: 'bytes=0-1023' }, signal: AbortSignal.timeout(15_000) });
+    response = await fetchImpl(url, { method: 'GET', redirect: 'follow', headers: { ...headers, range: 'bytes=0-1023' }, signal: AbortSignal.timeout(15_000) });
   }
-  return { statusCode: response.status, redirectedTo: response.url !== url ? response.url : undefined };
+  // Deliberately keep public self-references on the repository-backed Pages URL, even if hosting redirects it.
+  // The Pages custom domain is configured in repository settings, while public metadata policy
+  // (tests/resiliency.test.mjs) references only the repository-backed GitHub Pages origin.
+  // Revisit this carve-out together with that policy if the custom domain becomes canonical.
+  const selfOrigin = /^https:\/\/adibirzu\.github\.io\/obs(?:\/|[?#]|$)/.test(url);
+  return {
+    statusCode: response.status,
+    ...(!selfOrigin && response.url !== url ? { redirectedTo: response.url } : {}),
+  };
 }
 
-async function refreshLinks({ discovered, previous, today }) {
+export async function refreshLinks({ discovered, previous, today, fetchImpl = fetch }) {
   const previousByUrl = new Map((previous?.links ?? []).map(link => [link.url, link]));
   const links = new Array(discovered.length);
   let cursor = 0;
@@ -214,7 +222,7 @@ async function refreshLinks({ discovered, previous, today }) {
         continue;
       }
       try {
-        links[index] = { ...link, ...(await probeLink(link.url)), lastChecked: today };
+        links[index] = { ...link, ...(await probeLink(link.url, fetchImpl)), lastChecked: today };
       } catch (error) {
         links[index] = { ...link, statusCode: null, lastChecked: today, exemption: `Network validation could not complete: ${error.name}. Review manually before relying on this reference.` };
       }

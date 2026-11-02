@@ -5,6 +5,7 @@ import test from 'node:test';
 import {
   discoverExternalLinks,
   loadWorkflowRegistry,
+  refreshLinks,
   validateLinkRegistry,
   validateGovernance,
   validateRenameLedger,
@@ -14,6 +15,15 @@ import {
 
 const root = new URL('../', import.meta.url);
 const readJson = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
+const [checkedInRegistry, checkedInLedger] = await Promise.all([
+  readJson('governance/external-links.json'),
+  readJson('governance/roadmap-renames.json'),
+]);
+// Validate the snapshot at its newest recorded verification, independent of the wall clock.
+const snapshotToday = [
+  ...checkedInRegistry.links.map(link => link.lastChecked),
+  ...checkedInLedger.claims.map(claim => claim.verifiedOn),
+].sort().at(-1);
 
 test('external links are discovered across source files and governed by dated HTTP metadata', async () => {
   const [registry, schema, sourceRegister, discovered] = await Promise.all([
@@ -24,7 +34,7 @@ test('external links are discovered across source files and governed by dated HT
   ]);
 
   assert.equal(schema.$schema, 'https://json-schema.org/draft/2020-12/schema');
-  assert.deepEqual(validateLinkRegistry({ discovered, registry, today: '2026-07-03' }), []);
+  assert.deepEqual(validateLinkRegistry({ discovered, registry, today: snapshotToday }), []);
   assert.ok(registry.links.length > 40);
   assert.ok(registry.links.every(link => Number.isInteger(link.statusCode) || link.exemption));
   assert.ok(registry.links.every(link => /^\d{4}-\d{2}-\d{2}$/.test(link.lastChecked)));
@@ -70,7 +80,7 @@ test('Logan, Prometheus, and APM use segregated telemetry metadata contracts', a
 
 test('rename and roadmap ledger rejects stale claims and deprecated service names', async () => {
   const ledger = await readJson('governance/roadmap-renames.json');
-  assert.deepEqual(await validateRenameLedger({ rootUrl: root, ledger, today: '2026-07-03' }), []);
+  assert.deepEqual(await validateRenameLedger({ rootUrl: root, ledger, today: snapshotToday }), []);
   assert.ok(ledger.claims.every(claim => claim.verifiedOn && claim.reviewAfter));
   assert.ok(ledger.renames.some(rename => rename.deprecated === 'OCI Logging Analytics'));
 });
@@ -100,8 +110,32 @@ test('workflow detail UI renders governance prerequisites and empty-result cavea
 });
 
 test('complete governance compilation validates the checked-in contracts together', async () => {
-  const result = await validateGovernance({ today: '2026-07-03' });
+  const result = await validateGovernance({ today: snapshotToday });
   assert.ok(result.links > 40);
   assert.equal(result.workflows, 60);
   assert.ok(result.claims > 0);
+});
+
+test('link refresh omits self-origin redirect targets and preserves external redirects', async () => {
+  const urls = [
+    'https://adibirzu.github.io/obs/',
+    'https://adibirzu.github.io/obs/guide.html',
+    'https://adibirzu.github.io/other/',
+    'https://docs.example.test/old',
+  ];
+  const registry = await refreshLinks({
+    discovered: urls.map(url => ({ url, sources: ['README.md'] })),
+    previous: { links: [{ url: urls[0], redirectedTo: 'https://custom.example.test/' }] },
+    today: snapshotToday,
+    fetchImpl: async () => ({ status: 200, url: 'https://custom.example.test/' }),
+  });
+
+  for (const link of registry.links.slice(0, 2)) {
+    assert.equal(link.statusCode, 200);
+    assert.equal(link.lastChecked, snapshotToday);
+    assert.equal(Object.hasOwn(link, 'redirectedTo'), false);
+  }
+  for (const link of registry.links.slice(2)) {
+    assert.equal(link.redirectedTo, 'https://custom.example.test/');
+  }
 });

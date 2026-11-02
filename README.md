@@ -42,14 +42,14 @@ The interlocks addon turns the six Cloud Foundation posters into a maintainable,
 - [`scripts/generate-interlocks-drawio.mjs`](scripts/generate-interlocks-drawio.mjs) rebuilds the workbook, source register, all 12 standalone editable diagrams, and the browser-safe catalog script without third-party dependencies.
 - [`assets/interlocks/{network,domain}-drilldowns.js`](assets/interlocks/) defines ten guided workflows for each of the six domains. [`scripts/generate-usecase-artifacts.mjs`](scripts/generate-usecase-artifacts.mjs) and [`scripts/generate-usecase-pdf.mjs`](scripts/generate-usecase-pdf.mjs) create matching Draw.io, Excalidraw, and vector PDF files under `assets/diagrams/usecases/`.
 
-After changing the catalog, regenerate and verify the addon:
+After changing the catalog or refreshing public-link metadata, regenerate and verify the addon. The documented diagrams and source register derive their dates and HTTP metadata from `governance/external-links.json`, so refresh links before generation and review generated diffs before updating the snapshot:
 
 ```bash
-npm run generate:interlocks:documented
-npm run generate:interlocks:pdf
-npm run generate:usecase-artifacts
-npm run generate:usecase-pdf
 npm run governance:refresh-links # networked maintenance operation
+npm run artifacts:generate:vectors
+npm run generate:interlocks:pdf
+npm run generate:usecase-pdf
+npm run artifacts:update-snapshot # after reviewing generated diffs
 npm run build                    # offline governance verification + tests
 ```
 
