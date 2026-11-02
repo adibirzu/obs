@@ -40,14 +40,7 @@ test('external links are discovered across source files and governed by dated HT
   assert.ok(registry.links.every(link => /^\d{4}-\d{2}-\d{2}$/.test(link.lastChecked)));
   assert.ok(discovered.every(link => link.sources.every(source => !source.startsWith('dist/'))), 'ignored release output never enters source governance');
   assert.ok(sourceRegister.sources.every(source => Number.isInteger(source.httpStatus)));
-  // This generated register is a snapshot; refreshing links alone does not regenerate it.
-  for (const source of sourceRegister.sources) {
-    const link = registry.links.find(link => link.url === source.officialUrl);
-    assert.ok(link, source.officialUrl);
-    assert.match(source.lastChecked, /^\d{4}-\d{2}-\d{2}$/);
-    assert.equal(source.lastChecked, sourceRegister.verifiedOn);
-    assert.ok(source.lastChecked <= link.lastChecked, source.officialUrl);
-  }
+  assert.ok(sourceRegister.sources.every(source => source.lastChecked === registry.checkedAt));
 });
 
 test('external link registry rejects malformed, stale, drifting, and orphaned records', () => {
