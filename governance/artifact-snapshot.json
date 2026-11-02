@@ -5,7 +5,7 @@
   "files": [
     {
       "path": "assets/diagrams/interlocks-documented/end-to-end-documented.drawio",
-      "sha256": "db66a466493fdf93904808d09d5753266303e6414bcfc6fcbaf8c0574dc2ebb0"
+      "sha256": "590d91e9a68b835fdd077f53b2566f9f93a0ca71e73e3de006d17a321f34366f"
     },
     {
       "path": "assets/diagrams/interlocks-documented/end-to-end-documented.excalidraw",
@@ -13,7 +13,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-documented/iam-governance-documented.drawio",
-      "sha256": "3a762e75f91ed0d9cdac5612cf5f69a63503ebaf7418d83aa05836b624973a3f"
+      "sha256": "0e3a0bb6da3d31948ef6a784b69267bba870acf7eecaa612c955fbf732f15dfc"
     },
     {
       "path": "assets/diagrams/interlocks-documented/iam-governance-documented.excalidraw",
@@ -21,7 +21,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-documented/landing-zone-documented.drawio",
-      "sha256": "e84f878769ff4e282b351a8779b3251da94b35e49f1711d48e55182f24912cfd"
+      "sha256": "d7a63a579ec8a959ed09bee23105aba5f70f5f5bb17e37d5e6def6802b314f3d"
     },
     {
       "path": "assets/diagrams/interlocks-documented/landing-zone-documented.excalidraw",
@@ -29,7 +29,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-documented/network-documented.drawio",
-      "sha256": "849dc96fb2cda973c89818b58e1279269347ca1a91ad74a20dab270a81a446cd"
+      "sha256": "1cbd3f99decd4bc4d5413ffdead26c92b919195cb5dfd017d0351b26d45bbf88"
     },
     {
       "path": "assets/diagrams/interlocks-documented/network-documented.excalidraw",
@@ -37,7 +37,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-documented/operations-lifecycle-documented.drawio",
-      "sha256": "2eadabde9a97716c1ad2c12cb5cf93a568c1bf13b0f8f5eed5d4e396367d0c8b"
+      "sha256": "96b22e34c16289a9b93c2b456b8d1a5e4cf9893eb2245af3ea164ce4930248cd"
     },
     {
       "path": "assets/diagrams/interlocks-documented/operations-lifecycle-documented.excalidraw",
@@ -45,7 +45,7 @@
     },
     {
       "path": "assets/diagrams/interlocks-documented/security-documented.drawio",
-      "sha256": "f37212a1bae23636c1fe201f2d91f7605f4ff462af23ce27d21cdb1469554d70"
+      "sha256": "95d0db84db3e7e900926ea9b250258e7870762eff7bbf66cb4e8738d854a15ba"
     },
     {
       "path": "assets/diagrams/interlocks-documented/security-documented.excalidraw",
@@ -149,7 +149,7 @@
     },
     {
       "path": "assets/diagrams/oci-observability-service-interlocks-documented.drawio",
-      "sha256": "399136fb3e4b410a1b2daef46dcafdbd0dacff560fcf2f49e29d8f78577f178b"
+      "sha256": "afe2a2949bead8ca941c406851f2763ed2eaf401babca1c8e21a00aed6bec1dd"
     },
     {
       "path": "assets/diagrams/oci-observability-service-interlocks-infographic.drawio",
@@ -649,7 +649,7 @@
     },
     {
       "path": "assets/interlocks/documentation-sources.json",
-      "sha256": "59c161cc2033f2e109695dfa38c40f7c9c63448b29c9d614eac16415036b161e"
+      "sha256": "41525c5e69f5ffcc3e3e3e8fd1570de51c7648aa50dee7cabecc4f84625f379f"
     }
   ]
 }
