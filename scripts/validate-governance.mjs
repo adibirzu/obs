@@ -193,7 +193,10 @@ async function probeLink(url, fetchImpl = fetch) {
   if ([400, 405, 501].includes(response.status)) {
     response = await fetchImpl(url, { method: 'GET', redirect: 'follow', headers: { ...headers, range: 'bytes=0-1023' }, signal: AbortSignal.timeout(15_000) });
   }
-  // Keep public self-references on the repository-backed Pages URL, even if hosting redirects it.
+  // Deliberately keep public self-references on the repository-backed Pages URL, even if hosting redirects it.
+  // The Pages custom domain is configured in repository settings, while public metadata policy
+  // (tests/resiliency.test.mjs) references only the repository-backed GitHub Pages origin.
+  // Revisit this carve-out together with that policy if the custom domain becomes canonical.
   const selfOrigin = /^https:\/\/adibirzu\.github\.io\/obs(?:\/|[?#]|$)/.test(url);
   return {
     statusCode: response.status,

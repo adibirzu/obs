@@ -30,7 +30,7 @@
       "claim": "Project-facing references use Stack Monitoring and track Oracle service-change announcements in the source registry.",
       "status": "current",
       "verifiedOn": "2026-11-02",
-      "reviewAfter": "2027-01-31",
+      "reviewAfter": "2027-01-15",
       "sourceUrl": "https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm"
     }
   ],
