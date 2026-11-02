@@ -77,7 +77,7 @@ The project maintainer blocks merge until every applicable item is satisfied:
 - [ ] `npm run test:smoke` passes at desktop and mobile widths.
 - [ ] Finder query matching, operating-profile matching, Interlock mapping, keyboard access, empty states, and network failure behavior have automated coverage.
 
-When a contribution adds or changes public links, run `npm run governance:refresh-links` once, review the status metadata, and then rerun offline validation. Do not refresh link metadata merely to hide a failing or irrelevant source.
+When a contribution adds or changes public links, follow the [Interlocks regeneration sequence](README.md#oci-observability-service-interlocks), reviewing refreshed status metadata and dependent generated diffs before updating the snapshot and rerunning offline validation. Do not refresh link metadata merely to hide a failing or irrelevant source.
 
 ## Editorial acceptance checklist
 
