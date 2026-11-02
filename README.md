@@ -19,7 +19,7 @@ A guided Atlas that helps users find the right observability capabilities for an
 - **Use-case finder** — pick your estate pattern (traditional app, database-centric, OKE, Oracle apps, hybrid, agentic) and get a recommended path with concrete outcomes.
 - **The L0 to L4 maturity path** — services open an inspector with Executive, Architect, and Practitioner lenses, copy-ready MQL/OCL/OTel snippets, and curated guides and projects.
 - **Collection-agent comparison** — Oracle Cloud Agent vs. Management Agent vs. Unified Monitoring Agent.
-- **AI agent observability (L4)** — the SAIF / Zero Trust / Observability triad and a modern Instrument → Collect → Analyse → Evaluate → Act reference diagram.
+- **AI agent observability (L4)** — the SAIF / Zero Trust / Observability triad, the Instrument → Collect → Analyse → Evaluate → Act reference diagram, and an interactive **AI Observability Starter Kit** comparing OCI and open-source tools. Open the technical library's AI chapter and select a diagram node or operations card to inspect its role and service mapping; the diagram includes keyboard instructions and scrolls horizontally on narrow screens. Reduced motion preserves the information, and a static node list and mapping table remain available when JavaScript or D3 is unavailable. Integrations require instrumentation and configuration; badges describe design goals rather than product guarantees.
 - **Operator-scale architecture extension** — centralized Log Analytics aggregation across tenants and clouds, with per-tenant isolation by compartment and IAM. This is a scale pattern, not a fifth maturity level.
 - **Security + observability** — observability framed as an extension of OCI Security (Cloud Guard + Instance Security, IAM, Data Safe, Access Governance, Audit, ZPR): Security *detects*, observability *explains* and forwards to 3rd-party SIEMs (Splunk, Microsoft Sentinel, Elastic, Datadog).
 - **Resources** — curated DevRel guides, demos, and the maintainer's public observability projects, mapped per service.
@@ -137,7 +137,7 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-The source site has no runtime package dependencies and can be served without compilation. Release PDFs, deterministic diagrams, validation reports, and the packaged site are produced by the documented build pipeline. Fonts load from Google Fonts; all other runtime assets are vendored.
+The source site can be served without installing packages or compiling. Release PDFs, deterministic diagrams, validation reports, and the packaged site are produced by the documented build pipeline. Fonts load from Google Fonts; all other runtime assets are vendored, including [D3](assets/vendor/d3/README.md) for the starter kit.
 
 ## Quality and release pipeline
 

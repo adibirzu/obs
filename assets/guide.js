@@ -915,6 +915,7 @@ graph.add_node("explain",   call_generative_ai_summary)
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    $("#atlas-library").open = false;
     buildLadder();
     buildFinder();
     buildCommunityScenarioFinder();

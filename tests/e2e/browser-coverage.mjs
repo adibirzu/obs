@@ -10,6 +10,7 @@ const policy = JSON.parse(await readFile(resolve(root, 'governance/quality-gates
 const clientPolicy = policy.coverage.client;
 const requiredCoverageTargets = Object.freeze([
   'assets/guide.js',
+  'assets/ai-starter-kit.js',
   'assets/personas.js',
   'assets/state.js',
   'static/observability.js',
@@ -25,6 +26,12 @@ async function exerciseAtlas(harness, snapshots) {
   await harness.waitFor(`document.querySelectorAll('#telemetry-route [data-source]').length === 6`);
   await harness.evaluate(`(async () => {
     const clickAll = selector => [...document.querySelectorAll(selector)].forEach(node => node.click());
+    document.querySelectorAll('[data-kit-node]').forEach(node => {
+      node.focus();
+      node.dispatchEvent(new MouseEvent('mouseenter'));
+      node.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      for (const key of ['Enter', ' ', 'Escape', 'Tab']) node.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+    });
     clickAll('#telemetry-route [data-source]');
     clickAll('#goalPick [data-goal]');
     clickAll('#rolePick [data-persona]');

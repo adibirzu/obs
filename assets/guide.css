@@ -698,3 +698,63 @@ button.dchip:hover { border-color: var(--l4); background: var(--surface-card); b
 .refrow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--border-subtle); }
 .refrow__k { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
 .refrow a { font-size: var(--text-sm); font-weight: var(--weight-semibold); }
+
+/* ---------- L4 AI Observability Starter Kit (D3 enhancement) ---------- */
+.ai-kit { margin-top: var(--space-8); min-width: 0; }
+.ai-kit .section__head { margin-bottom: var(--space-5); }
+.ai-kit__scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-color: var(--blue-deep) var(--surface-sunken); }
+.ai-kit__scroll svg { display: block; width: 100%; min-width: 1400px; font-family: var(--font-body); }
+.ai-kit__heading { fill: var(--plum-core); font-size: 18px; font-weight: 700; }
+.ai-kit__orbit { fill: none; stroke: var(--plum-core); opacity: .5; }
+.ai-kit__link { fill: none; stroke: var(--blue-deep); stroke-width: 1.5; opacity: .22; }
+.ai-kit__link.is-connected { opacity: 1; stroke-width: 3; }
+.ai-kit__node { cursor: pointer; }
+.ai-kit__node rect { fill: var(--surface-raised, var(--white)); stroke: var(--border-default); stroke-width: 1.5; }
+.ai-kit__node text { fill: var(--text-strong); font-size: 16px; font-weight: 600; pointer-events: none; }
+.ai-kit__hub rect { fill: var(--l4-tint); stroke: var(--plum-core); }
+.ai-kit__node:hover rect, .ai-kit__node[aria-pressed="true"] rect { stroke: var(--blue-deep); stroke-width: 3; }
+.ai-kit__node:focus { outline: none; }
+.ai-kit__node:focus-visible rect { stroke: var(--blue-deep); stroke-width: 4; stroke-dasharray: 7 3; }
+.ai-kit__bottom { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-3); margin-block: var(--space-5); }
+.ai-kit__card { min-width: 0; min-height: 96px; padding: var(--space-4); text-align: left; color: var(--text-strong); background: var(--white); border: 1px solid var(--border-default); border-radius: var(--radius-sm); cursor: pointer; font: inherit; }
+.ai-kit__card strong, .ai-kit__card span { display: block; overflow-wrap: anywhere; }
+.ai-kit__card span { font-size: var(--text-sm); margin-top: var(--space-2); }
+.ai-kit__card[aria-pressed="true"] { background: var(--l1-tint); border-color: var(--blue-deep); }
+.ai-kit__card:focus-visible, .ai-kit__scroll:focus-visible { outline: 3px solid var(--blue-deep); outline-offset: 3px; }
+.ai-kit__badges { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); list-style: none; padding: 0; font-size: var(--text-sm); color: var(--plum-core); }
+.ai-kit__detail { margin-top: 0; padding: var(--space-5); background: var(--l1-tint); min-height: 200px; }
+.ai-kit__detail h3 { margin-top: 0; }
+.ai-kit__mapping { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.ai-kit__mapping dt { font-weight: 700; }
+.ai-kit__mapping dd { margin: var(--space-2) 0 0; overflow-wrap: anywhere; }
+.ai-kit table { width: 100%; min-width: 680px; border-collapse: collapse; }
+.ai-kit th, .ai-kit td { text-align: left; padding: var(--space-3); border-bottom: 1px solid var(--border-default); }
+@media (max-width: 700px) {
+  .ai-kit__bottom, .ai-kit__mapping { grid-template-columns: minmax(0, 1fr); }
+  .ai-kit__card { min-height: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-kit *, .ai-kit *::before, .ai-kit *::after { animation: none !important; transition: none !important; scroll-behavior: auto; }
+}
+
+.ai-kit__node text.ai-kit__subtitle { font-size: 14px; font-weight: 400; }
+
+.ai-kit__arrow { fill: var(--blue-deep); }
+
+.ai-kit__workspace { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+.ai-kit__workspace > * { min-width: 0; }
+.ai-kit__link.can-animate { transition: opacity 180ms ease-out, stroke-width 180ms ease-out; }
+.ai-kit__link.can-animate.is-connected { stroke-dasharray: 9 5; animation: ai-kit-flow 2s linear infinite; }
+@keyframes ai-kit-flow { to { stroke-dashoffset: -28; } }
+/* Preserve a 12px subtitle / ~14px label floor at desktop scale. */
+@media (min-width: 1280px) {
+  .ai-kit__workspace svg { min-width: 1200px; }
+}
+@media (min-width: 1600px) {
+  /* Let this workspace use the wider viewport beyond the 1200px prose column. */
+  .ai-kit__workspace { width: min(calc(100vw - 2.5rem), 1680px); position: relative; left: 50%; transform: translateX(-50%); grid-template-columns: minmax(0, 1fr) 260px; }
+  .ai-kit__detail { position: sticky; top: 144px; }
+  .ai-kit__mapping { grid-template-columns: minmax(0, 1fr); }
+}
+
+.ai-kit__hub text { font-size: 20px; font-weight: 700; }

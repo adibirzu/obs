@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { extname, relative, resolve, sep } from 'node:path';
 
 const root = resolve(new URL('../', import.meta.url).pathname);
-const excluded = ['.git', '.impeccable', '.playwright-cli', 'assets/diagrams', 'assets/redwood', 'dist', 'node_modules'];
+const excluded = ['.git', '.impeccable', '.playwright-cli', 'assets/diagrams', 'assets/redwood', 'assets/vendor', 'dist', 'node_modules'];
 const sourceExtensions = new Set(['.css', '.html', '.js', '.json', '.md', '.mjs', '.sh', '.yaml', '.yml']);
 const errors = [];
 

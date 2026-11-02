@@ -379,7 +379,7 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
   const press = async (key, code, keyCode) => {
     const text = key === 'Enter' ? '\r' : key === ' ' ? ' ' : undefined;
     await send('Input.dispatchKeyEvent', {
-      type: 'keyDown', key, code, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode,
+      type: 'keyDown', key, code, windowsVirtualKeyCode: keyCode,
       ...(text ? { text, unmodifiedText: text } : {}),
     });
     await send('Input.dispatchKeyEvent', { type: 'keyUp', key, code, windowsVirtualKeyCode: keyCode });
@@ -430,6 +430,12 @@ export async function startBrowserHarness({ root, port = 0, cdpPort = 0 }) {
     await send('Page.enable');
     await send('Runtime.enable');
     await send('Network.enable');
+    // CDP uses the first matching pattern: allow this local server before denying all external HTTP(S).
+    await send('Network.setBlockedURLs', { urlPatterns: [
+      { urlPattern: `http://${host}:${serverPort}/*`, block: false },
+      { urlPattern: 'http://*/*', block: true },
+      { urlPattern: 'https://*/*', block: true },
+    ] });
   };
   try {
     await initializeDevTools();
