@@ -9,19 +9,19 @@
     {
       "id": "logan-published-boundary",
       "subject": "Oracle Log Analytics signal boundary",
-      "claim": "Logan owns indexed log and event records; Prometheus exporter metrics remain in a metric backend and APM traces remain in APM, joined only through shared correlation fields.",
+      "claim": "In this project's telemetry contracts, Logan owns indexed log and event records; Prometheus exporter metrics remain in a metric backend and APM traces remain in APM, joined only through shared correlation fields.",
       "status": "current",
-      "verifiedOn": "2026-07-03",
-      "reviewAfter": "2026-10-01",
+      "verifiedOn": "2026-11-02",
+      "reviewAfter": "2027-01-31",
       "sourceUrl": "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm"
     },
     {
       "id": "logging-analytics-rename",
       "subject": "Oracle Logging Analytics rename",
-      "claim": "Project-facing service references use Oracle Log Analytics; historical URLs and repository identifiers remain unchanged.",
+      "claim": "The service catalog uses Oracle Log Analytics; historical URLs and repository identifiers remain unchanged.",
       "status": "current",
-      "verifiedOn": "2026-07-03",
-      "reviewAfter": "2026-10-01",
+      "verifiedOn": "2026-11-02",
+      "reviewAfter": "2027-01-31",
       "sourceUrl": "https://docs.oracle.com/en-us/iaas/log-analytics/home.htm"
     },
     {
@@ -29,8 +29,8 @@
       "subject": "Stack Monitoring service naming",
       "claim": "Project-facing references use Stack Monitoring and track Oracle service-change announcements in the source registry.",
       "status": "current",
-      "verifiedOn": "2026-07-03",
-      "reviewAfter": "2026-10-01",
+      "verifiedOn": "2026-11-02",
+      "reviewAfter": "2027-01-31",
       "sourceUrl": "https://docs.oracle.com/en-us/iaas/releasenotes/stack-monitoring/service-change-announcement.htm"
     }
   ],
