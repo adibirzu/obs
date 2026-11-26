@@ -14,6 +14,7 @@ const NON_REFERENCE_HOSTS = new Set([
   'itsm.example.com', 'localhost', 'www.w3.org',
 ]);
 const EXPLICIT_LINK_EXEMPTIONS = new Map([
+  ['https://docs.oracle.com/en-us/iaas/data-safe/doc/registering-oracle-database.html', 'Known broken historical reference: HTTP 404 confirmed by HEAD and GET on 2026-11-26. Retained in site content pending a separately reviewed replacement; do not rely on this reference.'],
   ['https://fonts.googleapis.com/', 'Origin-only browser preconnect; it is not a document endpoint and intentionally returns no content page.'],
   ['https://fonts.gstatic.com/', 'Origin-only browser preconnect; it is not a document endpoint and intentionally returns no content page.'],
 ]);
