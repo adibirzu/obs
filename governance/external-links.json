@@ -632,8 +632,7 @@
     {
       "url": "https://docs.oracle.com/en-us/iaas/data-safe/doc/registering-oracle-database.html",
       "sources": [
-        "launchpad.html",
-        "scripts/validate-governance.mjs"
+        "launchpad.html"
       ],
       "statusCode": null,
       "lastChecked": "2026-11-26",

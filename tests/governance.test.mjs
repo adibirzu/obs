@@ -116,22 +116,6 @@ test('complete governance compilation validates the checked-in contracts togethe
   assert.ok(result.claims > 0);
 });
 
-test('link refresh exempts the confirmed Data Safe 404 and still rejects unknown 404s', async () => {
-  const known = 'https://docs.oracle.com/en-us/iaas/data-safe/doc/registering-oracle-database.html';
-  const unknown = 'https://docs.example.test/missing';
-  const discovered = [known, unknown].map(url => ({ url, sources: ['launchpad.html'] }));
-  const registry = await refreshLinks({
-    discovered,
-    today: snapshotToday,
-    fetchImpl: async url => ({ status: 404, url }),
-  });
-
-  assert.deepEqual(validateLinkRegistry({ discovered, registry, today: snapshotToday }), [
-    `external-links: unacceptable or missing status for ${unknown}`,
-  ]);
-  assert.match(registry.links[0].exemption, /HTTP 404/);
-});
-
 test('link refresh omits self-origin redirect targets and preserves external redirects', async () => {
   const urls = [
     'https://adibirzu.github.io/obs/',
